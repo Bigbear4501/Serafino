@@ -1,0 +1,18 @@
+Package: pingulinux-system
+Architecture: all
+Version: 0.2.202611160057
+Priority: optional
+Section: admin
+Maintainer: Pingulinux <noreply@pingulinux.invalid>
+Depends: python3, python3-pyqt6
+Filename: ./pingulinux-system_0.2.202611160057_all.deb
+Size: 741452
+MD5sum: 717fa22afd502a5bd1b2ebd77b464fea
+SHA1: cb80256616fa1230bb9a59ec0aad9eabe0faedfe
+SHA256: e727ce6dddcdd2028724d190d0342326a0fcd5447971b0dad211d3a037493e77
+SHA512: 087ba661e9e09b601d7b5af64af7c068c913ed2ed26b4edcaf24b291ca509687bd8211b95a3e9385c31eca46476f249c3904fb8edd5837d22d3844c5b8eeb72f
+Description: Pingulinux – Kinderschutz, Kontrollzentrum, Fino und Co.
+ Alle eigenen Dateien von Pingulinux (Serafino): Eltern-Kontrollzentrum,
+ Startbildschirm der Kleinen, Fino, Handbuch, Sperren und Einstellungen.
+ Wird über das Pingulinux-Paketarchiv aktualisiert.
+
