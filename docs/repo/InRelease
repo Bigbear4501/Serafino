@@ -1,0 +1,27 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Date: Mon, 16 Nov 2026 00:29:09 +0000
+Description: Pingulinux (Serafino) Paketarchiv
+Label: Pingulinux
+Origin: Pingulinux
+MD5Sum:
+ d38decb6d5804e2eb9dc1eed7109b963              827 Packages
+ ba641cc0cd13b5c66e07210a7e2e578f              577 Packages.gz
+SHA1:
+ 63a75de209f43892048bb87358d478cd8db9c2ac              827 Packages
+ 317ae42a70fe398279fbeddeab487b7ef1cdd411              577 Packages.gz
+SHA256:
+ efcb1b0fae769cae00b33167ca306a033a8156b5c65d804afa74259b5feb2466              827 Packages
+ 238f511ed97115829fccce0ea21d0ca23c4843e75d8686a65f8bba91147978ff              577 Packages.gz
+SHA512:
+ b79e50d62c70ab78fbf3b446dceaad6e6db5bc52c9697b633e7e44738311c07088c4b19091c40cedbbcafa2bdc25114881ff19ebcf9b46c8d2d0ac4fa3d36d0c              827 Packages
+ b18e06f9fd51c3eb26067dd7d8cd5af5ad5907665862758faea735e0e2df96a6830ae6280826e212590e876d907855310d6b87f0bcb9a958d18d4bf99ec7186d              577 Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavpOVRscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyyncXgD9Gx/sXADfQa5kmwmVoS0S
+bz0uiLp5z2HaltwnPdQILmoBAIZ5eAdnBm5CVxZsgRlDvKb8JYtfOnBGDQrUyJrp
+kekB
+=yb7G
+-----END PGP SIGNATURE-----
