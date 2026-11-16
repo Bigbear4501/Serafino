@@ -1,27 +1,27 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Mon, 16 Nov 2026 00:48:57 +0000
+Date: Mon, 16 Nov 2026 00:56:17 +0000
 Description: Pingulinux (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- 046c624a7e2d0145ec638add62dae56e              860 Packages
- d098cab49768fa08d1700171bc9742a2              601 Packages.gz
+ d5ff5faf0e86b501faa70fcd5b1a6e16              860 Packages
+ 9dc7746336499bb8d99379e329b6879c              599 Packages.gz
 SHA1:
- b77a871cf9e95ef2434b5bebd83c1c4aad0cbd13              860 Packages
- 31ba341be1a14eaa9a7cd36d7f1ea86dc35c3255              601 Packages.gz
+ bd95b70fb85532cc3e52b8f50bfa62f9fe5e1f42              860 Packages
+ 40ea8180356e9dce8d8c8031daa980781a20b354              599 Packages.gz
 SHA256:
- ef8c9e6a7c1002fbc6b9b093a75685ac0033ff3cbc935372ca2b7af1f322762f              860 Packages
- 78147fbe79968a1dc8c0aabf1c2c7f1af48a3227660987331ffda81159fc4a92              601 Packages.gz
+ 3c89a794c98c1651be535a10ae7fbd2d8bb8ebdbdb0e5222993b3356ac73c97c              860 Packages
+ 653a7d819e8cc379ffb58f35e3d5be40260b1ccf33d79064036162dad2db0d31              599 Packages.gz
 SHA512:
- 956c8720c3e78745cf39014b288fba59662c72ab9ea9394e0d1de57c63f79808fbb21c8355e6a724ca24fa29ba7f2320ae7e9d26970754d9e1f90a71747933f9              860 Packages
- ef61afdc56d902be23b7d4e092b563c56ba031c091ff9d5c7cd436a98bce021f782e4b1ef0458231b4176ba279f2ad02ecc54c6962ea37ae4a5668e59acff1df              601 Packages.gz
+ 514e0a639c913dacea7060d2860409209ee2838487c3484c07006a1b3a2f2dfb0e913f0dbba13caaf2b43c0262612bac417eecfb9ef21dc990ca7b71b9bbb561              860 Packages
+ a26b24ccb777971390f1e9d53d6fb25aec2c3b20616d6dcfe77d2f274c28478d5ce5f1c20ef0a5177452d59c5c6b8d7da0d008a905ac4b499e8760627b052301              599 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavpS+Rscbm9yZXBseUBw
-aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyyntzQD+J/SMMqDwItDLQSJjp1cc
-RHJn2lhXWK9QeUTVugL40DkBAKlXGXWVq/oAMuJJNI112CB7s61UI96Hr5QjFDQI
-ME8P
-=MHPJ
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavpUsRscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyym1cAEAiC9S3lEn2NzcVheB19SW
+MFtT7co0m5Rl3oAFbzd3tvMBAMTc8lpjK3lcNaqnavH+OB1INPK2Rsl81D19uH/b
+TV4D
+=WMCI
 -----END PGP SIGNATURE-----
