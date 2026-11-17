@@ -1,27 +1,27 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Tue, 17 Nov 2026 02:44:15 +0000
+Date: Tue, 17 Nov 2026 02:51:07 +0000
 Description: Pingulinux (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- c6bb43c006daf2831b2c1e68b6b53414              883 Packages
- 1a7f6eb71b6e3891ce7084303e442800              615 Packages.gz
+ 1dfbccfca6bf206941ac7c718f1ec791              883 Packages
+ c084eb96a783cbab4e8b2501d6506e10              618 Packages.gz
 SHA1:
- 7793712384a12cc805eada287884e1aca52a64ec              883 Packages
- 40e1f1830267db1d13c6d6eafb1a02106d2ed801              615 Packages.gz
+ 57ccb7eb5cef5d4ff5878ef04a0bab574b911a6e              883 Packages
+ b4f90c44acebc227fd399862faaa1d2866b77b6a              618 Packages.gz
 SHA256:
- 9b343be8208273ffef0ab865c40f6555a739b526dec9ca8934618baf4db6ca72              883 Packages
- 99d52f3d8b83f0a8f7c472ec076a0ef9b13303e838d6992720290966b9de5a51              615 Packages.gz
+ 23763f4e2cc0b5151feea7950a470641e1d273b07a3638ed4b810a48d9e9f6e5              883 Packages
+ 87e68143ac31738a509d2cf23e32edeb1aee2483732860eab0187b1277a7dee3              618 Packages.gz
 SHA512:
- 6dc36622937a28620a95e0cf24e6e8fef5a4df3bb75c0ba92db5e5e24a3d8bccafa504f1b0422f73778c5fb98a032d10b03759def9d5d69c42fc3279b2e75afa              883 Packages
- f8fe07134834bc28c399bff38f5a267be4a13cf85187c783cbbcee67ff0c55b2e8de6e3960a6e18d6ff318219c5bb12129ebf704397925172618b99466483e76              615 Packages.gz
+ 318ea977940b951a85c36b9f4d3406b656788dcc19393c955d1c911d6e9e6481732919b4eddf8c94246ee06fffe1ad61895f71c91e3a2bc7b4ac04e98f5f5418              883 Packages
+ 41bf0a380a82e3240575d1b46013f8b510d82d49e2ae0f9bc21cf369c300f0fad3771dde33b29fcee59cba727c19bdebaaec743dd8842567d2b6a14f85ea2da2              618 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavu/fxscbm9yZXBseUBw
-aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyymhJAEA3XvsmaVwTLPDQvgoID3a
-oiI+KjbF+oG4zkfHufVxtngA/0xmw5ndQKdMOMaRRwB8t/stej84GkMhQ1BUUNuk
-WKQL
-=fexS
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavvBGxscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyymc3gD8C2JjRW6c5WpCEovwxWPV
+Och77bZobOebJzDVvMeWrykA/i6EIU77Qrxh0MK8MvJjIetkgGWph1kRSGkvcGVj
+asMI
+=PXQO
 -----END PGP SIGNATURE-----
