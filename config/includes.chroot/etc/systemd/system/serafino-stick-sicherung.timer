@@ -1,0 +1,9 @@
+[Unit]
+Description=Serafino: Sicherungs-Stick regelmäßig sichern
+
+[Timer]
+OnBootSec=20min
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,9 @@
+#!/bin/sh
+# 0570-ohne-passwort.hook.chroot  (bz21)
+# Kinderkonten in der Gruppe „nopasswdlogin“ melden sich ohne Passwort an –
+# nur am Anmeldebildschirm (SDDM) und an der Bildschirmsperre (KDE).
+# Die Arbeit macht /usr/local/lib/pingulinux/ohne-passwort.sh; derselbe Check
+# läuft zusätzlich bei jedem Start (pingulinux-ohne-passwort.service).
+/usr/local/lib/pingulinux/ohne-passwort.sh
+systemctl enable pingulinux-ohne-passwort.service >/dev/null 2>&1 && echo "OHNE-PASSWORT: Prüfung beim Start eingeschaltet"
+exit 0

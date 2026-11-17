@@ -14,7 +14,7 @@ WORKER=/usr/local/bin/pingulinux-sicherung-usb-worker.sh
 RESULT=/var/lib/pingulinux/usb-sicherung-ergebnis
 
 if grep -qw 'boot=live' /proc/cmdline 2>/dev/null; then
-    pd_info "$TITLE" "ℹ️ Im Live-Modus gibt es noch nichts zu sichern.\nDie Sicherung funktioniert nach der Installation."
+    pd_info "$TITLE" "Im Live-Modus gibt es noch nichts zu sichern.\nDie Sicherung funktioniert nach der Installation."
     exit 0
 fi
 
@@ -47,7 +47,7 @@ find_sticks() {
 while true; do
     mapfile -t STICKS < <(find_sticks)
     [ ${#STICKS[@]} -gt 0 ] && break
-    pd_frage "$TITLE" "🔌 Bitte stecke jetzt den USB-Stick oder die USB-Festplatte ein.\n\nDanach auf „Nochmal suchen“ klicken." "Nochmal suchen" "Abbrechen" || exit 0
+    pd_frage "$TITLE" "Bitte stecke jetzt den USB-Stick oder die USB-Festplatte ein.\n\nDanach auf „Nochmal suchen“ klicken." "Nochmal suchen" "Abbrechen" || exit 0
     sleep 2
 done
 
@@ -88,8 +88,8 @@ inhalt() {
 
 # --- Was sichern? ---
 WAHL=$(pd_auswahl "$TITLE" "Was soll auf den Stick?" \
-    daten "📁  Eigene Dateien aller Konten (Fotos, Dokumente, Spielstände …)" an \
-    system "💻  System (zum Wiederherstellen, falls Pingulinux nicht mehr richtig läuft)" an) || exit 0
+    daten "Eigene Dateien aller Konten (Fotos, Dokumente, Spielstände …)" an \
+    system "System (zum Wiederherstellen, falls Pingulinux nicht mehr richtig läuft)" an) || exit 0
 WAHL=$(echo "$WAHL" | tr -d '"')
 DATEN=; SYSTEM=
 grep -qx daten <<<"$WAHL" && DATEN=1
@@ -107,16 +107,16 @@ if [ -n "$SYSTEM" ] && [ -z "$LINUXFS" ]; then
     if [ "$ANZ" = 0 ]; then
         FORMAT=1
     elif [ "$ANZ" = "?" ]; then
-        pd_frage "$TITLE" "Die System-Sicherung braucht einen Stick im Linux-Format (ext4).\nWas auf diesem Stick liegt, lässt sich nicht feststellen.\n\n<b>Stick löschen und vorbereiten?</b>\n⚠️ Alles darauf geht verloren. Danach kann Windows den Stick nicht mehr lesen.\n\n$NAME" "Alles löschen" "Nein, nur eigene Dateien" && FORMAT=1
+        pd_frage "$TITLE" "Die System-Sicherung braucht einen Stick im Linux-Format (ext4).\nWas auf diesem Stick liegt, lässt sich nicht feststellen.\n\n<b>Stick löschen und vorbereiten?</b>\n<b>Achtung:</b> Alles darauf geht verloren. Danach kann Windows den Stick nicht mehr lesen.\n\n$NAME" "Alles löschen" "Nein, nur eigene Dateien" && FORMAT=1
     else
-        pd_frage "$TITLE" "Auf dem Stick liegen <b>$ANZ Dateien ($GROESSE)</b>.\n\nFür die System-Sicherung muss er gelöscht und neu vorbereitet werden (Linux-Format ext4).\n<b>Alles löschen?</b>\n\n⚠️ Die Dateien sind danach weg. Windows kann den Stick danach nicht mehr lesen.\n\n$NAME" "Alles löschen" "Nein, nur eigene Dateien" && FORMAT=1
+        pd_frage "$TITLE" "Auf dem Stick liegen <b>$ANZ Dateien ($GROESSE)</b>.\n\nFür die System-Sicherung muss er gelöscht und neu vorbereitet werden (Linux-Format ext4).\n<b>Alles löschen?</b>\n\n<b>Achtung:</b> Die Dateien sind danach weg. Windows kann den Stick danach nicht mehr lesen.\n\n$NAME" "Alles löschen" "Nein, nur eigene Dateien" && FORMAT=1
     fi
     if [ -n "$FORMAT" ]; then
         [ "$ANZ" = 0 ] && pd_info "$TITLE" "Der Stick ist leer – er wird jetzt für die Sicherung vorbereitet (ein paar Sekunden)."
         udisksctl unmount -b "$DEV" --no-user-interaction >/dev/null 2>&1
         pkexec "$WORKER" formatieren "$DEV" | pd_fortschritt "$TITLE" "Stick wird vorbereitet…"
-        if ! grep -q "✅" "$RESULT" 2>/dev/null; then
-            pd_fehler "$TITLE" "$(cat "$RESULT" 2>/dev/null || echo "⚠️ Abgebrochen.")"
+        if ! grep -q "^✓" "$RESULT" 2>/dev/null; then
+            pd_fehler "$TITLE" "$(cat "$RESULT" 2>/dev/null || echo "Abgebrochen.")"
             exit 1
         fi
         FSTYPE=ext4; LINUXFS=1
@@ -133,7 +133,7 @@ if [ -z "$MP" ]; then
     sleep 1
     MP=$(lsblk -no MOUNTPOINT "$DEV" | head -1)
 fi
-[ -n "$MP" ] || { pd_fehler "$TITLE" "⚠️ Der Stick ließ sich nicht öffnen."; exit 1; }
+[ -n "$MP" ] || { pd_fehler "$TITLE" "Der Stick ließ sich nicht öffnen."; exit 1; }
 
 if [ -n "$DATEN" ] && [ -n "$SYSTEM" ]; then WHAT=beides
 elif [ -n "$SYSTEM" ]; then WHAT=system
@@ -155,5 +155,5 @@ if pd_frage "$TITLE" "$MSG\n\nDer Stick liegt jetzt im Ordner „Pingulinux-Sich
     udisksctl unmount -b "$DEV" --no-user-interaction >/dev/null 2>&1
     PARENT=$(lsblk -dno PKNAME "$DEV" | tr -d ' ')
     udisksctl power-off -b "${PARENT:-$DEV}" --no-user-interaction >/dev/null 2>&1
-    pd_info "$TITLE" "✅ Du kannst den Stick jetzt abziehen."
+    pd_info "$TITLE" "Du kannst den Stick jetzt abziehen."
 fi

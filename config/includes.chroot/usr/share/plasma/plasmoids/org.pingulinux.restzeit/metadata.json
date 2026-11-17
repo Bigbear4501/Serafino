@@ -1,0 +1,16 @@
+{
+    "KPlugin": {
+        "Authors": [ { "Name": "Pingulinux" } ],
+        "Category": "Utilities",
+        "Description": "Shows how much screen time is left today",
+        "Description[de]": "Zeigt, wie lange der Computer heute noch erlaubt ist",
+        "Icon": "chronometer",
+        "Id": "org.pingulinux.restzeit",
+        "License": "GPL-3.0+",
+        "Name": "Screen time left",
+        "Name[de]": "Restzeit",
+        "Version": "1.0"
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

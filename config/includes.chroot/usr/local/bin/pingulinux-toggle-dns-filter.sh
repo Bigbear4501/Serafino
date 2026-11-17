@@ -34,7 +34,7 @@ if ERR=$(pkexec /usr/local/bin/pingulinux-dns-filter-worker.sh "$SEL" 2>&1); the
         pd_info "Kinderschutz-Filter" "Es ist jetzt EINGESCHALTET: $NAME\n\nErwachsenen- und Gewaltinhalte werden blockiert."
     fi
 else
-    pd_fehler_roh "Kinderschutz-Filter" "⚠️ Der Filter konnte nicht umgestellt werden.
+    pd_fehler_roh "Kinderschutz-Filter" "Der Filter konnte nicht umgestellt werden.
 
 $ERR"
 fi

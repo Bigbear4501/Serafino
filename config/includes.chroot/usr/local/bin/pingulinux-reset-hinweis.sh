@@ -20,5 +20,5 @@ done < "$LOG"
 [ -n "$msg" ] || exit 0
 sleep 8   # erst nach dem Aufbau des Schreibtischs
 . /usr/local/lib/pingulinux/dialog.sh
-pd_info "Sicherheits-Hinweis" "⚠️ <b>Ein Eltern-Passwort wurde vom USB-Stick aus zurückgesetzt:</b>\n\n$msg\nWart ihr das nicht selbst? Dann hat jemand den Computer vom Stick gestartet.\nTipp: BIOS-Passwort setzen und den Start vom USB-Stick abschalten (siehe Eltern-FAQ)." "Verstanden"
+pd_info "Sicherheits-Hinweis" "<b>Ein Eltern-Passwort wurde vom USB-Stick aus zurückgesetzt:</b>\n\n$msg\nWart ihr das nicht selbst? Dann hat jemand den Computer vom Stick gestartet.\nTipp: BIOS-Passwort setzen und den Start vom USB-Stick abschalten (siehe Eltern-FAQ)." "Verstanden"
 mkdir -p "$(dirname "$SEEN")" && echo "$newest" > "$SEEN"

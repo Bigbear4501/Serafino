@@ -1,0 +1,41 @@
+#!/bin/bash
+# serafino – kleines Werkzeug für Eltern und Tester.
+#   serafino --fino   Fino als Textbild mit einem Spruch (wie „apt moo“)
+FINO=/usr/share/pingulinux/fastfetch/fino.txt
+WITZE=/usr/share/pingulinux/fino/witze.txt
+
+fino() {
+    local c1=$'\e[93m' c2=$'\e[94m' c3=$'\e[38;5;214m' c4=$'\e[97m' c5=$'\e[96m' r=$'\e[0m'
+    [ -t 1 ] || { c1=; c2=; c3=; c4=; c5=; r=; }
+    if [ -r "$FINO" ]; then
+        sed -e "s/\$1/$c1/g" -e "s/\$2/$c2/g" -e "s/\$3/$c3/g" -e "s/\$4/$c4/g" -e "s/\$5/$c5/g" -e "s/\$/$r/" "$FINO"
+    fi
+    local zeile frage antwort
+    zeile=$(grep -v '^#' "$WITZE" 2>/dev/null | grep . | shuf -n1)
+    frage="${zeile%%|*}"; antwort="${zeile#*|}"
+    echo
+    echo "   ${c1}Fino sagt:${r} ${frage:-Hallo! Schön, dass du da bist.}"
+    [ -n "$zeile" ] && [ "$antwort" != "$zeile" ] && echo "              ${antwort}"
+    echo
+    echo "   …und denk dran: Pausen machen ist auch wichtig. 🐧"
+}
+
+case "${1:-}" in
+    --fino|fino) fino ;;
+    --version|-v)
+        . /etc/os-release 2>/dev/null
+        echo "${PRETTY_NAME:-Pingulinux OS}"
+        v=$(dpkg-query -W -f='${Version}' pingulinux-system 2>/dev/null)
+        if [ -n "$v" ]; then
+            echo "Pingulinux-Paket: $v (Updates über das Pingulinux-Paketarchiv)"
+        else
+            echo "Pingulinux-Paket: noch nicht installiert (Stand der ISO)"
+        fi ;;
+    *)
+        echo "serafino – kleine Helfer für Eltern"
+        echo
+        echo "  serafino --version   zeigt die Version des Systems"
+        echo
+        echo "Hast du heute schon Fino gesehen?"
+        exit 0 ;;
+esac

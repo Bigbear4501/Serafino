@@ -7,8 +7,8 @@
 . /usr/local/lib/pingulinux/dialog.sh
 REPORT="$HOME/Pingulinux-Diagnose.txt"
 SUMMARY=$(mktemp)
-ok()   { echo "✅ $1" >> "$SUMMARY"; }
-warn() { echo "⚠️ $1" >> "$SUMMARY"; }
+ok()   { echo "✓ $1" >> "$SUMMARY"; }
+warn() { echo "✗ $1" >> "$SUMMARY"; }
 
 # --- Kurzpruefungen ---
 if ping -c1 -W3 1.1.1.1 >/dev/null 2>&1; then ok "Internetverbindung ist da"; else warn "Keine Internetverbindung (WLAN/LAN prüfen)"; fi
@@ -30,7 +30,7 @@ if command -v upower >/dev/null && upower -e 2>/dev/null | grep -q battery; then
 fi
 if lsusb 2>/dev/null | grep -qi "printer"; then ok "Drucker per USB erkannt"; fi
 if ls /sys/class/leds/*kbd_backlight* >/dev/null 2>&1; then ok "Tastaturbeleuchtung vorhanden"; fi
-if [ -n "$(xinput list 2>/dev/null | grep -i touch)" ]; then ok "Touchscreen erkannt"; else echo "ℹ️ Kein Touchscreen erkannt" >> "$SUMMARY"; fi
+if [ -n "$(xinput list 2>/dev/null | grep -i touch)" ]; then ok "Touchscreen erkannt"; else echo "• Kein Touchscreen erkannt" >> "$SUMMARY"; fi
 
 # --- ausfuehrlicher Bericht ---
 {
@@ -48,7 +48,7 @@ if [ -n "$(xinput list 2>/dev/null | grep -i touch)" ]; then ok "Touchscreen erk
 } > "$REPORT" 2>&1
 
 pd_textdatei "Hilfe und Fehlerdiagnose" "$SUMMARY"
-if pd_frage "Hilfe und Fehlerdiagnose" "📄 Ein ausführlicher Bericht liegt in deinem Ordner:\n<b>Pingulinux-Diagnose.txt</b>\n\nDen kannst du an die Pingulinux-Community schicken, wenn etwas nicht klappt. Er enthält keine Passwörter." "Bericht öffnen" "Schließen"; then
+if pd_frage "Hilfe und Fehlerdiagnose" "Ein ausführlicher Bericht liegt in deinem Ordner:\n<b>Pingulinux-Diagnose.txt</b>\n\nDen kannst du an die Pingulinux-Community schicken, wenn etwas nicht klappt. Er enthält keine Passwörter." "Bericht öffnen" "Schließen"; then
     xdg-open "$REPORT" >/dev/null 2>&1 &
 fi
 rm -f "$SUMMARY"

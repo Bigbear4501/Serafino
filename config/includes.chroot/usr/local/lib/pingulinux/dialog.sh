@@ -17,6 +17,7 @@
 #   pd_passwort TITEL TEXT                      -> Ausgabe: Passwort
 #   pd_eingabe  TITEL TEXT [VORGABE]            -> Ausgabe: Text
 #   pd_menue    TITEL TEXT tag text [tag text …] -> Ausgabe: tag
+#   pd_menue_ikon TITEL TEXT tag symbol text …   -> wie pd_menue, mit KDE-Symbolen
 #   pd_radio    TITEL TEXT tag text an|aus …     -> Ausgabe: tag
 #   pd_auswahl  TITEL TEXT tag text an|aus …     -> Ausgabe: tags, je Zeile
 #   pd_combo    TITEL TEXT VORGABE eintrag …     -> Ausgabe: eintrag
@@ -82,6 +83,18 @@ pd_menue() {
         for ((i=1; i<=$#; i+=2)); do args+=("${!i}" "${@:i+1:1}"); done
         _pd_z --list --title="$title" --width=520 --height=480 --text="$text" \
             --column=tag --column=Auswahl --hide-column=1 --print-column=1 --hide-header "${args[@]}"
+    fi
+}
+# Menü mit KDE-Symbolen: pd_menue_ikon TITEL TEXT tag symbol text [tag symbol text …]
+# Ohne PyQt6 dasselbe Menü ohne Symbole.
+pd_menue_ikon() {
+    local title="$1" text="$2"; shift 2
+    if [ -x /usr/local/bin/pingulinux-menue.py ] && python3 -c 'import PyQt6' 2>/dev/null; then
+        /usr/local/bin/pingulinux-menue.py "$title" "$(printf '%b' "$text")" "$@"
+    else
+        local args=()
+        while [ $# -ge 3 ]; do args+=("$1" "$3"); shift 3; done
+        pd_menue "$title" "$text" "${args[@]}"
     fi
 }
 pd_radio() {

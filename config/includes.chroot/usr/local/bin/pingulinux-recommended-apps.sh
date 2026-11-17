@@ -47,8 +47,8 @@ if [ -n "$PACKAGES" ]; then
     # Früher wurde hier der Rückgabewert des Fortschrittsfensters geprüft,
     # nicht der von apt – Fehler wurden so als Erfolg gemeldet.
     if [ "$(cat /tmp/pingulinux-apt-install.rc 2>/dev/null)" = 0 ]; then
-        pd_info "Fertig" "✅ Die ausgewählten Programme wurden installiert."
+        pd_info "Fertig" "Die ausgewählten Programme wurden installiert."
     else
-        pd_fehler "Fehler" "⚠️ Bei der Installation ist ein Fehler aufgetreten.\n\nDetails: /tmp/pingulinux-apt-install.log"
+        pd_fehler "Fehler" "Bei der Installation ist ein Fehler aufgetreten.\n\nDetails: /tmp/pingulinux-apt-install.log"
     fi
 fi

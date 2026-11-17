@@ -82,3 +82,13 @@ Auch dann lässt sich eine Sicherung zurückspielen:
 5. Stick abziehen, neu starten.
 
 Die eigenen Dateien (Fotos, Dokumente) bleiben dabei unverändert. Ist die Festplatte selbst kaputt, hilft nur noch die Sicherung auf dem USB-Stick – deshalb ab und zu „Auf USB-Stick sichern“.
+
+## Braucht Pingulinux einen Virenscanner?
+
+Für den Alltag nicht: Kinder können keine heruntergeladenen Programme starten, und der Filter sperrt gefährliche Seiten. Wer aber USB-Sticks oder Dateien für Windows-Rechner prüfen will, kann im **App Store** unter *Dienstprogramme* den **Virenscanner (ClamUI)** installieren.
+
+- Er ist **nur für Eltern** sichtbar – in Kinderkonten taucht er weder im App Store noch im Startmenü auf.
+- Er läuft **nicht im Hintergrund**. Geprüft wird nur, wenn Sie ClamUI öffnen und einen Ordner oder Stick auswählen.
+- Die Installation dauert einige Minuten, weil beim ersten Mal die Virendaten (etwa 200 MB) geladen werden. Danach holt Pingulinux nichts von selbst: Neue Virendaten gibt es, wenn Sie ClamUI öffnen und dort die Virendaten aktualisieren – am besten jedes Mal vor dem Prüfen.
+- Entfernen geht wie bei jedem Programm im App Store; dabei werden auch ClamAV und die Virendaten gelöscht.
+

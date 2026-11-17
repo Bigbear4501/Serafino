@@ -1,0 +1,8 @@
+[Unit]
+Description=Serafino: eigene Dateien auf den Sicherungs-Stick (beim Einstecken)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/serafino-stick-sicherung.sh %i
+Nice=10
+IOSchedulingClass=idle

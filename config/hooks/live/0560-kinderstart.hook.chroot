@@ -1,0 +1,8 @@
+#!/bin/sh
+# 0560-kinderstart.hook.chroot  (be4) – Startbildschirm der Kleinen
+# Vorlesen (espeak-ng, deutsch) und die Restzeit-Anzeige (Sonne).
+dpkg -s espeak-ng >/dev/null 2>&1 || apt-get install -y espeak-ng || echo "KINDERSTART: espeak-ng fehlt (kein Vorlesen)"
+mkdir -p /var/lib/pingulinux/kinderstart && chmod 755 /var/lib/pingulinux/kinderstart
+systemctl enable pingulinux-restzeit.timer
+echo "KINDERSTART: Startbildschirm der Kleinen eingerichtet"
+exit 0

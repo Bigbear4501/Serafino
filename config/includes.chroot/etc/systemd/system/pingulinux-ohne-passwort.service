@@ -1,0 +1,11 @@
+[Unit]
+Description=Pingulinux: Anmelden ohne Passwort für die Kleinen absichern
+Before=display-manager.service
+ConditionKernelCommandLine=!boot=live
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/lib/pingulinux/ohne-passwort.sh
+
+[Install]
+WantedBy=multi-user.target

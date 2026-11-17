@@ -207,7 +207,16 @@
   "apt": "wine",
   "flatpak": null,
   "cmd": "wine",
-  "min_age": 99
+  "min_age": 99,
+  "lock_paths": [
+   "/usr/lib/wine",
+   "/usr/lib/x86_64-linux-gnu/wine",
+   "/usr/lib/i386-linux-gnu/wine",
+   "/usr/lib64/wine",
+   "/usr/bin/wineserver",
+   "/usr/bin/wine64",
+   "/usr/bin/wine-stable"
+  ]
  },
  {
   "category": "Dienstprogramme",
@@ -618,5 +627,16 @@
   "flatpak": null,
   "cmd": "idle",
   "min_age": 10
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Virenscanner (ClamUI)",
+  "summary": "Dateien und USB-Sticks auf Viren prüfen – nur für Eltern",
+  "icon": "io.github.linx_systems.ClamUI",
+  "apt": null,
+  "flatpak": "io.github.linx_systems.ClamUI",
+  "cmd": null,
+  "min_age": 99,
+  "helper": "/usr/local/bin/pingulinux-virenscanner.sh"
  }
 ]

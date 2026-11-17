@@ -55,7 +55,7 @@ def log(r):
 
 def devices():
     """Festplatte (Standard) plus eingesteckte Sticks mit Linux-Dateisystem."""
-    out = [("", "💻  Diese Festplatte (tägliche Sicherung)")]
+    out = [("", "Diese Festplatte (tägliche Sicherung)")]
     src = run(["findmnt", "-no", "SOURCE", "/"]).stdout.strip()
     rootdisk = run(["lsblk", "-npdo", "PKNAME", src]).stdout.strip() if src else ""
 
@@ -75,7 +75,7 @@ def devices():
         if d.get("NAME") == src:
             continue
         if extern(d["NAME"]) or (d.get("PKNAME") and extern(d["PKNAME"])):
-            out.append((d["NAME"], "🔌  %s – %s" % (d.get("LABEL") or "USB-Stick", d.get("SIZE", ""))))
+            out.append((d["NAME"], "%s – %s" % (d.get("LABEL") or "USB-Stick", d.get("SIZE", ""))))
     return out
 
 
@@ -107,6 +107,32 @@ class Signals(QObject):
     done = pyqtSignal(str, object)
 
 
+class IkonText(QWidget):
+    """Statuszeile: KDE-Symbol links, Text rechts (statt Emojis im Text)."""
+    def __init__(self):
+        super().__init__()
+        h = QHBoxLayout(self)
+        h.setContentsMargins(0, 0, 0, 0)
+        self.bild = QLabel()
+        self.bild.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.bild.hide()
+        self.txt = QLabel("")
+        self.txt.setWordWrap(True)
+        h.addWidget(self.bild)
+        h.addWidget(self.txt, 1)
+
+    def setText(self, t, ikon=None):
+        self.txt.setText(t)
+        if ikon:
+            self.bild.setPixmap(QIcon.fromTheme(ikon).pixmap(16, 16))
+            self.bild.show()
+        else:
+            self.bild.hide()
+
+    def text(self):
+        return self.txt.text()
+
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -120,9 +146,14 @@ class Window(QMainWindow):
         w = QWidget(); self.setCentralWidget(w)
         v = QVBoxLayout(w)
         v.setContentsMargins(18, 16, 18, 14)
-        title = QLabel("💾  Sicherung und Wiederherstellung")
+        kopf = QHBoxLayout()
+        kopf_ikon = QLabel()
+        kopf_ikon.setPixmap(QIcon.fromTheme("document-save").pixmap(32, 32))
+        kopf.addWidget(kopf_ikon)
+        title = QLabel("Sicherung und Wiederherstellung")
         f = title.font(); f.setPointSizeF(f.pointSizeF() * 1.35); f.setBold(True); title.setFont(f)
-        v.addWidget(title)
+        kopf.addWidget(title, 1)
+        v.addLayout(kopf)
         hint = QLabel("Pingulinux sichert das System jeden Tag von selbst. Läuft nach einem Update "
                       "oder einer Einstellung etwas nicht mehr, kannst du hier einen älteren Stand "
                       "zurückholen. Eigene Dateien (Fotos, Dokumente) bleiben dabei unverändert.")
@@ -133,7 +164,7 @@ class Window(QMainWindow):
         row.addWidget(QLabel("Sicherungen auf:"))
         self.dev = QComboBox()
         for dev, label in devices():
-            self.dev.addItem(label, dev)
+            self.dev.addItem(QIcon.fromTheme("drive-harddisk" if not dev else "drive-removable-media-usb"), label, dev)
         self.dev.currentIndexChanged.connect(self.reload)
         row.addWidget(self.dev, 1)
         again = QPushButton(QIcon.fromTheme("view-refresh"), "Neu suchen")
@@ -148,8 +179,7 @@ class Window(QMainWindow):
 
         self.bar = QProgressBar(); self.bar.setRange(0, 0); self.bar.hide()
         v.addWidget(self.bar)
-        self.status = QLabel("")
-        self.status.setWordWrap(True)
+        self.status = IkonText()
         v.addWidget(self.status)
 
         btns = QHBoxLayout()
@@ -174,7 +204,7 @@ class Window(QMainWindow):
         self.dev.blockSignals(True)
         self.dev.clear()
         for dev, label in devices():
-            self.dev.addItem(label, dev)
+            self.dev.addItem(QIcon.fromTheme("drive-harddisk" if not dev else "drive-removable-media-usb"), label, dev)
         i = self.dev.findData(cur)
         self.dev.setCurrentIndex(max(i, 0))
         self.dev.blockSignals(False)
@@ -255,17 +285,17 @@ class Window(QMainWindow):
         if kind == "backup":
             self.reload()
             if r.returncode == 0:
-                self.status.setText("✅ Sicherung fertig.")
+                self.status.setText("Sicherung fertig.", "data-success")
             else:
-                self.status.setText("⚠️ Die Sicherung hat nicht geklappt. Details: " + LOG)
+                self.status.setText("Die Sicherung hat nicht geklappt. Details: " + LOG, "data-warning")
         else:
             if r.returncode == 0:
                 QMessageBox.information(self, "Wiederherstellen",
-                                        "✅ Fertig. Der Computer startet jetzt neu.")
+                                        "Fertig. Der Computer startet jetzt neu.")
                 subprocess.run(HELPER + ["ts-reboot"])
             else:
-                self.status.setText("⚠️ Die Wiederherstellung hat nicht geklappt – es wurde nichts "
-                                    "geändert oder nur teilweise. Details: " + LOG)
+                self.status.setText("Die Wiederherstellung hat nicht geklappt – es wurde nichts "
+                                    "geändert oder nur teilweise. Details: " + LOG, "data-warning")
         self.update_buttons()
 
 

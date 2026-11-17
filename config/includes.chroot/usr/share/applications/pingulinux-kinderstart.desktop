@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Mein Startbildschirm
+Comment=Große Bilder für die Kleinen
+Exec=/usr/local/bin/pingulinux-kinderstart.py
+Icon=/usr/share/pingulinux/icons/pingu.png
+Categories=Education;

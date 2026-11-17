@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Fino sagt Bescheid (Bildschirmzeit)
+Exec=/usr/local/bin/pingulinux-fino-zeit.py
+NoDisplay=true
+X-KDE-autostart-phase=2

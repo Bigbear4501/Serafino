@@ -105,26 +105,44 @@ case "$1" in
     sicherung)
         TITLE="Sicherung und Wiederherstellung"
         STAND=$(cat /var/lib/pingulinux/sicherung-status 2>/dev/null)
-        WAHL=$(pd_menue "$TITLE" "<b>💾 Sicherung und Wiederherstellung</b>\n\nTägliche Systemsicherung: ${STAND:-noch nicht gelaufen}" \
-            jetzt "💻  System jetzt sichern (auf dieser Festplatte)" \
-            usb "🔌  Auf USB-Stick sichern (eigene Dateien und System)" \
-            dateien "📁  Eigene Dateien vom Stick zurückholen" \
-            timeshift "🕰️  Sicherungen ansehen und System wiederherstellen") || exit 0
+        STICKSTAND=$(cat /var/lib/pingulinux/stick-sicherung-status 2>/dev/null)
+        STICKZEILE=""
+        [ -s /var/lib/pingulinux/sicherungs-sticks ] && STICKZEILE="\nEigene Dateien auf dem Sicherungs-Stick: ${STICKSTAND:-noch nicht}"
+        AUTO=()
+        [ -s /var/lib/pingulinux/sicherungs-sticks ] && AUTO=(auto media-flash "Automatische Stick-Sicherung (welche Sticks, ausschalten)")
+        WAHL=$(pd_menue_ikon "$TITLE" "<b>Sicherung und Wiederherstellung</b>\n\nTägliche Systemsicherung: ${STAND:-noch nicht gelaufen}$STICKZEILE" \
+            jetzt drive-harddisk "System jetzt sichern (auf dieser Festplatte)" \
+            usb drive-removable-media-usb "Auf USB-Stick sichern (eigene Dateien und System)" \
+            dateien folder-documents "Eigene Dateien vom Stick zurückholen" \
+            timeshift document-revert "Sicherungen ansehen und System wiederherstellen" \
+            "${AUTO[@]}") || exit 0
         case "$WAHL" in
             jetzt)
                 sichern() { pkexec /usr/local/bin/pingulinux-root-helper ts-create >/tmp/pingulinux-sichern-$USER.log 2>&1; }
                 if pd_warten "$TITLE" "System wird gesichert … das kann einige Minuten dauern." sichern; then
-                    pd_info "$TITLE" "✅ Das System ist gesichert.\n\nDiesen Stand findest du unter „Sicherungen ansehen und System wiederherstellen“."
+                    pd_info "$TITLE" "Das System ist gesichert.\n\nDiesen Stand findest du unter „Sicherungen ansehen und System wiederherstellen“."
                 else
                     RC=$?
                     if [ "$RC" -eq 126 ] || [ "$RC" -eq 127 ]; then
                         pd_info "$TITLE" "Abgebrochen. Dafür braucht es das Passwort eines Erwachsenen."
                     else
-                        pd_fehler "$TITLE" "⚠️ Die Sicherung hat nicht geklappt.\nDetails: /tmp/pingulinux-sichern-$USER.log"
+                        pd_fehler "$TITLE" "Die Sicherung hat nicht geklappt.\nDetails: /tmp/pingulinux-sichern-$USER.log"
                     fi
                 fi
                 exit 0 ;;
             usb) exec /usr/local/bin/pingulinux-sicherung-usb.sh ;;
+            auto)
+                # z4: Sticks, die die eigenen Dateien von selbst sichern
+                ARGS=()
+                while IFS=$'\t' read -r U L; do
+                    [ -n "$U" ] && ARGS+=("$U" "$L  (beim Einstecken und alle 4 Stunden)")
+                done < /var/lib/pingulinux/sicherungs-sticks
+                U=$(pd_menue "$TITLE" "Diese Sticks sichern die eigenen Dateien von selbst, sobald sie stecken.\nZuletzt: ${STICKSTAND:-noch nicht}\n\nEinen Stick auswählen, um das für ihn <b>auszuschalten</b>:" "${ARGS[@]}") || exit 0
+                [ -n "$U" ] || exit 0
+                if pd_frage "$TITLE" "Diesen Stick nicht mehr automatisch sichern?\n\nWas schon auf dem Stick liegt, bleibt dort. Nach der nächsten Sicherung von Hand ist er wieder dabei." "Ausschalten" "Abbrechen"; then
+                    pkexec /usr/local/bin/pingulinux-sicherung-usb-worker.sh vergessen "$U" && pd_info "$TITLE" "Ausgeschaltet."
+                fi
+                exit 0 ;;
             dateien)
                 pd_info "$TITLE" "Stecke den Stick ein. Gleich öffnet sich der Dateimanager.\n\nDie Sicherung liegt auf dem Stick unter\n<b>Pingulinux-Sicherung → $(hostname) → Eigene-Dateien</b>.\nKopiere einfach die Dateien, die du brauchst, zurück in deinen Ordner."
                 exec dolphin --new-window "/media/$USER" ;;

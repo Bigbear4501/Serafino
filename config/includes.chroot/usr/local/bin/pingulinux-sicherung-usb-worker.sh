@@ -6,6 +6,7 @@
 # Aufruf (nur aus pingulinux-sicherung-usb.sh):
 #   …-worker.sh formatieren GERÄT
 #   …-worker.sh sichern GERÄT ZIELORDNER daten|system|beides
+#   …-worker.sh vergessen UUID      Stick nicht mehr automatisch sichern (z4)
 #
 # Das Ergebnis steht danach in /var/lib/pingulinux/usb-sicherung-ergebnis.
 #
@@ -24,7 +25,17 @@ DEV="${2:-}"
 RESULT=/var/lib/pingulinux/usb-sicherung-ergebnis
 mkdir -p /var/lib/pingulinux
 
-fail() { echo "# ⚠️ $1"; echo "⚠️ $1" > "$RESULT"; chmod 644 "$RESULT"; exit 1; }
+fail() { echo "# $1"; echo "✗ $1" > "$RESULT"; chmod 644 "$RESULT"; exit 1; }
+
+# Sicherungs-Sticks (z4): nach der ersten Sicherung der eigenen Dateien merkt
+# sich Serafino den Stick (UUID). serafino-stick-sicherung.sh sichert dann
+# beim Einstecken und regelmäßig, solange er steckt.
+STICKS=/var/lib/pingulinux/sicherungs-sticks
+if [ "$MODE" = vergessen ]; then
+    [[ "$DEV" =~ ^[A-Za-z0-9-]+$ ]] || { echo "UUID?" >&2; exit 2; }
+    [ -f "$STICKS" ] && sed -i "/^$DEV\t/d" "$STICKS"
+    exit 0
+fi
 
 # Nur Wechseldatenträger (USB) zulassen – nie die eingebaute Platte
 [ -b "$DEV" ] || fail "Kein gültiges Gerät: $DEV"
@@ -48,7 +59,7 @@ formatieren)
     for m in $(lsblk -nlo MOUNTPOINT "$DEV" | grep -v '^$'); do umount "$m" 2>/dev/null; done
     umount "$DEV" 2>/dev/null
     if mkfs.ext4 -F -q -L PINGU-SICHER "$DEV"; then
-        echo 100; echo "# Fertig"; echo "✅ Stick formatiert" > "$RESULT"; chmod 644 "$RESULT"
+        echo 100; echo "# Fertig"; echo "✓ Stick formatiert" > "$RESULT"; chmod 644 "$RESULT"
         exit 0
     fi
     fail "Formatieren hat nicht geklappt."
@@ -87,32 +98,57 @@ sichern)
         RC=${PIPESTATUS[0]}
         if [ "$RC" = 0 ] || [ "$RC" = 23 ] || [ "$RC" = 24 ]; then
             date '+%d.%m.%Y %H:%M' > "$BASE/Eigene-Dateien/LETZTE-SICHERUNG.txt"
-            msgs+=("✅ Eigene Dateien gesichert")
+            msgs+=("✓ Eigene Dateien gesichert")
+            # Stick merken (z4)
+            U=$(lsblk -dno UUID "$DEV" 2>/dev/null | tr -d ' ')
+            if [ -n "$U" ] && ! grep -q "^$U"$'\t' "$STICKS" 2>/dev/null; then
+                L=$(lsblk -dno LABEL "$DEV" 2>/dev/null | sed 's/ *$//')
+                printf '%s\t%s\n' "$U" "${L:-USB-Stick}" >> "$STICKS"; chmod 644 "$STICKS"
+                msgs+=("✓ Ab jetzt sichert dieser Stick die eigenen Dateien von selbst, sobald er steckt")
+            fi
+            mkdir -p /var/lib/pingulinux/stick-letzte; [ -n "$U" ] && touch "/var/lib/pingulinux/stick-letzte/$U"
+            date '+%d.%m.%Y %H:%M' > /var/lib/pingulinux/stick-sicherung-status; chmod 644 /var/lib/pingulinux/stick-sicherung-status
             [ "$RC" != 0 ] && msgs+=("   (einzelne Dateien ließen sich nicht kopieren, Details: /var/log/pingulinux-sicherung-usb.log)")
         else
-            msgs+=("⚠️ Eigene Dateien: Fehler (rsync $RC)")
+            msgs+=("✗ Eigene Dateien: Fehler (rsync $RC)")
         fi
     fi
 
     if [ "$WHAT" = system ] || [ "$WHAT" = beides ]; then
         case "$FSTYPE" in
             ext2|ext3|ext4|btrfs|xfs) ;;
-            *) msgs+=("⚠️ System: braucht einen Stick im Linux-Format (ext4)"); WHAT=fertig ;;
+            *) msgs+=("✗ System: braucht einen Stick im Linux-Format (ext4)"); WHAT=fertig ;;
         esac
     fi
     if [ "$WHAT" = system ] || [ "$WHAT" = beides ]; then
         echo "# System wird gesichert (Timeshift)… das dauert eine Weile"
-        if [ "$WHAT" = beides ]; then echo 55; else echo 10; fi
+        if [ "$WHAT" = beides ]; then S0=55; else S0=10; fi
+        echo "$S0"
         # Timeshift merkt sich den Stick sonst dauerhaft als Sicherungs-Platte –
         # dann liefe die tägliche Sicherung ins Leere, sobald der Stick ab ist.
         TSCONF=/etc/timeshift/timeshift.json; KEEP=$(mktemp)
         [ -f "$TSCONF" ] && cp -p "$TSCONF" "$KEEP"
-        if timeshift --create --scripted --snapshot-device "$DEV" \
-               --comments "USB-Sicherung $(date '+%d.%m.%Y')" \
-               >>/var/log/pingulinux-sicherung-usb.log 2>&1; then
-            msgs+=("✅ System gesichert (Timeshift auf dem Stick)")
+        # Fortschritt (bz20): Timeshift schreibt jede Sekunde „ 12.34% complete (…)\r“.
+        # Die Prozente gehen ins Fortschrittsfenster, alles andere ins Protokoll.
+        LOG=/var/log/pingulinux-sicherung-usb.log
+        timeshift --create --scripted --snapshot-device "$DEV" \
+               --comments "USB-Sicherung $(date '+%d.%m.%Y')" 2>&1 \
+          | tr '\r' '\n' | awk -v s="$S0" -v logdatei="$LOG" '
+              /^[ ]*[0-9]+([.,][0-9]+)?%/ {
+                  p = $1; sub("%", "", p); sub(",", ".", p)
+                  v = int(s + p * (99 - s) / 100)
+                  if (v != alt) { print v; alt = v; fflush() }
+                  r = $0; if (r ~ /\(/) { sub(/^[^(]*\(/, "", r); sub(/\)[^)]*$/, "", r) }
+                  else r = ""
+                  if (r != "" && (zuletzt == "" || NR - zuletzt >= 10)) {
+                      sub(/ [^ ]+$/, "", r)          # „remaining“/„verbleibend“ weg
+                      printf "# System wird gesichert – %d %%, noch etwa %s\n", int(p), r; fflush(); zuletzt = NR }
+                  next }
+              NF { print >> logdatei; fflush(logdatei) }'
+        if [ "${PIPESTATUS[0]}" = 0 ]; then
+            msgs+=("✓ System gesichert (Timeshift auf dem Stick)")
         else
-            msgs+=("⚠️ System: Timeshift meldet einen Fehler (Details: /var/log/pingulinux-sicherung-usb.log)")
+            msgs+=("✗ System: Timeshift meldet einen Fehler (Details: /var/log/pingulinux-sicherung-usb.log)")
         fi
         [ -s "$KEEP" ] && cp -p "$KEEP" "$TSCONF"; rm -f "$KEEP"
     fi

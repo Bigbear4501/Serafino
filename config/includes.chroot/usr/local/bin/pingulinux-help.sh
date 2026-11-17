@@ -9,28 +9,36 @@ source /etc/pingulinux/links.conf 2>/dev/null
 
 open_link() {  # $1 Adresse, $2 Name
     if [ -z "$1" ]; then
-        pd_info "$TITLE" "🚧 Die Seite „$2“ ist noch in Arbeit.\n\nSchau bald wieder vorbei!"
+        pd_info "$TITLE" "Die Seite „$2“ ist noch in Arbeit.\n\nSchau bald wieder vorbei!"
     else
         xdg-open "$1" >/dev/null 2>&1 &
     fi
 }
 
 while true; do
-    CHOICE=$(pd_menue "$TITLE" "<big><b>Wie können wir helfen? 🐧</b></big>" \
-        handbuch "📖  Eltern-Handbuch (auch ohne Internet)" \
-        faq "❓  Fragen von Eltern (Passwort vergessen, Sicherung …)" \
-        web "🌐  Pingulinux-Webseite" \
-        anleitung "📘  Anleitungen" \
-        community "💬  Community und Forum" \
-        fehler "🐞  Fehler melden" \
-        diagnose "🛠️  Fehlerdiagnose starten" \
-        datenschutz "🔒  Datenschutz" \
-        impressum "📄  Impressum" \
-        spenden "❤️  Pingulinux unterstützen" )
+    CHOICE=$(pd_menue_ikon "$TITLE" "<big><b>Wie können wir helfen?</b></big>" \
+        handbuch help-contents "Eltern-Handbuch (auch ohne Internet)" \
+        einrichtung tools-wizard "Einrichtungs-Assistent (Kinder, Filter, Bildschirmzeit)" \
+        faq help-about "Fragen von Eltern (Passwort vergessen, Sicherung …)" \
+        ohnepw emblem-unlocked "Anmelden ohne Passwort (für die Kleinen)" \
+        fino /usr/share/pingulinux/fino/fino.png "Überraschungen von Fino (zum Ausprobieren)" \
+        pdf printer "Eltern-Handbuch als PDF (zum Ausdrucken)" \
+        web internet-web-browser "Pingulinux-Webseite" \
+        anleitung applications-education "Anleitungen" \
+        community system-users "Community und Forum" \
+        fehler tools-report-bug "Fehler melden" \
+        diagnose run-build "Fehlerdiagnose starten" \
+        datenschutz security-high "Datenschutz" \
+        impressum document-preview "Impressum" \
+        spenden emblem-favorite "Pingulinux unterstützen" )
 
     case "$CHOICE" in
         handbuch) /usr/local/bin/pingulinux-handbuch.py 01-kontrollzentrum.md ;;
+        einrichtung) /usr/local/bin/pingulinux-einrichtung.py ;;
         faq) /usr/local/bin/pingulinux-handbuch.py 02-eltern-faq.md ;;
+        ohnepw) /usr/local/bin/pingulinux-handbuch.py 03-ohne-passwort.md ;;
+        fino) /usr/local/bin/pingulinux-handbuch.py 04-ueberraschungen.md ;;
+        pdf) xdg-open /usr/share/pingulinux/hilfe/Eltern-Handbuch.pdf >/dev/null 2>&1 & ;;
         web) open_link "$WEBSEITE" "Pingulinux-Webseite" ;;
         anleitung) if [ -n "$ANLEITUNGEN" ]; then open_link "$ANLEITUNGEN" "Anleitungen"; else /usr/local/bin/pingulinux-handbuch.py; fi ;;
         community) open_link "$COMMUNITY" "Community und Forum" ;;

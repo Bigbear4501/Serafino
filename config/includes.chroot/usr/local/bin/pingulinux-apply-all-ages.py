@@ -68,6 +68,20 @@ def desktop_files_for(real):
     return found
 
 
+
+def _mime(fname):
+    """Dateitypen des echten Programms übernehmen: Doppelklick auf eine passende
+    Datei zeigt dann Fino statt einer Fehlermeldung."""
+    for d in ("/usr/share/applications", "/var/lib/flatpak/exports/share/applications"):
+        try:
+            for z in open(os.path.join(d, fname), encoding="utf-8", errors="replace"):
+                if z.startswith("MimeType="):
+                    return z.strip() + "\n"
+        except OSError:
+            continue
+    return ""
+
+
 def set_hidden(user, fname, name, hide):
     try:
         pw = pwd.getpwnam(user)
@@ -80,7 +94,7 @@ def set_hidden(user, fname, name, hide):
             return  # eigene Datei des Nutzers nicht anfassen
         os.makedirs(d, exist_ok=True)
         with open(f, "w", encoding="utf-8") as fh:
-            fh.write("[Desktop Entry]\nType=Application\nName=%s\nNoDisplay=true\nHidden=true\n%s\n" % (name, MARK))
+            fh.write("[Desktop Entry]\nType=Application\nName=%s\nNoDisplay=true\nExec=/usr/local/bin/pingulinux-kind-hinweis.py --app %s\n%s%s\n" % (name, fname, _mime(fname), MARK))
         for path in (os.path.join(pw.pw_dir, ".local"), os.path.join(pw.pw_dir, ".local/share"), d, f):
             try:
                 os.chown(path, pw.pw_uid, pw.pw_gid)
@@ -97,6 +111,20 @@ def flatpak_entries():
         for e in json.load(open("/usr/share/pingulinux/store-apps.json", encoding="utf-8")):
             if e.get("flatpak") and "min_age" in e:
                 out[e["flatpak"]] = e["min_age"]
+    except Exception:
+        pass
+    return out
+
+
+def lock_paths_entries():
+    """Zusätzliche Pfade je Store-Eintrag ("lock_paths"), z. B. alle Wine-Ordner:
+    /usr/bin/wine ist nur ein Startskript, das eigentliche Programm liegt in
+    /usr/lib/wine. Liste von (Mindestalter, [Pfade])."""
+    out = []
+    try:
+        for e in json.load(open("/usr/share/pingulinux/store-apps.json", encoding="utf-8")):
+            if e.get("lock_paths") and "min_age" in e:
+                out.append((e["min_age"], e["lock_paths"]))
     except Exception:
         pass
     return out
@@ -138,6 +166,16 @@ def main():
             else:
                 subprocess.run(["setfacl", "-x", "u:%s" % user, appdir], capture_output=True)
             set_hidden(user, ref + ".desktop", ref, locked)
+        # Zusätzliche Pfade (z. B. Wine komplett): Ordner ohne Zugriff = nichts darin startbar
+        for min_age, paths in lock_paths_entries():
+            for p in paths:
+                if not os.path.lexists(p):
+                    continue
+                real = os.path.realpath(p)
+                if age < min_age:
+                    subprocess.run(["setfacl", "-m", "u:%s:---" % user, real], capture_output=True)
+                else:
+                    subprocess.run(["setfacl", "-x", "u:%s" % user, real], capture_output=True)
 
 
 main()

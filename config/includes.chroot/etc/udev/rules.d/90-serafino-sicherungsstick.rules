@@ -1,0 +1,4 @@
+# Serafino (z4): Steckt ein Sicherungs-Stick (schon einmal von Hand gesichert),
+# sichert serafino-stick-sicherung.sh die eigenen Dateien. Für alle anderen
+# Sticks beendet sich das Skript sofort.
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="?*", ENV{ID_BUS}=="usb", TAG+="systemd", ENV{SYSTEMD_WANTS}+="serafino-stick-sicherung@$env{ID_FS_UUID}.service"

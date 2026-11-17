@@ -5,18 +5,18 @@
 # (pingulinux-youtube-kids-viewer.py). Das Fenster ist kein Browser und
 # kann nur YouTube Kids zeigen.
 #
-# Starten auch Kinder direkt: Die Datei
-# /etc/pingulinux/youtube-kids-ohne-passwort liegt in der ISO.
-# Wird sie gelöscht, brauchen Kinderkonten wieder die Freigabe eines
-# Erwachsenen (Passwort). Eltern-Konten und der Live-Modus starten immer
-# direkt. Schalter im Kontrollzentrum folgt.
+# Kinder starten YouTube Kids direkt. Schalter im Kontrollzentrum
+# („YouTube Kids“, be9) legt /var/lib/pingulinux/youtube-kids-mit-passwort an:
+# dann brauchen Kinderkonten die Freigabe eines Erwachsenen (Passwort).
+# Liegt unter /var/lib, damit ein Paket-Update die Wahl der Eltern nicht
+# zurücksetzt. Eltern-Konten und der Live-Modus starten immer direkt.
 
 . /usr/local/lib/pingulinux/dialog.sh
 VIEWER=/usr/local/bin/pingulinux-youtube-kids-viewer.py
 
 is_parent() { id -nG | tr ' ' '\n' | grep -qx sudo; }
 
-if [ -e /etc/pingulinux/youtube-kids-ohne-passwort ] || is_parent || grep -q "boot=live" /proc/cmdline 2>/dev/null; then
+if [ ! -e /var/lib/pingulinux/youtube-kids-mit-passwort ] || is_parent || grep -q "boot=live" /proc/cmdline 2>/dev/null; then
     exec "$VIEWER"
 fi
 

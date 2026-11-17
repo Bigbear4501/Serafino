@@ -170,3 +170,10 @@ python3-pyqt6
 firmware-cirrus
 firmware-libertas
 ipp-usb
+espeak-ng
+fastfetch
+mokutil
+fonts-noto-color-emoji
+systemd-timesyncd
+plymouth
+plymouth-themes

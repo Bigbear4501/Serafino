@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Fino durchs Jahr
+Comment=Hintergrund passend zur Jahreszeit
+Exec=/usr/local/bin/serafino-jahreszeit.sh
+NoDisplay=true
+X-KDE-autostart-phase=2
+OnlyShowIn=KDE;

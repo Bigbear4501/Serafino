@@ -15,7 +15,7 @@ Maskottchen ist **Pingu**, ein Pinguin mit grüner Kappe und Sonnenbrille.
 - **Eltern-Kontrollzentrum** mit großen Kacheln: Bildschirmzeit, Benutzerkonten, Konten-Übersicht, Kinderschutz-Filter, Firewall, App Store, Sicherung, Update-Assistent, Systembereinigung, Drucker und Scanner, Fehlerdiagnose und Hilfe. Kinder sehen es nicht. Alles, was Administrator-Rechte braucht, fragt nach dem Passwort eines Erwachsenen.
 - **Eltern-Handbuch** direkt im System (Kontrollzentrum → Hilfe), auch ohne Internet: jede Kachel erklärt, dazu Fragen von Eltern (Passwort vergessen, Sicherung, Notfall).
 - **Bildschirmzeit** in einem eigenen Fenster: heute genutzt und übrig, Extrazeit („+15 Min. heute“), Minuten pro Tag für Montag–Freitag und das Wochenende, erlaubte Uhrzeiten. Unterbau ist Timekpr-nExT.
-- **Alter wächst mit:** Beim Anlegen eines Kinderkontos gibst du Geburtsmonat und -jahr an. Erlaubte Programme und Sperren passen sich an, wenn das Kind älter wird. Programme über der Altersgrenze erscheinen im Menü nicht.
+- **Alter wächst mit:** Beim Anlegen eines Kinderkontos gibst du den Geburtstag an. Erlaubte Programme und Sperren passen sich an, wenn das Kind älter wird. Programme über der Altersgrenze erscheinen im Menü nicht.
 - **Sperren pro Konto:** YouTube und soziale Netzwerke sind für Kinder unter 13 Jahren gesperrt, auch im privaten Fenster.
 - **Kinderschutz-Filter (DNS):** CleanBrowsing Family (Standard) oder DNS4EU Kinderschutz. Kinder können ihn nicht umstellen.
 - **Firewall** ab Werk eingeschaltet.
@@ -57,7 +57,7 @@ Maskottchen ist **Pingu**, ein Pinguin mit grüner Kappe und Sonnenbrille.
 - **SHA256-Prüfsumme:**
 
 ```
-ba350165141db393439bc25c6a9cf42ec78721a70a527725fd9ef6654155254e
+PRÜFSUMME-HIER-EINTRAGEN
 ```
 
 Prüfsumme nach dem Download prüfen (im Ordner mit der ISO):

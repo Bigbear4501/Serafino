@@ -22,6 +22,22 @@ done
 while IFS= read -r f; do targets+=("$f"); done < <(find /usr/lib -name 'konsolepart.so' 2>/dev/null)
 [ ${#targets[@]} -eq 0 ] && exit 0
 
+# Strg+Alt+T: Kinder sehen Pingu („Das ist nur für Erwachsene.“) statt nichts.
+# Eigener Menüeintrag im Kinderkonto, der den Konsole-Eintrag überdeckt.
+MARK="X-Pingulinux-Hidden=true"
+pingu_terminal() {   # BENUTZER HOME an|aus
+    local d="$2/.local/share/applications" f="$2/.local/share/applications/org.kde.konsole.desktop"
+    if [ "$3" = an ]; then
+        [ -e "$f" ] && ! grep -q "$MARK" "$f" && return       # eigene Datei des Kindes nicht anfassen
+        [ $DRY = 1 ] && { echo "[dry-run] Pingu-Terminal für $1"; return; }
+        mkdir -p "$d"
+        printf '[Desktop Entry]\nType=Application\nName=Konsole\nNoDisplay=true\nExec=/usr/local/bin/pingulinux-kind-hinweis.py --terminal\nX-KDE-Shortcuts=Ctrl+Alt+T\n%s\n' "$MARK" > "$f"
+        chown "$1:" "$2/.local" "$2/.local/share" "$d" "$f" 2>/dev/null
+    elif [ -e "$f" ] && grep -q "$MARK" "$f"; then
+        run rm -f "$f"
+    fi
+}
+
 getent passwd | while IFS=: read -r user _ uid _ _ home _; do
     [ "$uid" -ge 1000 ] 2>/dev/null && [ "$uid" -lt 60000 ] || continue
     case "$home" in /home/*) ;; *) continue ;; esac
@@ -32,5 +48,6 @@ getent passwd | while IFS=: read -r user _ uid _ _ home _; do
             getfacl -cp "$t" 2>/dev/null | grep -q "^user:$user:" && run setfacl -x "u:$user" "$t"
         fi
     done
+    if is_kid "$user"; then pingu_terminal "$user" "$home" an; else pingu_terminal "$user" "$home" aus; fi
 done
 exit 0

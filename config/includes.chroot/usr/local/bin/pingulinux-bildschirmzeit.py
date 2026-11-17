@@ -23,7 +23,7 @@ import sys
 try:
     from PyQt6.QtCore import Qt
     from PyQt6.QtGui import QIcon
-    from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
+    from PyQt6.QtWidgets import (QApplication, QCheckBox, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                                  QGridLayout, QLabel, QPushButton, QListWidget, QListWidgetItem,
                                  QSpinBox, QGroupBox, QMessageBox, QSplitter)
 except ImportError:
@@ -91,6 +91,32 @@ def fmt(sec):
     return "%d Std. %02d Min." % (h, m) if h else "%d Min." % m
 
 
+class IkonText(QWidget):
+    """Statuszeile: KDE-Symbol links, Text rechts (statt Emojis im Text)."""
+    def __init__(self):
+        super().__init__()
+        h = QHBoxLayout(self)
+        h.setContentsMargins(0, 0, 0, 0)
+        self.bild = QLabel()
+        self.bild.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.bild.hide()
+        self.txt = QLabel("")
+        self.txt.setWordWrap(True)
+        h.addWidget(self.bild)
+        h.addWidget(self.txt, 1)
+
+    def setText(self, t, ikon=None):
+        self.txt.setText(t)
+        if ikon:
+            self.bild.setPixmap(QIcon.fromTheme(ikon).pixmap(16, 16))
+            self.bild.show()
+        else:
+            self.bild.hide()
+
+    def text(self):
+        return self.txt.text()
+
+
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -149,14 +175,20 @@ class Window(QMainWindow):
         self.h_to = QSpinBox(); self.h_to.setRange(1, 24); self.h_to.setSuffix(" Uhr")
         hrow.addWidget(self.h_from); hrow.addWidget(QLabel("bis")); hrow.addWidget(self.h_to); hrow.addStretch(1)
         rg.addLayout(hrow, 2, 1)
+        # bz7: nur Spiele, Videos und Internet zählen · be16: Pausen-Erinnerung
+        self.lernen = QCheckBox("Lernprogramme zählen nicht – nur Spiele, YouTube Kids und Firefox")
+        self.lernen.setToolTip("Malen, Schreiben, Lernspiele wie GCompris und alles andere läuft nicht "
+                               "von der Bildschirmzeit ab. Die erlaubten Uhrzeiten gelten trotzdem.")
+        rg.addWidget(self.lernen, 3, 0, 1, 2)
+        self.pausen = QCheckBox("Fino erinnert an Pausen (alle 30–45 Minuten aufstehen)")
+        rg.addWidget(self.pausen, 4, 0, 1, 2)
         self.save = QPushButton(QIcon.fromTheme("document-save"), "Regeln speichern")
         self.save.clicked.connect(self.save_rules)
-        rg.addWidget(self.save, 3, 1, alignment=Qt.AlignmentFlag.AlignRight)
+        rg.addWidget(self.save, 5, 1, alignment=Qt.AlignmentFlag.AlignRight)
         rv.addWidget(rules)
         rv.addStretch(1)
 
-        self.status = QLabel("")
-        self.status.setWordWrap(True)
+        self.status = IkonText()
         rv.addWidget(self.status)
         split.addWidget(right)
         split.setStretchFactor(1, 1)
@@ -208,7 +240,10 @@ class Window(QMainWindow):
         if hours:
             self.h_from.setValue(min(hours))
             self.h_to.setValue(max(hours) + 1)
-        self.status.setText("" if r.returncode == 0 else "⚠️ Timekpr hat keine Daten geliefert.")
+        self.lernen.setChecked(not os.path.exists(os.path.join("/var/lib/pingulinux/alles-zaehlt", self.user)))
+        self.pausen.setChecked(not os.path.exists(os.path.join("/var/lib/pingulinux/keine-pausen", self.user)))
+        self.status.setText("" if r.returncode == 0 else "Timekpr hat keine Daten geliefert.",
+                            None if r.returncode == 0 else "data-warning")
 
     def save_rules(self):
         if not self.user:
@@ -220,13 +255,17 @@ class Window(QMainWindow):
         hours = ";".join(str(h) for h in range(a, b))
         r1 = run(HELPER + ["tk-limits", self.user, str(self.wd.value() * 60), str(self.we.value() * 60)])
         r2 = run(HELPER + ["tk-hours", self.user, hours]) if r1.returncode == 0 else r1
+        if r2.returncode == 0:
+            r2 = run(HELPER + ["spielzeit", self.user, "an" if self.lernen.isChecked() else "aus"])
+        if r2.returncode == 0:
+            r2 = run(HELPER + ["pausen", self.user, "an" if self.pausen.isChecked() else "aus"])
         self.load()
         if r1.returncode == 0 and r2.returncode == 0:
-            self.status.setText("✅ Gespeichert.")
+            self.status.setText("Gespeichert.", "data-success")
         elif r1.returncode in (126, 127):
             self.status.setText("Abgebrochen – es wurde nichts geändert.")
         else:
-            self.status.setText("⚠️ Speichern hat nicht geklappt: " + (r2.stderr or r1.stderr).strip()[:200])
+            self.status.setText("Speichern hat nicht geklappt: " + (r2.stderr or r1.stderr).strip()[:200], "data-warning")
 
     def add_today(self, mins):
         if not self.user:
@@ -234,11 +273,11 @@ class Window(QMainWindow):
         r = run(HELPER + ["tk-extra", self.user, str(mins * 60)])
         if r.returncode == 0:
             self.load()
-            self.status.setText("✅ %d Minuten extra für heute." % mins)
+            self.status.setText("%d Minuten extra für heute." % mins, "data-success")
         elif r.returncode in (126, 127):
             self.status.setText("Abgebrochen – es wurde nichts geändert.")
         else:
-            self.status.setText("⚠️ Hat nicht geklappt: " + r.stderr.strip()[:200])
+            self.status.setText("Hat nicht geklappt: " + r.stderr.strip()[:200], "data-warning")
 
 
 if __name__ == "__main__":

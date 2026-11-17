@@ -1,0 +1,6 @@
+# Pingulinux-Paketarchiv (Serafino): Updates für Kontrollzentrum, Fino und Co.
+# Liegt auf GitHub Pages, unterschrieben mit dem Pingulinux-Schlüssel.
+Types: deb
+URIs: https://bigbear4501.github.io/Serafino/repo/
+Suites: ./
+Signed-By: /usr/share/keyrings/pingulinux-archiv.gpg

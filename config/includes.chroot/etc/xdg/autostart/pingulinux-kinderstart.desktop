@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Startbildschirm der Kleinen
+Comment=Einfacher Startbildschirm für Kinder bis 6 Jahre
+Exec=/usr/local/bin/pingulinux-kinderstart.py --auto
+Icon=/usr/share/pingulinux/icons/pingu.png
+X-KDE-autostart-phase=2
+NoDisplay=true

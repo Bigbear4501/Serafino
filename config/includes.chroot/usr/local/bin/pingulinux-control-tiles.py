@@ -20,20 +20,24 @@ ADMIN = BIN + "pingulinux-admin-tool.sh"
 STATUS = "/var/lib/pingulinux/sicherung-status"
 
 # Hinweis für einbauen.sh: Konten-Übersicht = pingulinux-admin-tool.sh konten
-# (Symbol aus dem KDE-Thema, Ersatz-Emoji, Titel, Untertitel, Befehl)
+# (Symbol aus dem KDE-Thema, Titel, Untertitel, Befehl)
 TILES = [
-    ("preferences-system-time", "⏰", "Bildschirmzeit", "Zeiten der Kinder", [BIN + "pingulinux-bildschirmzeit.py"]),
-    ("system-users", "👨‍👩‍👧", "Benutzerkonten", "Kinder anlegen, Passwörter", [BIN + "pingulinux-manage-users.sh"]),
-    ("view-list-details", "📋", "Konten-Übersicht", "Alter und Zeiten", [ADMIN, "konten"]),
-    ("security-high", "🌐", "Kinderschutz-Filter", "Webseiten filtern", [BIN + "pingulinux-toggle-dns-filter.sh"]),
-    ("firewall-config", "🛡️", "Firewall", "Netzwerk schützen", [ADMIN, "firewall"]),
-    ("plasmadiscover", "🛍️", "App Store", "Programme holen", [BIN + "pingulinux-store.py"]),
-    ("document-save", "💾", "Sicherung", "Sichern und wiederherstellen", [ADMIN, "sicherung"]),
-    ("system-software-update", "🚀", "Update-Assistent", "Aktualisieren", [BIN + "pingulinux-upgrade-assistant.sh"]),
-    ("edit-clear-all", "🧹", "Systembereinigung", "Platz schaffen", [BIN + "pingulinux-cleanup.sh"]),
-    ("printer", "🖨️", "Drucker und Scanner", "Einrichten", ["kcmshell6", "kcm_printer_manager"]),
-    ("tools-report-bug", "🛠️", "Fehlerdiagnose", "Was ist los?", [BIN + "pingulinux-diagnose.sh"]),
-    ("help-contents", "❓", "Hilfe", "Anleitungen und Kontakt", [BIN + "pingulinux-help.sh"]),
+    ("preferences-system-time", "Bildschirmzeit", "Zeiten der Kinder", [BIN + "pingulinux-bildschirmzeit.py"]),
+    ("system-users", "Benutzerkonten", "Kinder anlegen, Passwörter", [BIN + "pingulinux-manage-users.sh"]),
+    ("view-list-details", "Konten-Übersicht", "Alter und Zeiten", [ADMIN, "konten"]),
+    ("office-chart-bar", "Nutzung", "Wie lange und womit", [BIN + "pingulinux-statistik.py"]),
+    ("applications-games", "Startbildschirm der Kleinen", "Kacheln für 2 bis 6 Jahre", [BIN + "pingulinux-kinderstart.py", "--bearbeiten"]),
+    ("applications-multimedia", "YouTube Kids", "Selbst starten oder mit Passwort", [BIN + "pingulinux-youtube-kids-schalter.sh"]),
+    ("security-high", "Kinderschutz-Filter", "Webseiten filtern", [BIN + "pingulinux-toggle-dns-filter.sh"]),
+    ("firewall-config", "Firewall", "Netzwerk schützen", [ADMIN, "firewall"]),
+    ("plasmadiscover", "App Store", "Programme holen", [BIN + "pingulinux-store.py"]),
+    ("document-save", "Sicherung", "Sichern und wiederherstellen", [ADMIN, "sicherung"]),
+    ("system-software-update", "Update-Assistent", "Aktualisieren", [BIN + "pingulinux-upgrade-assistant.sh"]),
+    ("edit-clear-all", "Systembereinigung", "Platz schaffen", [BIN + "pingulinux-cleanup.sh"]),
+    ("printer", "Drucker und Scanner", "Einrichten", ["kcmshell6", "kcm_printer_manager"]),
+    ("hwinfo", "Hardware & Treiber", "Nvidia, WLAN, neuer Kernel", [BIN + "pingulinux-treiber.py"]),
+    ("tools-report-bug", "Fehlerdiagnose", "Was ist los?", [BIN + "pingulinux-diagnose.sh"]),
+    ("help-contents", "Hilfe", "Anleitungen und Kontakt", [BIN + "pingulinux-help.sh"]),
 ]
 
 
@@ -44,25 +48,45 @@ def start(cmd):
         pass
 
 
-def emoji_icon(emoji):
-    pm = QPixmap(64, 64)
-    pm.fill(Qt.GlobalColor.transparent)
-    p = QPainter(pm)
-    f = QFont(); f.setPixelSize(48); p.setFont(f)
-    p.drawText(pm.rect(), Qt.AlignmentFlag.AlignCenter, emoji)
-    p.end()
-    return QIcon(pm)
+# Ersatz-Symbole, falls ein Name im KDE-Symbolthema fehlt
+ERSATZ = {"firewall-config": "security-high", "plasmadiscover": "system-software-install",
+          "hwinfo": "cpu", "applications-games": "preferences-desktop-user",
+          "office-chart-bar": "view-statistics", "applications-multimedia": "media-playback-start"}
+
+
+def kde_icon(name):
+    ic = QIcon.fromTheme(name)
+    if ic.isNull() and name in ERSATZ:
+        ic = QIcon.fromTheme(ERSATZ[name])
+    return ic if not ic.isNull() else QIcon.fromTheme("applications-system")
+
+
+class KlickLogo(QLabel):
+    """Easter Egg: 5× schnell auf das Logo tippen → Fino fliegt über den Bildschirm."""
+    def __init__(self):
+        super().__init__()
+        self.klicks = []
+        self.setToolTip("Hallo!")
+
+    def mousePressEvent(self, e):
+        import time
+        jetzt = time.monotonic()
+        self.klicks = [t for t in self.klicks if jetzt - t < 3.0] + [jetzt]
+        if len(self.klicks) >= 5:
+            self.klicks = []
+            try:
+                subprocess.Popen([BIN + "pingulinux-fino-flug.py"], start_new_session=True)
+            except OSError:
+                pass
+        super().mousePressEvent(e)
 
 
 class Tile(QToolButton):
-    def __init__(self, icon, emoji, title, sub, cmd):
+    def __init__(self, icon, title, sub, cmd):
         super().__init__()
-        ic = QIcon.fromTheme(icon)
-        if ic.isNull():
-            ic = emoji_icon(emoji)          # Ersatz: großes Emoji als Bild
-        self.setIcon(ic)
+        self.setIcon(kde_icon(icon))
         self.setIconSize(QSize(56, 56))
-        self.setText("%s\n%s" % (title, sub))
+        self.setText("%s\n%s" % (title.replace("&", "&&"), sub))   # „&“ sonst als Tastenkürzel gelesen
         self.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextUnderIcon)
         self.setMinimumSize(170, 150)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
@@ -87,7 +111,7 @@ class Window(QMainWindow):
 
         head = QHBoxLayout()
         if os.path.exists(LOGO):
-            logo = QLabel()
+            logo = KlickLogo()
             logo.setPixmap(QIcon(LOGO).pixmap(56, 56))
             head.addWidget(logo)
         t = QLabel("Hallo! Was möchtest du verwalten?")
@@ -101,7 +125,10 @@ class Window(QMainWindow):
             st = open(STATUS).read().strip()
         except OSError:
             st = "noch nicht gelaufen"
-        self.backup = QLabel("💾 Tägliche Sicherung: " + st)
+        b_ikon = QLabel()
+        b_ikon.setPixmap(kde_icon("document-save").pixmap(22, 22))
+        info.addWidget(b_ikon)
+        self.backup = QLabel("Tägliche Sicherung: " + st)
         self.backup.setWordWrap(True)
         info.addWidget(self.backup, 1)
         undo = QPushButton(QIcon.fromTheme("edit-undo"), "Gestern wiederherstellen …")
@@ -114,8 +141,8 @@ class Window(QMainWindow):
         grid = QGridLayout(grid_w)
         grid.setSpacing(14)
         cols = 4
-        for i, (icon, emoji, title, sub, cmd) in enumerate(TILES):
-            grid.addWidget(Tile(icon, emoji, title, sub, cmd), i // cols, i % cols)
+        for i, (icon, title, sub, cmd) in enumerate(TILES):
+            grid.addWidget(Tile(icon, title, sub, cmd), i // cols, i % cols)
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
         scroll.setFrameShape(QScrollArea.Shape.NoFrame)

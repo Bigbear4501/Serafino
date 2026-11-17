@@ -45,6 +45,30 @@ def is_live():
 LIVE = is_live()
 
 
+def ist_kinderkonto():
+    """Kinderkonten haben ein Profil mit Alter. Programme „nur für Erwachsene“
+    (min_age 99, z. B. der Virenscanner) werden ihnen im Store gar nicht gezeigt."""
+    try:
+        import pwd
+        name = pwd.getpwuid(os.getuid()).pw_name
+    except Exception:
+        return False
+    return os.path.exists(os.path.join("/var/lib/pingulinux/profiles", name))
+
+
+KIND = ist_kinderkonto()
+
+
+def helfer(app):
+    """Optionales Zusatz-Skript eines Eintrags ("helper"), z. B. für den
+    Virenscanner: Flatpak-Oberfläche plus Debian-Paket clamav. Nur Skripte
+    aus /usr/local/bin/pingulinux-* werden akzeptiert."""
+    h = app.get("helper") or ""
+    if h.startswith("/usr/local/bin/pingulinux-") and os.path.exists(h):
+        return shlex.quote(h)
+    return None
+
+
 def run(cmd):
     try:
         return subprocess.run(cmd, capture_output=True, text=True)
@@ -117,6 +141,32 @@ class Worker(QObject):
     finished = pyqtSignal(object, int, str)
 
 
+class IkonText(QWidget):
+    """Statuszeile: KDE-Symbol links, Text rechts (statt Emojis im Text)."""
+    def __init__(self):
+        super().__init__()
+        h = QHBoxLayout(self)
+        h.setContentsMargins(0, 0, 0, 0)
+        self.bild = QLabel()
+        self.bild.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.bild.hide()
+        self.txt = QLabel("")
+        self.txt.setWordWrap(True)
+        h.addWidget(self.bild)
+        h.addWidget(self.txt, 1)
+
+    def setText(self, t, ikon=None):
+        self.txt.setText(t)
+        if ikon:
+            self.bild.setPixmap(QIcon.fromTheme(ikon).pixmap(16, 16))
+            self.bild.show()
+        else:
+            self.bild.hide()
+
+    def text(self):
+        return self.txt.text()
+
+
 class Store(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -135,6 +185,8 @@ class Store(QMainWindow):
                 keys.add("apt:" + a["apt"].split()[0])
             if a.get("flatpak"):
                 keys.add("fp:" + a["flatpak"])
+            if KIND and a.get("min_age", 0) >= 99:
+                continue
             if a["_src"] and not (keys & seen):
                 seen |= keys
                 self.apps.append(a)
@@ -188,7 +240,7 @@ class Store(QMainWindow):
         body.addWidget(self.applist, 1)
         outer.addLayout(body, 1)
 
-        self.status = QLabel("")
+        self.status = IkonText()
         self.status.setContentsMargins(14, 6, 14, 8)
         outer.addWidget(self.status)
 
@@ -274,23 +326,32 @@ class Store(QMainWindow):
     def on_install(self, app, btn):
         if self.busy:
             return
+        if KIND:   # Kinderkonto: erst Fino, dann das Passwort-Fenster für die Eltern
+            run(["/usr/local/bin/pingulinux-kind-hinweis.py", "--installieren"])
         self.busy = True
         btn.setEnabled(False)
         btn.setText("Bitte warten…")
-        self.status.setText("%s wird installiert – ein Erwachsener muss das Passwort eingeben." % app["name"])
+        self.status.setText("%s wird installiert – ein Erwachsener muss das Passwort eingeben.%s"
+                           % (app["name"], " Das kann einige Minuten dauern." if helfer(app) else ""))
         if app["_src"] == "apt":
             cmd = ["pkexec", "sh", "-c",
                    "export DEBIAN_FRONTEND=noninteractive; apt-get update -qq; "
                    "apt-get install -y %s" % " ".join(shlex.quote(p) for p in apt_pkgs(app))]
         else:
+            extra = ("[ $rc -eq 0 ] && { %s install; rc=$?; }; " % helfer(app)) if helfer(app) else ""
             cmd = ["pkexec", "sh", "-c",
-                   "flatpak install -y --system flathub %s; rc=$?; "
-                   "/usr/local/bin/pingulinux-apply-all-ages.py; exit $rc" % shlex.quote(app["flatpak"])]
+                   "flatpak install -y --system flathub %s; rc=$?; %s"
+                   "/usr/local/bin/pingulinux-apply-all-ages.py; "
+                   "[ -x /usr/local/bin/serafino-spielzeit.py ] && /usr/local/bin/serafino-spielzeit.py --alle >/dev/null 2>&1; "
+                   "exit $rc"
+                   % (shlex.quote(app["flatpak"]), extra)]
         threading.Thread(target=self.run_logged, args=(cmd, app, "install"), daemon=True).start()
 
     def on_remove(self, app, btn):
         if self.busy:
             return
+        if KIND:
+            run(["/usr/local/bin/pingulinux-kind-hinweis.py", "--entfernen"])
         if app["_src"] == "apt":
             pkgs = apt_pkgs(app)
             would = apt_removal_set(" ".join(pkgs))
@@ -321,10 +382,11 @@ class Store(QMainWindow):
                    "/usr/local/bin/pingulinux-apply-all-ages.py; exit $rc"
                    % " ".join(shlex.quote(p) for p in apt_pkgs(app))]
         else:
+            extra = ("[ $rc -eq 0 ] && %s remove; " % helfer(app)) if helfer(app) else ""
             cmd = ["pkexec", "sh", "-c",
-                   "flatpak uninstall -y --system %s; rc=$?; "
+                   "flatpak uninstall -y --system %s; rc=$?; %s"
                    "[ $rc -eq 0 ] && flatpak uninstall -y --system --unused; "
-                   "/usr/local/bin/pingulinux-apply-all-ages.py; exit $rc" % shlex.quote(app["flatpak"])]
+                   "/usr/local/bin/pingulinux-apply-all-ages.py; exit $rc" % (shlex.quote(app["flatpak"]), extra)]
         threading.Thread(target=self.run_logged, args=(cmd, app, "remove"), daemon=True).start()
 
     def run_logged(self, cmd, app, action):
@@ -339,14 +401,14 @@ class Store(QMainWindow):
     def done(self, app, rc, action):
         self.busy = False
         if rc == 0:
-            self.status.setText(("✅ %s wurde entfernt." if action == "remove"
-                                 else "✅ %s ist jetzt installiert.") % app["name"])
+            self.status.setText(("%s wurde entfernt." if action == "remove"
+                                 else "%s ist jetzt installiert.") % app["name"], "data-success")
         elif rc in (126, 127):
             self.status.setText("Abgebrochen – es wurde nichts geändert.")
         elif action == "remove":
-            self.status.setText("⚠️ Entfernen fehlgeschlagen. Details: " + LOG)
+            self.status.setText("Entfernen fehlgeschlagen. Details: " + LOG, "data-warning")
         else:
-            self.status.setText("⚠️ Installation fehlgeschlagen. Details: " + LOG)
+            self.status.setText("Installation fehlgeschlagen. Details: " + LOG, "data-warning")
         self.refresh()
 
 

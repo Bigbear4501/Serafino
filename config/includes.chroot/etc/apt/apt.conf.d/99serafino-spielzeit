@@ -1,0 +1,3 @@
+// Serafino: Nach jeder Installation die Liste der Spiele für die Bildschirmzeit
+// neu anwenden (Lernprogramme zählen nicht, Spiele schon).
+DPkg::Post-Invoke { "if [ -x /usr/local/bin/serafino-spielzeit.py ] && ! grep -qw boot=live /proc/cmdline; then /usr/local/bin/serafino-spielzeit.py --alle >/dev/null 2>&1 || true; fi"; };

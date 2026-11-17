@@ -1,0 +1,5 @@
+#!/bin/sh
+# Serafino (z4): regelmäßige Sicherung auf den Sicherungs-Stick einschalten.
+# (Beim Einstecken sorgt die udev-Regel 90-serafino-sicherungsstick.rules dafür.)
+systemctl enable serafino-stick-sicherung.timer || true
+echo "STICK-SICHERUNG: Timer eingeschaltet"

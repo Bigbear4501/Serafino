@@ -19,7 +19,7 @@ if ! grep -q "boot=live" /proc/cmdline 2>/dev/null; then
     fi
 
     if ! echo "$PASSWORD" | sudo -S true 2>/dev/null; then
-        pd_fehler "Eltern-Kontrollzentrum" "⚠️ Das Passwort stimmt nicht. Bitte versuche es noch einmal."
+        pd_fehler "Eltern-Kontrollzentrum" "Das Passwort stimmt nicht. Bitte versuche es noch einmal."
         exit 1
     fi
 fi
@@ -32,48 +32,48 @@ fi
 # Ersatz (Liste), falls die Kachel-Ansicht nicht startet
 while true; do
     # Ersatz-Menü: Schlüssel = angezeigter Text, damit die Fälle unten gleich bleiben
-    ITEMS=("⏰  Bildschirmzeit" "🛡️  Firewall und Netzwerk" "🌐  Kinderschutz-Filter ein/aus"
-           "🖨️  Drucker und Scanner" "💾  Sicherung und Wiederherstellung" "👨‍👩‍👧  Benutzerkonten"
-           "📋  Konten-Übersicht" "🛍️  Pingulinux App Store" "🚀  Update-Assistent (neue Debian-Version)"
-           "🧹  Systembereinigung" "🛠️  Hilfe und Fehlerdiagnose" "❓  Hilfe")
+    ITEMS=("Bildschirmzeit" "Firewall und Netzwerk" "Kinderschutz-Filter ein/aus"
+           "Drucker und Scanner" "Sicherung und Wiederherstellung" "Benutzerkonten"
+           "Konten-Übersicht" "Pingulinux App Store" "Update-Assistent (neue Debian-Version)"
+           "Systembereinigung" "Hilfe und Fehlerdiagnose" "Hilfe")
     ARGS=(); for i in "${ITEMS[@]}"; do ARGS+=("$i" "$i"); done
-    CHOICE=$(pd_menue "Eltern-Kontrollzentrum" "<big><b>Hallo! 🐧 Was möchtest du verwalten?</b></big>" "${ARGS[@]}")
+    CHOICE=$(pd_menue "Eltern-Kontrollzentrum" "<big><b>Hallo! Was möchtest du verwalten?</b></big>" "${ARGS[@]}")
 
     case "$CHOICE" in
-        "⏰  Bildschirmzeit")
+        "Bildschirmzeit")
             /usr/local/bin/pingulinux-admin-tool.sh bildschirmzeit &
             ;;
-        "🛡️  Firewall und Netzwerk")
+        "Firewall und Netzwerk")
             /usr/local/bin/pingulinux-admin-tool.sh firewall &
             ;;
-        "🌐  Kinderschutz-Filter ein/aus")
+        "Kinderschutz-Filter ein/aus")
             /usr/local/bin/pingulinux-toggle-dns-filter.sh
             ;;
-        "🖨️  Drucker und Scanner")
+        "Drucker und Scanner")
             kcmshell6 kcm_printer_manager &
             ;;
-        "💾  Sicherung und Wiederherstellung")
+        "Sicherung und Wiederherstellung")
             /usr/local/bin/pingulinux-admin-tool.sh sicherung &
             ;;
-        "👨‍👩‍👧  Benutzerkonten")
+        "Benutzerkonten")
             /usr/local/bin/pingulinux-manage-users.sh &
             ;;
-        "📋  Konten-Übersicht")
+        "Konten-Übersicht")
             /usr/local/bin/pingulinux-admin-tool.sh konten &
             ;;
-        "🚀  Update-Assistent (neue Debian-Version)")
+        "Update-Assistent (neue Debian-Version)")
             /usr/local/bin/pingulinux-upgrade-assistant.sh
             ;;
-        "🧹  Systembereinigung")
+        "Systembereinigung")
             /usr/local/bin/pingulinux-cleanup.sh
             ;;
-        "🛠️  Hilfe und Fehlerdiagnose")
+        "Hilfe und Fehlerdiagnose")
             /usr/local/bin/pingulinux-diagnose.sh
             ;;
-        "🛍️  Pingulinux App Store")
+        "Pingulinux App Store")
             /usr/local/bin/pingulinux-store.py &
             ;;
-        "❓  Hilfe")
+        "Hilfe")
             /usr/local/bin/pingulinux-help.sh
             ;;
         *)
