@@ -1,16 +1,16 @@
 Package: pingulinux-system
 Architecture: all
-Version: 0.2.202611170238
+Version: 0.2.202611170344
 Priority: optional
 Section: admin
 Maintainer: Pingulinux <noreply@pingulinux.invalid>
 Depends: python3, python3-pyqt6, systemd-timesyncd | time-daemon, fonts-noto-color-emoji
-Filename: ./pingulinux-system_0.2.202611170238_all.deb
-Size: 1223048
-MD5sum: 95217dc2358a0ec492319f89e6216a4c
-SHA1: 0672a89a5e66c225a09057971f4133d96254ec8b
-SHA256: 96d4875a95bd38d2e4c5c57f50d360bd1b3441a5c0eda8d51650ee3f0b333926
-SHA512: a767eceb1dff8bfe619606b6e1df24db1b4cbdbb8b9e253b0b0dcd530f3dfd1c62c292b8f14e3d326683bbac0360d3b50d7f169827add1d294b704cecd88bf88
+Filename: ./pingulinux-system_0.2.202611170344_all.deb
+Size: 1222996
+MD5sum: 7ee33a8be227fde987dc865cb3c25f2c
+SHA1: 167f9e328c36848069a782914019a0be5eeb336a
+SHA256: 3b496645ca593ac9cba8ad7ed51de808c97fdb78b47434940c00244c9e72e586
+SHA512: ebf03ac3c23ee3ced76d253217fe213c7139859faf945b37c325d548b117cb9e28dfe5a88483c32e1f1138a795d6813676b51fa7c480ad8351e2426b9e058fa7
 Description: Serafino – Kinderschutz, Kontrollzentrum, Fino und Co.
  Alle eigenen Dateien von Pingulinux (Serafino): Eltern-Kontrollzentrum,
  Startbildschirm der Kleinen, Fino, Handbuch, Sperren und Einstellungen.
