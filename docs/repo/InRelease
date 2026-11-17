@@ -1,27 +1,27 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Tue, 17 Nov 2026 12:35:10 +0000
+Date: Tue, 17 Nov 2026 12:39:17 +0000
 Description: Pingulinux (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- 21322e6418b59067ae88efd3ffbb1eca              883 Packages
- 6fe0d68809e2e720c400355b7b8187a5              618 Packages.gz
+ 61f144eda1e45ff2badcb4881aefcb94              883 Packages
+ 795e75e4564bd1d507c7ea067652c1d7              613 Packages.gz
 SHA1:
- d8d221ca4932f02dd446c02a291cc8339da17b47              883 Packages
- 24b701e34771a36199dab1a213fb185773f9812b              618 Packages.gz
+ c2f9d82b4f6400eb786498b5497806785a4f7d5d              883 Packages
+ 59d55df9ba4de819263f87e5df841ea0bc81c595              613 Packages.gz
 SHA256:
- 9f4e14acd29e6b091ac919d62da31bc1675105cd1b51b2fc45734316c52ec719              883 Packages
- 6228523cb75bacba21004609a28fa822d8e979b4abe7c44cf13d2281112ca477              618 Packages.gz
+ aaf065178c0e578d16a963f556c74099089916f57851ef35d2c29a0c5526bcfe              883 Packages
+ bd3d94686afafc8563074d70fb89abf4594e1d3baadd38453d1aeaf4ed9cd6ee              613 Packages.gz
 SHA512:
- 732565f73a54b4b5dd0a1dd5c071d8c3384a9220b66b31dedb66a7aed17d4c462272f2ffa11b2e4943757622160e0567f54d1e7476409c264207dfb1f1244e8c              883 Packages
- 2f86e63d1761dcc4d3e2d3725301336c51e5c34d8fc10b484b846eb0250ba4edbbfdd9a19684db390eb92e4ee2fd580119a20767f9265eae45845e965b18ce34              618 Packages.gz
+ ce7dadbf2bd8aa7bab0e87d88cd12919414cc43f3a98dfd4720992fd2621e269537216df2f10861b3b2401f2371f1951f791a9011db93ea4a5df3ce2bd6a65cb              883 Packages
+ 266595878b94049b55526397f7fc0bc540e131a55d6cfa0d34f10fab966f6714e26e82df4ce93909ce98cd01dd9c9aa0b3a2629a1c9c432d3a4c104bdd0f40e2              613 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavxJ/hscbm9yZXBseUBw
-aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyyn6DwD+MjTp58eynuX2KiOQBf6P
-+hMPyR/zTbpyFd5/XdO284EA/iBFbwtjIfLhsZKv4l0+8A5YakGUWMIK/VK8vEGN
-T+AB
-=gqlR
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavxK9Rscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyyn8GwEAiv7Bh394+4TaN9VIRTC8
+9NB9YYxrTWfBpCMcUCqMUkkA/3eoTDKcXBQ5kgEaRTGwfyUDF1bAE5qwCus3TDjt
+NJIM
+=798/
 -----END PGP SIGNATURE-----
