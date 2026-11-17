@@ -468,12 +468,22 @@ def kwin_regeln(an, x=24, y=600):
                                          skippager="true", skippagerrule="2",
                                          skipswitcher="true", skipswitcherrule="2",
                                          position="%d,%d" % (x, y), positionrule="2",
-                                         minimize="false", minimizerule="2"),
+                                         minimize="false", minimizerule="2",
+                                         maximizehoriz="false", maximizehorizrule="2",
+                                         maximizevert="false", maximizevertrule="2"),
             "pingulinux-startbildschirm": dict(klasse, Description="Serafino: Startbildschirm der Kleinen",
                                                title="Mein Startbildschirm", titlematch="1",
                                                fullscreen="true", fullscreenrule="2"),
-            "pingulinux-kein-vollbild": {"Description": "Serafino: kein Vollbild (Nach-Hause-Knopf bleibt sichtbar)",
-                                         "wmclassmatch": "0", "fullscreen": "false", "fullscreenrule": "2"},
+            # Alle Programm-Fenster (nur „normale“ Fenster, keine Dialoge): füllen den ganzen
+            # Bildschirm ohne Rahmen und Titelleiste, lassen sich nicht verkleinern oder
+            # verschieben – aber kein echtes Vollbild, damit der Nach-Hause-Knopf obendrauf
+            # sichtbar bleibt (Wunsch Mike, 17. Nov).
+            "pingulinux-kein-vollbild": {"Description": "Serafino: Programme füllen den Bildschirm (Nach-Hause-Knopf bleibt sichtbar)",
+                                         "wmclassmatch": "0", "types": "1",
+                                         "fullscreen": "false", "fullscreenrule": "2",
+                                         "maximizehoriz": "true", "maximizehorizrule": "2",
+                                         "maximizevert": "true", "maximizevertrule": "2",
+                                         "noborder": "true", "noborderrule": "2"},
         }
         for r in REGEL_IDS:            # Reihenfolge zählt: der Startbildschirm vor „kein Vollbild“
             c.add_section(r)

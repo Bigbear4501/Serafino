@@ -60,7 +60,7 @@ Für Kinder **bis 6 Jahre** startet nach dem Anmelden ein eigener, einfacher Sta
 Oben gibt es große Knöpfe **🔉 leiser** und **🔊 lauter** mit Balken dazwischen, bis 100 %.
 
 - **Kacheln einrichten:** Nur hier im Kontrollzentrum (Kachel „Startbildschirm der Kleinen“). Angeboten werden nur Programme, die zum Alter passen. Auf dem Startbildschirm selbst gibt es keinen „Hinzufügen“-Knopf – so landen Kinder nicht aus Versehen bei der Passwort-Abfrage.
-- **Nach Hause 🏠:** Solange ein Programm läuft, das vom Startbildschirm aus gestartet wurde, liegt unten links ein runder Knopf mit einem Haus über allem. Antippen beendet das Programm und bringt das Kind zurück zum Startbildschirm. Damit der Knopf nie verdeckt wird, öffnen sich Spiele und Videos in diesem Konto nicht im echten Vollbild, sondern als großes Fenster.
+- **Nach Hause 🏠:** Solange ein Programm läuft, das vom Startbildschirm aus gestartet wurde, liegt unten links ein runder Knopf mit einem Haus über allem. Antippen beendet das Programm und bringt das Kind zurück zum Startbildschirm. Jedes Programm füllt hier den ganzen Bildschirm, ohne Rahmen und Titelleiste, und lässt sich nicht verkleinern oder verschieben. Es ist aber kein echtes Vollbild, damit der Knopf nie verdeckt wird.
 - **Gruppen:** Mehrere Programme lassen sich zu einer Kachel zusammenfassen, zum Beispiel „Spielen“. Beim Antippen öffnet sich eine zweite Seite mit einem großen „Zurück“-Knopf.
 - **Umbenennen:** Doppelklick auf einen Eintrag, zum Beispiel „Malen“ statt „Tux Paint“. Dieser Name wird auch vorgelesen.
 - **Ab 7 Jahren** gibt es automatisch den normalen Bildschirm. Ihr könnt das pro Kind auf „immer“ oder „nie“ umstellen.
