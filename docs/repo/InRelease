@@ -1,27 +1,27 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Tue, 17 Nov 2026 02:51:07 +0000
+Date: Tue, 17 Nov 2026 03:00:59 +0000
 Description: Pingulinux (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- 1dfbccfca6bf206941ac7c718f1ec791              883 Packages
- c084eb96a783cbab4e8b2501d6506e10              618 Packages.gz
+ f6a66a135d42aedf7ff03b0874b1d5a6              883 Packages
+ b04287e9865bbf1590dc88b795c8019c              618 Packages.gz
 SHA1:
- 57ccb7eb5cef5d4ff5878ef04a0bab574b911a6e              883 Packages
- b4f90c44acebc227fd399862faaa1d2866b77b6a              618 Packages.gz
+ 2eb9ce715a6398d55392f23b4fb57aed6178c98b              883 Packages
+ 1346d184c01d717ef4499a037920ade6a6608ccb              618 Packages.gz
 SHA256:
- 23763f4e2cc0b5151feea7950a470641e1d273b07a3638ed4b810a48d9e9f6e5              883 Packages
- 87e68143ac31738a509d2cf23e32edeb1aee2483732860eab0187b1277a7dee3              618 Packages.gz
+ dad092bcfbe2bd658e9df8ab696daa7126c03e9452ec5e8397d75579f1886352              883 Packages
+ 14c096ecbc61597ce05c21d6d56a931f70dafdcbcd7e66a689e8138d83a66255              618 Packages.gz
 SHA512:
- 318ea977940b951a85c36b9f4d3406b656788dcc19393c955d1c911d6e9e6481732919b4eddf8c94246ee06fffe1ad61895f71c91e3a2bc7b4ac04e98f5f5418              883 Packages
- 41bf0a380a82e3240575d1b46013f8b510d82d49e2ae0f9bc21cf369c300f0fad3771dde33b29fcee59cba727c19bdebaaec743dd8842567d2b6a14f85ea2da2              618 Packages.gz
+ 341b1cc4543a34c9a5efd2d91f3d334e80c0f731331c75cd55ed22600f5097c50b47df89ebb8827471a9e106e7d72f938e3773afd2c6e33267bb587a60adf812              883 Packages
+ f8423c6092f23babf22701244b560ccbda92aee88c86a25a0367fa0b5e3eac0d19d77ffb131562f6ae86e3f1c224f512fe2033907ed20ce94c0d9211174ef9e8              618 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavvBGxscbm9yZXBseUBw
-aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyymc3gD8C2JjRW6c5WpCEovwxWPV
-Och77bZobOebJzDVvMeWrykA/i6EIU77Qrxh0MK8MvJjIetkgGWph1kRSGkvcGVj
-asMI
-=PXQO
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCavvDaxscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyykzyQD9GHQQz5Z2DaHvx5fYqKyy
+F5GyLQP2AsTVoFgaHpXpS0wA/j8ZdTH9F33gR9Rvxy8KQimRdLwi82043Kd5tmKT
+54ED
+=4d07
 -----END PGP SIGNATURE-----
