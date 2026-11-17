@@ -4,12 +4,15 @@
 Kamera und Mikrofon erst ab 10 Jahren.
 
 So funktioniert es:
-  - Eine udev-Regel (72-pingulinux-media.rules) gibt Kameras (/dev/video*)
-    und die Aufnahme-Seite der Soundkarten (/dev/snd/pcm…c) nur noch der
-    Gruppe „pingumedia“ frei. Lautsprecher und Kopfhörer sind nicht betroffen,
-    Ton hören geht für alle.
-  - Dieses Skript legt fest, wer in der Gruppe ist: alle Erwachsenen-Konten
-    und Kinder ab 10. Kinder unter 10 (oder ohne bekanntes Alter) nicht.
+  - Kamera: Eine udev-Regel (72-pingulinux-media.rules) gibt Kameras
+    (/dev/video*) nur noch der Gruppe „pingumedia“ frei. Dieses Skript legt
+    fest, wer in der Gruppe ist: alle Erwachsenen-Konten und Kinder ab 10.
+  - Mikrofon (seit 17. Nov, b25): Für Kinder unter 10 liegt eine
+    WirePlumber-Regel in /etc/serafino/pro-konto/KIND/wireplumber/, die alle
+    Mikrofone abschaltet (auch Bluetooth). Lautsprecher und Kopfhörer bleiben.
+    Früher sperrte die udev-Regel die Aufnahme-Geräte direkt – auf dem
+    Surface verschwand damit die ganze Soundkarte, also auch der Ton.
+    Wirkt ab der nächsten Anmeldung des Kindes.
   - Läuft beim Start, täglich und sobald sich ein Alter ändert. Am
     10. Geburtstag kommt das Kind automatisch in die Gruppe (wirkt ab der
     nächsten Anmeldung).
@@ -59,6 +62,49 @@ def kid_age(name):
     return age if age is not None else 0
 
 
+PRO_KONTO = "/etc/serafino/pro-konto"
+MIKRO_REGEL = "wireplumber/wireplumber.conf.d/90-serafino-kein-mikrofon.conf"
+MIKRO_TEXT = """# Serafino: Mikrofon erst ab 10 Jahren (wird von pingulinux-media-access.py
+# angelegt und wieder entfernt – bitte nicht von Hand ändern).
+monitor.alsa.rules = [
+  {
+    matches = [ { node.name = "~alsa_input.*" } ]
+    actions = { update-props = { node.disabled = true } }
+  }
+]
+monitor.bluez.rules = [
+  {
+    matches = [ { node.name = "~bluez_input.*" } ]
+    actions = { update-props = { node.disabled = true } }
+  }
+]
+"""
+
+
+def mikrofon(name, gesperrt):
+    """WirePlumber-Regel für dieses Konto anlegen bzw. entfernen."""
+    pfad = os.path.join(PRO_KONTO, name, MIKRO_REGEL)
+    if gesperrt:
+        try:
+            if open(pfad, encoding="utf-8").read() == MIKRO_TEXT:
+                return
+        except OSError:
+            pass
+        if DRY:
+            print("[dry-run] Mikrofon-Regel: " + pfad)
+            return
+        os.makedirs(os.path.dirname(pfad), mode=0o755, exist_ok=True)
+        with open(pfad + ".neu", "w", encoding="utf-8") as f:
+            f.write(MIKRO_TEXT)
+        os.chmod(pfad + ".neu", 0o644)
+        os.replace(pfad + ".neu", pfad)
+    elif os.path.exists(pfad):
+        if DRY:
+            print("[dry-run] Mikrofon-Regel weg: " + pfad)
+            return
+        os.remove(pfad)
+
+
 def sh(cmd):
     if DRY:
         print("[dry-run] " + " ".join(cmd))
@@ -85,6 +131,7 @@ def main():
         allowed = age is None or age >= MIN_AGE
         label = "Erwachsen" if age is None else "%d Jahre" % age
         print("%-16s %-10s Kamera/Mikrofon: %s" % (pw.pw_name, label, "frei" if allowed else "gesperrt"))
+        mikrofon(pw.pw_name, not allowed)
         if allowed and pw.pw_name not in members:
             sh(["gpasswd", "-a", pw.pw_name, GROUP])
         elif not allowed and pw.pw_name in members:

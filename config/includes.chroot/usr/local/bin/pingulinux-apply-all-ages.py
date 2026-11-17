@@ -124,10 +124,32 @@ def lock_paths_entries():
     try:
         for e in json.load(open("/usr/share/pingulinux/store-apps.json", encoding="utf-8")):
             if e.get("lock_paths") and "min_age" in e:
-                out.append((e["min_age"], e["lock_paths"]))
+                out.append((e["min_age"], e["lock_paths"], e.get("cmd") or e.get("flatpak") or ""))
     except Exception:
         pass
     return out
+
+
+AUSNAHMEN = "/var/lib/pingulinux/app-ausnahmen"
+
+
+def ausnahmen(user):
+    """Ausnahmen der Eltern für dieses Kind: (erlauben, sperren) als Mengen."""
+    try:
+        d = json.load(open(os.path.join(AUSNAHMEN, user + ".json"), encoding="utf-8"))
+        return set(d.get("erlauben", [])), set(d.get("sperren", []))
+    except Exception:
+        return set(), set()
+
+
+def entscheide(aus, key, nach_alter):
+    """Gesperrt? „sperren“ und „erlauben“ der Eltern gehen vor dem Alter."""
+    erlauben, sperren = aus
+    if key in sperren:
+        return True
+    if key in erlauben:
+        return False
+    return nach_alter
 
 
 FP_APPS = "/var/lib/flatpak/app"
@@ -138,6 +160,7 @@ def main():
     ents = entries()
     fps = flatpak_entries()
     for user, age in users():
+        aus = ausnahmen(user)
         # Terminal (Konsole) ist fuer Kinderkonten immer gesperrt
         for term in ("/usr/bin/konsole",):
             if os.path.exists(term):
@@ -147,7 +170,7 @@ def main():
             if not path or not os.path.exists(path):
                 continue
             real = os.path.realpath(path)
-            locked = age < min_age
+            locked = entscheide(aus, cmd, age < min_age)
             if locked:
                 subprocess.run(["setfacl", "-m", "u:%s:---" % user, real], capture_output=True)
             else:
@@ -160,19 +183,19 @@ def main():
             appdir = os.path.join(FP_APPS, ref)
             if not os.path.isdir(appdir):
                 continue
-            locked = age < min_age
+            locked = entscheide(aus, ref, age < min_age)
             if locked:
                 subprocess.run(["setfacl", "-m", "u:%s:---" % user, appdir], capture_output=True)
             else:
                 subprocess.run(["setfacl", "-x", "u:%s" % user, appdir], capture_output=True)
             set_hidden(user, ref + ".desktop", ref, locked)
         # Zusätzliche Pfade (z. B. Wine komplett): Ordner ohne Zugriff = nichts darin startbar
-        for min_age, paths in lock_paths_entries():
+        for min_age, paths, lp_key in lock_paths_entries():
             for p in paths:
                 if not os.path.lexists(p):
                     continue
                 real = os.path.realpath(p)
-                if age < min_age:
+                if entscheide(aus, lp_key, age < min_age):
                     subprocess.run(["setfacl", "-m", "u:%s:---" % user, real], capture_output=True)
                 else:
                     subprocess.run(["setfacl", "-x", "u:%s" % user, real], capture_output=True)

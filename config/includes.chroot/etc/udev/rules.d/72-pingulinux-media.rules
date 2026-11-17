@@ -1,7 +1,11 @@
-# Pingulinux: Kamera und Mikrofon nur für die Gruppe „pingumedia“
+# Serafino: Kamera nur für die Gruppe „pingumedia“
 # (Erwachsene und Kinder ab 10, siehe pingulinux-media-access.py).
 # Normalerweise bekommt das angemeldete Konto automatisch Zugriff („uaccess“).
-# Das wird hier für Kameras und Aufnahme-Geräte abgeschaltet.
+# Das wird hier für Kameras abgeschaltet.
 # Läuft nach 70-uaccess.rules und vor 73-seat-late.rules.
+#
+# Das Mikrofon wird NICHT mehr hier gesperrt (b25, 17. Nov): Auf Geräten wie
+# dem Surface hängen Lautsprecher und Mikrofon an derselben Soundkarte –
+# ohne Zugriff aufs Mikrofon verschwand dort auch der Ton. Mikrofone sperrt
+# jetzt PipeWire (WirePlumber-Regel pro Kind, siehe pingulinux-media-access.py).
 SUBSYSTEM=="video4linux", TAG-="uaccess", GROUP="pingumedia", MODE="0660"
-SUBSYSTEM=="sound", KERNEL=="pcmC[0-9]*D[0-9]*c", TAG-="uaccess", GROUP="pingumedia", MODE="0660"

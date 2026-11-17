@@ -30,6 +30,7 @@ while true; do
         "Profilbild ändern" edit-image "Profilbild ändern" \
         "Passwort ändern" dialog-password "Passwort ändern" \
         "Ohne Passwort" emblem-unlocked "Anmelden ohne Passwort (für die Kleinen) ein/aus" \
+        "Programme" applications-other "Programme pro Kind (erlauben oder sperren, unabhängig vom Alter)" \
         "Zurücksetzen" edit-clear-history "Kinderkonto zurücksetzen (Einstellungen und Schreibtisch)" \
         "Benutzer löschen" edit-delete "Benutzer löschen")
 
@@ -179,6 +180,10 @@ $ERR"
 $ERR"
                 fi
             fi
+            ;;
+        "Programme")
+            # bz3: einzelne Programme für ein Kind erlauben oder sperren
+            /usr/local/bin/serafino-programme.py
             ;;
         "Zurücksetzen")
             # bz8: Einstellungen und Schreibtisch auf Anfang, eigene Dateien bleiben

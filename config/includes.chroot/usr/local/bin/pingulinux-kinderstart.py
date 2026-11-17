@@ -16,17 +16,19 @@ Einstellungen pro Kind: /var/lib/pingulinux/kinderstart/BENUTZER.json
 (nur root darf schreiben – gespeichert wird über
 pkexec pingulinux-root-helper ks-save BENUTZER, also mit Eltern-Passwort).
   {"modus": "auto"|"an"|"aus",          auto = bis 6 Jahre
-   "max_lautstaerke": 70,                 höchste Lautstärke in % (Vorgabe 70)
+   "max_lautstaerke": 100,                wird nicht mehr benutzt (Obergrenze entfernt, 17. Nov)
    "kacheln": [ {"app": "tuxpaint.desktop", "name": "Malen"},
                 {"gruppe": "Spielen", "symbol": "🧩",
                  "kacheln": [ {"app": "org.kde.ktuberling.desktop"} ]} ]}
 Ohne Datei gilt eine Vorgabe nach Alter.
 
-Unten rechts führt „Normaler Bildschirm (Eltern)“ zum gewohnten KDE – nur mit
-dem Eltern-Passwort (Wunsch Mike, 14. Nov). Jede Kachel hat oben rechts einen
+Es gibt keinen Weg in den normalen Bereich der Eltern (Wunsch Mike, 17. Nov, be4m):
+unten rechts nur zwei Knöpfe, „Herunterfahren“ und „Abmelden“ (ohne Passwort).
+Eltern melden sich zum Wechseln ab und mit ihrem Konto an. Jedes Programm lässt
+sich nur einmal öffnen (zweites Antippen holt das laufende nach vorn). Jede Kachel hat oben rechts einen
 Vorlese-Knopf 🗣️, der nur den Namen vorliest. Oben gibt es große Knöpfe
-„leiser“/„lauter“ mit Balken; mehr als die Obergrenze der Eltern geht nicht
-(auch nicht über die Tasten – alle paar Sekunden wird nachgeregelt).
+„leiser“/„lauter“ mit Balken (bis 100 %). Eine Obergrenze gibt es nicht mehr
+(Wunsch Mike, 17. Nov – am Surface war der Ton damit zu leise).
 Kinder können nichts hinzufügen oder löschen: Kacheln richten die Eltern im
 Kontrollzentrum ein („Startbildschirm der Kleinen“, Speichern mit Passwort).
 """
@@ -204,8 +206,52 @@ def restzeit(user):
         return None
 
 
+def _hauptprogramm(teile):
+    """Der eigentliche Programmname hinter „env VAR=x“ usw. (für die Einmal-Prüfung)."""
+    t = list(teile)
+    while t and (os.path.basename(t[0]) == "env" or re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*=.*", t[0])
+                 or t[0].startswith("-")):
+        t.pop(0)
+    return t
+
+
+def laeuft_schon(teile):
+    """Läuft dieses Programm im eigenen Konto schon? (be4m: jedes nur einmal)"""
+    t = _hauptprogramm(teile)
+    if not t:
+        return False
+    name = os.path.basename(t[0])
+    schluessel = None
+    if name == "flatpak":                         # flatpak run [Optionen] APP-ID
+        rest = [x for x in t[1:] if x != "run" and not x.startswith("-")]
+        schluessel = rest[0] if rest else None
+    uid, eigen = os.getuid(), os.getpid()
+    skripte = ("python", "sh", "bash", "perl", "ruby", "node")
+    for d in glob.glob("/proc/[0-9]*"):
+        try:
+            if int(os.path.basename(d)) == eigen or os.stat(d).st_uid != uid:
+                continue
+            arg = open(d + "/cmdline", "rb").read().split(b"\0")
+            arg = [a.decode("utf-8", "replace") for a in arg if a]
+        except (OSError, ValueError):
+            continue
+        if not arg:
+            continue
+        if schluessel:
+            if schluessel in arg:
+                return True
+            continue
+        if os.path.basename(arg[0]) == name:
+            return True
+        if len(arg) > 1 and os.path.basename(arg[0]).startswith(skripte) \
+                and os.path.basename(arg[1]) == name:
+            return True
+    return False
+
+
 def starte(desktop_name):
-    """Programm aus seinem Menü-Eintrag starten (ohne %f/%u-Platzhalter)."""
+    """Programm aus seinem Menü-Eintrag starten (ohne %f/%u-Platzhalter).
+    Läuft es schon, wird nichts Neues gestartet: Rückgabe "laeuft"."""
     info = app_info(desktop_name)
     if not info or not info["exec"]:
         return False
@@ -213,6 +259,8 @@ def starte(desktop_name):
         teile = [t for t in shlex.split(info["exec"]) if not re.fullmatch(r"%[a-zA-Z]", t)]
     except ValueError:
         return False
+    if laeuft_schon(teile):
+        return "laeuft"
     try:
         return subprocess.Popen(teile, start_new_session=True,
                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -265,11 +313,8 @@ def _aus(cmd):
 
 
 def max_lautstaerke(user):
-    try:
-        v = int(lade_conf(user).get("max_lautstaerke", LAUT_VORGABE))
-    except (TypeError, ValueError):
-        v = LAUT_VORGABE
-    return max(30, min(100, v))
+    """Keine Obergrenze mehr (17. Nov): der Balken reicht immer bis 100 %."""
+    return 100
 
 
 def lautstaerke():
@@ -628,12 +673,18 @@ class Startbildschirm(QWidget):
         v.addWidget(scroll, 1)
 
         unten = QHBoxLayout(); unten.addStretch(1)
-        normal = QPushButton("🔒  Normaler Bildschirm (Eltern)")
-        normal.setToolTip("Wechsel zum normalen Bildschirm – nur mit dem Passwort von Mama oder Papa")
-        normal.setStyleSheet("QPushButton{background:rgba(255,255,255,.55);color:#1f3557;"
-                             "border-radius:14px;padding:8px 14px;font-size:17px}")
-        normal.clicked.connect(self.normaler_bildschirm)
-        unten.addWidget(normal)
+        for text, tip, fn in (("⏻  Herunterfahren", "Den Computer ausschalten", self.herunterfahren),
+                              ("🚪  Abmelden", "Abmelden – dann kann sich jemand anderes anmelden", self.abmelden)):
+            kn = QPushButton(text)
+            kn.setToolTip(tip); kn.setAccessibleName(text)
+            kn.setCursor(Qt.CursorShape.PointingHandCursor)
+            kn.setMinimumHeight(64)
+            kn.setStyleSheet("QPushButton{background:rgba(255,255,255,.75);color:#1f3557;"
+                             "border-radius:22px;padding:10px 28px;font-size:24px;font-weight:bold;"
+                             "border-bottom:5px solid rgba(0,0,0,.12)}"
+                             "QPushButton:pressed{background:#ffe9a8}")
+            kn.clicked.connect(fn)
+            unten.addWidget(kn)
         v.addLayout(unten)
 
         self.zeige(None)
@@ -642,7 +693,6 @@ class Startbildschirm(QWidget):
         self.lautuhr = QTimer(self); self.lautuhr.timeout.connect(self.laut_pruefen); self.lautuhr.start(4000)
         self.laut_pruefen()
         self.laeuft = []
-        self.eltern_modus = False
         self.knopf = NachHause(self.nach_hause)
         self.knopfuhr = QTimer(self); self.knopfuhr.timeout.connect(self.knopf_pruefen); self.knopfuhr.start(1500)
 
@@ -693,15 +743,19 @@ class Startbildschirm(QWidget):
     # ---- Programme und „Nach Hause“ ----
     def app_starten(self, app):
         pr = starte(app)
-        if pr:
-            self.eltern_modus = False
+        if pr == "laeuft":
+            # Schon offen (be4m): kein zweites Fenster – Startbildschirm geht zur Seite,
+            # das laufende Programm kommt zum Vorschein; „Nach Hause“ bringt ihn zurück.
+            self.showMinimized()
+            QTimer.singleShot(800, self.knopf_pruefen)
+        elif pr:
             self.laeuft.append(pr)
             QTimer.singleShot(800, self.knopf_pruefen)
 
     def knopf_pruefen(self):
         """Knopf zeigen, solange ein vom Startbildschirm gestartetes Programm läuft."""
         self.laeuft = [pr for pr in self.laeuft if pr.poll() is None]
-        if self.laeuft and not self.eltern_modus:
+        if self.laeuft:
             if not self.knopf.isVisible():
                 self.knopf.show()
         elif self.knopf.isVisible():
@@ -757,16 +811,13 @@ class Startbildschirm(QWidget):
 
     # ---- Lautstärke ----
     def laut_pruefen(self):
-        """Balken aktualisieren und über der Obergrenze zurückregeln (auch nach Tasten)."""
+        """Balken aktualisieren (nur Anzeige – es wird nichts zurückgeregelt)."""
         v = lautstaerke()
         if v is None:
             self.lautbox.hide()
             return
         self.lautbox.show()
-        if v > self.lautmax:
-            setze_lautstaerke(self.lautmax)
-            v = self.lautmax
-        self.balken.setze(v / self.lautmax)
+        self.balken.setze(min(1.0, v / self.lautmax))
         self.leiser.setEnabled(v > 0)
         self.lauter.setEnabled(v < self.lautmax)
 
@@ -787,19 +838,30 @@ class Startbildschirm(QWidget):
         self.zeige(None)
         self.laut_pruefen()
 
-    def normaler_bildschirm(self):
-        """Nur mit Eltern-Passwort (polkit, wie überall im Kontrollzentrum)."""
+    def _sitzung_beenden(self, methode, rueckfall):
+        """Über KDE (ohne Rückfrage); klappt das nicht, über systemd/logind."""
         try:
-            ok = subprocess.run(["pkexec", "/usr/local/bin/pingulinux-root-helper", "eltern-ok"],
-                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
-            # Passwort nicht ein paar Minuten merken – das Kind sitzt gleich wieder davor
-            subprocess.run(["pkcheck", "--revoke-temp"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        except OSError:
+            ok = subprocess.run(["dbus-send", "--session", "--type=method_call",
+                                 "--dest=org.kde.Shutdown", "/Shutdown",
+                                 "org.kde.Shutdown." + methode],
+                                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                timeout=5).returncode == 0
+        except (OSError, subprocess.SubprocessError):
             ok = False
-        if ok:
-            self.eltern_modus = True          # Eltern am Gerät: kein Nach-Hause-Knopf
-            self.knopf.hide()
-            self.showMinimized()
+        if not ok:
+            try:
+                subprocess.Popen(rueckfall, start_new_session=True,
+                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except OSError:
+                pass
+
+    def herunterfahren(self):
+        sprich("Tschüss")
+        self._sitzung_beenden("logoutAndShutdown", ["systemctl", "poweroff"])
+
+    def abmelden(self):
+        sprich("Tschüss")
+        self._sitzung_beenden("logout", ["loginctl", "terminate-user", self.user])
 
 
 # ---------------------------------------------------------------- Editor (Eltern)
@@ -856,18 +918,6 @@ class Editor(QDialog):
             self.modus.addItem(text, wert)
         self.modus.setCurrentIndex(max(0, self.modus.findData(conf.get("modus", "auto"))))
         knoepfe.addWidget(self.modus)
-        knoepfe.addSpacing(12)
-        knoepfe.addWidget(QLabel("Höchste Lautstärke:"))
-        self.laut = QComboBox()
-        for wert in (40, 50, 60, 70, 80, 90, 100):
-            self.laut.addItem("%d %%%s" % (wert, " (empfohlen)" if wert == LAUT_VORGABE else ""), wert)
-        try:
-            jetzt = int(conf.get("max_lautstaerke", LAUT_VORGABE))
-        except (TypeError, ValueError):
-            jetzt = LAUT_VORGABE
-        self.laut.setCurrentIndex(max(0, self.laut.findData(jetzt)))
-        self.laut.setToolTip("Mehr geht auf dem Startbildschirm nicht – schützt die Ohren, gerade mit Kopfhörern.")
-        knoepfe.addWidget(self.laut)
         v.addLayout(knoepfe)
 
         unten = QHBoxLayout(); unten.addStretch(1)
@@ -958,7 +1008,7 @@ class Editor(QDialog):
             return d
         root = self.baum.invisibleRootItem()
         return {"modus": self.modus.currentData(),
-                "max_lautstaerke": self.laut.currentData(),
+                "max_lautstaerke": 100,
                 "kacheln": [kachel(root.child(i)) for i in range(root.childCount())]}
 
     def speichern(self):
@@ -1026,7 +1076,6 @@ def main():
         c = server.nextPendingConnection()
         if c:
             c.close()
-        win.eltern_modus = False
         win.showFullScreen(); win.raise_(); win.activateWindow(); win.zeige(None)
     server.newConnection.connect(nach_vorn)
     win.showFullScreen()

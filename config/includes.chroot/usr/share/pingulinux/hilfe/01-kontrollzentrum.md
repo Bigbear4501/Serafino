@@ -33,6 +33,8 @@ Beim Anlegen gebt ihr den **Geburtstag** an (Tag, Monat und Jahr). Damit **wäch
 
 Für die Kleinen (2 bis 6 Jahre) könnt ihr **Anmelden ohne Passwort** einschalten – gleich beim Anlegen oder später unter „Anmelden ohne Passwort“. Mehr dazu im Thema „Anmelden ohne Passwort“.
 
+**Programme pro Kind:** Normalerweise entscheidet das Alter, welche Programme ein Kind starten darf. Hier wählt ihr ein Kind und stellt einzelne Programme davon abweichend auf **„Trotzdem erlauben“** (zum Beispiel Krita schon mit 8) oder **„Sperren“** (zum Beispiel ein Spiel nur für dieses eine Kind). Alles auf „Nach Alter“ bleibt wie bisher, auch Programme, die später aus dem App Store dazukommen. „Nur Ausnahmen zeigen“ listet, was ihr geändert habt, „Alles nach Alter“ nimmt alle Ausnahmen zurück. Ein gesperrtes Programm verschwindet aus dem Startmenü des Kindes, und wer es trotzdem öffnet, bekommt Fino zu sehen.
+
 **Kinderkonto zurücksetzen:** Hat ein Kind seinen Schreibtisch oder seine Programme durcheinandergebracht, setzt dieser Punkt das Konto auf Anfang: Einstellungen aller Programme, Schreibtisch, Firefox-Verlauf und Lesezeichen und auch Spielstände sind danach wie neu. **Bilder, Dokumente, Musik, Videos und Downloads bleiben**, was auf dem Schreibtisch lag, landet in „Dokumente/Vom Schreibtisch …“. Passwort, Alter, Bildschirmzeit und die Kacheln der Kleinen bleiben auch. Das Kind muss dafür abgemeldet sein. Vorher wird alles gesichert (unter /var/lib/pingulinux/zuruecksetzen, nur die letzte Sicherung pro Kind).
 
 **Tipp:** Legt für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann kann einer das Passwort des anderen zurücksetzen, falls es vergessen wurde.
@@ -55,14 +57,15 @@ Hier stellt ihr ein, ob Kinder YouTube Kids **selbst starten** dürfen (so ist e
 
 Für Kinder **bis 6 Jahre** startet nach dem Anmelden ein eigener, einfacher Startbildschirm: wenige große Bild-Kacheln, Fino oben und eine **Sonne, die im Lauf der erlaubten Zeit langsam untergeht**. Jede Kachel hat oben rechts einen **Vorlese-Knopf 🗣️**: Der liest nur den Namen vor („Malen“), startet aber nichts – so können Kinder, die noch nicht lesen, in Ruhe ausprobieren. Ein Tipp auf die Kachel selbst startet das Programm (und sagt den Namen dazu).
 
-Oben gibt es große Knöpfe **🔉 leiser** und **🔊 lauter** mit Balken dazwischen. Lauter als eure Obergrenze geht es nicht – auch nicht über die Lautstärke-Tasten. Die Obergrenze (Vorgabe **70 %**, schont die Ohren, gerade mit Kopfhörern) stellt ihr beim Einrichten der Kacheln unter „Höchste Lautstärke“ ein.
+Oben gibt es große Knöpfe **🔉 leiser** und **🔊 lauter** mit Balken dazwischen, bis 100 %.
 
 - **Kacheln einrichten:** Nur hier im Kontrollzentrum (Kachel „Startbildschirm der Kleinen“). Angeboten werden nur Programme, die zum Alter passen. Auf dem Startbildschirm selbst gibt es keinen „Hinzufügen“-Knopf – so landen Kinder nicht aus Versehen bei der Passwort-Abfrage.
 - **Nach Hause 🏠:** Solange ein Programm läuft, das vom Startbildschirm aus gestartet wurde, liegt unten links ein runder Knopf mit einem Haus über allem. Antippen beendet das Programm und bringt das Kind zurück zum Startbildschirm. Damit der Knopf nie verdeckt wird, öffnen sich Spiele und Videos in diesem Konto nicht im echten Vollbild, sondern als großes Fenster.
 - **Gruppen:** Mehrere Programme lassen sich zu einer Kachel zusammenfassen, zum Beispiel „Spielen“. Beim Antippen öffnet sich eine zweite Seite mit einem großen „Zurück“-Knopf.
 - **Umbenennen:** Doppelklick auf einen Eintrag, zum Beispiel „Malen“ statt „Tux Paint“. Dieser Name wird auch vorgelesen.
 - **Ab 7 Jahren** gibt es automatisch den normalen Bildschirm. Ihr könnt das pro Kind auf „immer“ oder „nie“ umstellen.
-- Unten rechts führt **„🔒 Normaler Bildschirm (Eltern)“** zum gewohnten KDE – nur mit dem Eltern-Passwort. Zurück geht es über „Mein Startbildschirm“ im Startmenü oder in der Taskleiste.
+- Unten rechts gibt es nur zwei Knöpfe: **„Herunterfahren“** und **„Abmelden“**. Einen Weg in den normalen Bereich der Eltern gibt es für die Kleinen nicht. Ihr meldet euch dafür ab und mit eurem eigenen Konto wieder an.
+- Jedes Programm lässt sich nur **einmal** öffnen. Tippt das Kind noch einmal auf dieselbe Kachel, kommt kein zweites Fenster.
 
 Gespeichert wird nur mit dem Eltern-Passwort, Kinder können also nichts hinzufügen oder löschen.
 

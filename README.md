@@ -86,6 +86,32 @@ Die angezeigte Zahl muss mit der Prüfsumme oben übereinstimmen. Unter Windows:
 | Touch-Geräte ohne Tastatur: Die Suche im Startmenü mit der Bildschirmtastatur kann die Oberfläche einfrieren („plasmashell reagiert nicht“). Ursache ist ein Fehler in KDE. | Im Menü durchklicken oder mit einer echten Tastatur suchen. Falls es hängt: „Plasma beenden“ antippen, die Oberfläche startet von selbst neu. | Beta 2 |
 | Auf manchen Geräten stimmen Uhrzeit oder Datum nicht. | Kann die Bildschirmzeit und Webseiten (Zertifikate) stören. Bitte melden, falls es bei dir auftritt. | Beta 2 |
 
+## Datenschutz: Serafino sammelt keine Daten
+
+Serafino schickt **nichts an uns**. Es gibt kein Konto, keine Werbung, keine Nutzungsstatistik und keine Absturzberichte an das Projekt. Alles, was Serafino über die Kinder weiß (Alter, Bildschirmzeit, die Übersicht „Nutzung“ im Kontrollzentrum), bleibt **auf dem Computer**. Eltern können es lesen, Kinder nicht. Die Nutzungs-Übersicht löscht Einträge, die älter als 30 Tage sind, von selbst.
+
+Ganz ohne Internet geht es trotzdem nicht. Damit du genau weißt, wohin der Computer sich verbindet, steht hier jede Verbindung:
+
+| Wohin | Wofür | Wann | Abschalten |
+|---|---|---|---|
+| Debian (`deb.debian.org`, `security.debian.org`) | Updates und Programme | täglich, und wenn im App Store etwas installiert wird | Updates abschalten ist nicht empfohlen |
+| Serafino-Archiv auf GitHub Pages (`bigbear4501.github.io`) | Updates für die Serafino-Programme | täglich, zusammen mit den Debian-Updates | – |
+| Flathub (`flathub.org`) | einige Programme aus dem App Store und deren Updates | nur wenn solche Programme installiert sind | Flathub-Programme wieder entfernen |
+| Kinderschutz-Filter: CleanBrowsing oder DNS4EU | übersetzt Webadressen und blockiert ungeeignete Seiten. Der Dienst sieht dabei, **welche Seiten** aufgerufen werden, aber nicht, was darauf passiert. | bei jedem Seitenaufruf | Kontrollzentrum → Kinderschutz-Filter → Aus |
+| Zeitserver (`debian.pool.ntp.org`) | richtige Uhrzeit (wichtig für die Bildschirmzeit) | beim Start und ab und zu | – |
+| Firefox | Mozilla: Sperrlisten gegen gefährliche Seiten und Erweiterungs-Updates. uBlock Origin: Werbefilter-Listen. Die **Telemetrie ist abgeschaltet**. | wenn Firefox läuft | – |
+| YouTube Kids (Google) | Videos | nur wenn YouTube Kids geöffnet ist. Es gelten die Regeln von Google. | Kontrollzentrum → YouTube Kids |
+| fragFINN, Kindersuchmaschine | Startseite und Suche in Firefox | wenn Firefox geöffnet ist bzw. gesucht wird | in Firefox eine andere Startseite wählen |
+
+Nur wenn Eltern es selbst starten oder installieren:
+
+- **Fehlerdiagnose:** prüft mit einem einzelnen Ping an `1.1.1.1` (Cloudflare), ob Internet da ist. Der Bericht bleibt auf dem Computer.
+- **Update-Assistent:** fragt bei Debian nach, ob es eine neue Debian-Version gibt.
+- **Virenscanner (ClamUI), falls installiert:** lädt Virendaten von ClamAV.
+- **Absturzmeldungen von KDE:** werden nur verschickt, wenn du sie selbst abschickst.
+
+Wer eine Verbindung findet, die hier fehlt: bitte als [Issue](../../issues) melden.
+
 ## Bekannte Einschränkungen
 
 - **Kinderschutz-Filter (DNS):** Nutzt einen externen DNS-Dienst (CleanBrowsing oder DNS4EU). Dabei werden DNS-Anfragen an diesen Dienst gesendet. Wer das nicht möchte, kann den Filter im Kontrollzentrum ausschalten.

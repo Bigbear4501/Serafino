@@ -121,6 +121,7 @@ os.replace(tmp, "/var/lib/pingulinux/kinderstart/%s.json" % user)
         ohne) PW=$(zufall) ;;      # geheimes Zufallspasswort, Anmeldung läuft über die Gruppe
         *)    die "Modus?" ;;
       esac
+      rm -f "/var/lib/pingulinux/app-ausnahmen/$U.json"   # alte Ausnahmen eines gelöschten Kontos gleichen Namens
       printf '%s' "$PW" | /usr/local/bin/pingulinux-create-restricted-user.sh "$U" "$B" "$A" || exit 1
       if [ "$M" = ohne ]; then
           getent group "$PWLOS" >/dev/null || groupadd -r "$PWLOS"
@@ -169,11 +170,46 @@ os.replace(tmp, "/var/lib/pingulinux/kinderstart/%s.json" % user)
       mkdir -p /var/lib/pingulinux/keine-pausen
       if [ "$2" = aus ]; then touch "/var/lib/pingulinux/keine-pausen/$1"; else rm -f "/var/lib/pingulinux/keine-pausen/$1"; fi
       exit 0 ;;
+  app-ausnahmen)      # BENUTZER (JSON auf stdin) – Programme pro Kind erlauben/sperren (bz3)
+      kid_ok "${1:-}" || die "Nur für Kinderkonten."
+      python3 -I -c '
+import json, os, re, sys, tempfile
+user = sys.argv[1]
+try:
+    d = json.loads(sys.stdin.read(65536))
+except ValueError:
+    sys.exit("Ungültige Daten")
+def liste(k):
+    v = d.get(k, [])
+    if not isinstance(v, list) or len(v) > 500:
+        sys.exit("Liste?")
+    out = []
+    for x in v:
+        if not isinstance(x, str) or not re.fullmatch(r"[A-Za-z0-9._+-]{1,120}", x):
+            sys.exit("Eintrag?")
+        out.append(x)
+    return sorted(set(out))
+erl, sp = liste("erlauben"), liste("sperren")
+erl = [x for x in erl if x not in sp]
+ziel = "/var/lib/pingulinux/app-ausnahmen"
+os.makedirs(ziel, mode=0o755, exist_ok=True)
+datei = os.path.join(ziel, user + ".json")
+if not erl and not sp:
+    try:
+        os.remove(datei)
+    except FileNotFoundError:
+        pass
+    sys.exit(0)
+fd, tmp = tempfile.mkstemp(dir=ziel)
+with os.fdopen(fd, "w", encoding="utf-8") as f:
+    json.dump({"erlauben": erl, "sperren": sp}, f, ensure_ascii=False, indent=1)
+os.chmod(tmp, 0o644)
+os.replace(tmp, datei)
+' "$1" || exit 1
+      exec /usr/local/bin/pingulinux-apply-all-ages.py ;;
   konto-reset)        # BENUTZER – Einstellungen und Schreibtisch auf Anfang (bz8)
       kid_ok "${1:-}" || die "Nur für Kinderkonten."
       exec /usr/local/lib/pingulinux/serafino-konto-zuruecksetzen.sh "$1" ;;
-  eltern-ok)          # nur Passwort-Abfrage (z. B. Kinder-Startbildschirm → normaler Bildschirm)
-      exit 0 ;;
   ts-reboot)
       exec systemctl reboot ;;
   *)
