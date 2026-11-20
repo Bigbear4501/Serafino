@@ -151,16 +151,6 @@
  },
  {
   "category": "Dienstprogramme",
-  "name": "GParted",
-  "summary": "Partitionen verwalten",
-  "icon": "gparted",
-  "apt": "gparted",
-  "flatpak": null,
-  "cmd": "gparted",
-  "min_age": 99
- },
- {
-  "category": "Dienstprogramme",
   "name": "BleachBit",
   "summary": "Datenträger aufräumen",
   "icon": "bleachbit",
@@ -638,5 +628,455 @@
   "cmd": null,
   "min_age": 99,
   "helper": "/usr/local/bin/pingulinux-virenscanner.sh"
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Bottles",
+  "summary": "Windows-Programme und -Spiele ausführen – nur für Eltern",
+  "icon": "com.usebottles.bottles",
+  "apt": null,
+  "flatpak": "com.usebottles.bottles",
+  "cmd": "/var/lib/flatpak/exports/bin/com.usebottles.bottles",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Synaptic",
+  "summary": "Für Debian-Profis: alle Debian-Pakete von Hand verwalten – nur für Eltern",
+  "icon": "synaptic",
+  "apt": "synaptic",
+  "flatpak": null,
+  "cmd": "synaptic-pkexec",
+  "min_age": 99
+ },
+ {
+  "category": "Spiele",
+  "name": "BamBam",
+  "summary": "Tasten drücken, Bilder und Töne erscheinen – für die Kleinsten",
+  "icon": "bambam",
+  "apt": "bambam",
+  "flatpak": null,
+  "cmd": "bambam",
+  "min_age": 2
+ },
+ {
+  "category": "Spiele",
+  "name": "Gamine",
+  "summary": "Malen mit der Maus, mit Tönen – für die Kleinsten",
+  "icon": "gamine",
+  "apt": "gamine",
+  "flatpak": null,
+  "cmd": "gamine",
+  "min_age": 2
+ },
+ {
+  "category": "Spiele",
+  "name": "KBreakOut",
+  "summary": "Ball und Schläger: alle Steine abräumen",
+  "icon": "kbreakout",
+  "apt": "kbreakout",
+  "flatpak": null,
+  "cmd": "kbreakout",
+  "min_age": 6
+ },
+ {
+  "category": "Spiele",
+  "name": "KBlocks",
+  "summary": "Fallende Steine stapeln",
+  "icon": "kblocks",
+  "apt": "kblocks",
+  "flatpak": null,
+  "cmd": "kblocks",
+  "min_age": 6
+ },
+ {
+  "category": "Spiele",
+  "name": "Numpty Physics",
+  "summary": "Physik-Rätsel: Lösungen mit dem Stift malen",
+  "icon": "numptyphysics",
+  "apt": "numptyphysics",
+  "flatpak": null,
+  "cmd": "numptyphysics",
+  "min_age": 6
+ },
+ {
+  "category": "Spiele",
+  "name": "Hex-a-Hop",
+  "summary": "Knobelspiel: jedes Feld genau einmal betreten",
+  "icon": "hex-a-hop",
+  "apt": "hex-a-hop",
+  "flatpak": null,
+  "cmd": "hex-a-hop",
+  "min_age": 7
+ },
+ {
+  "category": "Spiele",
+  "name": "SGT Puzzles",
+  "summary": "Rund 40 kleine Denk- und Logikrätsel",
+  "icon": "sgt-puzzles",
+  "apt": "sgt-puzzles",
+  "flatpak": null,
+  "cmd": null,
+  "min_age": 7
+ },
+ {
+  "category": "Spiele",
+  "name": "Atomix",
+  "summary": "Atome zu Molekülen zusammenschieben",
+  "icon": "atomix",
+  "apt": "atomix",
+  "flatpak": null,
+  "cmd": "atomix",
+  "min_age": 8
+ },
+ {
+  "category": "Spiele",
+  "name": "KMines",
+  "summary": "Minensucher",
+  "icon": "kmines",
+  "apt": "kmines",
+  "flatpak": null,
+  "cmd": "kmines",
+  "min_age": 8
+ },
+ {
+  "category": "Spiele",
+  "name": "Hedgewars",
+  "summary": "Igel-Strategiespiel mit Comic-Waffen",
+  "icon": "hedgewars",
+  "apt": "hedgewars",
+  "flatpak": null,
+  "cmd": "hedgewars",
+  "min_age": 10
+ },
+ {
+  "category": "Bildung",
+  "name": "pySioGame",
+  "summary": "Über 40 Lernspiele: Zahlen, Buchstaben, Uhr, Logik",
+  "icon": "pysiogame",
+  "apt": "pysiogame",
+  "flatpak": null,
+  "cmd": "pysiogame",
+  "min_age": 4
+ },
+ {
+  "category": "Bildung",
+  "name": "Laby",
+  "summary": "Programmieren lernen: eine Ameise durchs Labyrinth steuern",
+  "icon": "laby",
+  "apt": "laby",
+  "flatpak": null,
+  "cmd": "laby",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "Minuet",
+  "summary": "Musik hören lernen: Töne, Intervalle, Akkorde",
+  "icon": "minuet",
+  "apt": "minuet",
+  "flatpak": null,
+  "cmd": "minuet",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "Artikulate",
+  "summary": "Aussprache in Fremdsprachen üben",
+  "icon": "artikulate",
+  "apt": "artikulate",
+  "flatpak": null,
+  "cmd": "artikulate",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "KWordQuiz",
+  "summary": "Karteikarten und Vokabeln lernen",
+  "icon": "kwordquiz",
+  "apt": "kwordquiz",
+  "flatpak": null,
+  "cmd": "kwordquiz",
+  "min_age": 9
+ },
+ {
+  "category": "Bildung",
+  "name": "KAlgebra",
+  "summary": "Rechnen und Funktionen zeichnen",
+  "icon": "kalgebra",
+  "apt": "kalgebra",
+  "flatpak": null,
+  "cmd": "kalgebra",
+  "min_age": 12
+ },
+ {
+  "category": "Bildung",
+  "name": "GeoGebra",
+  "summary": "Geometrie und Algebra zum Ausprobieren (ab Klasse 5)",
+  "icon": "org.geogebra.GeoGebra",
+  "apt": null,
+  "flatpak": "org.geogebra.GeoGebra",
+  "cmd": "/var/lib/flatpak/exports/bin/org.geogebra.GeoGebra",
+  "min_age": 10
+ },
+ {
+  "category": "Grafik",
+  "name": "KolourPaint",
+  "summary": "Einfaches Malprogramm",
+  "icon": "kolourpaint",
+  "apt": "kolourpaint",
+  "flatpak": null,
+  "cmd": "kolourpaint",
+  "min_age": 5
+ },
+ {
+  "category": "Grafik",
+  "name": "Pinta",
+  "summary": "Malen und einfache Bildbearbeitung",
+  "icon": "com.github.PintaProject.Pinta",
+  "apt": null,
+  "flatpak": "com.github.PintaProject.Pinta",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.PintaProject.Pinta",
+  "min_age": 7
+ },
+ {
+  "category": "Grafik",
+  "name": "Pencil2D",
+  "summary": "Eigene Zeichentrickfilme malen",
+  "icon": "pencil2d",
+  "apt": "pencil2d",
+  "flatpak": null,
+  "cmd": "pencil2d",
+  "min_age": 8
+ },
+ {
+  "category": "Grafik",
+  "name": "Stopmotion",
+  "summary": "Trickfilme mit der Kamera (Knete, Lego)",
+  "icon": "stopmotion",
+  "apt": "stopmotion",
+  "flatpak": null,
+  "cmd": "stopmotion",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "Elisa",
+  "summary": "Musik und Hörspiele abspielen",
+  "icon": "elisa",
+  "apt": "elisa",
+  "flatpak": null,
+  "cmd": "elisa",
+  "min_age": 4
+ },
+ {
+  "category": "Multimedia",
+  "name": "MuseScore",
+  "summary": "Noten schreiben und abspielen",
+  "icon": "org.musescore.MuseScore",
+  "apt": null,
+  "flatpak": "org.musescore.MuseScore",
+  "cmd": "/var/lib/flatpak/exports/bin/org.musescore.MuseScore",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "OBS Studio",
+  "summary": "Bildschirm und Kamera aufnehmen",
+  "icon": "obs-studio",
+  "apt": "obs-studio",
+  "flatpak": null,
+  "cmd": "obs",
+  "min_age": 14
+ },
+ {
+  "category": "Multimedia",
+  "name": "HandBrake",
+  "summary": "Videos umwandeln – nur für Eltern",
+  "icon": "handbrake",
+  "apt": "handbrake",
+  "flatpak": null,
+  "cmd": "ghb",
+  "min_age": 99
+ },
+ {
+  "category": "Multimedia",
+  "name": "digiKam",
+  "summary": "Fotos verwalten – nur für Eltern",
+  "icon": "digikam",
+  "apt": "digikam",
+  "flatpak": null,
+  "cmd": "digikam",
+  "min_age": 99
+ },
+ {
+  "category": "Programmieren",
+  "name": "GDevelop",
+  "summary": "Eigene 2D-Spiele bauen",
+  "icon": "io.gdevelop.ide",
+  "apt": null,
+  "flatpak": "io.gdevelop.ide",
+  "cmd": "/var/lib/flatpak/exports/bin/io.gdevelop.ide",
+  "min_age": 12
+ },
+ {
+  "category": "Programmieren",
+  "name": "VSCodium",
+  "summary": "Code-Editor",
+  "icon": "com.vscodium.codium",
+  "apt": null,
+  "flatpak": "com.vscodium.codium",
+  "cmd": "/var/lib/flatpak/exports/bin/com.vscodium.codium",
+  "min_age": 12
+ },
+ {
+  "category": "Programmieren",
+  "name": "Godot",
+  "summary": "Spiele-Engine für 2D und 3D",
+  "icon": "org.godotengine.Godot",
+  "apt": null,
+  "flatpak": "org.godotengine.Godot",
+  "cmd": "/var/lib/flatpak/exports/bin/org.godotengine.Godot",
+  "min_age": 14
+ },
+ {
+  "category": "Programmieren",
+  "name": "Arduino IDE",
+  "summary": "Mikrocontroller programmieren",
+  "icon": "cc.arduino.IDE2",
+  "apt": null,
+  "flatpak": "cc.arduino.IDE2",
+  "cmd": "/var/lib/flatpak/exports/bin/cc.arduino.IDE2",
+  "min_age": 10
+ },
+ {
+  "category": "Büro",
+  "name": "PDF Arranger",
+  "summary": "PDF-Seiten sortieren, drehen, zusammenfügen – nur für Eltern",
+  "icon": "pdfarranger",
+  "apt": "pdfarranger",
+  "flatpak": null,
+  "cmd": "pdfarranger",
+  "min_age": 99
+ },
+ {
+  "category": "Büro",
+  "name": "Calibre",
+  "summary": "E-Books verwalten und umwandeln – nur für Eltern",
+  "icon": "calibre",
+  "apt": "calibre",
+  "flatpak": null,
+  "cmd": "calibre",
+  "min_age": 99
+ },
+ {
+  "category": "Büro",
+  "name": "KMyMoney",
+  "summary": "Haushaltsbuch und Konten – nur für Eltern",
+  "icon": "kmymoney",
+  "apt": "kmymoney",
+  "flatpak": null,
+  "cmd": "kmymoney",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Filelight",
+  "summary": "Zeigt, was den Speicher belegt – nur für Eltern",
+  "icon": "filelight",
+  "apt": "filelight",
+  "flatpak": null,
+  "cmd": "filelight",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "KDE Partition Manager",
+  "summary": "Festplatten einteilen – nur für Eltern",
+  "icon": "partitionmanager",
+  "apt": "partitionmanager",
+  "flatpak": null,
+  "cmd": "partitionmanager",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Czkawka",
+  "summary": "Doppelte Fotos und Dateien finden – nur für Eltern",
+  "icon": "com.github.qarmin.czkawka",
+  "apt": null,
+  "flatpak": "com.github.qarmin.czkawka",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.qarmin.czkawka",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Flatseal",
+  "summary": "Rechte von Flatpak-Programmen einstellen – nur für Eltern",
+  "icon": "com.github.tchx84.Flatseal",
+  "apt": null,
+  "flatpak": "com.github.tchx84.Flatseal",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.tchx84.Flatseal",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Authenticator",
+  "summary": "Einmal-Codes für die Zwei-Faktor-Anmeldung – nur für Eltern",
+  "icon": "com.belmoussaoui.Authenticator",
+  "apt": null,
+  "flatpak": "com.belmoussaoui.Authenticator",
+  "cmd": "/var/lib/flatpak/exports/bin/com.belmoussaoui.Authenticator",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Bitwarden",
+  "summary": "Passwort-Manager mit Abgleich – nur für Eltern",
+  "icon": "com.bitwarden.desktop",
+  "apt": null,
+  "flatpak": "com.bitwarden.desktop",
+  "cmd": "/var/lib/flatpak/exports/bin/com.bitwarden.desktop",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "LocalSend",
+  "summary": "Dateien und Fotos im WLAN zum Handy schicken – nur für Eltern",
+  "icon": "org.localsend.localsend_app",
+  "apt": null,
+  "flatpak": "org.localsend.localsend_app",
+  "cmd": "/var/lib/flatpak/exports/bin/org.localsend.localsend_app",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Nextcloud",
+  "summary": "Dateien mit der eigenen Cloud abgleichen – nur für Eltern",
+  "icon": "nextcloud-desktop",
+  "apt": "nextcloud-desktop",
+  "flatpak": null,
+  "cmd": "nextcloud",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Syncthing",
+  "summary": "Ordner zwischen Geräten abgleichen – nur für Eltern",
+  "icon": "syncthing",
+  "apt": "syncthing",
+  "flatpak": null,
+  "cmd": "syncthing",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Firefox (neueste Version)",
+  "summary": "Neuester Firefox als Flatpak – nur für Eltern, ohne Kinderschutz",
+  "icon": "org.mozilla.firefox",
+  "apt": null,
+  "flatpak": "org.mozilla.firefox",
+  "cmd": "/var/lib/flatpak/exports/bin/org.mozilla.firefox",
+  "min_age": 99
  }
 ]
