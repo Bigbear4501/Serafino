@@ -1078,5 +1078,35 @@
   "flatpak": "org.mozilla.firefox",
   "cmd": "/var/lib/flatpak/exports/bin/org.mozilla.firefox",
   "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Google Chrome",
+  "summary": "Browser von Google (proprietär, inoffizielles Flatpak) – nur für Eltern, ohne Kinderschutz",
+  "icon": "com.google.Chrome",
+  "apt": null,
+  "flatpak": "com.google.Chrome",
+  "cmd": "/var/lib/flatpak/exports/bin/com.google.Chrome",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Brave",
+  "summary": "Browser mit eingebautem Werbeblocker – nur für Eltern, ohne Kinderschutz",
+  "icon": "com.brave.Browser",
+  "apt": null,
+  "flatpak": "com.brave.Browser",
+  "cmd": "/var/lib/flatpak/exports/bin/com.brave.Browser",
+  "min_age": 99
+ },
+ {
+  "category": "Programmieren",
+  "name": "Visual Studio Code",
+  "summary": "Code-Editor von Microsoft (proprietär, inoffizielles Flatpak)",
+  "icon": "com.visualstudio.code",
+  "apt": null,
+  "flatpak": "com.visualstudio.code",
+  "cmd": "/var/lib/flatpak/exports/bin/com.visualstudio.code",
+  "min_age": 14
  }
 ]
