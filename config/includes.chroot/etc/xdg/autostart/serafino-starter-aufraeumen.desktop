@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Taskleiste aufräumen
+Comment=Serafino: keine leeren Symbole für fehlende oder gesperrte Programme
+Exec=/usr/local/bin/serafino-starter-aufraeumen.sh
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=2

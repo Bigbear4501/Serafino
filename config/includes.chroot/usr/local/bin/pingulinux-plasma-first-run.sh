@@ -34,8 +34,6 @@ for (var i = 0; i < ps.length; i++) {
         "applications:org.kde.dolphin.desktop",
         "applications:tuxpaint.desktop",
         "applications:org.kde.gcompris.desktop",
-        "applications:gcompris-qt.desktop",
-        "applications:org.kde.krita.desktop",
         "applications:pingulinux-youtube-kids.desktop"
       ]);
       w.reloadConfig();

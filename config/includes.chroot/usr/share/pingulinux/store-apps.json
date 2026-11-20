@@ -651,26 +651,6 @@
  },
  {
   "category": "Spiele",
-  "name": "BamBam",
-  "summary": "Tasten drücken, Bilder und Töne erscheinen – für die Kleinsten",
-  "icon": "bambam",
-  "apt": "bambam",
-  "flatpak": null,
-  "cmd": "bambam",
-  "min_age": 2
- },
- {
-  "category": "Spiele",
-  "name": "Gamine",
-  "summary": "Malen mit der Maus, mit Tönen – für die Kleinsten",
-  "icon": "gamine",
-  "apt": "gamine",
-  "flatpak": null,
-  "cmd": "gamine",
-  "min_age": 2
- },
- {
-  "category": "Spiele",
   "name": "KBreakOut",
   "summary": "Ball und Schläger: alle Steine abräumen",
   "icon": "kbreakout",
