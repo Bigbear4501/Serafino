@@ -54,7 +54,9 @@ case "$CMD" in
       exec timekpra --setallowedhours "$1" ALL "$2" ;;
   tk-extra)           # BENUTZER SEKUNDEN (heute zusätzlich)
       user_ok "${1:-}" && num_ok "${2:-}" || die "Werte?"
-      exec timekpra --settimeleft "$1" + "$2" ;;
+      timekpra --settimeleft "$1" + "$2" || exit 1
+      /usr/local/bin/pingulinux-restzeit.sh >/dev/null 2>&1 || true   # Anzeige sofort neu (b29)
+      exit 0 ;;
   # ---- Startbildschirm der Kleinen (be4) ----
   ks-save)            # BENUTZER  (JSON auf stdin)
       user_ok "${1:-}" && [ -f "/var/lib/pingulinux/profiles/$1" ] || die "Kein Kinderkonto?"

@@ -39,6 +39,7 @@ import os
 import pwd
 import re
 import shlex
+import shutil
 import signal
 import subprocess
 import sys
@@ -221,6 +222,9 @@ def laeuft_schon(teile):
     if not t:
         return False
     name = os.path.basename(t[0])
+    # Starter, die ein anderes Programm starten (b28): YouTube Kids startet über
+    # ein Shell-Skript, läuft aber als Python-Skript weiter.
+    name = {"pingulinux-youtube-kids.sh": "pingulinux-youtube-kids-viewer.py"}.get(name, name)
     schluessel = None
     if name == "flatpak":                         # flatpak run [Optionen] APP-ID
         rest = [x for x in t[1:] if x != "run" and not x.startswith("-")]
@@ -473,7 +477,10 @@ def kwin_regeln(an, x=24, y=600):
                                          maximizevert="false", maximizevertrule="2"),
             "pingulinux-startbildschirm": dict(klasse, Description="Serafino: Startbildschirm der Kleinen",
                                                title="Mein Startbildschirm", titlematch="1",
-                                               fullscreen="true", fullscreenrule="2"),
+                                               fullscreen="true", fullscreenrule="2",
+                                               # darf sich selbst zur Seite legen (läuft schon, be4m),
+                                               # deshalb nur „anfangs nicht minimiert“
+                                               minimize="false", minimizerule="1"),
             # Alle Programm-Fenster (nur „normale“ Fenster, keine Dialoge): füllen den ganzen
             # Bildschirm ohne Rahmen und Titelleiste, lassen sich nicht verkleinern oder
             # verschieben – aber kein echtes Vollbild, damit der Nach-Hause-Knopf obendrauf
@@ -483,7 +490,9 @@ def kwin_regeln(an, x=24, y=600):
                                          "fullscreen": "false", "fullscreenrule": "2",
                                          "maximizehoriz": "true", "maximizehorizrule": "2",
                                          "maximizevert": "true", "maximizevertrule": "2",
-                                         "noborder": "true", "noborderrule": "2"},
+                                         "noborder": "true", "noborderrule": "2",
+                                         # be4n: nicht minimierbar – zurück nur über 🏠
+                                         "minimize": "false", "minimizerule": "2"},
         }
         for r in REGEL_IDS:            # Reihenfolge zählt: der Startbildschirm vor „kein Vollbild“
             c.add_section(r)
@@ -516,6 +525,64 @@ def _kwin_schreiben_nur_neu_laden():
 def kwin_regeln_da():
     c = _kwin_lesen()
     return bool(c and c.has_section(REGEL_IDS[0]))
+
+
+# be4n: Bildschirmränder (Maus in die Ecke, Wischen vom Rand am Touchscreen)
+# lösen bei den Kleinen nichts aus – sonst kämen Übersicht oder Leiste hervor.
+RAENDER = [("ElectricBorders", k) for k in ("Top", "TopRight", "Right", "BottomRight",
+                                           "Bottom", "BottomLeft", "Left", "TopLeft")] + \
+          [("TouchEdges", k) for k in ("Top", "Right", "Bottom", "Left")] + \
+          [("Effect-overview", "BorderActivate"), ("Effect-overview", "TouchBorderActivate"),
+           ("Effect-windowview", "BorderActivate"), ("Effect-windowview", "TouchBorderActivate"),
+           ("Effect-windowview", "BorderActivateAll"), ("Effect-windowview", "TouchBorderActivateAll")]
+
+
+# be4n: Tastenkürzel zum Fensterwechseln, für Übersicht und Startmenü aus.
+# Lautstärke-, Helligkeits- und Ein/Aus-Taste bleiben. Wirkt ab dem nächsten
+# Anmelden (die Kürzel werden beim Anmelden gelesen).
+KUERZEL = {
+    "kwin": [("Walk Through Windows", "Alt+Tab"), ("Walk Through Windows (Reverse)", "Alt+Shift+Tab"),
+             ("Walk Through Windows of Current Application", "Alt+`"),
+             ("Walk Through Windows of Current Application (Reverse)", "Alt+~"),
+             ("Overview", "Meta+W"), ("Cycle Overview", "none"), ("Grid View", "Meta+G"),
+             ("Expose", "Ctrl+F9"), ("ExposeAll", "Ctrl+F10"), ("ExposeClass", "Ctrl+F7"),
+             ("Show Desktop", "Meta+D"), ("Window Minimize", "Meta+PgDown"),
+             ("Window Maximize", "Meta+PgUp"), ("Window Quick Tile Bottom", "Meta+Down"),
+             ("Window Quick Tile Top", "Meta+Up"), ("Window Quick Tile Left", "Meta+Left"),
+             ("Window Quick Tile Right", "Meta+Right"), ("Window Operations Menu", "Alt+F3"),
+             ("Edit Tiles", "Meta+T")],
+    "plasmashell": [("activate application launcher", "Meta\tAlt+F1"), ("manage activities", "Meta+Q"),
+                    ("show dashboard", "Ctrl+F12"), ("next activity", "Meta+A")],
+    "org.kde.krunner.desktop": [("_launch", "Alt+Space\tAlt+F2\tSearch")],
+}
+
+
+def kiosk(an):
+    """be4n: Ränder aus/an (kwinrc), Tastenkürzel (kglobalshortcutsrc) und
+    Plasma-Leiste weg/zurück (eigenes Skript)."""
+    kw = "kwriteconfig6" if shutil.which("kwriteconfig6") else "kwriteconfig5"
+    for gruppe, liste in KUERZEL.items():
+        for name, standard in liste:
+            cmd = [kw, "--file", "kglobalshortcutsrc", "--group", gruppe, "--key", name]
+            cmd += ["none,%s,%s" % (standard, name)] if an else ["--delete"]
+            try:
+                subprocess.run(cmd, timeout=5, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            except (OSError, subprocess.SubprocessError):
+                pass
+    for gruppe, key in RAENDER:
+        wert = ("9" if key.startswith(("Border", "TouchBorder")) else "None") if an else None
+        cmd = [kw, "--file", "kwinrc", "--group", gruppe, "--key", key]
+        cmd += [wert] if wert is not None else ["--delete"]
+        try:
+            subprocess.run(cmd, timeout=5, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except (OSError, subprocess.SubprocessError):
+            pass
+    _kwin_schreiben_nur_neu_laden()
+    try:
+        subprocess.Popen(["/usr/local/bin/serafino-kinder-leiste.sh", "weg" if an else "zurueck"],
+                         start_new_session=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except OSError:
+        pass
 
 
 class NachHause(QWidget):
@@ -801,7 +868,8 @@ class Startbildschirm(QWidget):
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except OSError:
             pass
-        QTimer.singleShot(20000, self.zeit_neu)
+        for ms in (3000, 8000, 15000, 30000, 60000):     # sofort neu, sobald Mama/Papa freigegeben haben (b29)
+            QTimer.singleShot(ms, self.zeit_neu)
 
     def zeit_neu(self):
         z = restzeit(self.user)
@@ -816,7 +884,12 @@ class Startbildschirm(QWidget):
         self.sonnebox.show()
         a = uebrig / ges
         self.sonne.setze(a)
-        self.zeittext.setText("Noch viel Zeit" if a > 0.5 else
+        try:                                   # 3. Wert: zählt die Zeit gerade? (b29)
+            steht = open(os.path.join(ZEITDIR, self.user)).read().split()[2] == "0"
+        except (OSError, IndexError):
+            steht = False
+        self.zeittext.setText("🎨 Die Zeit steht gerade" if steht else
+                              "Noch viel Zeit" if a > 0.5 else
                               "Noch ein bisschen" if a > 0.2 else "Bald ist Schluss")
 
     # ---- Lautstärke ----
@@ -1043,6 +1116,7 @@ def main():
     if args[:1] == ["--auto"] and not aktiv_fuer(user):
         if kwin_regeln_da():               # Konto hat keinen Startbildschirm (mehr): Regeln weg
             kwin_regeln(False)
+            kiosk(False)                   # Ränder und Leiste wieder normal (be4n)
         return 0
     app = QApplication(sys.argv)
     app.setApplicationName("pingulinux-kinderstart")
@@ -1081,6 +1155,7 @@ def main():
     g = app.primaryScreen().geometry() if app.primaryScreen() else None
     if g:
         kwin_regeln(True, g.x() + 24, g.y() + g.height() - KNOPF_GROESSE - 24)
+    kiosk(True)                            # be4n: keine Leiste, keine Ränder
 
     def nach_vorn():
         c = server.nextPendingConnection()

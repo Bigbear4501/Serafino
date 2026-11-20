@@ -29,7 +29,15 @@ TK_CONF = "/etc/timekpr/timekpr.conf"
 APPDIRS = ["/usr/share/applications", "/usr/local/share/applications"]
 FLATPAK_APPS = "/var/lib/flatpak/exports/share/applications"
 # immer gezählt (Videos und Internet)
-IMMER = [("pingulinux-youtube-kids-viewer", "YouTube Kids"), ("firefox", "Firefox")]
+# Timekpr vergleicht so (b30, aus dem Quelltext von 0.5.4): der Name muss das
+# ganze Programm sein oder am Ende eines Pfads stehen – „/NAME“ am Ende oder
+# „/NAME “ mit Leerzeichen danach, mit „Erweiterter Aktivitätsüberwachung“
+# auch irgendwo in der Befehlszeile. YouTube Kids ist ein Python-Skript
+# („python3 /usr/local/bin/pingulinux-youtube-kids-viewer.py“) – also muss
+# „.py“ mit in die Maske. Firefox heißt bei Debian „firefox-esr“.
+IMMER = [("pingulinux-youtube-kids-viewer.py", "YouTube Kids"),
+         ("pingulinux-youtube-kids-viewer-gtk.py", "YouTube Kids (alt)"),
+         ("firefox-esr", "Firefox"), ("firefox", "Firefox")]
 
 
 def sauber(t, erlaubt=r"[^A-Za-z0-9._-]"):

@@ -242,10 +242,50 @@ class Viewer(QMainWindow):
         self.exit_btn.raise_()
 
 
+def schon_offen(name):
+    """Läuft YouTube Kids in diesem Konto schon? Dann das offene Fenster nach
+    vorn holen lassen und selbst nichts öffnen (b28: nur ein Fenster)."""
+    from PyQt6.QtNetwork import QLocalSocket
+    s = QLocalSocket()
+    s.connectToServer(name)
+    if s.waitForConnected(500):
+        s.write(b"zeigen")
+        s.flush()
+        s.waitForBytesWritten(500)
+        s.disconnectFromServer()
+        return True
+    return False
+
+
+def wache(name, win):
+    """Auf weitere Starts hören und dann das vorhandene Fenster zeigen."""
+    from PyQt6.QtNetwork import QLocalServer
+    QLocalServer.removeServer(name)            # Rest eines abgestürzten Fensters
+    srv = QLocalServer(win)
+    srv.setSocketOptions(QLocalServer.SocketOption.UserAccessOption)
+
+    def neu():
+        c = srv.nextPendingConnection()
+        if c is not None:
+            c.disconnected.connect(c.deleteLater)
+        if win.isMinimized():
+            win.showNormal()
+        win.show()
+        win.raise_()
+        win.activateWindow()
+    srv.newConnection.connect(neu)
+    srv.listen(name)
+    return srv
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setApplicationName("pingulinux-youtube-kids")
     app.setDesktopFileName("pingulinux-youtube-kids")
+    EINMAL = "serafino-youtube-kids-%d" % os.getuid()
+    if schon_offen(EINMAL):
+        sys.exit(0)
     win = Viewer()
+    _srv = wache(EINMAL, win)
     win.show()
     sys.exit(app.exec())
