@@ -1,27 +1,27 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Fri, 20 Nov 2026 01:50:15 +0000
+Date: Fri, 20 Nov 2026 03:04:49 +0000
 Description: Pingulinux (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- ef673cd0b613438f1a0cacbd5c119d5c              883 Packages
- c1034c2202bab429bedb6aeece258b04              617 Packages.gz
+ b92d261fe5bf7202bbdf1315555c0c17              883 Packages
+ 380775d203ad66b3689425eef7d563ed              618 Packages.gz
 SHA1:
- 910cea18663e041f5da541547978dc313bc2bda1              883 Packages
- d385883084335b1654927c20dab42f4eec182dd8              617 Packages.gz
+ ff7f7ab949a7ef5335ec400d487af114d310d169              883 Packages
+ 868ae4f3772d03b7034482cea857c5526e46046a              618 Packages.gz
 SHA256:
- d9e7fa19fe618ff6c81ffe561b1e0fc7a999d1d8a8960c29e66a6eeafdae8f8a              883 Packages
- 373347c9c312ec6c742014824f8e553342ab92fc0fb795ec65acc422a9672270              617 Packages.gz
+ bb3d22e86b56db825aca70f4edf743f4b7d2cd0b483b506fe6041c805d9df848              883 Packages
+ 0fcef01a2ab49bff8ca8930828ac42791f9028e5cc47c93068d6d027329d6914              618 Packages.gz
 SHA512:
- 9dbae132c201bee34d847318a2f5fe56639d23b62e5b59b0e8f68af2defbc903085fef165af06fa4aff04eaadcdf7bdb6f619bd0b906663ee7683539a097e074              883 Packages
- 67116edb7f393c9ce873f487ae6dcf0fc356631fe4a2d016eaed5a3892b57cf80877196d8e9cfd29065e3441520108de9cedf8c52461672ccdae7d04a8226f3c              617 Packages.gz
+ 9ac2dfd475b4eef867221513eab15e64663cdcefd2de81f2b2d12abd22999dd77a4ff73ddb6a814014e8985d6c40fb1a7133b77ad9c6b253002395787e8650f9              883 Packages
+ 023832c0674cb6720124ad1a5363622ceb4aa3d527d2f536d7bb300f24c6da8f7f8a17f8d95127430f00a43c4fc8ea7633891cf5c9d9f71cdaad326805dca8ae              618 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCav+nVxscbm9yZXBseUBw
-aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyynCvQEAueKozAR/c27JXMOvkFXl
-j2ty+OralLyJOcWcEJHuXRsBAJYta792Ssxyd6kG29CzCYYM61u4ZdVqzIjt6DPz
-iG4D
-=hyYU
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCav+40Rscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyykfHwD/fO+tQ5m/gp42TxA/Gib7
+y9hLPfedGslfbH6wfWO5rnMBALGh/+wJUZtL2RvXhS0f8gNcBu19LMn2APU8dO5o
+H0wD
+=w6L5
 -----END PGP SIGNATURE-----

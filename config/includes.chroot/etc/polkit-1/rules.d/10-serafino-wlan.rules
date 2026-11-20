@@ -1,0 +1,14 @@
+// Serafino (be4o): WLAN der Eltern gilt für alle Kinderkonten.
+polkit.addRule(function(action, subject) {
+    // Eltern (sudo) am eigenen Bildschirm geben ihr WLAN ohne Passwort-Fenster frei
+    if (action.id == "org.serafino.wlan-alle" &&
+        subject.local && subject.active && subject.isInGroup("sudo")) {
+        return polkit.Result.YES;
+    }
+    // Gemeinsame WLANs ändern oder ihr Passwort anzeigen: nur mit Eltern-Passwort.
+    // So sehen Kinder das WLAN-Passwort nicht und können es nicht löschen.
+    if (action.id == "org.freedesktop.NetworkManager.settings.modify.system" &&
+        !subject.isInGroup("sudo")) {
+        return polkit.Result.AUTH_ADMIN;
+    }
+});

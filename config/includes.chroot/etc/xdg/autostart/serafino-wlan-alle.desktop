@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=WLAN für alle Konten
+Comment=Serafino: das WLAN der Eltern gilt auch für die Kinderkonten
+Exec=/usr/local/bin/serafino-wlan-alle.sh --wache
+NoDisplay=true
+X-KDE-autostart-phase=2
+OnlyShowIn=KDE;

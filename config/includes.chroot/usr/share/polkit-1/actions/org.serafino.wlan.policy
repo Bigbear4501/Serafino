@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- Serafino (be4o): WLAN der Eltern für alle Kinderkonten freigeben.
+     Eltern-Konten (sudo) brauchen dafür kein Passwort: Regel 10-serafino-wlan.rules. -->
+<policyconfig>
+  <vendor>Serafino</vendor>
+  <action id="org.serafino.wlan-alle">
+    <description>Serafino: WLAN für alle Konten freigeben</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>network-wireless</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/lib/pingulinux/serafino-wlan-alle-root.py</annotate>
+  </action>
+</policyconfig>

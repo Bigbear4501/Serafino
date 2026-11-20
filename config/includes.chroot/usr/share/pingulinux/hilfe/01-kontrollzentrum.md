@@ -37,6 +37,8 @@ Für die Kleinen (2 bis 6 Jahre) könnt ihr **Anmelden ohne Passwort** einschalt
 
 **Kinderkonto zurücksetzen:** Hat ein Kind seinen Schreibtisch oder seine Programme durcheinandergebracht, setzt dieser Punkt das Konto auf Anfang: Einstellungen aller Programme, Schreibtisch, Firefox-Verlauf und Lesezeichen und auch Spielstände sind danach wie neu. **Bilder, Dokumente, Musik, Videos und Downloads bleiben**, was auf dem Schreibtisch lag, landet in „Dokumente/Vom Schreibtisch …“. Passwort, Alter, Bildschirmzeit und die Kacheln der Kleinen bleiben auch. Das Kind muss dafür abgemeldet sein. Vorher wird alles gesichert (unter /var/lib/pingulinux/zuruecksetzen, nur die letzte Sicherung pro Kind).
 
+**WLAN für alle:** Verbindet ihr euch in eurem Eltern-Konto mit einem WLAN, gilt es automatisch auch für alle Kinderkonten. Die Kinder müssen das WLAN-Passwort nicht kennen und können es auch nicht anzeigen oder das WLAN löschen, dafür braucht es das Eltern-Passwort. Das gilt auch für WLANs, die schon gespeichert sind (beim nächsten Anmelden der Eltern). Ausgenommen sind Firmen- oder Schul-WLANs mit eigenem Benutzernamen.
+
 **Tipp:** Legt für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann kann einer das Passwort des anderen zurücksetzen, falls es vergessen wurde.
 
 ### Konten-Übersicht
