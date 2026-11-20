@@ -1,16 +1,16 @@
-Date: Tue, 17 Nov 2026 13:30:22 +0000
+Date: Fri, 20 Nov 2026 01:49:34 +0000
 Description: Pingulinux (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- 1718b5644acd95873d4f4ba6d1c2f6db              883 Packages
- bfd6c192e4034d11e1cd04aa8628f02b              618 Packages.gz
+ 0cce19544e1388ecc6c6c5953cf8630b              883 Packages
+ d6318b7ad8094451315017b945528cc1              616 Packages.gz
 SHA1:
- 63f797743dd31f53cba394d357e5b13a5c63a0ca              883 Packages
- 93d9cd80a2950e782e8b191acbf8b7c1e4299fac              618 Packages.gz
+ 16c122dbdbe8325514ebde527d1c9e5c75bbfb39              883 Packages
+ 0c8f2bbfedb6334f5d519087711ea3a17568c359              616 Packages.gz
 SHA256:
- 8e08b7eec0c9165afa688c8cfc99a53c9bfbf96c1d2e7cb4b638eb06933108b5              883 Packages
- 9384e8cd5cd707bd6f6e87eeb02d7d517cdecbc21d495acaa3a9aad0a7094e99              618 Packages.gz
+ 70b338377f2aa8f450f7f7eb9a48fac5cb2f9da734f2417789635909373456f1              883 Packages
+ e6865300a01506a973217a43b334c630ad507dde680a2255887e4b89189c770c              616 Packages.gz
 SHA512:
- 55a82df7163472548e2c6b8b032d91a8c5f98176678c77a01f1d90ef5b6e8f486cc860ccfa6fb0a1b26927bd55f0352c2512fed6cdecadd49fa161193e5d7c52              883 Packages
- aca4fed1f199eafab4ea6d3719c6bde210c4198e113ff1a33cd12aac19dcb50095332ca35f394e106829c98835e2505053e8e8fba0e9cb86edacd32aa7f98d48              618 Packages.gz
+ 865551359c81676f1c3045af310bdefea0a1473402d93712406970d9956d397cd73dea0b09c49fddedad4c539cb33da143cb2e5c8ae0f0feee9fe01889b742a6              883 Packages
+ f661203f05ed28dc44b8c7f58e23318e0815c75dc2c71be5855bf5080693063046656251b0ce417607fc70108ba3c650e4e6b65af4d6c198bef04f74b32c0d39              616 Packages.gz
