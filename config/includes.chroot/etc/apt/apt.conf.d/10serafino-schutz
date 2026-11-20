@@ -1,0 +1,4 @@
+// Serafino: das Serafino-Paket (pingulinux-system) darf weder apt noch Synaptic
+// aus Versehen entfernen. Prüfung vor jedem dpkg-Lauf.
+DPkg::Pre-Install-Pkgs { "/usr/local/lib/pingulinux/serafino-schutz.sh"; };
+DPkg::Tools::Options::/usr/local/lib/pingulinux/serafino-schutz.sh::Version "2";
