@@ -1,6 +1,6 @@
 PRETTY_NAME="Serafino"
 NAME="Serafino"
-VERSION_ID="0.2"
+VERSION_ID="1.0"
 VERSION="trixie-based"
 VERSION_CODENAME=trixie
 ID=serafino
