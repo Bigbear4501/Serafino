@@ -54,7 +54,7 @@ Alle Neuerungen stehen in den [Release Notes zu Beta 2](RELEASE-NOTES-BETA2.md).
 - **SHA256-Prüfsumme:**
 
 ```
-PRÜFSUMME-HIER-EINTRAGEN
+70022e456853402219797d667a4824e24cb992521be8b4de2fcc934836a18040
 ```
 
 Prüfsumme nach dem Download prüfen (im Ordner mit der ISO):
