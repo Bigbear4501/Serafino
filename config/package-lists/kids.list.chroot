@@ -157,14 +157,14 @@ gstreamer1.0-libav
 # Passwort-Fenster (Polkit-Agent), WLAN MacBook Air, Social-Media-Sperre, YouTube-Kids-Fenster
 polkit-kde-agent-1
 
-# Pingulinux: zram, Passwort-Fenster (Polkit-Agent), WLAN MacBook Air, Social-Media-Sperre, YouTube-Kids-Fenster
+# Serafino: zram, Passwort-Fenster (Polkit-Agent), WLAN MacBook Air, Social-Media-Sperre, YouTube-Kids-Fenster
 sddm
 sddm-theme-breeze
 qt6-virtualkeyboard-plugin
 systemd-zram-generator
 ufw
 
-# Pingulinux: zram, Passwort-Fenster (Polkit-Agent), WLAN MacBook Air, Social-Media-Sperre, YouTube-Kids-Fenster
+# Serafino: zram, Passwort-Fenster (Polkit-Agent), WLAN MacBook Air, Social-Media-Sperre, YouTube-Kids-Fenster
 kdialog
 python3-pyqt6
 firmware-cirrus

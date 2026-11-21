@@ -1,5 +1,0 @@
-// Automatische Updates (unattended-upgrades) auch aus dem Pingulinux-Paketarchiv,
-// zusätzlich zu Debian und Debian-Security.
-Unattended-Upgrade::Origins-Pattern {
-        "origin=Pingulinux,label=Pingulinux";
-};

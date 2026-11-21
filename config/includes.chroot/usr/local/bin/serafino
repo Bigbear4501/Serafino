@@ -1,8 +1,8 @@
 #!/bin/bash
 # serafino – kleines Werkzeug für Eltern und Tester.
 #   serafino --fino   Fino als Textbild mit einem Spruch (wie „apt moo“)
-FINO=/usr/share/pingulinux/fastfetch/fino.txt
-WITZE=/usr/share/pingulinux/fino/witze.txt
+FINO=/usr/share/serafino/fastfetch/fino.txt
+WITZE=/usr/share/serafino/fino/witze.txt
 
 fino() {
     local c1=$'\e[93m' c2=$'\e[94m' c3=$'\e[38;5;214m' c4=$'\e[97m' c5=$'\e[96m' r=$'\e[0m'
@@ -24,12 +24,12 @@ case "${1:-}" in
     --fino|fino) fino ;;
     --version|-v)
         . /etc/os-release 2>/dev/null
-        echo "${PRETTY_NAME:-Pingulinux OS}"
-        v=$(dpkg-query -W -f='${Version}' pingulinux-system 2>/dev/null)
+        echo "${PRETTY_NAME:-Serafino}"
+        v=$(dpkg-query -W -f='${Version}' serafino-tools 2>/dev/null)
         if [ -n "$v" ]; then
-            echo "Pingulinux-Paket: $v (Updates über das Pingulinux-Paketarchiv)"
+            echo "Serafino-Paket: $v (Updates über das Serafino-Paketarchiv)"
         else
-            echo "Pingulinux-Paket: noch nicht installiert (Stand der ISO)"
+            echo "Serafino-Paket: noch nicht installiert (Stand der ISO)"
         fi ;;
     *)
         echo "serafino – kleine Helfer für Eltern"

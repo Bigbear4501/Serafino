@@ -3,14 +3,14 @@
 #
 # Die Diashow im Installer zeigte das Willkommensbild mit „Crop“: Auf
 # breiten, flachen Fenstern (z. B. Surface) wurde oben und unten
-# abgeschnitten, also auch die Überschrift „Willkommen bei Pingulinux!“.
+# abgeschnitten, also auch die Überschrift „Willkommen bei Serafino!“.
 # 2. Versuch (11. Nov): Beim 1. Versuch (Fit + weißes Rechteck + Ausrichtung)
 # blieb die Diashow am Surface leer. Jetzt genau das funktionierende
 # Original aus 0110 – nur „Crop“ durch „Fit“ ersetzt: Das ganze Bild ist zu
 # sehen, nichts wird abgeschnitten, frei bleibender Platz ist Hintergrund.
 # Ersetzt nur show.qml aus 0110, das Bild selbst bleibt.
 
-D=/etc/calamares/branding/pingulinux
+D=/etc/calamares/branding/serafino
 [ -d "$D" ] || { echo "Calamares-Branding nicht gefunden, überspringe." >&2; exit 0; }
 
 cat > "$D/show.qml" <<'QMLEOF'

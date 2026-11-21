@@ -8,7 +8,7 @@
 #
 # Welche Sticks? Die, auf die schon einmal von Hand gesichert wurde
 # (Kontrollzentrum → Sicherung → „Auf USB-Stick sichern“, eigene Dateien).
-# Sie stehen in /var/lib/pingulinux/sicherungs-sticks.
+# Sie stehen in /var/lib/serafino/sicherungs-sticks.
 #
 # Gesichert werden nur die eigenen Dateien (wie von Hand, nichts wird auf dem
 # Stick gelöscht). Die System-Sicherung bleibt Handarbeit.
@@ -18,12 +18,12 @@
 #
 # Eltern bekommen eine kurze Meldung (Anfang und Ende).
 
-LISTE=/var/lib/pingulinux/sicherungs-sticks
-LETZTE=/var/lib/pingulinux/stick-letzte
-WORKER=/usr/local/bin/pingulinux-sicherung-usb-worker.sh
-RESULT=/var/lib/pingulinux/usb-sicherung-ergebnis
+LISTE=/var/lib/serafino/sicherungs-sticks
+LETZTE=/var/lib/serafino/stick-letzte
+WORKER=/usr/local/bin/serafino-sicherung-usb-worker.sh
+RESULT=/var/lib/serafino/usb-sicherung-ergebnis
 MNT=/run/serafino/stick-sicherung
-LOG=/var/log/pingulinux-sicherung-usb.log
+LOG=/var/log/serafino-sicherung-usb.log
 
 grep -qw boot=live /proc/cmdline 2>/dev/null && exit 0
 [ -s "$LISTE" ] || exit 0

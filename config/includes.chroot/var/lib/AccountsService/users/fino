@@ -1,0 +1,4 @@
+[User]
+Icon=/var/lib/AccountsService/icons/fino
+SystemAccount=false
+XSession=plasma

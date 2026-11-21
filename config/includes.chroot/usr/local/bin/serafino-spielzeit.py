@@ -6,7 +6,7 @@ läuft nur, solange ein Spiel, YouTube Kids oder Firefox offen ist. Lernen,
 Malen, Schreiben und alles andere zählt nicht (Uhrzeiten gelten trotzdem).
 
 Ab Werk für jedes Kinderkonto an. Ausschalten pro Kind im Fenster
-„Bildschirmzeit“: dann liegt /var/lib/pingulinux/alles-zaehlt/KIND und es
+„Bildschirmzeit“: dann liegt /var/lib/serafino/alles-zaehlt/KIND und es
 zählt wie früher jede Minute.
 
   serafino-spielzeit.py --alle          alle Kinderkonten anwenden (root)
@@ -23,8 +23,8 @@ import re
 import subprocess
 import sys
 
-PROFDIR = "/var/lib/pingulinux/profiles"
-AUS_DIR = "/var/lib/pingulinux/alles-zaehlt"
+PROFDIR = "/var/lib/serafino/profiles"
+AUS_DIR = "/var/lib/serafino/alles-zaehlt"
 TK_CONF = "/etc/timekpr/timekpr.conf"
 APPDIRS = ["/usr/share/applications", "/usr/local/share/applications"]
 FLATPAK_APPS = "/var/lib/flatpak/exports/share/applications"
@@ -33,10 +33,10 @@ FLATPAK_APPS = "/var/lib/flatpak/exports/share/applications"
 # ganze Programm sein oder am Ende eines Pfads stehen – „/NAME“ am Ende oder
 # „/NAME “ mit Leerzeichen danach, mit „Erweiterter Aktivitätsüberwachung“
 # auch irgendwo in der Befehlszeile. YouTube Kids ist ein Python-Skript
-# („python3 /usr/local/bin/pingulinux-youtube-kids-viewer.py“) – also muss
+# („python3 /usr/local/bin/serafino-youtube-kids-viewer.py“) – also muss
 # „.py“ mit in die Maske. Firefox heißt bei Debian „firefox-esr“.
-IMMER = [("pingulinux-youtube-kids-viewer.py", "YouTube Kids"),
-         ("pingulinux-youtube-kids-viewer-gtk.py", "YouTube Kids (alt)"),
+IMMER = [("serafino-youtube-kids-viewer.py", "YouTube Kids"),
+         ("serafino-youtube-kids-viewer-gtk.py", "YouTube Kids (alt)"),
          ("firefox-esr", "Firefox"), ("firefox", "Firefox")]
 
 

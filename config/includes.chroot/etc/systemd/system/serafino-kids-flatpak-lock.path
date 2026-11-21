@@ -1,0 +1,10 @@
+[Unit]
+Description=Serafino: Flatpak-Sperre neu setzen, wenn sich Kinderkonten ändern
+
+[Path]
+PathChanged=/var/lib/serafino/birth
+PathChanged=/var/lib/serafino/profiles
+Unit=serafino-kids-flatpak-lock.service
+
+[Install]
+WantedBy=multi-user.target

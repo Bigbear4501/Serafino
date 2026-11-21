@@ -1,10 +1,10 @@
 #!/bin/sh
 # Timekpr-nExT auf Deutsch.
 # Das Debian-Paket bringt je nach Version keine deutsche Übersetzung mit.
-# Pingulinux liefert sie mit (aus Timekpr-nExT 0.5.9, Lizenz GPL-3) und
+# Serafino liefert sie mit (aus Timekpr-nExT 0.5.9, Lizenz GPL-3) und
 # legt sie nur ab, wenn das Paket selbst keine hat.
 set -e
-SRC=/usr/share/pingulinux/locale/timekpr-de.mo
+SRC=/usr/share/serafino/locale/timekpr-de.mo
 DST=/usr/share/locale/de/LC_MESSAGES/timekpr.mo
 if [ -f "$DST" ]; then
     echo "Timekpr: deutsche Übersetzung ist schon im Paket"

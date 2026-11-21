@@ -5,6 +5,6 @@ if ! dpkg -s unattended-upgrades >/dev/null 2>&1; then
     apt-get install -y unattended-upgrades || echo "UPDATES: unattended-upgrades fehlt!"
 fi
 systemctl enable apt-daily.timer apt-daily-upgrade.timer 2>/dev/null
-systemctl enable pingulinux-flatpak-update.timer
+systemctl enable serafino-flatpak-update.timer
 echo "UPDATES: Sicherheitsupdates und Flatpak-Updates automatisch eingeschaltet"
 exit 0

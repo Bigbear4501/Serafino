@@ -42,9 +42,9 @@
     "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi",
     "private_browsing": true
    },
-   "fino-waechter@pingulinux": {
+   "fino-waechter@serafino": {
     "installation_mode": "force_installed",
-    "install_url": "file:///usr/share/pingulinux/firefox/fino-waechter.xpi",
+    "install_url": "file:///usr/share/serafino/firefox/fino-waechter.xpi",
     "private_browsing": true
    }
   },

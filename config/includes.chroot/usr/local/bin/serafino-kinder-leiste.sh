@@ -11,7 +11,7 @@
 #
 # Plasma muss dafür laufen – das Skript wartet bis zu 60 Sekunden darauf.
 
-[ -f "/var/lib/pingulinux/profiles/$(id -un)" ] || exit 0        # nur Kinderkonten
+[ -f "/var/lib/serafino/profiles/$(id -un)" ] || exit 0        # nur Kinderkonten
 QDBUS=$(command -v qdbus6 || command -v qdbus) || exit 0
 for _ in $(seq 1 30); do
     "$QDBUS" org.kde.plasmashell /PlasmaShell >/dev/null 2>&1 && break
@@ -31,9 +31,9 @@ var ps = panels();
 for (var i = 0; i < ps.length; i++) {
     var da = false, w = ps[i].widgets();
     for (var j = 0; j < w.length; j++) {
-        if (w[j].type == "org.pingulinux.restzeit") { da = true; }
+        if (w[j].type == "org.serafino.restzeit") { da = true; }
     }
-    if (!da) { ps[i].addWidget("org.pingulinux.restzeit"); }
+    if (!da) { ps[i].addWidget("org.serafino.restzeit"); }
 }
 JSEND
         ;;

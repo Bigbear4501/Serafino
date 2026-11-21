@@ -1,3 +1,3 @@
 #!/bin/sh
-systemctl enable pingulinux-recalc-ages.timer || true
+systemctl enable serafino-recalc-ages.timer || true
 exit 0

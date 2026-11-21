@@ -20,9 +20,9 @@ from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QPixmap, QFont, QIcon
 from PyQt6.QtWidgets import QApplication, QDialog, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
 
-FINO = "/usr/share/pingulinux/fino/fino.png"
-FINO_PARTY = "/usr/share/pingulinux/fino/fino-party.png"
-HELPER = ["pkexec", "/usr/local/bin/pingulinux-root-helper"]
+FINO = "/usr/share/serafino/fino/fino.png"
+FINO_PARTY = "/usr/share/serafino/fino/fino-party.png"
+HELPER = ["pkexec", "/usr/local/bin/serafino-root-helper"]
 MINUTEN = 15
 
 
@@ -93,7 +93,7 @@ def vergessen():
 def merker_loeschen():
     """Fino soll bei 15/5/1 Minute wieder Bescheid sagen (Zeit ist ja wieder mehr)."""
     heute = datetime.date.today().isoformat()
-    for p in glob.glob(os.path.expanduser("~/.local/state/pingulinux/fino-zeit-%s" % heute)):
+    for p in glob.glob(os.path.expanduser("~/.local/state/serafino/fino-zeit-%s" % heute)):
         try:
             os.remove(p)
         except OSError:

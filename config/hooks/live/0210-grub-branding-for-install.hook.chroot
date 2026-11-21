@@ -1,7 +1,7 @@
 #!/bin/bash
 # 0210-grub-branding-for-install.hook.chroot
 #
-# Setzt /etc/default/grub mit Pingulinux-Branding. Diese Datei landet
+# Setzt /etc/default/grub mit Serafino-Branding. Diese Datei landet
 # über das Live-Dateisystem (squashfs) automatisch auch auf dem
 # installierten System (Calamares kopiert das gesamte Live-Root über
 # "unpackfs"). Wenn Calamares danach sein "bootloader"/"grubcfg"-Modul
@@ -21,12 +21,12 @@ fi
 cp "$GRUB_DEFAULT" "$GRUB_DEFAULT.orig"
 
 # GRUB_DISTRIBUTOR ersetzt "Debian GNU/Linux" durch unseren Namen in
-# den automatisch generierten Menüeinträgen (z.B. "Pingulinux OS" statt
+# den automatisch generierten Menüeinträgen (z.B. "Serafino" statt
 # "Debian GNU/Linux, mit Linux 6.12...")
 if grep -q "^GRUB_DISTRIBUTOR=" "$GRUB_DEFAULT"; then
-    sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="Pingulinux OS"/' "$GRUB_DEFAULT"
+    sed -i 's/^GRUB_DISTRIBUTOR=.*/GRUB_DISTRIBUTOR="Serafino"/' "$GRUB_DEFAULT"
 else
-    echo 'GRUB_DISTRIBUTOR="Pingulinux OS"' >> "$GRUB_DEFAULT"
+    echo 'GRUB_DISTRIBUTOR="Serafino"' >> "$GRUB_DEFAULT"
 fi
 
 # 5-Sekunden-Timeout, wie im Live-Medium
@@ -40,10 +40,10 @@ echo 'GRUB_TIMEOUT_STYLE=menu' >> "$GRUB_DEFAULT"
 
 # Eigenes Hintergrundbild fürs installierte GRUB-Menü (Datei muss
 # dauerhaft im System liegen, damit update-grub sie später findet)
-if [ -f /usr/share/plymouth/themes/pingulinux/logo.png ]; then
-    mkdir -p /usr/share/pingulinux
-    cp /usr/share/plymouth/themes/pingulinux/logo.png /usr/share/pingulinux/grub-background.png
-    echo 'GRUB_BACKGROUND="/usr/share/pingulinux/grub-background.png"' >> "$GRUB_DEFAULT"
+if [ -f /usr/share/plymouth/themes/serafino/logo.png ]; then
+    mkdir -p /usr/share/serafino
+    cp /usr/share/plymouth/themes/serafino/logo.png /usr/share/serafino/grub-background.png
+    echo 'GRUB_BACKGROUND="/usr/share/serafino/grub-background.png"' >> "$GRUB_DEFAULT"
 fi
 
 echo "GRUB-Branding für installiertes System gesetzt."

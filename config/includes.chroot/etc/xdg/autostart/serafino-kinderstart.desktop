@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Startbildschirm der Kleinen
+Comment=Einfacher Startbildschirm für Kinder bis 6 Jahre
+Exec=/usr/local/bin/serafino-kinderstart.py --auto
+Icon=/usr/share/serafino/icons/fino.png
+X-KDE-autostart-phase=2
+NoDisplay=true

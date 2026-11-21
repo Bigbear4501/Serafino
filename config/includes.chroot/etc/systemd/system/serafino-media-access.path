@@ -1,0 +1,10 @@
+[Unit]
+Description=Serafino: Kamera/Mikrofon neu setzen, wenn sich ein Alter ändert
+
+[Path]
+PathChanged=/var/lib/serafino/birth
+PathChanged=/var/lib/serafino/profiles
+Unit=serafino-media-access.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Serafino: Kinder bekommen kein Terminal
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/serafino-kids-terminal-lock.sh
+
+[Install]
+WantedBy=multi-user.target

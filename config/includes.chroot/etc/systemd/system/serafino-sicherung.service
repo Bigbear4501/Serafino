@@ -1,0 +1,10 @@
+[Unit]
+Description=Serafino: tägliche Systemsicherung (Timeshift)
+After=local-fs.target network-online.target
+ConditionKernelCommandLine=!boot=live
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/serafino-timeshift-einrichten.sh
+Nice=19
+IOSchedulingClass=idle

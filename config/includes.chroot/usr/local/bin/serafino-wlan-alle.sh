@@ -18,9 +18,9 @@ set -u
 export LC_ALL=C
 
 id -nG 2>/dev/null | tr ' ' '\n' | grep -qx sudo || exit 0       # nur Eltern (Admins)
-[ -f "/var/lib/pingulinux/profiles/$(id -un)" ] && exit 0        # nie in Kinderkonten
+[ -f "/var/lib/serafino/profiles/$(id -un)" ] && exit 0        # nie in Kinderkonten
 command -v nmcli >/dev/null 2>&1 || exit 0
-ROOT=/usr/local/lib/pingulinux/serafino-wlan-alle-root.py
+ROOT=/usr/local/lib/serafino/serafino-wlan-alle-root.py
 [ -x "$ROOT" ] || exit 0
 LOG="$HOME/.local/state/serafino/wlan-alle.log"
 mkdir -p "${LOG%/*}" 2>/dev/null

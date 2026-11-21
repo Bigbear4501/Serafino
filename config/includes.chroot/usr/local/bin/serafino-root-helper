@@ -1,0 +1,219 @@
+#!/bin/bash
+#
+# serafino-root-helper – kleine, feste Liste von Verwaltungs-
+# befehlen, die die Qt-Fenster (Bildschirmzeit, Wiederherstellen) als root
+# brauchen. Aufruf nur über:  pkexec /usr/local/bin/serafino-root-helper …
+# Polkit merkt sich das Passwort ein paar Minuten (auth_admin_keep), damit
+# Eltern nicht bei jedem Klick neu gefragt werden.
+#
+# Jeder Befehl prüft seine Werte streng – nichts wird ungeprüft weitergegeben.
+
+set -u
+CMD="${1:-}"; shift || true
+
+user_ok() { [[ "$1" =~ ^[a-zA-Z_][a-zA-Z0-9_.-]{0,31}$ ]] && id "$1" >/dev/null 2>&1; }
+num_ok()  { [[ "$1" =~ ^[0-9]{1,6}$ ]]; }
+dev_ok()  { [ -z "$1" ] || { [[ "$1" =~ ^/dev/[a-zA-Z0-9/_-]+$ ]] && [ -b "$1" ]; }; }
+hours_ok(){ [[ "$1" =~ ^([0-9]{1,2};)*[0-9]{1,2}$ ]]; }
+snap_ok() { [[ "$1" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}-[0-9]{2}$ ]]; }
+die() { echo "$1" >&2; exit 2; }
+# Kinderkonto = hat ein Alters-Profil und ist kein Admin (sudo)
+kid_ok()  { user_ok "$1" && [ -f "/var/lib/serafino/profiles/$1" ] && ! id -nG "$1" | tr ' ' '\n' | grep -qx sudo; }
+PWLOS=nopasswdlogin   # Gruppe: Anmelden ohne Passwort (Anmeldebildschirm + Bildschirmsperre)
+zufall()  { head -c 24 /dev/urandom | base64 | tr -d '/+=\n'; }
+
+devopt() { [ -n "${1:-}" ] && printf '%s\n' --snapshot-device "$1"; }
+
+# Timeshift mit anderem Gerät (USB-Stick): Timeshift schreibt das Gerät dabei
+# dauerhaft in seine Einstellungen. Danach liefe die tägliche Sicherung ins
+# Leere („Device not found“), sobald der Stick ab ist. Darum Einstellungen
+# vorher merken und hinterher zurücklegen.
+TSCONF=/etc/timeshift/timeshift.json
+ts() {   # ts [GERÄT] ARGUMENTE…
+    local dev="$1"; shift
+    if [ -z "$dev" ]; then exec "$@"; fi
+    local keep; keep=$(mktemp)
+    [ -f "$TSCONF" ] && cp -p "$TSCONF" "$keep"
+    "$@"; local rc=$?
+    if [ -s "$keep" ]; then cp -p "$keep" "$TSCONF"; fi
+    rm -f "$keep"
+    exit $rc
+}
+
+case "$CMD" in
+  # ---- Bildschirmzeit (Timekpr-nExT) ----
+  tk-info)
+      user_ok "${1:-}" || die "Benutzer?"
+      exec timekpra --userinfo "$1" ;;
+  tk-limits)          # BENUTZER SEK_MO-FR SEK_SA-SO
+      user_ok "${1:-}" && num_ok "${2:-}" && num_ok "${3:-}" || die "Werte?"
+      timekpra --setalloweddays "$1" '1;2;3;4;5;6;7' >/dev/null
+      exec timekpra --settimelimits "$1" "$2;$2;$2;$2;$2;$3;$3" ;;
+  tk-hours)           # BENUTZER "8;9;10;…"
+      user_ok "${1:-}" && hours_ok "${2:-}" || die "Werte?"
+      exec timekpra --setallowedhours "$1" ALL "$2" ;;
+  tk-extra)           # BENUTZER SEKUNDEN (heute zusätzlich)
+      user_ok "${1:-}" && num_ok "${2:-}" || die "Werte?"
+      timekpra --settimeleft "$1" + "$2" || exit 1
+      /usr/local/bin/serafino-restzeit.sh >/dev/null 2>&1 || true   # Anzeige sofort neu (b29)
+      exit 0 ;;
+  # ---- Startbildschirm der Kleinen (be4) ----
+  ks-save)            # BENUTZER  (JSON auf stdin)
+      user_ok "${1:-}" && [ -f "/var/lib/serafino/profiles/$1" ] || die "Kein Kinderkonto?"
+      exec python3 -I -c '
+import json, os, re, sys, tempfile
+user = sys.argv[1]
+raw = sys.stdin.read(65536)
+try:
+    d = json.loads(raw)
+except ValueError:
+    sys.exit("Ungültige Daten")
+def txt(v, n):
+    return isinstance(v, str) and 0 < len(v) <= n and "\n" not in v
+def app(k):
+    return isinstance(k, dict) and isinstance(k.get("app"), str) \
+        and re.fullmatch(r"[A-Za-z0-9._+-]{1,120}\.desktop", k["app"]) \
+        and ("name" not in k or txt(k["name"], 30)) and ("symbol" not in k or txt(k["symbol"], 4))
+out = {"modus": d.get("modus", "auto"), "kacheln": []}
+if out["modus"] not in ("auto", "an", "aus"):
+    sys.exit("Modus?")
+ml = d.get("max_lautstaerke", 70)
+if not isinstance(ml, int) or isinstance(ml, bool) or not 30 <= ml <= 100:
+    sys.exit("Lautstärke?")
+out["max_lautstaerke"] = ml
+for k in d.get("kacheln", [])[:30]:
+    if isinstance(k, dict) and "gruppe" in k:
+        if not txt(k["gruppe"], 30) or not txt(k.get("symbol", "🧩"), 4):
+            sys.exit("Gruppe?")
+        kids = [c for c in k.get("kacheln", [])[:30] if app(c)]
+        out["kacheln"].append({"gruppe": k["gruppe"], "symbol": k.get("symbol", "🧩"),
+            "kacheln": [{x: c[x] for x in ("app", "name", "symbol") if x in c} for c in kids]})
+    elif app(k):
+        out["kacheln"].append({x: k[x] for x in ("app", "name", "symbol") if x in k})
+os.makedirs("/var/lib/serafino/kinderstart", mode=0o755, exist_ok=True)
+fd, tmp = tempfile.mkstemp(dir="/var/lib/serafino/kinderstart")
+with os.fdopen(fd, "w", encoding="utf-8") as f:
+    json.dump(out, f, ensure_ascii=False, indent=1)
+os.chmod(tmp, 0o644)
+os.replace(tmp, "/var/lib/serafino/kinderstart/%s.json" % user)
+' "$1" ;;
+  # ---- Sicherung (Timeshift) ----
+  ts-list)            # [GERÄT]
+      dev_ok "${1:-}" || die "Gerät?"
+      mapfile -t D < <(devopt "${1:-}")
+      ts "${1:-}" timeshift --list --scripted "${D[@]}" ;;
+  ts-create)          # [GERÄT]  (ohne --tags: Timeshift markiert Sicherungen von Hand selbst mit „O“; „--tags O“ lehnt es ab)
+      dev_ok "${1:-}" || die "Gerät?"
+      mapfile -t D < <(devopt "${1:-}")
+      ts "${1:-}" nice -n 10 timeshift --create --scripted --comments "Von Hand gesichert" "${D[@]}" ;;
+  ts-restore)         # STAND [GERÄT]
+      snap_ok "${1:-}" && dev_ok "${2:-}" || die "Werte?"
+      mapfile -t D < <(devopt "${2:-}")
+      ts "${2:-}" timeshift --restore --snapshot "$1" --scripted --yes --skip-grub "${D[@]}" ;;
+  # ---- Benutzerkonten: Kinderkonto anlegen, Anmelden ohne Passwort ----
+  konto-neu)          # BENUTZER JJJJ-MM BILD|"" pw|ohne   (Passwort bei „pw“ auf stdin)
+      U="${1:-}"; B="${2:-}"; A="${3:-}"; M="${4:-}"
+      [[ "$U" =~ ^[a-z_][a-z0-9_-]{0,31}$ ]] || die "Ungültiger Name (nur Kleinbuchstaben, Ziffern, - und _)"
+      id "$U" >/dev/null 2>&1 && die "Das Konto '$U' gibt es schon."
+      [[ "$B" =~ ^[0-9]{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01]))?$ ]] || die "Geburtstag?"
+      [ ${#B} -eq 7 ] || date -d "$B" >/dev/null 2>&1 || die "Diesen Tag gibt es nicht."
+      [ -z "$A" ] || { [[ "$A" == /* && "$A" != *$'\n'* ]] && [ -f "$A" ]; } || die "Bild?"
+      case "$M" in
+        pw)   PW=$(head -c 4096); [ -n "$PW" ] || die "Passwort fehlt" ;;
+        ohne) PW=$(zufall) ;;      # geheimes Zufallspasswort, Anmeldung läuft über die Gruppe
+        *)    die "Modus?" ;;
+      esac
+      rm -f "/var/lib/serafino/app-ausnahmen/$U.json"   # alte Ausnahmen eines gelöschten Kontos gleichen Namens
+      printf '%s' "$PW" | /usr/local/bin/serafino-create-restricted-user.sh "$U" "$B" "$A" || exit 1
+      if [ "$M" = ohne ]; then
+          getent group "$PWLOS" >/dev/null || groupadd -r "$PWLOS"
+          gpasswd -a "$U" "$PWLOS" >/dev/null
+          /usr/local/lib/serafino/ohne-passwort.sh >/dev/null   # Regel prüfen + leeres Passwort
+      fi
+      [ -x /usr/local/bin/serafino-spielzeit.py ] && /usr/local/bin/serafino-spielzeit.py "$U" an >/dev/null 2>&1
+      exit 0 ;;
+  pw-los)             # BENUTZER   – Kinderkonto meldet sich ohne Passwort an
+      kid_ok "${1:-}" || die "Nur für Kinderkonten."
+      getent group "$PWLOS" >/dev/null || groupadd -r "$PWLOS"
+      gpasswd -a "$1" "$PWLOS" >/dev/null || exit 1
+      /usr/local/lib/serafino/ohne-passwort.sh >/dev/null       # Regel prüfen + leeres Passwort
+      exit 0 ;;
+  pw-mit)             # BENUTZER   (neues Passwort auf stdin) – wieder mit Passwort
+      kid_ok "${1:-}" || die "Nur für Kinderkonten."
+      PW=$(head -c 4096); [ -n "$PW" ] || die "Passwort fehlt"
+      printf '%s:%s\n' "$1" "$PW" | chpasswd || die "Das Passwort wurde nicht angenommen."
+      gpasswd -d "$1" "$PWLOS" >/dev/null 2>&1
+      exit 0 ;;
+  # ---- Hardware & Treiber (bz14) ----
+  treiber)            # nvidia=an|aus|- broadcom=an|aus|- kernel=bpo|debian|-
+      [ $# -ge 1 ] || die "Werte?"
+      for a in "$@"; do
+          [[ "$a" =~ ^(nvidia=(an|aus|-)|broadcom=(an|aus|-)|kernel=(bpo|debian|-)|mok=neu)$ ]] || die "Werte?"
+      done
+      exec /usr/local/lib/serafino/treiber-root.sh "$@" ;;
+  yt-pw)              # an|aus – YouTube Kids für Kinder nur mit Eltern-Passwort (be9)
+      case "${1:-}" in
+        an)  mkdir -p /var/lib/serafino && touch /var/lib/serafino/youtube-kids-mit-passwort ;;
+        aus) rm -f /var/lib/serafino/youtube-kids-mit-passwort /etc/serafino/youtube-kids-ohne-passwort ;;
+        *)   die "an oder aus?" ;;
+      esac
+      exit 0 ;;
+  dns)                # cleanbrowsing|dns4eu|off – Kinderschutz-Filter (Einrichtungs-Assistent)
+      [[ "${1:-}" =~ ^(cleanbrowsing|dns4eu|off)$ ]] || die "Filter?"
+      exec /usr/local/bin/serafino-dns-filter-worker.sh "$1" ;;
+  einrichtung-fertig) # Einrichtungs-Assistent (bz6) kommt nicht mehr von selbst
+      mkdir -p /var/lib/serafino && touch /var/lib/serafino/einrichtung-fertig
+      exit 0 ;;
+  spielzeit)          # BENUTZER an|aus – an: Lernprogramme zählen nicht (bz7)
+      kid_ok "${1:-}" && [[ "${2:-}" =~ ^(an|aus)$ ]] || die "Werte?"
+      exec /usr/local/bin/serafino-spielzeit.py "$1" "$2" ;;
+  pausen)             # BENUTZER an|aus – Fino erinnert an Bildschirm-Pausen (be16)
+      kid_ok "${1:-}" && [[ "${2:-}" =~ ^(an|aus)$ ]] || die "Werte?"
+      mkdir -p /var/lib/serafino/keine-pausen
+      if [ "$2" = aus ]; then touch "/var/lib/serafino/keine-pausen/$1"; else rm -f "/var/lib/serafino/keine-pausen/$1"; fi
+      exit 0 ;;
+  app-ausnahmen)      # BENUTZER (JSON auf stdin) – Programme pro Kind erlauben/sperren (bz3)
+      kid_ok "${1:-}" || die "Nur für Kinderkonten."
+      python3 -I -c '
+import json, os, re, sys, tempfile
+user = sys.argv[1]
+try:
+    d = json.loads(sys.stdin.read(65536))
+except ValueError:
+    sys.exit("Ungültige Daten")
+def liste(k):
+    v = d.get(k, [])
+    if not isinstance(v, list) or len(v) > 500:
+        sys.exit("Liste?")
+    out = []
+    for x in v:
+        if not isinstance(x, str) or not re.fullmatch(r"[A-Za-z0-9._+-]{1,120}", x):
+            sys.exit("Eintrag?")
+        out.append(x)
+    return sorted(set(out))
+erl, sp = liste("erlauben"), liste("sperren")
+erl = [x for x in erl if x not in sp]
+ziel = "/var/lib/serafino/app-ausnahmen"
+os.makedirs(ziel, mode=0o755, exist_ok=True)
+datei = os.path.join(ziel, user + ".json")
+if not erl and not sp:
+    try:
+        os.remove(datei)
+    except FileNotFoundError:
+        pass
+    sys.exit(0)
+fd, tmp = tempfile.mkstemp(dir=ziel)
+with os.fdopen(fd, "w", encoding="utf-8") as f:
+    json.dump({"erlauben": erl, "sperren": sp}, f, ensure_ascii=False, indent=1)
+os.chmod(tmp, 0o644)
+os.replace(tmp, datei)
+' "$1" || exit 1
+      exec /usr/local/bin/serafino-apply-all-ages.py ;;
+  konto-reset)        # BENUTZER – Einstellungen und Schreibtisch auf Anfang (bz8)
+      kid_ok "${1:-}" || die "Nur für Kinderkonten."
+      exec /usr/local/lib/serafino/serafino-konto-zuruecksetzen.sh "$1" ;;
+  ts-reboot)
+      exec systemctl reboot ;;
+  *)
+      die "Unbekannter Befehl" ;;
+esac

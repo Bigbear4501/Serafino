@@ -1,0 +1,10 @@
+[Unit]
+Description=Serafino: Alter der Kinderkonten taeglich pruefen
+
+[Timer]
+OnBootSec=2min
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -5,5 +5,5 @@
 # trotzdem anzeigt und jemand ihn setzt, wird die automatische Anmeldung
 # auf dem installierten System beim Start wieder entfernt.
 set -e
-systemctl enable pingulinux-no-autologin.service
+systemctl enable serafino-no-autologin.service
 echo "Schutz gegen automatische Anmeldung aktiviert."

@@ -1,6 +1,6 @@
 #!/bin/sh
 # KDE-Bildschirmtastatur (Maliit) nur auf Deutsch, Englisch entfernt.
-# Die Vorgabe steht in 90_pingulinux-maliit.gschema.override.
+# Die Vorgabe steht in 90_serafino-maliit.gschema.override.
 set -e
 if ls /usr/share/glib-2.0/schemas/*maliit* >/dev/null 2>&1; then
     glib-compile-schemas /usr/share/glib-2.0/schemas

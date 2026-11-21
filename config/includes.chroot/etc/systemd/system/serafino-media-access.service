@@ -1,0 +1,11 @@
+[Unit]
+Description=Serafino: Kamera und Mikrofon erst ab 10 Jahren
+After=local-fs.target
+Before=display-manager.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/serafino-media-access.py
+
+[Install]
+WantedBy=multi-user.target

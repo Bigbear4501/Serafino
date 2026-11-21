@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Serafino installieren
+Comment=Startet den Calamares-Installer
+Exec=/usr/local/bin/serafino-start-calamares.sh
+Icon=/usr/share/serafino/icons/fino.png
+Terminal=false
+Categories=System;

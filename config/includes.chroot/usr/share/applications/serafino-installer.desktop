@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Serafino installieren
+Comment=Serafino auf diesem Computer installieren
+Exec=/usr/local/bin/serafino-start-calamares.sh
+Icon=/usr/share/serafino/icons/fino.png
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true

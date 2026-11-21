@@ -13,7 +13,7 @@
 # /etc/serafino/keine-jahreszeiten anlegen.
 
 [ -e /etc/serafino/keine-jahreszeiten ] && exit 0
-DIR=/usr/share/backgrounds/pingulinux
+DIR=/usr/share/backgrounds/serafino
 case "$(date +%m)" in
     12|01|02) BILD=winter ;;
     03|04|05) BILD=ostern ;;
@@ -29,7 +29,7 @@ for i in $(seq 1 30); do
         org.freedesktop.DBus.Introspectable.Introspect >/dev/null 2>&1 && break
     sleep 1
 done
-sleep 5     # Ersteinrichtung (pingulinux-plasma-first-run.sh) zuerst
+sleep 5     # Ersteinrichtung (serafino-plasma-first-run.sh) zuerst
 
 RC="$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
 JETZT=$(grep -h '^Image=' "$RC" 2>/dev/null | head -1 | sed 's/^Image=//; s|^file://||')

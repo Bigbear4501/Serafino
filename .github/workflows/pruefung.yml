@@ -1,4 +1,4 @@
-# Pingulinux: Automatische Prüfung bei jedem Push und Pull Request.
+# Serafino: Automatische Prüfung bei jedem Push und Pull Request.
 # Prüft nur, ob die Dateien fehlerfrei lesbar sind – baut keine ISO.
 #   - Shell-Skripte und Hooks: bash -n (Syntax) und ShellCheck (nur echte Fehler)
 #   - Python-Skripte: Syntax

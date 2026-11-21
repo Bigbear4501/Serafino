@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Mein Startbildschirm
+Comment=Große Bilder für die Kleinen
+Exec=/usr/local/bin/serafino-kinderstart.py
+Icon=/usr/share/serafino/icons/fino.png
+Categories=Education;

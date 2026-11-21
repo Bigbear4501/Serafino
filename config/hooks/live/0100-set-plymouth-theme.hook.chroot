@@ -3,7 +3,7 @@
 #
 # Wird von live-build automatisch in der Chroot-Umgebung ausgeführt
 # (Dateiname-Konvention: *.hook.chroot).
-# Setzt Pingulinux als Standard-Plymouth-Theme.
+# Setzt Serafino als Standard-Plymouth-Theme.
 
 set -e
 
@@ -15,14 +15,14 @@ mkdir -p /etc/plymouth
 cat > /etc/plymouth/plymouthd.conf << 'EOF'
 # Administrator customizations go in this file
 [Daemon]
-Theme=pingulinux
+Theme=serafino
 EOF
 
 echo "Theme direkt in plymouthd.conf gesetzt."
 
 # Zusätzlich versuchen, falls das Tool vorhanden ist (schadet nicht)
 if command -v plymouth-set-default-theme &> /dev/null; then
-    plymouth-set-default-theme pingulinux 2>/dev/null || true
+    plymouth-set-default-theme serafino 2>/dev/null || true
 fi
 
 # Initramfs neu bauen, damit das Theme dort mit eingebettet wird

@@ -30,7 +30,7 @@ dns=none
 EOF
 
 cat > /etc/resolv.conf << 'EOF'
-# Pingulinux OS: CleanBrowsing Family Filter (Kinderschutz-DNS)
+# Serafino: CleanBrowsing Family Filter (Kinderschutz-DNS)
 # Blockiert Erwachsenen-/Gewalt-Inhalte auf DNS-Ebene.
 nameserver 185.228.168.168
 nameserver 185.228.169.168
@@ -44,5 +44,5 @@ echo "Dienst - sonst blockiert das live-builds eigenen Chroot-Teardown."
 # systemd-Dienst aktivieren, der die Sperre beim Booten des fertigen
 # Systems setzt (nicht während des Builds)
 if command -v systemctl &> /dev/null; then
-    systemctl enable pingulinux-dns-lock.service 2>/dev/null || true
+    systemctl enable serafino-dns-lock.service 2>/dev/null || true
 fi

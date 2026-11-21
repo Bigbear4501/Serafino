@@ -1,16 +1,14 @@
-# Pingulinux OS 🐧
+# Serafino 🐧
 
 Ein kinderfreundliches Linux-System für Kinder von 2 bis 14 Jahren, basierend auf **Debian 13 („trixie“)** und **KDE Plasma**.
-Maskottchen ist **Pingu**, ein Pinguin mit grüner Kappe und Sonnenbrille.
+Maskottchen ist **Fino**, ein kleiner Pinguin mit Heiligenschein und Flügeln.
 
 > ⚠️ **Status: Beta 2 – Testversion.** Bitte zum Ausprobieren nutzen, zum Beispiel in einer virtuellen Maschine oder auf einem Zweitgerät, **noch nicht als Alltags-PC für Kinder.**
->
-> **„Pingulinux“ ist ein Arbeitstitel.** Vor Version 1.0 wird der Name noch einmal geprüft und kann sich ändern. Das Projekt, die Funktionen und dieses Repository bleiben dabei bestehen.
 
 ## Was ist drin?
 
-- **Oberfläche:** KDE Plasma im Pingulinux-Look (Pingu im Startmenü, Eigener Ordner und Papierkorb auf dem Schreibtisch). Eignet sich auch für Tablets und Touch.
-- **Anmeldebildschirm** (SDDM) mit Pingu-Hintergrund und Profilbildern. Auf Touch-Geräten geht die Bildschirmtastatur beim Antippen des Passwortfelds von selbst auf, mit Maus und Tastatur bleibt sie zu.
+- **Oberfläche:** KDE Plasma im Serafino-Look (Fino im Startmenü, Eigener Ordner und Papierkorb auf dem Schreibtisch). Eignet sich auch für Tablets und Touch.
+- **Anmeldebildschirm** (SDDM) mit Fino-Hintergrund und Profilbildern. Auf Touch-Geräten geht die Bildschirmtastatur beim Antippen des Passwortfelds von selbst auf, mit Maus und Tastatur bleibt sie zu.
 - **Installer:** Calamares, auf Deutsch.
 - **Eltern-Kontrollzentrum** mit großen Kacheln: Bildschirmzeit, Benutzerkonten, Konten-Übersicht, Kinderschutz-Filter, Firewall, App Store, Sicherung, Update-Assistent, Systembereinigung, Drucker und Scanner, Fehlerdiagnose und Hilfe. Kinder sehen es nicht. Alles, was Administrator-Rechte braucht, fragt nach dem Passwort eines Erwachsenen.
 - **Eltern-Handbuch** direkt im System (Kontrollzentrum → Hilfe), auch ohne Internet: jede Kachel erklärt, dazu Fragen von Eltern (Passwort vergessen, Sicherung, Notfall).
@@ -26,9 +24,9 @@ Maskottchen ist **Pingu**, ein Pinguin mit grüner Kappe und Sonnenbrille.
   - das System **täglich von selbst** (Timeshift), dazu „System jetzt sichern“
   - **auf einen USB-Stick:** eigene Dateien aller Konten und auf Wunsch das System
   - **„Gestern wiederherstellen“**, falls nach einem Update etwas nicht mehr läuft
-  - **Notfall:** Startet gar nichts mehr, lässt sich das System vom Pingulinux-Stick aus zurückholen
+  - **Notfall:** Startet gar nichts mehr, lässt sich das System vom Serafino-Stick aus zurückholen
 - **Updates:** Debian-Sicherheitsupdates und Programme aus dem App Store werden täglich von selbst installiert, vorher läuft die Sicherung. Der Update-Assistent hilft beim Wechsel auf eine neue Debian-Version.
-- **Eltern-Passwort vergessen?** Ein zweites Eltern-Konto setzt es zurück, oder das Werkzeug „Eltern-Passwort zurücksetzen“ auf dem Pingulinux-Stick.
+- **Eltern-Passwort vergessen?** Ein zweites Eltern-Konto setzt es zurück, oder das Werkzeug „Eltern-Passwort zurücksetzen“ auf dem Serafino-Stick.
 - **Lernen und Spielen:** GCompris, Tux Paint, Tux Typing, Tux Math, KTuberling, KLettres, KBruch, KGeography, Marble und mehr. Im App Store zusätzlich SuperTuxKart, Stellarium, Krita, Kalzium und weitere.
 - **Büro und Alltag:** LibreOffice (im KDE-Stil), Marknote (Notizen), Crow Translate, Skanpage (Scannen), Kamoso (Kamera), Okular, Gwenview. Thunderbird gibt es im App Store.
 - **Tablets:** Bildschirmdrehung, Touch und Bildschirmtastatur (nur Deutsch, ohne Autokorrektur).
@@ -54,7 +52,7 @@ Alle Neuerungen stehen in den [Release Notes zu Beta 2](RELEASE-NOTES-BETA2.md).
 - **SHA256-Prüfsumme:**
 
 ```
-70022e456853402219797d667a4824e24cb992521be8b4de2fcc934836a18040
+PRÜFSUMME-HIER-EINTRAGEN
 ```
 
 Prüfsumme nach dem Download prüfen (im Ordner mit der ISO):
@@ -71,8 +69,8 @@ Die angezeigte Zahl muss mit der Prüfsumme oben übereinstimmen. Unter Windows:
 
 1. ISO herunterladen und Prüfsumme prüfen.
 2. In einer virtuellen Maschine starten (z. B. GNOME Boxes, VirtualBox) oder mit einem Programm wie Balena Etcher auf einen USB-Stick schreiben.
-3. Im **Live-Modus** ausprobieren. Dort braucht das Eltern-Kontrollzentrum kein Passwort. Das Passwort des Live-Kontos „Pingu“ ist `live`. Flatpak-Programme lassen sich erst im installierten System installieren.
-4. Zum Installieren das Symbol **„Pingulinux OS installieren“** benutzen. Das erste Konto ist das Eltern-Konto. Kinderkonten legst du danach im Kontrollzentrum unter „Benutzerkonten“ an.
+3. Im **Live-Modus** ausprobieren. Dort braucht das Eltern-Kontrollzentrum kein Passwort. Das Passwort des Live-Kontos „Fino“ ist `live`. Flatpak-Programme lassen sich erst im installierten System installieren.
+4. Zum Installieren das Symbol **„Serafino installieren“** benutzen. Das erste Konto ist das Eltern-Konto. Kinderkonten legst du danach im Kontrollzentrum unter „Benutzerkonten“ an.
 
 **Getestet auf:** virtuellen Maschinen (GNOME Boxes), Microsoft Surface Go 2 (Touch, Secure Boot) und MacBook Air 2011/2012 (Live-Modus).
 
@@ -116,15 +114,15 @@ Bitte öffne ein [Issue](../../issues) und nenne dabei:
 - Was hast du gemacht, und was ist passiert?
 - Auf welchem Gerät (Modell, virtuelle Maschine oder echtes Gerät)?
 - Live-Modus oder installiert?
-- Den Bericht der **Fehlerdiagnose** aus dem Eltern-Kontrollzentrum (`Pingulinux-Diagnose.txt` im Eigenen Ordner), falls möglich.
+- Den Bericht der **Fehlerdiagnose** aus dem Eltern-Kontrollzentrum (`Serafino-Diagnose.txt` im Eigenen Ordner), falls möglich.
 
 ## Aus den Quellen bauen
 
-Pingulinux wird mit [live-build](https://wiki.debian.org/DebianLive) unter Debian 13 gebaut. Dieses Repository enthält die Konfiguration (`config/`) und das Bau-Skript (`rebuild.sh`).
+Serafino wird mit [live-build](https://wiki.debian.org/DebianLive) unter Debian 13 gebaut. Dieses Repository enthält die Konfiguration (`config/`) und das Bau-Skript (`rebuild.sh`).
 
 ```bash
 sudo apt install live-build
-git clone https://github.com/Bigbear4501/Pingulinux.git ~/kids-distro
+git clone https://github.com/Bigbear4501/Serafino.git ~/kids-distro
 cd ~/kids-distro
 sudo lb clean
 ./rebuild.sh

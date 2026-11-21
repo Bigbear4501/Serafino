@@ -32,12 +32,12 @@ wget-log*
 binary.modified_timestamps
 chroot.packages.*
 kids-distro-skeleton/
-pingulinux-branding/
+serafino-branding/
 wget-log*
 binary.modified_timestamps
 chroot.packages.*
 kids-distro-skeleton/
-pingulinux-branding/
+serafino-branding/
 
 # Python-Zwischenspeicher
 __pycache__/

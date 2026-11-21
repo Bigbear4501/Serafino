@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Serafino App Store
+Comment=Programme installieren und aktualisieren
+Exec=/usr/local/bin/serafino-store.py
+Icon=/usr/share/serafino/icons/fino.png
+Terminal=false
+Categories=System;PackageManager;

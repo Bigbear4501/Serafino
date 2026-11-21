@@ -1,10 +1,10 @@
-// Pingulinux / Serafino: Standard-Einstellungen für fastfetch (für alle Konten).
+// Serafino / Serafino: Standard-Einstellungen für fastfetch (für alle Konten).
 // Eigene Einstellungen eines Kontos (~/.config/fastfetch/config.jsonc) haben Vorrang.
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
   "logo": {
     "type": "file",
-    "source": "/usr/share/pingulinux/fastfetch/fino.txt",
+    "source": "/usr/share/serafino/fastfetch/fino.txt",
     "color": {
       "1": "bright_yellow",
       "2": "bright_blue",

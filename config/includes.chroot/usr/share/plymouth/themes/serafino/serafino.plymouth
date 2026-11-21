@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Serafino
+Description=Boot-Splash für Serafino mit Maskottchen-Logo
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/serafino
+ScriptFile=/usr/share/plymouth/themes/serafino/serafino.script

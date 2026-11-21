@@ -1,0 +1,8 @@
+[Unit]
+Description=Serafino: Restzeit der Kinder (Startbildschirm) und Nutzung (Eltern-Dashboard)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/serafino-restzeit.sh
+# Nutzung der Kinder für das Eltern-Dashboard (bz2), nur auf diesem Computer
+ExecStart=-/usr/local/bin/serafino-statistik.py --erfassen

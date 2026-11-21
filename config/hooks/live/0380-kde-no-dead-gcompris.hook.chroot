@@ -4,7 +4,7 @@
 # erscheint deshalb als leeres Symbol (Tooltip „gcompris-qt.desktop“),
 # neben dem richtigen GCompris-Symbol.
 set -e
-for f in $(grep -rl "gcompris-qt\.desktop" /etc/skel /etc/xdg /usr/share/plasma /usr/local/bin/pingulinux-plasma-first-run.sh 2>/dev/null); do
+for f in $(grep -rl "gcompris-qt\.desktop" /etc/skel /etc/xdg /usr/share/plasma /usr/local/bin/serafino-plasma-first-run.sh 2>/dev/null); do
     # Nur Zeilen anfassen, in denen der alte Name steht
     sed -i -E '/gcompris-qt\.desktop/{
         s#,? ?"?(applications:|file:///usr/share/applications/)gcompris-qt\.desktop"?##g

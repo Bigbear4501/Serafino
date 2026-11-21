@@ -1,0 +1,11 @@
+[Unit]
+Description=Serafino: Social-Media-Sperre für Kinder unter 13 setzen
+Wants=network-online.target
+After=network-online.target nftables.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/serafino-social-block.py
+
+[Install]
+WantedBy=multi-user.target

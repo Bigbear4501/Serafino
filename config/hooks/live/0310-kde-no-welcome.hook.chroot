@@ -3,7 +3,7 @@
 #
 # Läuft chrooted, NACH der Paketinstallation.
 # KDE Plasma: Das KDE-Willkommenscenter (plasma-welcome) soll nicht
-# automatisch starten. Pingulinux hat eigene Hilfe und ein eigenes
+# automatisch starten. Serafino hat eigene Hilfe und ein eigenes
 # Kontrollzentrum; das KDE-Fenster würde Kinder nur verwirren.
 #
 #  1. Autostart abschalten (Hidden=true), falls es eine Autostart-Datei gibt.

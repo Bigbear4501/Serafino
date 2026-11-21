@@ -10,9 +10,9 @@ Hier können Eltern für jedes Kind einzelne Programme davon abweichend
 Alles andere bleibt „nach Alter“ – auch Programme, die später aus dem
 App Store dazukommen.
 
-Gespeichert wird über pkexec pingulinux-root-helper app-ausnahmen KIND
-in /var/lib/pingulinux/app-ausnahmen/KIND.json. Danach läuft sofort die
-Alters-Sperre (pingulinux-apply-all-ages.py) neu.
+Gespeichert wird über pkexec serafino-root-helper app-ausnahmen KIND
+in /var/lib/serafino/app-ausnahmen/KIND.json. Danach läuft sofort die
+Alters-Sperre (serafino-apply-all-ages.py) neu.
 """
 import glob
 import json
@@ -29,14 +29,14 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QH
                              QPushButton, QListWidget, QListWidgetItem, QTableWidget, QTableWidgetItem,
                              QComboBox, QHeaderView, QSplitter, QCheckBox, QMessageBox, QLineEdit)
 
-FINO = "/usr/share/pingulinux/fino/fino.png"
-PROFDIR = "/var/lib/pingulinux/profiles"
-AUSNAHMEN = "/var/lib/pingulinux/app-ausnahmen"
-SOURCES = ["/usr/share/pingulinux/app-ages.json", "/usr/share/pingulinux/store-apps.json"]
+FINO = "/usr/share/serafino/fino/fino.png"
+PROFDIR = "/var/lib/serafino/profiles"
+AUSNAHMEN = "/var/lib/serafino/app-ausnahmen"
+SOURCES = ["/usr/share/serafino/app-ages.json", "/usr/share/serafino/store-apps.json"]
 APPDIR = "/usr/share/applications"
 FP_APPS = "/var/lib/flatpak/app"
 FP_DESKTOP = "/var/lib/flatpak/exports/share/applications"
-HELPER = ["pkexec", "/usr/local/bin/pingulinux-root-helper"]
+HELPER = ["pkexec", "/usr/local/bin/serafino-root-helper"]
 PFAD = "/usr/bin:/usr/games:/usr/local/bin:/bin"
 
 WAHL = [("alter", "Nach Alter"), ("erlauben", "Trotzdem erlauben"), ("sperren", "Sperren")]

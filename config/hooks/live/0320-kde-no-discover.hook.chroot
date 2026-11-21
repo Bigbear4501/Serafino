@@ -3,8 +3,8 @@
 #
 # Läuft chrooted, NACH der Paketinstallation.
 # KDE Discover soll nicht automatisch starten (vor allem der Update-Hinweis
-# "Discover Notifier" beim Login). Pingulinux nutzt dafür den eigenen
-# App Store (pingulinux-store.py), der Flatpaks direkt installiert.
+# "Discover Notifier" beim Login). Serafino nutzt dafür den eigenen
+# App Store (serafino-store.py), der Flatpaks direkt installiert.
 #
 #  1. Autostart des Discover-Update-Hinweises abschalten (Hidden=true).
 #  2. Discover-Pakete entfernen, aber NUR, wenn dabei ausschließlich

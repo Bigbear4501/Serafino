@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Geburtstagsgruß von Fino
-Exec=sh -c "sleep 4; exec /usr/local/bin/pingulinux-geburtstag.py --auto"
-NoDisplay=true
-X-KDE-autostart-phase=2

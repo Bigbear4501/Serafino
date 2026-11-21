@@ -1,0 +1,1092 @@
+[
+ {
+  "category": "Internet",
+  "name": "Chromium",
+  "summary": "Schneller, moderner Webbrowser",
+  "icon": "chromium",
+  "apt": "chromium",
+  "flatpak": null,
+  "cmd": "chromium",
+  "min_age": 12
+ },
+ {
+  "category": "Internet",
+  "name": "Falkon",
+  "summary": "Leichter, schneller Webbrowser",
+  "icon": "falkon",
+  "apt": "falkon",
+  "flatpak": null,
+  "cmd": "falkon",
+  "min_age": 10
+ },
+ {
+  "category": "Internet",
+  "name": "FileZilla",
+  "summary": "Dateien über FTP übertragen",
+  "icon": "filezilla",
+  "apt": "filezilla",
+  "flatpak": null,
+  "cmd": "filezilla",
+  "min_age": 14
+ },
+ {
+  "category": "Büro",
+  "name": "Scribus",
+  "summary": "Layout und Desktop-Publishing",
+  "icon": "scribus",
+  "apt": "scribus",
+  "flatpak": null,
+  "cmd": "scribus",
+  "min_age": 12
+ },
+ {
+  "category": "Grafik",
+  "name": "GIMP",
+  "summary": "Bildbearbeitung",
+  "icon": "gimp",
+  "apt": "gimp",
+  "flatpak": "org.gimp.GIMP",
+  "cmd": "gimp",
+  "min_age": 10
+ },
+ {
+  "category": "Grafik",
+  "name": "Inkscape",
+  "summary": "Vektorgrafik zeichnen",
+  "icon": "inkscape",
+  "apt": "inkscape",
+  "flatpak": "org.inkscape.Inkscape",
+  "cmd": "inkscape",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "Kdenlive",
+  "summary": "Videoschnitt",
+  "icon": "kdenlive",
+  "apt": "kdenlive",
+  "flatpak": "org.kde.kdenlive",
+  "cmd": "kdenlive",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "Audacity",
+  "summary": "Audio aufnehmen und bearbeiten",
+  "icon": "audacity",
+  "apt": "audacity",
+  "flatpak": "org.audacityteam.Audacity",
+  "cmd": "audacity",
+  "min_age": 10
+ },
+ {
+  "category": "Bildung",
+  "name": "Anki",
+  "summary": "Karteikarten zum Lernen",
+  "icon": "anki",
+  "apt": "anki",
+  "flatpak": "net.ankiweb.Anki",
+  "cmd": "anki",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "Klavaro",
+  "summary": "Tastschreiben üben",
+  "icon": "klavaro",
+  "apt": "klavaro",
+  "flatpak": null,
+  "cmd": "klavaro",
+  "min_age": 7
+ },
+ {
+  "category": "Spiele",
+  "name": "0 A.D.",
+  "summary": "Strategiespiel in der Antike",
+  "icon": "0ad",
+  "apt": "0ad",
+  "flatpak": "com.play0ad.zeroad",
+  "cmd": "0ad",
+  "min_age": 12
+ },
+ {
+  "category": "Spiele",
+  "name": "Extreme Tux Racer",
+  "summary": "Mit Tux den Berg hinunterrasen",
+  "icon": "extremetuxracer",
+  "apt": "extremetuxracer",
+  "flatpak": null,
+  "cmd": "etr",
+  "min_age": 4
+ },
+ {
+  "category": "Programmieren",
+  "name": "Geany",
+  "summary": "Einfacher Code-Editor",
+  "icon": "geany",
+  "apt": "geany",
+  "flatpak": null,
+  "cmd": "geany",
+  "min_age": 10
+ },
+ {
+  "category": "Programmieren",
+  "name": "Thonny",
+  "summary": "Python für Einsteiger",
+  "icon": "thonny",
+  "apt": "thonny",
+  "flatpak": "org.thonny.Thonny",
+  "cmd": "thonny",
+  "min_age": 8
+ },
+ {
+  "category": "Programmieren",
+  "name": "Scratch",
+  "summary": "Programmieren mit bunten Bausteinen",
+  "icon": "scratch",
+  "apt": null,
+  "flatpak": "edu.mit.Scratch",
+  "cmd": "/var/lib/flatpak/exports/bin/edu.mit.Scratch",
+  "min_age": 6
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "BleachBit",
+  "summary": "Datenträger aufräumen",
+  "icon": "bleachbit",
+  "apt": "bleachbit",
+  "flatpak": null,
+  "cmd": "bleachbit",
+  "min_age": 99
+ },
+ {
+  "category": "Spiele",
+  "name": "Steam",
+  "summary": "Spiele-Plattform",
+  "icon": "steam",
+  "apt": null,
+  "flatpak": "com.valvesoftware.Steam",
+  "cmd": "/var/lib/flatpak/exports/bin/com.valvesoftware.Steam",
+  "min_age": 14
+ },
+ {
+  "category": "Spiele",
+  "name": "Minecraft",
+  "summary": "Bauen und Entdecken (Mojang-Konto nötig)",
+  "icon": "minecraft",
+  "apt": null,
+  "flatpak": "com.mojang.Minecraft",
+  "cmd": "/var/lib/flatpak/exports/bin/com.mojang.Minecraft",
+  "min_age": 10
+ },
+ {
+  "category": "Spiele",
+  "name": "Lutris",
+  "summary": "Spiele-Verwaltung (auch Windows-Spiele)",
+  "icon": "lutris",
+  "apt": "lutris",
+  "flatpak": null,
+  "cmd": "lutris",
+  "min_age": 14
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Wine",
+  "summary": "Windows-Programme ausführen",
+  "icon": "wine",
+  "apt": "wine",
+  "flatpak": null,
+  "cmd": "wine",
+  "min_age": 99,
+  "lock_paths": [
+   "/usr/lib/wine",
+   "/usr/lib/x86_64-linux-gnu/wine",
+   "/usr/lib/i386-linux-gnu/wine",
+   "/usr/lib64/wine",
+   "/usr/bin/wineserver",
+   "/usr/bin/wine64",
+   "/usr/bin/wine-stable"
+  ]
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Winetricks",
+  "summary": "Hilfswerkzeug für Wine",
+  "icon": "wine",
+  "apt": "winetricks",
+  "flatpak": null,
+  "cmd": "winetricks",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "GNOME Boxes",
+  "summary": "Virtuelle Maschinen",
+  "icon": "org.gnome.Boxes",
+  "apt": "gnome-boxes",
+  "flatpak": null,
+  "cmd": "gnome-boxes",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "KeePassXC",
+  "summary": "Passwörter sicher verwalten",
+  "icon": "keepassxc",
+  "apt": "keepassxc",
+  "flatpak": null,
+  "cmd": "keepassxc",
+  "min_age": 14
+ },
+ {
+  "category": "Grafik",
+  "name": "Blender",
+  "summary": "3D-Modelle und Animation",
+  "icon": "blender",
+  "apt": "blender",
+  "flatpak": null,
+  "cmd": "blender",
+  "min_age": 12
+ },
+ {
+  "category": "Grafik",
+  "name": "Kamoso",
+  "summary": "Fotos und Videos mit der Kamera",
+  "icon": "kamoso",
+  "apt": "kamoso",
+  "flatpak": null,
+  "cmd": "kamoso",
+  "min_age": 6
+ },
+ {
+  "category": "Grafik",
+  "name": "Skanpage",
+  "summary": "Dokumente scannen",
+  "icon": "skanpage",
+  "apt": "skanpage",
+  "flatpak": null,
+  "cmd": "skanpage",
+  "min_age": 12
+ },
+ {
+  "category": "Internet",
+  "name": "WhatsApp",
+  "summary": "Nachrichten (inoffizielle Desktop-App)",
+  "icon": "whatsapp",
+  "apt": null,
+  "flatpak": "com.github.eneshecan.WhatsAppForLinux",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.eneshecan.WhatsAppForLinux",
+  "min_age": 16
+ },
+ {
+  "category": "Internet",
+  "name": "Discord",
+  "summary": "Chat und Sprache",
+  "icon": "discord",
+  "apt": null,
+  "flatpak": "com.discordapp.Discord",
+  "cmd": "/var/lib/flatpak/exports/bin/com.discordapp.Discord",
+  "min_age": 14
+ },
+ {
+  "category": "Internet",
+  "name": "TeamSpeak",
+  "summary": "Sprachchat",
+  "icon": "teamspeak",
+  "apt": null,
+  "flatpak": "com.teamspeak.TeamSpeak",
+  "cmd": "/var/lib/flatpak/exports/bin/com.teamspeak.TeamSpeak",
+  "min_age": 14
+ },
+ {
+  "category": "Internet",
+  "name": "FreeTube",
+  "summary": "YouTube ohne Werbung (nicht gefiltert)",
+  "icon": "freetube",
+  "apt": null,
+  "flatpak": "io.freetubeapp.FreeTube",
+  "cmd": "/var/lib/flatpak/exports/bin/io.freetubeapp.FreeTube",
+  "min_age": 14
+ },
+ {
+  "category": "Internet",
+  "name": "Claws Mail",
+  "summary": "E-Mail-Programm",
+  "icon": "claws-mail",
+  "apt": "claws-mail",
+  "flatpak": null,
+  "cmd": "claws-mail",
+  "min_age": 12
+ },
+ {
+  "category": "Büro",
+  "name": "Crow Translate",
+  "summary": "Texte übersetzen",
+  "icon": "crow-translate",
+  "apt": "crow-translate",
+  "flatpak": null,
+  "cmd": "crow-translate",
+  "min_age": 8
+ },
+ {
+  "category": "Büro",
+  "name": "Wetter",
+  "summary": "Wetter und Vorhersage",
+  "icon": "org.kde.kweather",
+  "apt": "kweather",
+  "flatpak": null,
+  "cmd": "kweather",
+  "min_age": 2
+ },
+ {
+  "category": "Multimedia",
+  "name": "K3b",
+  "summary": "CDs und DVDs brennen",
+  "icon": "k3b",
+  "apt": "k3b",
+  "flatpak": null,
+  "cmd": "k3b",
+  "min_age": 12
+ },
+ {
+  "category": "Bildung",
+  "name": "KLettres",
+  "summary": "Buchstaben und Laute lernen",
+  "icon": "org.kde.klettres",
+  "apt": "klettres",
+  "flatpak": null,
+  "cmd": "klettres",
+  "min_age": 3
+ },
+ {
+  "category": "Bildung",
+  "name": "Kanagram",
+  "summary": "Buchstaben-Rätsel",
+  "icon": "org.kde.kanagram",
+  "apt": "kanagram",
+  "flatpak": null,
+  "cmd": "kanagram",
+  "min_age": 6
+ },
+ {
+  "category": "Bildung",
+  "name": "KHangMan",
+  "summary": "Wörter raten (Galgenmännchen)",
+  "icon": "org.kde.khangman",
+  "apt": "khangman",
+  "flatpak": null,
+  "cmd": "khangman",
+  "min_age": 6
+ },
+ {
+  "category": "Bildung",
+  "name": "KTouch",
+  "summary": "Zehnfinger-Schreiben lernen",
+  "icon": "org.kde.ktouch",
+  "apt": "ktouch",
+  "flatpak": null,
+  "cmd": "ktouch",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "KStars",
+  "summary": "Sterne und Planeten",
+  "icon": "org.kde.kstars",
+  "apt": "kstars",
+  "flatpak": null,
+  "cmd": "kstars",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "KBruch",
+  "summary": "Bruchrechnen üben",
+  "icon": "org.kde.kbruch",
+  "apt": "kbruch",
+  "flatpak": null,
+  "cmd": "kbruch",
+  "min_age": 9
+ },
+ {
+  "category": "Bildung",
+  "name": "Parley",
+  "summary": "Vokabeln lernen",
+  "icon": "org.kde.parley",
+  "apt": "parley",
+  "flatpak": null,
+  "cmd": "parley",
+  "min_age": 9
+ },
+ {
+  "category": "Spiele",
+  "name": "KTuberling",
+  "summary": "Kartoffelmännchen anziehen",
+  "icon": "org.kde.ktuberling",
+  "apt": "ktuberling",
+  "flatpak": null,
+  "cmd": "ktuberling",
+  "min_age": 2
+ },
+ {
+  "category": "Spiele",
+  "name": "Blinken",
+  "summary": "Merkspiel mit Farben und Tönen",
+  "icon": "org.kde.blinken",
+  "apt": "blinken",
+  "flatpak": null,
+  "cmd": "blinken",
+  "min_age": 4
+ },
+ {
+  "category": "Spiele",
+  "name": "Kapman",
+  "summary": "Pac-Man-Spiel",
+  "icon": "org.kde.kapman",
+  "apt": "kapman",
+  "flatpak": null,
+  "cmd": "kapman",
+  "min_age": 4
+ },
+ {
+  "category": "Spiele",
+  "name": "KBounce",
+  "summary": "Bälle einsperren",
+  "icon": "org.kde.kbounce",
+  "apt": "kbounce",
+  "flatpak": null,
+  "cmd": "kbounce",
+  "min_age": 4
+ },
+ {
+  "category": "Spiele",
+  "name": "Neverball",
+  "summary": "Kugel durchs Labyrinth",
+  "icon": "neverball",
+  "apt": "neverball",
+  "flatpak": null,
+  "cmd": "neverball",
+  "min_age": 5
+ },
+ {
+  "category": "Spiele",
+  "name": "Frozen Bubble",
+  "summary": "Blasen abschießen",
+  "icon": "frozen-bubble",
+  "apt": "frozen-bubble",
+  "flatpak": null,
+  "cmd": "frozen-bubble",
+  "min_age": 5
+ },
+ {
+  "category": "Spiele",
+  "name": "KPatience",
+  "summary": "Solitär-Kartenspiele",
+  "icon": "org.kde.kpat",
+  "apt": "kpat",
+  "flatpak": null,
+  "cmd": "kpat",
+  "min_age": 7
+ },
+ {
+  "category": "Spiele",
+  "name": "KSudoku",
+  "summary": "Sudoku und andere Zahlenrätsel",
+  "icon": "org.kde.ksudoku",
+  "apt": "ksudoku",
+  "flatpak": null,
+  "cmd": "ksudoku",
+  "min_age": 9
+ },
+ {
+  "category": "Grafik",
+  "name": "Xournal++",
+  "summary": "Handschrift und Notizen (gut für Tablets)",
+  "icon": "com.github.xournalpp.xournalpp",
+  "apt": "xournalpp",
+  "flatpak": null,
+  "cmd": "xournalpp",
+  "min_age": 8
+ },
+ {
+  "category": "Grafik",
+  "name": "Tupi",
+  "summary": "Trickfilme zeichnen",
+  "icon": "tupi",
+  "apt": "tupi",
+  "flatpak": null,
+  "cmd": "tupi",
+  "min_age": 8
+ },
+ {
+  "category": "Multimedia",
+  "name": "OpenShot",
+  "summary": "Videos schneiden",
+  "icon": "openshot-qt",
+  "apt": "openshot-qt",
+  "flatpak": null,
+  "cmd": "openshot-qt",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "LMMS",
+  "summary": "Musik machen",
+  "icon": "lmms",
+  "apt": "lmms",
+  "flatpak": null,
+  "cmd": "lmms",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "TuxGuitar",
+  "summary": "Gitarre und Noten",
+  "icon": "tuxguitar",
+  "apt": "tuxguitar",
+  "flatpak": null,
+  "cmd": "tuxguitar",
+  "min_age": 10
+ },
+ {
+  "category": "Programmieren",
+  "name": "Mu-Editor",
+  "summary": "Python für Einsteiger",
+  "icon": "mu",
+  "apt": "mu-editor",
+  "flatpak": null,
+  "cmd": "mu-editor",
+  "min_age": 10
+ },
+ {
+  "category": "Spiele",
+  "name": "SuperTuxKart",
+  "summary": "Kart-Rennen mit Tux und Freunden",
+  "icon": "supertuxkart",
+  "apt": "supertuxkart",
+  "flatpak": null,
+  "cmd": "supertuxkart",
+  "min_age": 6
+ },
+ {
+  "category": "Bildung",
+  "name": "Stellarium",
+  "summary": "Sternenhimmel wie im Planetarium",
+  "icon": "stellarium",
+  "apt": "stellarium",
+  "flatpak": null,
+  "cmd": "stellarium",
+  "min_age": 8
+ },
+ {
+  "category": "Grafik",
+  "name": "Krita",
+  "summary": "Malen und Zeichnen für Fortgeschrittene",
+  "icon": "krita",
+  "apt": "krita",
+  "flatpak": null,
+  "cmd": "krita",
+  "min_age": 10
+ },
+ {
+  "category": "Bildung",
+  "name": "Kalzium",
+  "summary": "Periodensystem der Elemente",
+  "icon": "kalzium",
+  "apt": "kalzium",
+  "flatpak": null,
+  "cmd": "kalzium",
+  "min_age": 10
+ },
+ {
+  "category": "Internet",
+  "name": "Thunderbird",
+  "summary": "E-Mail-Programm (für Eltern und Ältere)",
+  "icon": "thunderbird",
+  "apt": "thunderbird thunderbird-l10n-de",
+  "flatpak": null,
+  "cmd": "thunderbird",
+  "min_age": 12
+ },
+ {
+  "category": "Programmieren",
+  "name": "IDLE (Python)",
+  "summary": "Python lernen: Editor und Python-Konsole",
+  "icon": "idle",
+  "apt": "idle",
+  "flatpak": null,
+  "cmd": "idle",
+  "min_age": 10
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Virenscanner (ClamUI)",
+  "summary": "Dateien und USB-Sticks auf Viren prüfen – nur für Eltern",
+  "icon": "io.github.linx_systems.ClamUI",
+  "apt": null,
+  "flatpak": "io.github.linx_systems.ClamUI",
+  "cmd": null,
+  "min_age": 99,
+  "helper": "/usr/local/bin/serafino-virenscanner.sh"
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Bottles",
+  "summary": "Windows-Programme und -Spiele ausführen – nur für Eltern",
+  "icon": "com.usebottles.bottles",
+  "apt": null,
+  "flatpak": "com.usebottles.bottles",
+  "cmd": "/var/lib/flatpak/exports/bin/com.usebottles.bottles",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Synaptic",
+  "summary": "Für Debian-Profis: alle Debian-Pakete von Hand verwalten – nur für Eltern",
+  "icon": "synaptic",
+  "apt": "synaptic",
+  "flatpak": null,
+  "cmd": "synaptic-pkexec",
+  "min_age": 99
+ },
+ {
+  "category": "Spiele",
+  "name": "KBreakOut",
+  "summary": "Ball und Schläger: alle Steine abräumen",
+  "icon": "kbreakout",
+  "apt": "kbreakout",
+  "flatpak": null,
+  "cmd": "kbreakout",
+  "min_age": 6
+ },
+ {
+  "category": "Spiele",
+  "name": "KBlocks",
+  "summary": "Fallende Steine stapeln",
+  "icon": "kblocks",
+  "apt": "kblocks",
+  "flatpak": null,
+  "cmd": "kblocks",
+  "min_age": 6
+ },
+ {
+  "category": "Spiele",
+  "name": "Numpty Physics",
+  "summary": "Physik-Rätsel: Lösungen mit dem Stift malen",
+  "icon": "numptyphysics",
+  "apt": "numptyphysics",
+  "flatpak": null,
+  "cmd": "numptyphysics",
+  "min_age": 6
+ },
+ {
+  "category": "Spiele",
+  "name": "Hex-a-Hop",
+  "summary": "Knobelspiel: jedes Feld genau einmal betreten",
+  "icon": "hex-a-hop",
+  "apt": "hex-a-hop",
+  "flatpak": null,
+  "cmd": "hex-a-hop",
+  "min_age": 7
+ },
+ {
+  "category": "Spiele",
+  "name": "SGT Puzzles",
+  "summary": "Rund 40 kleine Denk- und Logikrätsel",
+  "icon": "sgt-puzzles",
+  "apt": "sgt-puzzles",
+  "flatpak": null,
+  "cmd": null,
+  "min_age": 7
+ },
+ {
+  "category": "Spiele",
+  "name": "Atomix",
+  "summary": "Atome zu Molekülen zusammenschieben",
+  "icon": "atomix",
+  "apt": "atomix",
+  "flatpak": null,
+  "cmd": "atomix",
+  "min_age": 8
+ },
+ {
+  "category": "Spiele",
+  "name": "KMines",
+  "summary": "Minensucher",
+  "icon": "kmines",
+  "apt": "kmines",
+  "flatpak": null,
+  "cmd": "kmines",
+  "min_age": 8
+ },
+ {
+  "category": "Spiele",
+  "name": "Hedgewars",
+  "summary": "Igel-Strategiespiel mit Comic-Waffen",
+  "icon": "hedgewars",
+  "apt": "hedgewars",
+  "flatpak": null,
+  "cmd": "hedgewars",
+  "min_age": 10
+ },
+ {
+  "category": "Bildung",
+  "name": "pySioGame",
+  "summary": "Über 40 Lernspiele: Zahlen, Buchstaben, Uhr, Logik",
+  "icon": "pysiogame",
+  "apt": "pysiogame",
+  "flatpak": null,
+  "cmd": "pysiogame",
+  "min_age": 4
+ },
+ {
+  "category": "Bildung",
+  "name": "Laby",
+  "summary": "Programmieren lernen: eine Ameise durchs Labyrinth steuern",
+  "icon": "laby",
+  "apt": "laby",
+  "flatpak": null,
+  "cmd": "laby",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "Minuet",
+  "summary": "Musik hören lernen: Töne, Intervalle, Akkorde",
+  "icon": "minuet",
+  "apt": "minuet",
+  "flatpak": null,
+  "cmd": "minuet",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "Artikulate",
+  "summary": "Aussprache in Fremdsprachen üben",
+  "icon": "artikulate",
+  "apt": "artikulate",
+  "flatpak": null,
+  "cmd": "artikulate",
+  "min_age": 8
+ },
+ {
+  "category": "Bildung",
+  "name": "KWordQuiz",
+  "summary": "Karteikarten und Vokabeln lernen",
+  "icon": "kwordquiz",
+  "apt": "kwordquiz",
+  "flatpak": null,
+  "cmd": "kwordquiz",
+  "min_age": 9
+ },
+ {
+  "category": "Bildung",
+  "name": "KAlgebra",
+  "summary": "Rechnen und Funktionen zeichnen",
+  "icon": "kalgebra",
+  "apt": "kalgebra",
+  "flatpak": null,
+  "cmd": "kalgebra",
+  "min_age": 12
+ },
+ {
+  "category": "Bildung",
+  "name": "GeoGebra",
+  "summary": "Geometrie und Algebra zum Ausprobieren (ab Klasse 5)",
+  "icon": "org.geogebra.GeoGebra",
+  "apt": null,
+  "flatpak": "org.geogebra.GeoGebra",
+  "cmd": "/var/lib/flatpak/exports/bin/org.geogebra.GeoGebra",
+  "min_age": 10
+ },
+ {
+  "category": "Grafik",
+  "name": "KolourPaint",
+  "summary": "Einfaches Malprogramm",
+  "icon": "kolourpaint",
+  "apt": "kolourpaint",
+  "flatpak": null,
+  "cmd": "kolourpaint",
+  "min_age": 5
+ },
+ {
+  "category": "Grafik",
+  "name": "Pinta",
+  "summary": "Malen und einfache Bildbearbeitung",
+  "icon": "com.github.PintaProject.Pinta",
+  "apt": null,
+  "flatpak": "com.github.PintaProject.Pinta",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.PintaProject.Pinta",
+  "min_age": 7
+ },
+ {
+  "category": "Grafik",
+  "name": "Pencil2D",
+  "summary": "Eigene Zeichentrickfilme malen",
+  "icon": "pencil2d",
+  "apt": "pencil2d",
+  "flatpak": null,
+  "cmd": "pencil2d",
+  "min_age": 8
+ },
+ {
+  "category": "Grafik",
+  "name": "Stopmotion",
+  "summary": "Trickfilme mit der Kamera (Knete, Lego)",
+  "icon": "stopmotion",
+  "apt": "stopmotion",
+  "flatpak": null,
+  "cmd": "stopmotion",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "Elisa",
+  "summary": "Musik und Hörspiele abspielen",
+  "icon": "elisa",
+  "apt": "elisa",
+  "flatpak": null,
+  "cmd": "elisa",
+  "min_age": 4
+ },
+ {
+  "category": "Multimedia",
+  "name": "MuseScore",
+  "summary": "Noten schreiben und abspielen",
+  "icon": "org.musescore.MuseScore",
+  "apt": null,
+  "flatpak": "org.musescore.MuseScore",
+  "cmd": "/var/lib/flatpak/exports/bin/org.musescore.MuseScore",
+  "min_age": 10
+ },
+ {
+  "category": "Multimedia",
+  "name": "OBS Studio",
+  "summary": "Bildschirm und Kamera aufnehmen",
+  "icon": "obs-studio",
+  "apt": "obs-studio",
+  "flatpak": null,
+  "cmd": "obs",
+  "min_age": 14
+ },
+ {
+  "category": "Multimedia",
+  "name": "HandBrake",
+  "summary": "Videos umwandeln – nur für Eltern",
+  "icon": "handbrake",
+  "apt": "handbrake",
+  "flatpak": null,
+  "cmd": "ghb",
+  "min_age": 99
+ },
+ {
+  "category": "Multimedia",
+  "name": "digiKam",
+  "summary": "Fotos verwalten – nur für Eltern",
+  "icon": "digikam",
+  "apt": "digikam",
+  "flatpak": null,
+  "cmd": "digikam",
+  "min_age": 99
+ },
+ {
+  "category": "Programmieren",
+  "name": "GDevelop",
+  "summary": "Eigene 2D-Spiele bauen",
+  "icon": "io.gdevelop.ide",
+  "apt": null,
+  "flatpak": "io.gdevelop.ide",
+  "cmd": "/var/lib/flatpak/exports/bin/io.gdevelop.ide",
+  "min_age": 12
+ },
+ {
+  "category": "Programmieren",
+  "name": "VSCodium",
+  "summary": "Code-Editor",
+  "icon": "com.vscodium.codium",
+  "apt": null,
+  "flatpak": "com.vscodium.codium",
+  "cmd": "/var/lib/flatpak/exports/bin/com.vscodium.codium",
+  "min_age": 12
+ },
+ {
+  "category": "Programmieren",
+  "name": "Godot",
+  "summary": "Spiele-Engine für 2D und 3D",
+  "icon": "org.godotengine.Godot",
+  "apt": null,
+  "flatpak": "org.godotengine.Godot",
+  "cmd": "/var/lib/flatpak/exports/bin/org.godotengine.Godot",
+  "min_age": 14
+ },
+ {
+  "category": "Programmieren",
+  "name": "Arduino IDE",
+  "summary": "Mikrocontroller programmieren",
+  "icon": "cc.arduino.IDE2",
+  "apt": null,
+  "flatpak": "cc.arduino.IDE2",
+  "cmd": "/var/lib/flatpak/exports/bin/cc.arduino.IDE2",
+  "min_age": 10
+ },
+ {
+  "category": "Büro",
+  "name": "PDF Arranger",
+  "summary": "PDF-Seiten sortieren, drehen, zusammenfügen – nur für Eltern",
+  "icon": "pdfarranger",
+  "apt": "pdfarranger",
+  "flatpak": null,
+  "cmd": "pdfarranger",
+  "min_age": 99
+ },
+ {
+  "category": "Büro",
+  "name": "Calibre",
+  "summary": "E-Books verwalten und umwandeln – nur für Eltern",
+  "icon": "calibre",
+  "apt": "calibre",
+  "flatpak": null,
+  "cmd": "calibre",
+  "min_age": 99
+ },
+ {
+  "category": "Büro",
+  "name": "KMyMoney",
+  "summary": "Haushaltsbuch und Konten – nur für Eltern",
+  "icon": "kmymoney",
+  "apt": "kmymoney",
+  "flatpak": null,
+  "cmd": "kmymoney",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Filelight",
+  "summary": "Zeigt, was den Speicher belegt – nur für Eltern",
+  "icon": "filelight",
+  "apt": "filelight",
+  "flatpak": null,
+  "cmd": "filelight",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "KDE Partition Manager",
+  "summary": "Festplatten einteilen – nur für Eltern",
+  "icon": "partitionmanager",
+  "apt": "partitionmanager",
+  "flatpak": null,
+  "cmd": "partitionmanager",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Czkawka",
+  "summary": "Doppelte Fotos und Dateien finden – nur für Eltern",
+  "icon": "com.github.qarmin.czkawka",
+  "apt": null,
+  "flatpak": "com.github.qarmin.czkawka",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.qarmin.czkawka",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Flatseal",
+  "summary": "Rechte von Flatpak-Programmen einstellen – nur für Eltern",
+  "icon": "com.github.tchx84.Flatseal",
+  "apt": null,
+  "flatpak": "com.github.tchx84.Flatseal",
+  "cmd": "/var/lib/flatpak/exports/bin/com.github.tchx84.Flatseal",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Authenticator",
+  "summary": "Einmal-Codes für die Zwei-Faktor-Anmeldung – nur für Eltern",
+  "icon": "com.belmoussaoui.Authenticator",
+  "apt": null,
+  "flatpak": "com.belmoussaoui.Authenticator",
+  "cmd": "/var/lib/flatpak/exports/bin/com.belmoussaoui.Authenticator",
+  "min_age": 99
+ },
+ {
+  "category": "Dienstprogramme",
+  "name": "Bitwarden",
+  "summary": "Passwort-Manager mit Abgleich – nur für Eltern",
+  "icon": "com.bitwarden.desktop",
+  "apt": null,
+  "flatpak": "com.bitwarden.desktop",
+  "cmd": "/var/lib/flatpak/exports/bin/com.bitwarden.desktop",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "LocalSend",
+  "summary": "Dateien und Fotos im WLAN zum Handy schicken – nur für Eltern",
+  "icon": "org.localsend.localsend_app",
+  "apt": null,
+  "flatpak": "org.localsend.localsend_app",
+  "cmd": "/var/lib/flatpak/exports/bin/org.localsend.localsend_app",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Nextcloud",
+  "summary": "Dateien mit der eigenen Cloud abgleichen – nur für Eltern",
+  "icon": "nextcloud-desktop",
+  "apt": "nextcloud-desktop",
+  "flatpak": null,
+  "cmd": "nextcloud",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Syncthing",
+  "summary": "Ordner zwischen Geräten abgleichen – nur für Eltern",
+  "icon": "syncthing",
+  "apt": "syncthing",
+  "flatpak": null,
+  "cmd": "syncthing",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Firefox (neueste Version)",
+  "summary": "Neuester Firefox als Flatpak – nur für Eltern, ohne Kinderschutz",
+  "icon": "org.mozilla.firefox",
+  "apt": null,
+  "flatpak": "org.mozilla.firefox",
+  "cmd": "/var/lib/flatpak/exports/bin/org.mozilla.firefox",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Google Chrome",
+  "summary": "Browser von Google (proprietär, inoffizielles Flatpak) – nur für Eltern, ohne Kinderschutz",
+  "icon": "com.google.Chrome",
+  "apt": null,
+  "flatpak": "com.google.Chrome",
+  "cmd": "/var/lib/flatpak/exports/bin/com.google.Chrome",
+  "min_age": 99
+ },
+ {
+  "category": "Internet",
+  "name": "Brave",
+  "summary": "Browser mit eingebautem Werbeblocker – nur für Eltern, ohne Kinderschutz",
+  "icon": "com.brave.Browser",
+  "apt": null,
+  "flatpak": "com.brave.Browser",
+  "cmd": "/var/lib/flatpak/exports/bin/com.brave.Browser",
+  "min_age": 99
+ },
+ {
+  "category": "Programmieren",
+  "name": "Visual Studio Code",
+  "summary": "Code-Editor von Microsoft (proprietär, inoffizielles Flatpak)",
+  "icon": "com.visualstudio.code",
+  "apt": null,
+  "flatpak": "com.visualstudio.code",
+  "cmd": "/var/lib/flatpak/exports/bin/com.visualstudio.code",
+  "min_age": 14
+ }
+]

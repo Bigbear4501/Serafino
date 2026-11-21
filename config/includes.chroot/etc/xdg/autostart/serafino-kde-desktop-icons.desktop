@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Serafino Schreibtisch-Symbole
+Comment=KDE: Eigener Ordner und Papierkorb; Eltern: Kontrollzentrum auf dem Schreibtisch
+Exec=/usr/local/bin/serafino-kde-desktop-icons.sh
+NoDisplay=true
+Terminal=false

@@ -1,8 +1,0 @@
-[Unit]
-Description=Pingulinux: Restzeit der Kinder (Startbildschirm) und Nutzung (Eltern-Dashboard)
-
-[Service]
-Type=oneshot
-ExecStart=/usr/local/bin/pingulinux-restzeit.sh
-# Nutzung der Kinder für das Eltern-Dashboard (bz2), nur auf diesem Computer
-ExecStart=-/usr/local/bin/pingulinux-statistik.py --erfassen

@@ -1,4 +1,4 @@
-# Pingulinux OS – Fragen von Eltern
+# Serafino – Fragen von Eltern
 
 Kurze Antworten auf häufige Fragen. Diese Seite wächst mit der Zeit.
 
@@ -18,14 +18,14 @@ Am einfachsten geht es, wenn es auf dem Computer **zwei Eltern-Konten** gibt, zu
 
 **Tipp:** Legt gleich nach der Installation für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann braucht ihr Weg 2 nie.
 
-### Weg 2: Mit dem Pingulinux-Stick zurücksetzen
+### Weg 2: Mit dem Serafino-Stick zurücksetzen
 
 Wenn es nur ein Eltern-Konto gibt:
 
-1. Den **Pingulinux-USB-Stick** einstecken (der Stick, mit dem Pingulinux installiert wurde, oder ein neu erstellter).
-2. Den Computer vom Stick starten. Pingulinux startet im Live-Modus.
+1. Den **Serafino-USB-Stick** einstecken (der Stick, mit dem Serafino installiert wurde, oder ein neu erstellter).
+2. Den Computer vom Stick starten. Serafino startet im Live-Modus.
 3. Im **Startmenü** unter **System** auf **„Eltern-Passwort zurücksetzen“** klicken.
-4. Das Werkzeug findet das installierte Pingulinux von selbst. Das Eltern-Konto auswählen und zweimal das neue Passwort eingeben.
+4. Das Werkzeug findet das installierte Serafino von selbst. Das Eltern-Konto auswählen und zweimal das neue Passwort eingeben.
 5. Stick abziehen und den Computer neu starten. Jetzt gilt das neue Passwort.
 
 **Gut zu wissen:** Bei einer **verschlüsselten Festplatte** funktioniert Weg 2 nicht.
@@ -34,11 +34,11 @@ Wenn es nur ein Eltern-Konto gibt:
 
 ## Kann mein Kind den Stick-Trick auch benutzen?
 
-Wer den Computer vom USB-Stick starten kann, kommt an alles auf der Festplatte heran. Das gilt für jedes Betriebssystem, nicht nur für Pingulinux. Deshalb:
+Wer den Computer vom USB-Stick starten kann, kommt an alles auf der Festplatte heran. Das gilt für jedes Betriebssystem, nicht nur für Serafino. Deshalb:
 
 - Im **BIOS/UEFI** ein Passwort setzen.
 - Dort den **Start vom USB-Stick abschalten** (oder nur mit Passwort erlauben).
-- Den Pingulinux-Stick nicht beim Computer liegen lassen.
+- Den Serafino-Stick nicht beim Computer liegen lassen.
 
 Braucht ihr den Stick später selbst (Weg 2), schaltet ihr den USB-Start mit eurem BIOS-Passwort kurz wieder ein.
 
@@ -46,11 +46,11 @@ Wie man ins BIOS kommt, hängt vom Gerät ab. Meist hilft beim Einschalten eine 
 
 ---
 
-## Wie sichert Pingulinux unsere Daten?
+## Wie sichert Serafino unsere Daten?
 
 ### Automatisch: das System, jeden Tag
 
-Pingulinux sichert das **System** einmal am Tag von selbst (mit Timeshift) und behält die letzten 5 Stände. Diese Sicherung liegt auf derselben Festplatte. Sie hilft, wenn nach einem Update oder einer Einstellung etwas nicht mehr läuft – nicht aber, wenn die Festplatte kaputtgeht.
+Serafino sichert das **System** einmal am Tag von selbst (mit Timeshift) und behält die letzten 5 Stände. Diese Sicherung liegt auf derselben Festplatte. Sie hilft, wenn nach einem Update oder einer Einstellung etwas nicht mehr läuft – nicht aber, wenn die Festplatte kaputtgeht.
 
 **Nicht** automatisch gesichert werden die **eigenen Dateien** (Fotos, Dokumente, Spielstände). Dafür gibt es die Sicherung auf einen USB-Stick.
 
@@ -63,19 +63,19 @@ Pingulinux sichert das **System** einmal am Tag von selbst (mit Timeshift) und b
 
 **Gut zu wissen:**
 - Eigene Dateien gehen auf jeden Stick. Auf dem Stick wird nie etwas gelöscht: Was zu Hause gelöscht wurde, bleibt auf dem Stick erhalten.
-- Für die **System-Sicherung** braucht der Stick das Linux-Format (ext4). Pingulinux bietet an, den Stick dafür zu formatieren – **dabei wird alles auf dem Stick gelöscht**, und Windows kann ihn danach nicht mehr lesen. Am besten einen eigenen Stick nur für die Sicherung nehmen.
+- Für die **System-Sicherung** braucht der Stick das Linux-Format (ext4). Serafino bietet an, den Stick dafür zu formatieren – **dabei wird alles auf dem Stick gelöscht**, und Windows kann ihn danach nicht mehr lesen. Am besten einen eigenen Stick nur für die Sicherung nehmen.
 - Wer es regelmäßig macht (z. B. einmal im Monat), ist auch bei einer kaputten Festplatte auf der sicheren Seite.
 
 ### Zurückholen
 
-- **Eigene Dateien:** Kontrollzentrum → Sicherung und Wiederherstellung → „Eigene Dateien vom Stick zurückholen“. Der Dateimanager öffnet sich; die Dateien liegen unter *Pingulinux-Sicherung → Name des Computers → Eigene-Dateien* und lassen sich einfach zurückkopieren.
+- **Eigene Dateien:** Kontrollzentrum → Sicherung und Wiederherstellung → „Eigene Dateien vom Stick zurückholen“. Der Dateimanager öffnet sich; die Dateien liegen unter *Serafino-Sicherung → Name des Computers → Eigene-Dateien* und lassen sich einfach zurückkopieren.
 - **System:** Kontrollzentrum → Sicherung und Wiederherstellung → „System wiederherstellen“. Dort einen Stand auswählen – auch einen vom Stick, wenn er eingesteckt ist.
 
-### Pingulinux startet gar nicht mehr – was jetzt?
+### Serafino startet gar nicht mehr – was jetzt?
 
 Auch dann lässt sich eine Sicherung zurückspielen:
 
-1. Den **Pingulinux-USB-Stick** einstecken und den Computer davon starten (Live-Modus).
+1. Den **Serafino-USB-Stick** einstecken und den Computer davon starten (Live-Modus).
 2. Im Startmenü unter **System** auf **„System retten (Timeshift)“** klicken.
 3. Timeshift fragt, wo die Sicherungen liegen: die **eingebaute Festplatte** wählen (oder den Sicherungs-Stick, falls die Festplatte kaputt ist).
 4. Einen Stand auswählen, auf **„Wiederherstellen“** klicken und den Anweisungen folgen. Als Ziel die eingebaute Festplatte nehmen.
@@ -83,12 +83,12 @@ Auch dann lässt sich eine Sicherung zurückspielen:
 
 Die eigenen Dateien (Fotos, Dokumente) bleiben dabei unverändert. Ist die Festplatte selbst kaputt, hilft nur noch die Sicherung auf dem USB-Stick – deshalb ab und zu „Auf USB-Stick sichern“.
 
-## Braucht Pingulinux einen Virenscanner?
+## Braucht Serafino einen Virenscanner?
 
 Für den Alltag nicht: Kinder können keine heruntergeladenen Programme starten, und der Filter sperrt gefährliche Seiten. Wer aber USB-Sticks oder Dateien für Windows-Rechner prüfen will, kann im **App Store** unter *Dienstprogramme* den **Virenscanner (ClamUI)** installieren.
 
 - Er ist **nur für Eltern** sichtbar – in Kinderkonten taucht er weder im App Store noch im Startmenü auf.
 - Er läuft **nicht im Hintergrund**. Geprüft wird nur, wenn Sie ClamUI öffnen und einen Ordner oder Stick auswählen.
-- Die Installation dauert einige Minuten, weil beim ersten Mal die Virendaten (etwa 200 MB) geladen werden. Danach holt Pingulinux nichts von selbst: Neue Virendaten gibt es, wenn Sie ClamUI öffnen und dort die Virendaten aktualisieren – am besten jedes Mal vor dem Prüfen.
+- Die Installation dauert einige Minuten, weil beim ersten Mal die Virendaten (etwa 200 MB) geladen werden. Danach holt Serafino nichts von selbst: Neue Virendaten gibt es, wenn Sie ClamUI öffnen und dort die Virendaten aktualisieren – am besten jedes Mal vor dem Prüfen.
 - Entfernen geht wie bei jedem Programm im App Store; dabei werden auch ClamAV und die Virendaten gelöscht.
 

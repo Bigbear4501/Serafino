@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Serafino einrichten
+Comment=Einrichtungs-Assistent beim ersten Eltern-Anmelden
+Exec=/usr/local/bin/serafino-einrichtung.py --auto
+Icon=tools-wizard
+NoDisplay=true
+X-KDE-autostart-phase=2
+OnlyShowIn=KDE;

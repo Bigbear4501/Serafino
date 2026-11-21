@@ -14,6 +14,6 @@
       <allow_inactive>auth_admin</allow_inactive>
       <allow_active>auth_admin_keep</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/lib/pingulinux/serafino-wlan-alle-root.py</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/lib/serafino/serafino-wlan-alle-root.py</annotate>
   </action>
 </policyconfig>

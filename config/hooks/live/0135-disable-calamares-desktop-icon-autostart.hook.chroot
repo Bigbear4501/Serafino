@@ -27,7 +27,7 @@ ICON_SCRIPT="/usr/bin/add-calamares-desktop-icon"
 if [ -f "$ICON_SCRIPT" ]; then
     cat > "$ICON_SCRIPT" << 'EOF'
 #!/bin/sh
-# Deaktiviert durch Pingulinux OS - erzeugt bewusst kein Debian-Installer-Icon.
+# Deaktiviert durch Serafino - erzeugt bewusst kein Debian-Installer-Icon.
 exit 0
 EOF
     chmod +x "$ICON_SCRIPT"

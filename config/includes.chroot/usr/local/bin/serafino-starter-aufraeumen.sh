@@ -1,5 +1,6 @@
 #!/bin/bash
-# serafino-starter-aufraeumen.sh – keine leeren Symbole in der Taskleiste
+# serafino-starter-aufraeumen.sh – keine leeren Symbole in der Taskleiste,
+# Fino auf dem Startmenü-Knopf (bz36)
 #
 # Läuft bei jeder Anmeldung (alle Konten, alle Altersstufen). Entfernt aus der
 # Taskleiste angeheftete Programme, die es auf diesem Rechner nicht (mehr) gibt
@@ -42,9 +43,9 @@ for z in open(sys.argv[1], encoding="utf-8", errors="replace"):
 print(" ".join(sorted(n for n in namen if tot(n))))
 PY
 )
-[ -z "$TOT" ] && exit 0
-
-LISTE=$(printf '"%s",' $TOT); LISTE="[${LISTE%,}]"
+LISTE="[]"
+[ -n "$TOT" ] && { LISTE=$(printf '"%s",' $TOT); LISTE="[${LISTE%,}]"; }
+FINO=/usr/share/serafino/icons/fino.png
 qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
 var tot = $LISTE;
 var ps = panels();
@@ -52,6 +53,11 @@ for (var i = 0; i < ps.length; i++) {
   var ws = ps[i].widgets();
   for (var j = 0; j < ws.length; j++) {
     var w = ws[j];
+    // Startmenü-Knopf zeigt Fino (bz36)
+    if ((w.type == 'org.kde.plasma.kickoff' || w.type == 'org.kde.plasma.kicker' || w.type == 'org.kde.plasma.kickerdash') && '$FINO') {
+      w.currentConfigGroup = ['General'];
+      if (w.readConfig('icon', '') != '$FINO') { w.writeConfig('icon', '$FINO'); w.reloadConfig(); }
+    }
     if (w.type != 'org.kde.plasma.icontasks' && w.type != 'org.kde.plasma.taskmanager') continue;
     w.currentConfigGroup = ['General'];
     var l = w.readConfig('launchers', []);

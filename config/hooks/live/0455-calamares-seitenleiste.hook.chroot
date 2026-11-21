@@ -7,7 +7,7 @@
 # es eigene Standardfarben hinein – vermutlich der schwarze Kasten.
 # Ergänzt die neuen Namen mit denselben Farben; die alten bleiben stehen.
 
-F=/etc/calamares/branding/pingulinux/branding.desc
+F=/etc/calamares/branding/serafino/branding.desc
 [ -f "$F" ] || { echo "branding.desc nicht gefunden, überspringe." >&2; exit 0; }
 grep -q '^ *SidebarBackground:' "$F" && { echo "Calamares-Farben: schon eingetragen."; exit 0; }
 

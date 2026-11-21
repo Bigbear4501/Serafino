@@ -5,7 +5,7 @@
 # Discover direkt beim ersten Start zusätzliche Apps von dort
 # anzeigen kann, ohne dass Eltern das manuell einrichten müssen.
 #
-# Zusätzlich: Programme, die bereits als Debian-Paket in Pingulinux OS
+# Zusätzlich: Programme, die bereits als Debian-Paket in Serafino
 # vorhanden sind, werden über Flatpaks eigene, offizielle Filter-
 # Funktion aus Flathub ausgeblendet - damit erscheint z.B. Firefox
 # nicht doppelt (einmal als Debian-Paket, einmal als Flatpak) in
@@ -20,7 +20,7 @@ if command -v flatpak &> /dev/null; then
     # Programms aus, das wir bereits als Debian-Paket anbieten.
     mkdir -p /etc/flatpak
     cat > /etc/flatpak/flathub-filter.conf << 'EOF'
-# Pingulinux OS: Programme, die bereits als Debian-Paket vorhanden
+# Serafino: Programme, die bereits als Debian-Paket vorhanden
 # sind, werden hier ausgeblendet, damit sie nicht doppelt in
 # Discover auftauchen (einmal als .deb, einmal als Flatpak).
 deny org.mozilla.firefox

@@ -17,8 +17,8 @@ mkdir -p "$DESKTOP_DIR"
 # live-config baut den Desktop-Ordner bei jedem Boot neu auf und kann
 # dabei unser Icon überschreiben/entfernen - deshalb liegt eine
 # unangetastete Sicherheitskopie an einem festen Systempfad.
-OWN_ICON_SOURCE="/usr/share/pingulinux/install-pingulinux.desktop"
-OWN_ICON_TARGET="$DESKTOP_DIR/install-pingulinux.desktop"
+OWN_ICON_SOURCE="/usr/share/serafino/install-serafino.desktop"
+OWN_ICON_TARGET="$DESKTOP_DIR/install-serafino.desktop"
 
 if [ -f "$OWN_ICON_SOURCE" ] && [ ! -f "$OWN_ICON_TARGET" ]; then
     cp "$OWN_ICON_SOURCE" "$OWN_ICON_TARGET"

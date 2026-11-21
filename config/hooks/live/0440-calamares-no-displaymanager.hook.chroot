@@ -7,9 +7,9 @@
 # die normale Anmeldung im Test nicht mehr („Passwort falsch“).
 #
 # Lösung: Das Modul „displaymanager“ läuft nicht mehr. SDDM ist schon fertig
-# eingerichtet (sddm.conf.d/10-pingulinux.conf, Standard-Sitzung KDE Plasma),
+# eingerichtet (sddm.conf.d/10-serafino.conf, Standard-Sitzung KDE Plasma),
 # das Modul wird nicht gebraucht. Der Haken bleibt sichtbar, bewirkt aber
-# nichts mehr. Der Schutz 0146 (pingulinux-no-autologin) bleibt zusätzlich.
+# nichts mehr. Der Schutz 0146 (serafino-no-autologin) bleibt zusätzlich.
 
 SETTINGS=/etc/calamares/settings.conf
 [ -f "$SETTINGS" ] || { echo "Calamares settings.conf nicht gefunden, überspringe." >&2; exit 0; }

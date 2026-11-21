@@ -1,14 +1,14 @@
 #!/bin/bash
-# Pingulinux: prüft vor einem Release, ob alles eingetragen ist.
+# Serafino: prüft vor einem Release, ob alles eingetragen ist.
 # Aufruf im Projektordner: ./release-check.sh
-# Optional mit fertiger ISO: ./release-check.sh pingulinux-amd64.hybrid.iso
+# Optional mit fertiger ISO: ./release-check.sh serafino-amd64.hybrid.iso
 
 VERSION="Beta 1"
 FEHLER=0
 ok()   { echo "  OK      $1"; }
 fail() { echo "  FEHLT   $1"; FEHLER=1; }
 
-echo "== Pingulinux Release-Check ($VERSION) =="
+echo "== Serafino Release-Check ($VERSION) =="
 
 # 1. Version in os-release
 OSR=$(grep -rl "PRETTY_NAME" config/includes.chroot*/etc/os-release config/includes.chroot*/usr/lib/os-release 2>/dev/null | head -1)
@@ -19,7 +19,7 @@ else
 fi
 
 # 2. links.conf vorhanden und gefüllt
-LINKS=$(find config -path "*etc/pingulinux/links.conf" 2>/dev/null | head -1)
+LINKS=$(find config -path "*etc/serafino/links.conf" 2>/dev/null | head -1)
 if [ -z "$LINKS" ]; then
   fail "links.conf nicht gefunden"
 else

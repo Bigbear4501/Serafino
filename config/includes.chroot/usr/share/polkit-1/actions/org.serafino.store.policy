@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- Serafino App Store: installiert über „pkexec sh -c …“. Ohne eigene Aktion
+     zeigt das Passwort-Fenster nur „Authentifizierung erforderlich“. Gleiche Regel
+     wie Standard (Admin-Passwort jedes Mal), nur ein freundlicher Text. -->
+<policyconfig>
+  <vendor>Serafino</vendor>
+  <action id="org.serafino.store.sh">
+    <description>Serafino App Store: Programme installieren oder entfernen</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/sh</annotate>
+  </action>
+  <action id="org.serafino.store.bin-sh">
+    <description>Serafino App Store: Programme installieren oder entfernen</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/bin/sh</annotate>
+  </action>
+</policyconfig>

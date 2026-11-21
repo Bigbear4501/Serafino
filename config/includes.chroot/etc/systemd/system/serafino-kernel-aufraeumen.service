@@ -1,0 +1,12 @@
+[Unit]
+Description=Serafino: alten Backports-Kernel nach dem Wechsel entfernen
+ConditionPathExists=/var/lib/serafino/kernel-aufraeumen
+After=local-fs.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/lib/serafino/kernel-aufraeumen.sh
+
+[Install]
+WantedBy=multi-user.target
