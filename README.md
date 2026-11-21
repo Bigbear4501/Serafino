@@ -3,7 +3,7 @@
 Ein kinderfreundliches Linux-System für Kinder von 2 bis 14 Jahren, basierend auf **Debian 13 („trixie“)** und **KDE Plasma**.
 Maskottchen ist **Pingu**, ein Pinguin mit grüner Kappe und Sonnenbrille.
 
-> ⚠️ **Status: Beta 1 – Testversion.** Bitte zum Ausprobieren nutzen, zum Beispiel in einer virtuellen Maschine oder auf einem Zweitgerät, **noch nicht als Alltags-PC für Kinder.**
+> ⚠️ **Status: Beta 2 – Testversion.** Bitte zum Ausprobieren nutzen, zum Beispiel in einer virtuellen Maschine oder auf einem Zweitgerät, **noch nicht als Alltags-PC für Kinder.**
 >
 > **„Pingulinux“ ist ein Arbeitstitel.** Vor Version 1.0 wird der Name noch einmal geprüft und kann sich ändern. Das Projekt, die Funktionen und dieses Repository bleiben dabei bestehen.
 
@@ -34,26 +34,23 @@ Maskottchen ist **Pingu**, ein Pinguin mit grüner Kappe und Sonnenbrille.
 - **Tablets:** Bildschirmdrehung, Touch und Bildschirmtastatur (nur Deutsch, ohne Autokorrektur).
 - **Firmware** für gängige WLAN- und Grafikchips ist dabei, auch für ältere MacBooks (Broadcom).
 
-## Neu in Beta 1
+## Neu in Beta 2
 
-- **Nur noch KDE:** XFCE ist entfernt. Der letzte Stand mit XFCE bleibt im Zweig `xfce-light` erhalten.
-- **Neue Eltern-Fenster im KDE-Stil:** Kontrollzentrum, Bildschirmzeit, Sicherung und Wiederherstellung, App Store und YouTube Kids
-- **Sicherung:** täglich automatisch, auf USB-Stick, „Gestern wiederherstellen“ und Notfall-Rettung vom Stick
-- **Automatische Updates** für Debian-Sicherheitsupdates und App-Store-Programme
-- **Eltern-Handbuch** im System
-- **Neuer Anmeldebildschirm (SDDM)** mit Bildschirmtastatur, die auf Touch-Geräten von selbst aufgeht
-- **YouTube Kids ohne Eltern-Passwort**, begrenzt durch die Bildschirmzeit
-- **Firewall** ab Werk an
-- **Viel kleinere ISO:** rund 2,6 GB statt 4,2 GB (alte Pakete entfernt, Firmware bleibt)
-- **Neue KDE-Programme:** Marknote, Crow Translate, Skanpage, Kamoso, KTuberling, KLettres, KBruch; einige größere Programme sind in den App Store gewandert
-- **Behoben:** Passwort mit Zahlen im Installer per Bildschirmtastatur, Profilbild im Anmeldebildschirm, Live-Benutzer heißt „Pingu“, SuperTuxKart und KLettres auf Deutsch
+Alle Neuerungen stehen in den [Release Notes zu Beta 2](RELEASE-NOTES-BETA2.md). Das Wichtigste:
+
+- **Eigener Startbildschirm für die Kleinen (2–6 Jahre):** große Kacheln, Namen werden vorgelesen, nur das Programm und ein Haus-Knopf – kein Weg in den Eltern-Bereich
+- **Bildschirmzeit, die mitdenkt:** Lernprogramme zählen nicht, Spiele und Videos schon; „Mehr Zeit bitte“ mit Eltern-Passwort; Pausen-Erinnerung
+- **Updates von selbst** über ein eigenes, signiertes Paketarchiv – neue Funktionen und Fehlerbehebungen ohne neue ISO
+- **App Store mit 108 Programmen**, jedes mit Mindestalter
+- **WLAN für alle Kinderkonten**, ohne dass die Kinder das WLAN-Passwort kennen
+- **Neu im Kontrollzentrum:** Einrichtungs-Assistent, Nutzung pro Kind, Programme pro Kind, Kinderkonto zurücksetzen, Hardware & Treiber
 
 ## Download
 
 > Die ISO ist rund 2,6 GB groß und liegt deshalb auf **SourceForge**, nicht in diesem Repository.
 
 <!-- Nach dem Hochladen: Prüfsumme eintragen -->
-- **ISO-Download (Beta 1):** [pingulinux-beta1-amd64.iso](https://sourceforge.net/projects/pingulinux/files/Beta-1/pingulinux-beta1-amd64.iso/download) (SourceForge)
+- **ISO-Download (Beta 2):** [serafino-beta2-amd64.iso](https://sourceforge.net/projects/pingulinux/files/Beta-2/serafino-beta2-amd64.iso/download) (SourceForge)
 - **SHA256-Prüfsumme:**
 
 ```
@@ -63,10 +60,10 @@ PRÜFSUMME-HIER-EINTRAGEN
 Prüfsumme nach dem Download prüfen (im Ordner mit der ISO):
 
 ```bash
-sha256sum pingulinux-beta1-amd64.iso
+sha256sum serafino-beta2-amd64.iso
 ```
 
-Die angezeigte Zahl muss mit der Prüfsumme oben übereinstimmen. Unter Windows: `certutil -hashfile pingulinux-beta1-amd64.iso SHA256`.
+Die angezeigte Zahl muss mit der Prüfsumme oben übereinstimmen. Unter Windows: `certutil -hashfile serafino-beta2-amd64.iso SHA256`.
 
 Ältere Versionen findest du auf [SourceForge](https://sourceforge.net/projects/pingulinux/files/).
 
@@ -78,13 +75,6 @@ Die angezeigte Zahl muss mit der Prüfsumme oben übereinstimmen. Unter Windows:
 4. Zum Installieren das Symbol **„Pingulinux OS installieren“** benutzen. Das erste Konto ist das Eltern-Konto. Kinderkonten legst du danach im Kontrollzentrum unter „Benutzerkonten“ an.
 
 **Getestet auf:** virtuellen Maschinen (GNOME Boxes), Microsoft Surface Go 2 (Touch, Secure Boot) und MacBook Air 2011/2012 (Live-Modus).
-
-## Bekannte Fehler (Beta 1)
-
-| Fehler | Auswirkung | Geplant |
-|---|---|---|
-| Touch-Geräte ohne Tastatur: Die Suche im Startmenü mit der Bildschirmtastatur kann die Oberfläche einfrieren („plasmashell reagiert nicht“). Ursache ist ein Fehler in KDE. | Im Menü durchklicken oder mit einer echten Tastatur suchen. Falls es hängt: „Plasma beenden“ antippen, die Oberfläche startet von selbst neu. | Beta 2 |
-| Auf manchen Geräten stimmen Uhrzeit oder Datum nicht. | Kann die Bildschirmzeit und Webseiten (Zertifikate) stören. Bitte melden, falls es bei dir auftritt. | Beta 2 |
 
 ## Datenschutz: Serafino sammelt keine Daten
 
@@ -144,18 +134,15 @@ Die fertige ISO liegt danach im Ordner `~/kids-distro`. Bei jedem Push prüft Gi
 
 ## Roadmap
 
-### ✅ Beta 1 (aktuell)
-Siehe „Neu in Beta 1“ oben.
+### ✅ Beta 1
+Nur noch KDE, neue Eltern-Fenster, Sicherung, automatische Updates, kleinere ISO.
 
-### Beta 2: Praxis und Feinschliff
-- **Test mit echten Familien**
-- **Sicherung der eigenen Dateien automatisch**, sobald der Sicherungs-Stick eingesteckt ist
-- **Kinderkonten ohne Passwort** für die Kleinen (2–6 Jahre)
-- **Treiber-Assistent** für Grafik- und WLAN-Treiber, wie bei Ubuntu
-- **Fortschrittsanzeige** bei der System-Sicherung
-- **Alle bekannten Fehler beheben**, auch die aus dem Familientest
+### ✅ Beta 2 (aktuell)
+Siehe „Neu in Beta 2“ oben und die [Release Notes](RELEASE-NOTES-BETA2.md).
+- Noch offen: **Test mit echten Familien**
 
 ### Beta 3
+- Umbenennung in **Serafino** mit Maskottchen **Fino** überall im System
 - Festplattenverschlüsselung prüfen und testen
 - Feinschliff aus Beta 2
 

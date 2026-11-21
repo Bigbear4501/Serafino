@@ -66,13 +66,6 @@ Das ist eine **Beta**: zum Ausprobieren und Rückmelden gedacht, noch nicht für
 - **Mikrofon** ist für Kinder unter 10 gesperrt, der Ton funktioniert trotzdem.
 - **Serafino schützt sich selbst:** Das Serafino-Paket lässt sich weder mit `apt` noch mit Synaptic aus Versehen entfernen.
 
-## Fino und Überraschungen
-
-- **Fino durchs Jahr:** Hintergrundbilder für Winter, Ostern, Sommer und Herbst.
-- **Geburtstag:** Am Geburtstag begrüßt Fino das Kind mit Partyhut und Konfetti.
-- **Fino fliegt:** Im Kontrollzentrum 5× aufs Logo tippen.
-- **Für Eltern im Terminal:** `serafino --fino` und `fastfetch` mit Fino-Logo.
-
 ## Behobene Fehler seit Beta 1
 
 - Kein Ton im Kinderkonto auf dem Surface Go 2 (Mikrofon-Sperre hatte die ganze Soundkarte gesperrt).
