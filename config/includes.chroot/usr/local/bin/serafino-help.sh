@@ -25,7 +25,7 @@ while true; do
         pdf printer "Eltern-Handbuch als PDF (zum Ausdrucken)" \
         web internet-web-browser "Serafino-Webseite" \
         anleitung applications-education "Anleitungen" \
-        community system-users "Community und Forum" \
+        community system-users "Fragen und Ideen (Forum für Eltern)" \
         fehler tools-report-bug "Fehler melden" \
         diagnose run-build "Fehlerdiagnose starten" \
         datenschutz security-high "Datenschutz" \
