@@ -27,7 +27,6 @@
    "PreventInstalls": false
   },
   "OverrideFirstRunPage": "",
-  "OverrideSecondRunPage": "",
   "DontCheckDefaultBrowser": true,
   "DisableFirefoxStudies": true,
   "DNSOverHTTPS": {
@@ -52,6 +51,10 @@
    },
    "fino-waechter@pingulinux": {
     "installation_mode": "blocked"
+   },
+   "*": {
+    "installation_mode": "blocked",
+    "blocked_install_message": "Erweiterungen und Designs richtet Serafino ein. Bitte Mama oder Papa fragen."
    }
   },
   "3rdparty": {
@@ -86,6 +89,8 @@
     "url": "https://www.fragfinn.de/"
    }
   ],
-  "DisplayBookmarksToolbar": "always"
+  "DisplayBookmarksToolbar": "always",
+  "DisableDeveloperTools": true,
+  "OverridePostUpdatePage": ""
  }
 }
