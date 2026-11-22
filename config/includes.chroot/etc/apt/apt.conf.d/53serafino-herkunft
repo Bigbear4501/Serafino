@@ -1,0 +1,7 @@
+// Serafino (bz4n): Das Serafino-Paketarchiv hieß „Pingulinux“.
+// Ändert sich der Absendername (Origin/Label) eines Archivs, hält apt sonst
+// alle Updates daraus an, bis jemand von Hand zustimmt. Damit die automatischen
+// Updates beim Umstellen weiterlaufen, wird ein neuer Name ohne Rückfrage angenommen.
+// (Gilt nur für den Namen – die Unterschrift prüft apt weiterhin.)
+Acquire::AllowReleaseInfoChange::Origin "true";
+Acquire::AllowReleaseInfoChange::Label "true";
