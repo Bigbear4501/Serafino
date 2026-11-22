@@ -1,0 +1,6 @@
+#!/bin/sh
+# Serafino (bz33): einmal pro Woche aufräumen – Timer einschalten.
+# Läuft nicht im Live-Modus; beim ersten Lauf auf dem installierten Rechner
+# werden alle Pakete verankert (bz34).
+systemctl enable serafino-aufraeumen.timer || true
+echo "AUFRAEUMEN: Timer eingeschaltet"

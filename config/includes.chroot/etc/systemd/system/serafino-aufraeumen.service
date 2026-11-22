@@ -1,0 +1,12 @@
+[Unit]
+Description=Serafino: System aufräumen (alte Kernel, nicht mehr gebrauchte Pakete, Zwischenspeicher, Flatpak-Reste)
+ConditionKernelCommandLine=!boot=live
+After=apt-daily-upgrade.service serafino-flatpak-update.service
+
+[Service]
+Type=oneshot
+# vorher die tägliche Sicherung, falls fällig (wie bei den Updates)
+ExecStartPre=-/usr/local/bin/serafino-timeshift-einrichten.sh
+ExecStart=/usr/local/lib/serafino/serafino-aufraeumen.sh
+Nice=19
+IOSchedulingClass=idle
