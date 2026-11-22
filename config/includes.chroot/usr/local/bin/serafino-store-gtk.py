@@ -292,15 +292,15 @@ class Store(Gtk.Window):
         self.busy = False
         if rc == 0:
             if action == "remove":
-                self.status.set_text("✅ %s wurde entfernt." % app["name"])
+                self.status.set_text("✓ %s wurde entfernt." % app["name"])
             else:
-                self.status.set_text("✅ %s ist jetzt installiert." % app["name"])
+                self.status.set_text("✓ %s ist jetzt installiert." % app["name"])
         elif rc in (126, 127):
             self.status.set_text("Abgebrochen – es wurde nichts geändert.")
         elif action == "remove":
-            self.status.set_text("⚠️ Entfernen fehlgeschlagen. Details: /tmp/serafino-store.log")
+            self.status.set_text("✗ Entfernen fehlgeschlagen. Details: /tmp/serafino-store.log")
         else:
-            self.status.set_text("⚠️ Installation fehlgeschlagen. Details: /tmp/serafino-store.log")
+            self.status.set_text("✗ Installation fehlgeschlagen. Details: /tmp/serafino-store.log")
         self.refresh()
         return False
 
