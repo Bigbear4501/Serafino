@@ -1,27 +1,27 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Sun, 22 Nov 2026 03:04:11 +0000
+Date: Sun, 22 Nov 2026 14:40:20 +0000
 Description: Serafino (Serafino) Paketarchiv
 Label: Pingulinux
 Origin: Pingulinux
 MD5Sum:
- 665e7d067f66564b13a903092402e5c0             1809 Packages
- d8a304fdcf18f6bac5c2213ac43baa86             1058 Packages.gz
+ 434d9ce410e9de60f241c63bbf4f2ad1             1809 Packages
+ 8b2d1157c2cd44b94b8d5fb91f5a35b2             1057 Packages.gz
 SHA1:
- 74644458663618e35c2ab21e4264f40e9d91af07             1809 Packages
- f874a2ad5487c03a3ac4da54fd5d8fa855f73f5b             1058 Packages.gz
+ bdecd6ca8eadfc81b8cce41164d443e02e929843             1809 Packages
+ 08133264c5d02a938fde307d004592a8193abe34             1057 Packages.gz
 SHA256:
- 6f010dcf3118f2e4a40b4dabb9247a8767de48fe7af3daa71c08f8c1ecb629b9             1809 Packages
- c939a9b9e1bc82d813db25e39dad29759378eacbe4c643ba9f5d2741cc415d32             1058 Packages.gz
+ 4a017f6606e7c8edbe77480239cd2b7e52cc594a186958c8f6754b1b985e6dee             1809 Packages
+ b8aeda0e632c922b8ef3fef8c3f9a383bbb4633b191f750a0d5b5658955e8ff1             1057 Packages.gz
 SHA512:
- 263fd032a12d9406c8c9fbfbffbcf67149876180aa61db87c09243c9da48cd1a29b07a022ad944408a599a2c459de8c468577b24881000cc7c8fed09265b05b6             1809 Packages
- 127d5e354e1b519f0085842eeaee925d2ac352d155b4b9946cabe33751bf2a83b20a42e3f9623fdc68115e5c27affdb9a3053604d3a7bffa36bb06ed855a2d9b             1058 Packages.gz
+ f413781b08c14e24e78dcb08c1f36f22c454ec1379cb64e8da52235b3a9b663bc09672d3f113a5fda136c445e875525610dea3497adb4634fe4ae7717f26661e             1809 Packages
+ 21a18457b9e6610fee5885331868ee6a6cc90608c8f5ab8afec79640cf17c6965add849cd541c5ebab45a5eec213214f9058f3f0a42c916fc638e43086a7bde7             1057 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCawJbqxscbm9yZXBseUBw
-aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyymkbQD/c7ZOQ9aDQ+EN77cDkec4
-LT96ohxe/yCihi1m3XwWpwcBAIahcI1/i6q4Qvw6KXCkUmRx+ebxxbToD4NINa0F
-gl4B
-=DzrT
+iJEEARYKADkWIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCawL+1Bscbm9yZXBseUBw
+aW5ndWxpbnV4LmludmFsaWQACgkQE8iDOTVpyymvtgD+NsuaigcY7XzgdkA4gBLm
+21zosFKu5Ai2UXP35jiaN5IA+wSa6pUiKatIWdlh+UeB1XaVDCQHUqr0dJMcaAC5
+wEEM
+=GIgR
 -----END PGP SIGNATURE-----
