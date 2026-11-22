@@ -1,0 +1,5 @@
+# Serafino (bz39): Nach dem Anmelden ist nichts offen – KDE stellt die letzte
+# Sitzung nicht wieder her. Gilt für alle Konten und lässt sich im Konto
+# nicht umstellen ([$i] = fest).
+[General][$i]
+loginMode=emptySession

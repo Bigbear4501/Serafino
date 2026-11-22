@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- Serafino (bz30pw): einheitlicher Text in allen Passwort-Fenstern, die unsere
+     Programme über pkexec öffnen. Rechte wie bei pkexec üblich (auth_admin). -->
+<policyconfig>
+  <vendor>Serafino</vendor>
+  <action id="org.serafino.pkexec.delete-user">
+    <description>Serafino: Benutzer löschen</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-delete-user.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.set-password">
+    <description>Serafino: Passwort ändern</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-set-password.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.set-avatar">
+    <description>Serafino: Profilbild ändern</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-set-avatar.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.dns-filter">
+    <description>Serafino: Kinderschutz-Filter umstellen</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-dns-filter-worker.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.sicherung-usb">
+    <description>Serafino: Sicherung auf USB-Stick</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-sicherung-usb-worker.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.update">
+    <description>Serafino: Updates installieren</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-update-worker.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.upgrade">
+    <description>Serafino: Update-Assistent</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-upgrade-worker.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.cleanup">
+    <description>Serafino: Systembereinigung</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-cleanup-worker.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.youtube-kids">
+    <description>Serafino: YouTube Kids freigeben</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/local/bin/serafino-youtube-kids-session.sh</annotate>
+  </action>
+  <action id="org.serafino.pkexec.apt-get">
+    <description>Serafino: empfohlene Programme installieren</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/apt-get</annotate>
+  </action>
+  <action id="org.serafino.pkexec.apt-get-2">
+    <description>Serafino: empfohlene Programme installieren</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/bin/apt-get</annotate>
+  </action>
+  <action id="org.serafino.pkexec.env">
+    <description>Serafino: Verwaltungsprogramm starten</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/bin/env</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+  <action id="org.serafino.pkexec.env-2">
+    <description>Serafino: Verwaltungsprogramm starten</description>
+    <message>Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.</message>
+    <icon_name>fino</icon_name>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/bin/env</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>

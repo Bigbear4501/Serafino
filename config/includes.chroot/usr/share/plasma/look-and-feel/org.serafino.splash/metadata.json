@@ -1,0 +1,11 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [ { "Name": "Serafino" } ],
+        "Description": "Ladebildschirm beim Anmelden: Fino unter dem Nachthimmel",
+        "Id": "org.serafino.splash",
+        "License": "GPL-2.0+",
+        "Name": "Serafino (nur Ladebildschirm)",
+        "Version": "1.0"
+    }
+}
