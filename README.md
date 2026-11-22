@@ -107,9 +107,13 @@ Wer eine Verbindung findet, die hier fehlt: bitte als [Issue](../../issues) meld
 - **Flatpaks** lassen sich nur im installierten System installieren, nicht im Live-Modus.
 - **Platzhalter-Links:** Links für Datenschutz und Impressum fehlen noch. Wird bis 1.0 ergänzt.
 
+## Fragen und Ideen
+
+Du hast eine Frage zu Serafino, eine Idee oder möchtest zeigen, wie ihr es nutzt? Dafür gibt es die **[Diskussionen](../../discussions)** – ein Fragen-Bereich für Eltern. Bitte dort keine Namen oder Fotos von Kindern posten.
+
 ## Fehler melden
 
-Bitte öffne ein [Issue](../../issues) und nenne dabei:
+Bitte öffne ein [Issue](../../issues) (bei Unsicherheit gern erst in den [Diskussionen](../../discussions) fragen) und nenne dabei:
 
 - Was hast du gemacht, und was ist passiert?
 - Auf welchem Gerät (Modell, virtuelle Maschine oder echtes Gerät)?

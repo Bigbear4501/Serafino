@@ -1,0 +1,40 @@
+title: "Frage: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für deine Frage! Bitte keine Namen, Fotos oder Bildschirmfotos von Kindern hochladen – hier kann jeder mitlesen.
+  - type: textarea
+    id: frage
+    attributes:
+      label: Was möchtest du wissen oder was klappt nicht?
+      placeholder: "Zum Beispiel: Wie stelle ich die Bildschirmzeit für mein Kind ein?"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Welche Serafino-Version?
+      options:
+        - Beta 3
+        - Beta 2
+        - Beta 1
+        - weiß ich nicht
+    validations:
+      required: false
+  - type: dropdown
+    id: geraet
+    attributes:
+      label: Wo läuft Serafino?
+      options:
+        - Installiert auf einem Laptop/PC
+        - Live-Modus (vom USB-Stick)
+        - Virtuelle Maschine
+    validations:
+      required: false
+  - type: input
+    id: modell
+    attributes:
+      label: Gerät (optional)
+      placeholder: "z. B. Surface Go 2, Lenovo ThinkPad T480"
