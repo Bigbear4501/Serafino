@@ -1,19 +1,38 @@
 Package: pingulinux-system
 Architecture: all
-Version: 0.2.202611210330
+Version: 0.3.202611211817
+Priority: optional
+Section: oldlibs
+Maintainer: Serafino <noreply@serafino.invalid>
+Depends: serafino-tools (>= 0.3.202611211817)
+Filename: ./pingulinux-system_0.3.202611211817_all.deb
+Size: 836
+MD5sum: 12fec576675cc090c40c7585d2f98cb5
+SHA1: f88d6372d4b89a9d87c7e146db8b5cafc1068e4b
+SHA256: fb72c41b35355f818141702fefc2a36d76231d9a11b5e96f045bf388f7b3f339
+SHA512: 1d626c625494e016f6d0d6e90a2f0cb4de5e911ee33fe39f6fa25c999f32a9561b8d4dca5934cd45bf44e472acda6d96b917cb9cae0ce53cb6e31c031bc5e6e5
+Description: Übergangspaket – heißt jetzt serafino-tools
+ Dieses leere Paket sorgt nur dafür, dass ältere Rechner beim Update
+ serafino-tools bekommen. Es kann danach entfernt werden.
+
+Package: serafino-tools
+Architecture: all
+Version: 0.3.202611211817
 Priority: optional
 Protected: yes
 Section: admin
-Maintainer: Pingulinux <noreply@pingulinux.invalid>
+Maintainer: Serafino <noreply@serafino.invalid>
 Depends: python3, python3-pyqt6, systemd-timesyncd | time-daemon, fonts-noto-color-emoji
-Filename: ./pingulinux-system_0.2.202611210330_all.deb
-Size: 1263564
-MD5sum: f3dfef3ff6a15db94db8d98ae9e35463
-SHA1: 6f35fe56e7b19cba96923631cb53ce4efc16d167
-SHA256: 964971daca6a59b24b487c6df820891fd71ab44e5f92a2b0ad870fcdec64abaa
-SHA512: d28a89957db93442af26ddce769cb607b2a90572485aaf81094723549b3b6d5247e13b6a09c76756e5f524152aeee2c81759ba30e5660d445d28f08941105fac
+Breaks: pingulinux-system (<< 0.3~)
+Replaces: pingulinux-system (<< 0.3~)
+Filename: ./serafino-tools_0.3.202611211817_all.deb
+Size: 1354324
+MD5sum: 632b7e10f80a322839951f1af99332ce
+SHA1: 0694152fdeecef46c44917e5a8f2bfa4b2c5576a
+SHA256: 063ee421265e95bda50e7d2982dae501a373f5342dded02c11b02237850d9459
+SHA512: ecab60f643fca99fb7bb0a61696cdddca3390bde8480860d255de00d2ab7441b5842f7071a71c18a79746a2fbd7b6aa6fa783ad42114532d4e9d8aa3b2bc457b
 Description: Serafino – Kinderschutz, Kontrollzentrum, Fino und Co.
- Alle eigenen Dateien von Pingulinux (Serafino): Eltern-Kontrollzentrum,
+ Alle eigenen Dateien von Serafino: Eltern-Kontrollzentrum,
  Startbildschirm der Kleinen, Fino, Handbuch, Sperren und Einstellungen.
- Wird über das Pingulinux-Paketarchiv aktualisiert.
+ Wird über das Serafino-Paketarchiv aktualisiert.
 
