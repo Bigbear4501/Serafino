@@ -13,6 +13,13 @@ fi
 
 number() { case "$1" in bookworm) echo 12;; trixie) echo 13;; forky) echo 14;; duke) echo 15;; *) echo "$1";; esac; }
 
+# bz21d14: Ist der Umstieg auf diese Debian-Version freigegeben? (/usr/share/serafino/freigabe.conf)
+freigegeben() {  # $1 Codename
+    local n; n=$(number "$1")
+    case "$n" in *[!0-9]*|"") return 1 ;; esac
+    grep -qiE "^DEBIAN${n}=(ja|yes|1)\s*$" /usr/share/serafino/freigabe.conf 2>/dev/null
+}
+
 run_with_progress() {  # $1 Text, Rest: Befehl
     local text="$1"; shift
     pd_warten "$TITLE" "$text" "$@"
@@ -45,6 +52,11 @@ wechsel)
     fi
     if [ "$NEWC" = "$CUR" ]; then
         pd_info "$TITLE" "Du hast schon die neueste Debian-Version: <b>Debian $(number "$CUR") ($CUR)</b>.\n\nNormale Updates bekommst du über „Updates installieren“."
+        exit 0
+    fi
+    # bz21d14: nur umsteigen, wenn Serafino für diese Version freigegeben ist
+    if ! freigegeben "$NEWC"; then
+        pd_info "$TITLE" "Es gibt eine neue Debian-Version: <b>Debian $(number "$NEWC") ($NEWC)</b>.\n\nSerafino wird gerade dafür vorbereitet und getestet. Sobald alles sicher läuft, kommt die Freigabe mit einem normalen Update – dann kannst du hier umsteigen.\n\nBis dahin bekommst du weiter alle Sicherheits-Updates für <b>Debian $(number "$CUR")</b>. Du musst nichts tun."
         exit 0
     fi
     pd_frage "$TITLE" "Es gibt eine neue Debian-Version:\n\n<b>Debian $(number "$CUR") ($CUR)  →  Debian $(number "$NEWC") ($NEWC)</b>\n\nDer Wechsel dauert 30 bis 90 Minuten.\n• Das Gerät muss am Strom bleiben.\n• Die Internetverbindung muss durchgehend bestehen.\n• Vorher wird eine Sicherung (Timeshift) erstellt.\n\nMöchtest du fortfahren?" "Ja, weiter" "Abbrechen" || exit 0

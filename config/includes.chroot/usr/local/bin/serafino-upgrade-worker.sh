@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # serafino-upgrade-worker.sh  (laeuft als root, Aufruf: ALT NEU)
+# Wechselt nur auf eine in /usr/share/serafino/freigabe.conf freigegebene Version (bz21d14).
 # Wechselt die Debian-Version: Paketquellen umstellen, aktualisieren.
 # Bei Fehler vor dem Upgrade werden die alten Paketquellen zurueckgesetzt.
 
@@ -13,6 +14,13 @@ APT_OPTS=(-y -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confd
 [ -n "$OLD" ] && [ -n "$NEW" ] || { echo "Aufruf: $0 ALT NEU"; exit 2; }
 exec >> "$LOG" 2>&1
 echo "=== Upgrade $OLD -> $NEW: $(date) ==="
+
+# bz21d14: nur freigegebene Debian-Versionen (zweite Sicherung neben dem Assistenten)
+case "$NEW" in trixie) N=13;; forky) N=14;; duke) N=15;; *) N="";; esac
+if [ -z "$N" ] || ! grep -qiE "^DEBIAN${N}=(ja|yes|1)\s*$" /usr/share/serafino/freigabe.conf 2>/dev/null; then
+    echo "Debian $NEW ist für Serafino noch nicht freigegeben (/usr/share/serafino/freigabe.conf) – nichts geändert"
+    exit 30
+fi
 
 # Sicherung vor dem Wechsel (Code 20 = Sicherung fehlgeschlagen, es wurde noch nichts veraendert)
 if [ "$MODE" = "backup" ]; then

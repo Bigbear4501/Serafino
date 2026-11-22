@@ -122,6 +122,8 @@ Der Schreibtisch-Hintergrund wechselt mit der Jahreszeit: **Winter** (Dezember b
 
 Installiert Sicherheits-Updates und neue Programmversionen. Gibt es eine neue Debian-Version, hilft er auch beim Wechsel und legt vorher eine Sicherung an. Bitte das Gerät dabei am Strom lassen.
 
+Eine neue Debian-Version bietet er erst an, wenn Serafino darauf getestet und **freigegeben** ist. Erscheint zum Beispiel Debian 14, sagt er bis dahin nur „Serafino wird gerade dafür vorbereitet“ – Sicherheits-Updates kommen in der Zeit ganz normal weiter. Die Freigabe kommt mit einem gewöhnlichen Update, ihr müsst nichts tun.
+
 ### Systembereinigung
 
 Entfernt nicht mehr benötigte Pakete, heruntergeladene Installationsdateien und ungenutzte Flatpak-Teile und schafft so Platz auf der Festplatte.
