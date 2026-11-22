@@ -33,6 +33,13 @@ APT=(apt-get -q -o DPkg::Lock::Timeout=900)
 KERNEL='^linux-(image|headers|modules|kbuild)-[0-9]'
 # Darf nie automatisch entfernt werden (Sicherheitsbremse)
 WICHTIG='^(serafino-tools|pingulinux-system|kde-plasma-desktop|plasma-desktop|plasma-workspace|kwin-wayland|sddm|plymouth|plymouth-themes|firefox-esr|network-manager|timekpr-next|flatpak|timeshift|ufw|cups|sane-utils|grub-efi-amd64|grub-efi-amd64-signed|grub-pc|shim-signed|systemd|sudo|polkitd|pkexec|unattended-upgrades|apt|dpkg|linux-image-amd64|fonts-noto-color-emoji|konsole|dolphin|calamares-settings-serafino)$'
+# Läuft gerade apt, dpkg, Synaptic oder ein automatisches Update? Dann warten
+# (höchstens 30 Minuten), sonst nächstes Mal.
+for i in $(seq 1 60); do
+    pgrep -x 'apt|apt-get|dpkg|aptitude|synaptic|unattended-upgr' >/dev/null || break
+    [ "$i" = 60 ] && { echo "apt läuft seit 30 Minuten – heute nicht aufgeräumt."; exit 0; }
+    sleep 30
+done
 vorher=$(df --output=avail -k / | tail -1)
 
 # 1. Verankern (bz34) – einmal pro Rechner
