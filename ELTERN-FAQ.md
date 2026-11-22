@@ -92,3 +92,26 @@ Für den Alltag nicht: Kinder können keine heruntergeladenen Programme starten,
 - Die Installation dauert einige Minuten, weil beim ersten Mal die Virendaten (etwa 200 MB) geladen werden. Danach holt Serafino nichts von selbst: Neue Virendaten gibt es, wenn Sie ClamUI öffnen und dort die Virendaten aktualisieren – am besten jedes Mal vor dem Prüfen.
 - Entfernen geht wie bei jedem Programm im App Store; dabei werden auch ClamAV und die Virendaten gelöscht.
 
+---
+
+## Wie füge ich die Seite unserer Schule (z. B. Moodle) hinzu?
+
+Den Ordner **„Schule“** in der Lesezeichen-Leiste legt Serafino fest an. Eigene Seiten kommen so dazu:
+
+1. Die Seite in Firefox öffnen, zum Beispiel die Moodle-Seite eurer Schule.
+2. Auf den **Stern** rechts in der Adressleiste klicken.
+3. Bei „Ordner“ **„Lesezeichen-Symbolleiste“** wählen und „Fertig“ klicken.
+
+Das geht im Konto des Kindes – am besten zusammen mit dem Kind, damit es die Seite wiederfindet.
+
+## Warum kann ich in Firefox keine Erweiterung installieren?
+
+Mit einer Erweiterung, zum Beispiel einem VPN oder Proxy, ließe sich der Kinderschutz umgehen. Firefox kennt solche Sperren nur für alle Konten gemeinsam, deshalb gilt sie auch für Eltern. Fest eingebaut sind der Werbefilter **uBlock Origin** und der **Fino-Wächter**. Fehlt euch eine Erweiterung wirklich, schreibt uns im Forum („Fragen und Ideen“).
+
+## Wird die Festplatte mit der Zeit voll?
+
+Nein, Serafino räumt einmal pro Woche selbst auf: alte Kernel, nicht mehr gebrauchte Pakete und Download-Reste. Eigene Dateien, Fotos und Spielstände fasst es dabei nie an. Mehr dazu im Kontrollzentrum unter „Systembereinigung“.
+
+## Wo kann ich Fragen stellen?
+
+Im **Forum für Eltern**: Kontrollzentrum → Hilfe → „Fragen und Ideen (Forum für Eltern)“. Dort antworten wir und andere Eltern. Bitte keine Namen oder Fotos von Kindern posten – das Forum ist öffentlich. Einen Fehler gefunden? Dann unter Hilfe → „Fehler melden“, am besten mit dem Bericht der Fehlerdiagnose.

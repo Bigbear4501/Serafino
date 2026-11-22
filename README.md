@@ -10,14 +10,14 @@ Maskottchen ist **Fino**, ein kleiner Pinguin mit Heiligenschein und Flügeln.
 - **Oberfläche:** KDE Plasma im Serafino-Look (Fino im Startmenü, Eigener Ordner und Papierkorb auf dem Schreibtisch). Eignet sich auch für Tablets und Touch.
 - **Anmeldebildschirm** (SDDM) mit Fino-Hintergrund und Profilbildern. Auf Touch-Geräten geht die Bildschirmtastatur beim Antippen des Passwortfelds von selbst auf, mit Maus und Tastatur bleibt sie zu.
 - **Installer:** Calamares, auf Deutsch.
-- **Eltern-Kontrollzentrum** mit großen Kacheln: Bildschirmzeit, Benutzerkonten, Konten-Übersicht, Kinderschutz-Filter, Firewall, App Store, Sicherung, Update-Assistent, Systembereinigung, Drucker und Scanner, Fehlerdiagnose und Hilfe. Kinder sehen es nicht. Alles, was Administrator-Rechte braucht, fragt nach dem Passwort eines Erwachsenen.
+- **Eltern-Kontrollzentrum** mit großen Kacheln: Bildschirmzeit, Benutzerkonten, Konten-Übersicht, Nutzung, YouTube Kids, Startbildschirm der Kleinen, Kinderschutz-Filter, Firewall, App Store, Sicherung, Update-Assistent, Systembereinigung, Drucker und Scanner, Hardware & Treiber, Fehlerdiagnose und Hilfe. Kinder sehen es nicht. Alles, was Administrator-Rechte braucht, fragt nach dem Passwort eines Erwachsenen.
 - **Eltern-Handbuch** direkt im System (Kontrollzentrum → Hilfe), auch ohne Internet: jede Kachel erklärt, dazu Fragen von Eltern (Passwort vergessen, Sicherung, Notfall).
 - **Bildschirmzeit** in einem eigenen Fenster: heute genutzt und übrig, Extrazeit („+15 Min. heute“), Minuten pro Tag für Montag–Freitag und das Wochenende, erlaubte Uhrzeiten. Unterbau ist Timekpr-nExT.
 - **Alter wächst mit:** Beim Anlegen eines Kinderkontos gibst du den Geburtstag an. Erlaubte Programme und Sperren passen sich an, wenn das Kind älter wird. Programme über der Altersgrenze erscheinen im Menü nicht.
 - **Sperren pro Konto:** YouTube und soziale Netzwerke sind für Kinder unter 13 Jahren gesperrt, auch im privaten Fenster.
 - **Kinderschutz-Filter (DNS):** CleanBrowsing Family (Standard) oder DNS4EU Kinderschutz. Kinder können ihn nicht umstellen.
 - **Firewall** ab Werk eingeschaltet.
-- **Browser:** Firefox mit kinderfreundlicher Startseite (fragFINN) und Kindersuchmaschine. `about:config` ist gesperrt.
+- **Browser:** Firefox mit kinderfreundlicher Startseite (fragFINN) und Kindersuchmaschine, Werbefilter (uBlock Origin) und dem **Fino-Wächter**: Gesperrte Seiten zeigen Fino statt einer Fehlermeldung. In der Lesezeichen-Leiste liegt der Ordner **„Schule“** (ANTON, Antolin, Microsoft Teams, Schulcloud, fragFINN). Eigene Erweiterungen lassen sich nicht installieren, `about:config` ist gesperrt.
 - **YouTube Kids** im eigenen, abgeschotteten Fenster: kein Browser, keine Adressleiste, nur YouTube Kids. Die Bildschirmzeit begrenzt es wie jedes andere Programm.
 - **Eigener, geprüfter App Store** mit Altersangabe pro Programm. Debian-Pakete haben Vorrang, Flatpak nur, wenn es kein Debian-Paket gibt. Programme lassen sich auch wieder entfernen.
 - **Sicherung:**
@@ -26,6 +26,7 @@ Maskottchen ist **Fino**, ein kleiner Pinguin mit Heiligenschein und Flügeln.
   - **„Gestern wiederherstellen“**, falls nach einem Update etwas nicht mehr läuft
   - **Notfall:** Startet gar nichts mehr, lässt sich das System vom Serafino-Stick aus zurückholen
 - **Updates:** Debian-Sicherheitsupdates und Programme aus dem App Store werden täglich von selbst installiert, vorher läuft die Sicherung. Der Update-Assistent hilft beim Wechsel auf eine neue Debian-Version.
+- **Räumt selbst auf:** Einmal pro Woche verschwinden alte Kernel, nicht mehr gebrauchte Pakete und Download-Reste – mit Sicherheitsbremse, damit nie etwas Wichtiges entfernt wird.
 - **Eltern-Passwort vergessen?** Ein zweites Eltern-Konto setzt es zurück, oder das Werkzeug „Eltern-Passwort zurücksetzen“ auf dem Serafino-Stick.
 - **Lernen und Spielen:** GCompris, Tux Paint, Tux Typing, Tux Math, KTuberling, KLettres, KBruch, KGeography, Marble und mehr. Im App Store zusätzlich SuperTuxKart, Stellarium, Krita, Kalzium und weitere.
 - **Büro und Alltag:** LibreOffice (im KDE-Stil), Marknote (Notizen), Crow Translate, Skanpage (Scannen), Kamoso (Kamera), Okular, Gwenview. Thunderbird gibt es im App Store.
@@ -47,12 +48,11 @@ Alle Neuerungen stehen in den [Release Notes zu Beta 2](RELEASE-NOTES-BETA2.md).
 
 > Die ISO ist rund 2,6 GB groß und liegt deshalb auf **SourceForge**, nicht in diesem Repository.
 
-<!-- Nach dem Hochladen: Prüfsumme eintragen -->
 - **ISO-Download (Beta 2):** [serafino-beta2-amd64.iso](https://sourceforge.net/projects/pingulinux/files/Beta-2/serafino-beta2-amd64.iso/download) (SourceForge)
 - **SHA256-Prüfsumme:**
 
 ```
-PRÜFSUMME-HIER-EINTRAGEN
+70022e456853402219797d667a4824e24cb992521be8b4de2fcc934836a18040
 ```
 
 Prüfsumme nach dem Download prüfen (im Ordner mit der ISO):
@@ -66,6 +66,10 @@ Die angezeigte Zahl muss mit der Prüfsumme oben übereinstimmen. Unter Windows:
 Ältere Versionen findest du auf [SourceForge](https://sourceforge.net/projects/pingulinux/files/).
 
 ## Ausprobieren
+
+**Neu bei Linux?** Die **[Schritt-für-Schritt-Anleitung](INSTALLATION.md)** erklärt alles: ISO herunterladen, USB-Stick erstellen, vom Stick starten, Live-Modus und Installation. Es gibt sie auch [als PDF zum Ausdrucken](Serafino-Installationsanleitung.pdf).
+
+Kurzfassung:
 
 1. ISO herunterladen und Prüfsumme prüfen.
 2. In einer virtuellen Maschine starten (z. B. GNOME Boxes, VirtualBox) oder mit einem Programm wie Balena Etcher auf einen USB-Stick schreiben.
@@ -104,6 +108,7 @@ Wer eine Verbindung findet, die hier fehlt: bitte als [Issue](../../issues) meld
 
 - **Kinderschutz-Filter (DNS):** Nutzt einen externen DNS-Dienst (CleanBrowsing oder DNS4EU). Dabei werden DNS-Anfragen an diesen Dienst gesendet. Wer das nicht möchte, kann den Filter im Kontrollzentrum ausschalten.
 - **`about:config`** ist in Firefox für alle Konten gesperrt, auch für Eltern. Normale Einstellungen gehen weiter über die Firefox-Einstellungen.
+- **Firefox-Erweiterungen und Entwicklerwerkzeuge (F12)** sind ab Beta 3 für alle Konten gesperrt, auch für Eltern – sonst könnten Kinder den Kinderschutz mit einer Erweiterung umgehen. Erlaubt sind nur uBlock Origin und der Fino-Wächter.
 - **Flatpaks** lassen sich nur im installierten System installieren, nicht im Live-Modus.
 - **Platzhalter-Links:** Links für Datenschutz und Impressum fehlen noch. Wird bis 1.0 ergänzt.
 
@@ -143,17 +148,26 @@ Nur noch KDE, neue Eltern-Fenster, Sicherung, automatische Updates, kleinere ISO
 Siehe „Neu in Beta 2“ oben und die [Release Notes](RELEASE-NOTES-BETA2.md).
 - Noch offen: **Test mit echten Familien**
 
-### Beta 3
-- Umbenennung in **Serafino** mit Maskottchen **Fino** überall im System
-- Festplattenverschlüsselung prüfen und testen
-- Feinschliff aus Beta 2
+### Beta 3 (in Arbeit)
+Fertig und per Update schon auf allen Beta-2-Rechnern:
+- ✅ Umbenennung in **Serafino** mit Maskottchen **Fino** überall im System – Startbild, Boot-Menü, Anmeldung, Startmenü, Installer
+- ✅ Ladebildschirm mit Fino beim Anmelden, nach dem Anmelden ist nichts mehr offen
+- ✅ Einheitliche Passwort-Fenster („Bitte Mama oder Papa …“)
+- ✅ Firefox: Lesezeichen „Schule“, eigene Erweiterungen gesperrt
+- ✅ Wöchentliches Aufräumen mit Sicherheitsbremse
+- ✅ Fragen-Bereich für Eltern ([Diskussionen](../../discussions))
+
+Noch offen:
+- WLAN schon im Installer verbinden
+- Festplattenverschlüsselung und BitLocker-Hinweis prüfen und testen
+- Nvidia- und Broadcom-Treiber auf echter Hardware testen
+- Neue ISO
 
 ### 1.0
-- Name endgültig festlegen
 - ISO weiter verschlanken
 - Rechtliches: Impressum, Datenschutz, Lizenzen
 - Release-Prozess mit Prüfsummen, Signatur und Changelog
-- Webseite und Eltern-Handbuch als PDF
+- Webseite
 
 ## Lizenz
 

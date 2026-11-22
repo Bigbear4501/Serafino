@@ -2,7 +2,9 @@
 
 Das Kontrollzentrum ist euer Werkzeugkasten. Ihr öffnet es über das Symbol **„Eltern-Kontrollzentrum“** auf dem Schreibtisch oder im Startmenü. Kinder sehen es nicht.
 
-Was Administrator-Rechte braucht, fragt nach dem **Eltern-Passwort**. Danach merkt sich Serafino das Passwort für ein paar Minuten, ihr müsst es also nicht bei jedem Klick neu eingeben.
+Was Administrator-Rechte braucht, fragt nach dem **Eltern-Passwort** – das Fenster sagt dann immer „Bitte Mama oder Papa: Hier wird das Eltern-Passwort gebraucht.“ Danach merkt sich Serafino das Passwort für ein paar Minuten, ihr müsst es also nicht bei jedem Klick neu eingeben.
+
+Nach dem Anmelden startet Serafino immer frisch: Fino zeigt kurz „Einen Moment, ich mache alles bereit …“, und Programme vom letzten Mal gehen nicht von selbst wieder auf – bei Kindern und Eltern.
 
 ---
 
@@ -23,7 +25,7 @@ Das Kind sieht seine Restzeit in der Taskleiste als gut lesbares Feld **„⏳ N
 
 **„Mehr Zeit bitte“:** In Finos Hinweisen, beim Antippen der Restzeit in der Taskleiste und neben der Sonne gibt es den Knopf **„🙋 Mehr Zeit bitte“**. Fino erklärt dem Kind, dass Mama oder Papa das entscheiden; dann kommt das Passwort-Fenster. Mit dem Eltern-Passwort gibt es für heute 15 Minuten mehr, ohne Passwort passiert nichts. Das Passwort wird danach nicht gemerkt – für die nächsten 15 Minuten braucht es wieder eins.
 
-Ist die Zeit um, meldet Serafino das Kind ab.
+Ist die Zeit um, meldet Serafino das Kind ab. Im Hintergrund zählt dafür das Programm Timekpr; dessen eigenes Symbol und seine Meldungen sind ausgeblendet, Kinder sehen nur die Restzeit und Fino.
 
 ### Benutzerkonten
 
@@ -38,6 +40,8 @@ Für die Kleinen (2 bis 6 Jahre) könnt ihr **Anmelden ohne Passwort** einschalt
 **Kinderkonto zurücksetzen:** Hat ein Kind seinen Schreibtisch oder seine Programme durcheinandergebracht, setzt dieser Punkt das Konto auf Anfang: Einstellungen aller Programme, Schreibtisch, Firefox-Verlauf und Lesezeichen und auch Spielstände sind danach wie neu. **Bilder, Dokumente, Musik, Videos und Downloads bleiben**, was auf dem Schreibtisch lag, landet in „Dokumente/Vom Schreibtisch …“. Passwort, Alter, Bildschirmzeit und die Kacheln der Kleinen bleiben auch. Das Kind muss dafür abgemeldet sein. Vorher wird alles gesichert (unter /var/lib/serafino/zuruecksetzen, nur die letzte Sicherung pro Kind).
 
 **WLAN für alle:** Verbindet ihr euch in eurem Eltern-Konto mit einem WLAN, gilt es automatisch auch für alle Kinderkonten. Die Kinder müssen das WLAN-Passwort nicht kennen und können es auch nicht anzeigen oder das WLAN löschen, dafür braucht es das Eltern-Passwort. Das gilt auch für WLANs, die schon gespeichert sind (beim nächsten Anmelden der Eltern). Ausgenommen sind Firmen- oder Schul-WLANs mit eigenem Benutzernamen.
+
+**Konto löschen:** Ist das Kind noch angemeldet, wird es dabei abgemeldet. Gelöscht werden das Konto, sein Ordner mit allen Dateien und alles, was Serafino über das Kind gespeichert hat (Alter, Bildschirmzeit, Nutzung, Ausnahmen, Kacheln). Wichtige Bilder vorher auf einen Stick sichern.
 
 **Tipp:** Legt für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann kann einer das Passwort des anderen zurücksetzen, falls es vergessen wurde.
 
@@ -81,6 +85,8 @@ Blockiert im ganzen Computer Seiten mit Erwachsenen- und Gewaltinhalten. Zur Wah
 
 Kinder können den Filter nicht selbst umstellen. Zusätzlich sind **YouTube und soziale Netzwerke für Kinder unter 13 Jahren gesperrt**, auch im privaten Fenster. Für Kinder gibt es dafür **YouTube Kids** im eigenen Fenster, ohne Adressleiste und ohne Browser.
 
+**Firefox:** In der Lesezeichen-Leiste liegt für alle Konten der Ordner **„Schule“** mit ANTON, Antolin, Microsoft Teams, der Schulcloud und fragFINN. Eigene Lesezeichen, zum Beispiel für die Moodle-Seite eurer Schule, legt ihr wie gewohnt mit dem Stern in der Adressleiste an. **Erweiterungen und Designs** lassen sich nicht installieren – auch nicht von Eltern –, denn eine Erweiterung (etwa ein VPN) könnte den Kinderschutz umgehen. Fest dabei sind nur der Werbefilter uBlock Origin und der Fino-Wächter. Aus demselben Grund sind die Entwicklerwerkzeuge (F12) und `about:config` gesperrt.
+
 Landet ein Kind auf einer gesperrten Seite, zeigt Firefox statt einer technischen Fehlermeldung **Fino**: „Diese Seite ist gesperrt – frag Mama oder Papa.“ Unter „Für Erwachsene“ steht auf dieser Seite, welche Adresse es war und warum sie nicht geht. Genauso freundlich reagiert Serafino, wenn ein Kind ein Programm öffnen will, für das es noch zu jung ist, oder das Terminal (Strg+Alt+T).
 
 ### Firewall
@@ -120,6 +126,8 @@ Installiert Sicherheits-Updates und neue Programmversionen. Gibt es eine neue De
 
 Entfernt nicht mehr benötigte Pakete, heruntergeladene Installationsdateien und ungenutzte Flatpak-Teile und schafft so Platz auf der Festplatte.
 
+**Von selbst einmal pro Woche:** Nach den automatischen Updates räumt Serafino auf – alte Kernel (der laufende und der vorherige bleiben immer), Pakete, die nichts mehr braucht, den Download-Zwischenspeicher und Flatpak-Reste. Vorher läuft die Sicherung. Eine **Sicherheitsbremse** sorgt dafür, dass nie etwas Wichtiges verschwindet: Stünde ein wichtiges Paket oder der laufende Kernel auf der Liste, oder wären es mehr als 30 Pakete auf einmal, wird an diesem Tag nichts entfernt. Was passiert ist, steht in `/var/log/serafino/aufraeumen.log`. Ausschalten: `sudo touch /etc/serafino/kein-aufraeumen`.
+
 ### Drucker und Scanner
 
 Öffnet die KDE-Druckereinstellungen. Die meisten Drucker im Heimnetz werden von selbst gefunden.
@@ -146,6 +154,6 @@ Prüft, ob alles läuft, und legt einen Bericht **Serafino-Diagnose.txt** in eur
 
 ### Hilfe
 
-Dieses Handbuch, die Fragen von Eltern, „Anmelden ohne Passwort“, die „Überraschungen von Fino“ und Links zur Serafino-Webseite. Unter „Eltern-Handbuch als PDF“ gibt es alles auch zum Ausdrucken.
+Dieses Handbuch, die Fragen von Eltern, „Anmelden ohne Passwort“, die „Überraschungen von Fino“ und Links zur Serafino-Webseite. Unter **„Fragen und Ideen (Forum für Eltern)“** öffnet sich der Fragen-Bereich auf GitHub: Dort könnt ihr Fragen stellen, Wünsche äußern und sehen, was andere Eltern gefragt haben. Unter „Eltern-Handbuch als PDF“ gibt es alles auch zum Ausdrucken.
 
 **Einrichtungs-Assistent:** Kommt beim ersten Anmelden nach der Installation von selbst und führt in drei Schritten durch Kinderkonten, Kinderschutz-Filter und Bildschirmzeit. Alles ist sinnvoll voreingestellt – wer nichts ändert, klickt nur „Weiter“. Geändert wird erst ganz am Ende mit „Einrichten“ (einmal Eltern-Passwort). Mit „Später“ kommt er nicht wieder von selbst; hier unter „Hilfe“ lässt er sich jederzeit erneut starten, etwa für ein weiteres Kind.
