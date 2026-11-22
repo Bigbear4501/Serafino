@@ -3,7 +3,8 @@
 # Die Bildschirmzeit stellen Eltern im Kontrollzentrum ein
 # (serafino-bildschirmzeit.py). Timekpr-nExT bleibt der Unterbau; die
 # Timekpr-Oberfläche gibt es dort über „Timekpr öffnen“.
-# Das Kinder-Symbol (Restzeit in der Taskleiste) bleibt unverändert.
+# Das Timekpr-Symbol in der Taskleiste blendet (bz31)
+# /etc/xdg/plasma-workspace/env/serafino-ohne-timekpr.sh in allen Konten aus.
 for p in /usr/share/applications/timekpr*.desktop; do
   [ -f "$p" ] || continue
   case "$(basename "$p")" in *client*) continue ;; esac
