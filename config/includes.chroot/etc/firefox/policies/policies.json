@@ -46,6 +46,12 @@
     "installation_mode": "force_installed",
     "install_url": "file:///usr/share/serafino/firefox/fino-waechter.xpi",
     "private_browsing": true
+   },
+   "pingu-waechter@pingulinux": {
+    "installation_mode": "blocked"
+   },
+   "fino-waechter@pingulinux": {
+    "installation_mode": "blocked"
    }
   },
   "3rdparty": {
@@ -54,6 +60,32 @@
      "disableDashboard": true
     }
    }
-  }
+  },
+  "ManagedBookmarks": [
+   {
+    "toplevel_name": "Schule"
+   },
+   {
+    "name": "ANTON – Lernen für die Schule",
+    "url": "https://anton.app/de/"
+   },
+   {
+    "name": "Antolin – Lesen",
+    "url": "https://antolin.westermann.de/"
+   },
+   {
+    "name": "Microsoft Teams",
+    "url": "https://teams.microsoft.com/"
+   },
+   {
+    "name": "Schulcloud (dBildungscloud)",
+    "url": "https://dbildungscloud.de/"
+   },
+   {
+    "name": "fragFINN – Suchmaschine für Kinder",
+    "url": "https://www.fragfinn.de/"
+   }
+  ],
+  "DisplayBookmarksToolbar": "always"
  }
 }

@@ -52,17 +52,41 @@ loginctl terminate-user "$U" >/dev/null 2>&1
 pkill -KILL -u "$U" >/dev/null 2>&1
 sleep 1
 
+# bz37: Kinder-Ordner ist „noexec“ auf sich selbst eingehängt und der
+# Flatpak-Ordner darin unveränderlich (chattr +i). Beides verhinderte das
+# Löschen des Ordners – das Konto war weg, aber es kam eine Fehlermeldung.
+# Deshalb vorher aushängen und den Schutz aufheben.
+H=$(getent passwd "$U" | cut -d: -f6)
+case "$H" in
+    /home/?*)
+        for _ in 1 2 3 4; do
+            mountpoint -q "$H" 2>/dev/null || break
+            umount "$H" 2>/dev/null || umount -l "$H" 2>/dev/null || break
+        done
+        chattr -R -i "$H" 2>/dev/null
+        ;;
+    *) H="" ;;
+esac
+umount -l "/run/user/$UID_N" 2>/dev/null
+rm -f "/run/serafino/noexec-$U"
+
 # Konto loeschen
-if ! OUT=$(deluser --remove-home "$U" 2>&1); then
-    if ! OUT2=$(userdel -r -f "$U" 2>&1); then
-        echo "Das Konto konnte nicht gelöscht werden:"
-        echo "$OUT"; echo "$OUT2"
-        exit 4
-    fi
+OUT=$(deluser --remove-home "$U" 2>&1) || OUT2=$(userdel -r -f "$U" 2>&1)
+if id "$U" >/dev/null 2>&1; then
+    echo "Das Konto konnte nicht gelöscht werden:"
+    echo "$OUT"; echo "${OUT2:-}"
+    exit 4
 fi
+# Konto ist weg – übrig gebliebenen Ordner noch entfernen
+[ -n "$H" ] && [ -d "$H" ] && rm -rf "$H" 2>/dev/null
 
 # Reste aufraeumen
+case "$U" in */*|.*) exit 0 ;; esac
 rm -f "/var/lib/serafino/profiles/$U" "/var/lib/serafino/birth/$U"
+for d in alles-zaehlt app-ausnahmen keine-pausen kinderstart statistik zuruecksetzen; do
+    rm -rf "/var/lib/serafino/$d/$U" "/var/lib/serafino/$d/$U".* 2>/dev/null
+done
+rm -rf "/etc/serafino/pro-konto/$U" 2>/dev/null
 rm -f "/var/lib/AccountsService/users/$U" "/var/lib/AccountsService/icons/$U"
 rm -f /var/lib/timekpr/config/timekpr."$U".conf /var/lib/timekpr/work/"$U".* 2>/dev/null
 rm -rf "/var/mail/$U" 2>/dev/null
