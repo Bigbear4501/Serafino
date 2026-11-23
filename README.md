@@ -46,7 +46,7 @@ Alle Neuerungen stehen in den [Release Notes zu Beta 2](RELEASE-NOTES-BETA2.md).
 
 ## Download
 
-> Die ISO ist rund 2,7 GB groß und liegt deshalb auf **SourceForge**, nicht in diesem Repository.
+> Die ISO ist rund 2,6 GB groß und liegt deshalb auf **SourceForge**, nicht in diesem Repository.
 
 - **ISO-Download (Beta 2):** [serafino-beta2-amd64.iso](https://sourceforge.net/projects/pingulinux/files/Beta-2/serafino-beta2-amd64.iso/download) (SourceForge)
 - **SHA256-Prüfsumme:**
@@ -102,8 +102,6 @@ Nur wenn Eltern es selbst starten oder installieren:
 - **Virenscanner (ClamUI), falls installiert:** lädt Virendaten von ClamAV.
 - **Absturzmeldungen von KDE:** werden nur verschickt, wenn du sie selbst abschickst.
 
-Die Angaben in dieser Tabelle prüfen wir gerade auf einem frisch installierten System. Das Ergebnis tragen wir hier nach.
-
 Wer eine Verbindung findet, die hier fehlt: bitte als [Issue](../../issues) melden.
 
 ## Bekannte Einschränkungen
@@ -112,6 +110,7 @@ Wer eine Verbindung findet, die hier fehlt: bitte als [Issue](../../issues) meld
 - **`about:config`** ist in Firefox für alle Konten gesperrt, auch für Eltern. Normale Einstellungen gehen weiter über die Firefox-Einstellungen.
 - **Firefox-Erweiterungen und Entwicklerwerkzeuge (F12)** sind ab Beta 3 für alle Konten gesperrt, auch für Eltern – sonst könnten Kinder den Kinderschutz mit einer Erweiterung umgehen. Erlaubt sind nur uBlock Origin und der Fino-Wächter.
 - **Flatpaks** lassen sich nur im installierten System installieren, nicht im Live-Modus.
+- **Platzhalter-Links:** Links für Datenschutz und Impressum fehlen noch. Wird bis 1.0 ergänzt.
 
 ## Fragen und Ideen
 
@@ -166,10 +165,10 @@ Noch offen:
 
 ### 1.0
 - ISO weiter verschlanken
-- ✅ Rechtliches: Impressum, Datenschutz, Lizenzen
+- Rechtliches: Impressum, Datenschutz, Lizenzen
 - Release-Prozess mit Prüfsummen, Signatur und Changelog
 - Webseite
 
 ## Lizenz
 
-Siehe die Datei `LICENSE` (GPL-3). Für Serafino selbst gilt die GPL-3. Enthaltene Programme stehen unter ihren jeweiligen Lizenzen. Serafino enthält Firmware-Pakete (`non-free-firmware`) für WLAN- und Grafikchips. Diese sind nicht frei im Sinne der Debian-Richtlinien. Die mitgelieferte deutsche Übersetzung von Timekpr-nExT stammt aus dem Timekpr-nExT-Projekt (GPL-3).
+Siehe die Datei `LICENSE`. Enthaltene Programme stehen unter ihren jeweiligen Lizenzen. Die Firmware-Pakete (`non-free-firmware`) sind nicht frei im Sinne der Debian-Richtlinien. Die mitgelieferte deutsche Übersetzung von Timekpr-nExT stammt aus dem Timekpr-nExT-Projekt (GPL-3).

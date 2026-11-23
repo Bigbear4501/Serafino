@@ -29,7 +29,8 @@ while true; do
         fehler tools-report-bug "Fehler melden" \
         diagnose run-build "Fehlerdiagnose starten" \
         datenschutz security-high "Datenschutz" \
-        impressum document-preview "Impressum" )
+        impressum document-preview "Impressum" \
+        spenden emblem-favorite "Serafino unterstützen" )
 
     case "$CHOICE" in
         handbuch) /usr/local/bin/serafino-handbuch.py 01-kontrollzentrum.md ;;
@@ -45,6 +46,7 @@ while true; do
         diagnose) /usr/local/bin/serafino-diagnose.sh ;;
         datenschutz) open_link "$DATENSCHUTZ" "Datenschutz" ;;
         impressum) open_link "$IMPRESSUM" "Impressum" ;;
+        spenden) open_link "$SPENDEN" "Unterstützen" ;;
         *) break ;;
     esac
 done

@@ -1,26 +1,26 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Sun, 22 Nov 2026 16:18:50 +0000
+Date: Mon, 23 Nov 2026 18:10:12 +0000
 Description: Serafino (Serafino) Paketarchiv
 Label: Serafino
 Origin: Serafino
 MD5Sum:
- 2be5102be6e7e1a1686a77c8ff9cd4cd             1809 Packages
- c2f91a3cc0c00c364a9a24d4db31de2c             1058 Packages.gz
+ bbd6be836b533643319846d74c46a53d             1809 Packages
+ 03d6c120aa6db283533bc4e28939fbd6             1055 Packages.gz
 SHA1:
- 9ba3ee22a8ad298d6326a6534f9e5b0ed83512b6             1809 Packages
- ef5adec962a91395c1637c3b30e41f60827f9c42             1058 Packages.gz
+ f0ee457ef3dc290f235351ae7b625c104ca08d6f             1809 Packages
+ 61f0b3eac94fb9fd17bf8abaafa0625781c4490a             1055 Packages.gz
 SHA256:
- 21cd5a8f3821b0dcb353e3a18565a9fcc4da002ca3b5a39aac1cf2deb79c8e29             1809 Packages
- ebcc58cc76e1b8af3d8a68cd266bb7bd71e6a65a994e2801d45038c44c440e98             1058 Packages.gz
+ d7491acd6d52075030587adc3452ba28e26290d929265a9574a4c772e1f31f9d             1809 Packages
+ a830a7274b50cc81e293686f2eeeb6c6b80bd5aebcbb33eeeca79150c40755c0             1055 Packages.gz
 SHA512:
- b87229ac913a42220bcf0ac1d407d3b478aaa1c56fb928b5a484ce1dc01fbb6a37f5ce7170f404b5d5b75b03f985b6a4770312e75f28998832bee1c003d16043             1809 Packages
- dd363b8f2b79ead8d3bc628d09cf2fb642ec997d2661f650b95b212b1a84f12ada42619077fab3e5b74b038d9ac898ab7a58be84a8810da4d297475c801e71f6             1058 Packages.gz
+ 2b7f3d26600b800bdb4f16d7be391d71cdd900303b640870b5df2904ccb9fa0a3893d4755460de593a983201a6e878685bf23c64a55d209511e8682cc1cf3c1b             1809 Packages
+ 827cfcb1304002368cb37cbe276e296c44d597b2fa3f8869f9cffbb666f4ceab63db51db6b4d97456d6cfea0dfde418ef929d0f5952c9a310013a76fb52baa96             1055 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCawMV6gAKCRATyIM5NWnL
-KVfPAP4u+DmngWEpBxLLrNFPPr3gJiEF5AL3GcW3+W+v9ly/7gEA28Wsdjb84mk9
-zIx/JKOsnYEt3jS+VPW57H97OgcHHgw=
-=0qvz
+iHUEARYKAB0WIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCawSBhAAKCRATyIM5NWnL
+KfVcAP9plIUN41igWSW9soxCDMWxKXd/Bh8jjPvE0LwNAUdBZgD7BVv1c9JSonU7
+BnjLrnD0NKeIT3eg4yPaQ+ig1sbfkQs=
+=DNmI
 -----END PGP SIGNATURE-----
