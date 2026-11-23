@@ -172,4 +172,4 @@ Noch offen:
 
 ## Lizenz
 
-Siehe die Datei `LICENSE`. Enthaltene Programme stehen unter ihren jeweiligen Lizenzen. Die Firmware-Pakete (`non-free-firmware`) sind nicht frei im Sinne der Debian-Richtlinien. Die mitgelieferte deutsche Übersetzung von Timekpr-nExT stammt aus dem Timekpr-nExT-Projekt (GPL-3).
+Siehe die Datei `LICENSE` (GPL-3). Für Serafino selbst gilt die GPL-3. Enthaltene Programme stehen unter ihren jeweiligen Lizenzen. Serafino enthält Firmware-Pakete (`non-free-firmware`) für WLAN- und Grafikchips. Diese sind nicht frei im Sinne der Debian-Richtlinien. Die mitgelieferte deutsche Übersetzung von Timekpr-nExT stammt aus dem Timekpr-nExT-Projekt (GPL-3).
