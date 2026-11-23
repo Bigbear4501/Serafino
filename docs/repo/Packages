@@ -1,23 +1,23 @@
 Package: pingulinux-system
 Architecture: all
-Version: 0.3.202611231909
+Version: 0.3.202611231910
 Priority: optional
 Section: oldlibs
 Maintainer: Serafino <noreply@serafino.invalid>
-Depends: serafino-tools (>= 0.3.202611231909)
-Filename: ./pingulinux-system_0.3.202611231909_all.deb
+Depends: serafino-tools (>= 0.3.202611231910)
+Filename: ./pingulinux-system_0.3.202611231910_all.deb
 Size: 836
-MD5sum: f58366a54e99c03195c3e550d49b45f4
-SHA1: 775b1d2c2721b7cd06ba68b2a67b271c5a2ccffb
-SHA256: bb96f21ac5306d68197300f67f488fef333408955a0b9ee1e6de85f06735d3c4
-SHA512: 94c114f010576c943256a45783f701158846070b0b63aa3a11168b17ee5cdd3a511ddf4c590588ab0118e48a4359077798eee8481f158abe1de24de6ee4f916d
+MD5sum: e1e18c61364141cfdcd3086951b3662c
+SHA1: 1a5f8bf2c0bb5688f1028fe2114800990c1a37b9
+SHA256: 9225ad9e89f20c14dd2c74ff20e5bd68d4a32f4a1c93dece3918298a49b43a5b
+SHA512: d55cd080adde7722676ea495057cf8a01ef3bf40f7918f09d927f042258d2d106066482218e966039122738af0c6696b49eda5ee92b428319e4894926b22dc6b
 Description: Übergangspaket – heißt jetzt serafino-tools
  Dieses leere Paket sorgt nur dafür, dass ältere Rechner beim Update
  serafino-tools bekommen. Es kann danach entfernt werden.
 
 Package: serafino-tools
 Architecture: all
-Version: 0.3.202611231909
+Version: 0.3.202611231910
 Priority: optional
 Protected: yes
 Section: admin
@@ -26,12 +26,12 @@ Depends: python3, python3-pyqt6, systemd-timesyncd | time-daemon, fonts-noto-col
  sddm, network-manager, firefox-esr, timekpr-next, timeshift, ufw, flatpak, unattended-upgrades
 Breaks: pingulinux-system (<< 0.3~)
 Replaces: pingulinux-system (<< 0.3~)
-Filename: ./serafino-tools_0.3.202611231909_all.deb
-Size: 1487808
-MD5sum: a699d7ac8eb1a50217bdbbca1b69ca5d
-SHA1: 33054707a8c5872f52e5a254c8565b888ebb544a
-SHA256: 444f7ec40c004b8778868e599212361ab02e354d5a8a7b4eceb1719df3a973ac
-SHA512: 9ad52d8a28d30804da920281d1342a3a5ad1501572a1ae1ebdc95d0598442815369df1d6a3f150590b3587384666d0444280ce6da3acc58db259ff20148d4c8b
+Filename: ./serafino-tools_0.3.202611231910_all.deb
+Size: 1487880
+MD5sum: dc213be4dcd965ed440bc0a2b628bc1b
+SHA1: 1ea8f46b7b74fa100aba2edb45e165542d47fce4
+SHA256: ac04299bdd0e5372aa9a4b53c29c7bb5d8d404e9772a72bc963939e9dc218242
+SHA512: 593f7a2a17f0092dff3f1d0fb2e3dddbcf98d3632a776f09337bc3160fe364b4cfd8267457bd41127f999aec4a3526b18e513f7b3d5820cbc71700fad0d5622b
 Description: Serafino – Kinderschutz, Kontrollzentrum, Fino und Co.
  Alle eigenen Dateien von Serafino: Eltern-Kontrollzentrum,
  Startbildschirm der Kleinen, Fino, Handbuch, Sperren und Einstellungen.
