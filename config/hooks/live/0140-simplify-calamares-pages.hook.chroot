@@ -38,3 +38,12 @@ sed -i \
 
 echo "Calamares-Seiten/Module 'locale', 'keyboard' und 'localecfg' aus der Sequenz entfernt."
 echo "Original gesichert unter $SETTINGS.orig zum Vergleich."
+
+# Prüfung: Die WLAN-Seite (networkcfg) muss in der Sequenz bleiben.
+# Fehlt sie, zeigt der Build eine Warnung; der Installer-Start-Hinweis
+# "Kein Internet" in serafino-start-calamares.sh deckt das Fallback ab.
+if grep -q 'networkcfg' "$SETTINGS"; then
+    echo "WLAN-Seite (networkcfg) ist in der Calamares-Sequenz vorhanden."
+else
+    echo "WARNUNG: networkcfg fehlt in $SETTINGS - WLAN-Seite im Installer fehlt." >&2
+fi

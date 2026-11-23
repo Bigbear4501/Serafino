@@ -9,7 +9,24 @@
 
 # Dialog-Fenster (kdialog, sonst zenity) mit Serafino-Logo
 . /usr/local/lib/serafino/dialog.sh
+
+# BitLocker-Warnung: Windows-Verschlüsselung auf dieser Festplatte erkennen.
+# Dann ist die Installation nicht ohne Wiederherstellungsschlüssel möglich,
+# wenn Windows später wieder gebraucht wird.
+bitlocker_gefunden() {
+    lsblk -rno TYPE,FSTYPE 2>/dev/null | grep -qi 'bitlocker' && return 0
+    blkid -o value -s TYPE 2>/dev/null | grep -qi 'bitlocker' && return 0
+    return 1
+}
 if command -v kdialog >/dev/null 2>&1 || command -v zenity >/dev/null 2>&1; then
+    if bitlocker_gefunden; then
+        pd_info "Achtung - BitLocker (Windows-Verschlüsselung)" "Auf diesem Computer ist Windows mit BitLocker verschlüsselt.\n\nWenn du Serafino installierst, werden Windows und seine Daten gelöscht. Ohne den BitLocker-Wiederherstellungsschlüssel kannst du sie später nicht mehr öffnen – auch nicht, wenn du sie wieder herstellen willst.\n\nBitte vorher:\n• Den Schlüssel unter aka.ms/myrecoverykey sichern oder ausdrucken.\n• Oder BitLocker in Windows ausschalten (Systemsteuerung → BitLocker-Laufwerksverschlüsselung).\n\nDie Installation startet erst, wenn du unten bestätigst." "Verstanden"
+    fi
+    # WLAN-Hinweis: Ohne Netzwerk fehlen Updates und Internet-Einrichtung.
+    # Die Installation läuft trotzdem; der Hinweis zeigt nur den Weg zum WLAN.
+    if ! nmcli -t -f STATE general 2>/dev/null | grep -q '^connected$'; then
+        pd_info "Kein Internet" "Du bist gerade nicht mit dem WLAN verbunden.\n\nDie Installation funktioniert auch ohne Internet. Wenn du dich jetzt mit WLAN verbinden möchtest, klicke unten rechts auf das WLAN-Symbol, wähle dein Netz und gib das Passwort ein. Danach kannst du hier weitermachen.\n\nMit WLAN bekommt Serafino gleich die neuesten Updates." "Weiter"
+    fi
     pd_frage "Achtung - Vor der Installation" "Bei der Installation von Serafino können Daten auf der Festplatte deines Computers gelöscht werden!\n\nBitte sichere wichtige Daten vorher an einem anderen Ort (z.B. USB-Stick).\n\nMöchtest du jetzt mit der Installation fortfahren?" "Ja, fortfahren" "Abbrechen"
 
     if [ $? -ne 0 ]; then

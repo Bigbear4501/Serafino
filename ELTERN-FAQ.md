@@ -112,6 +112,17 @@ Mit einer Erweiterung, zum Beispiel einem VPN oder Proxy, ließe sich der Kinder
 
 Nein, Serafino räumt einmal pro Woche selbst auf: alte Kernel, nicht mehr gebrauchte Pakete und Download-Reste. Eigene Dateien, Fotos und Spielstände fasst es dabei nie an. Mehr dazu im Kontrollzentrum unter „Systembereinigung“.
 
+## Auf unserem Computer ist Windows mit BitLocker verschlüsselt. Was ist zu tun?
+
+Serafino löscht bei der Installation die komplette Festplatte, und mit ihr Windows. Ist Windows mit **BitLocker** verschlüsselt, bekommt ihr ohne den **Wiederherstellungsschlüssel** die Daten nicht zurück, falls ihr Windows doch noch braucht. Serafino zeigt deshalb vor der Installation eine Warnung an.
+
+Vorher bitte eine der beiden Möglichkeiten wählen:
+
+- **Schlüssel sichern:** Unter **aka.ms/myrecoverykey** (mit dem Microsoft-Konto von Windows anmelden) den Wiederherstellungsschlüssel anzeigen und ausdrucken oder abschreiben.
+- **BitLocker ausschalten:** In Windows unter *Systemsteuerung → BitLocker-Laufwerksverschlüsselung* die Verschlüsselung ausschalten. Nach dem Ausschalten bitte warten, bis die Entschlüsselung abgeschlossen ist.
+
+Auf dem **Surface** (Windows 11) ist BitLocker oft schon an. Ob es aktiv ist, zeigt der Befehl `manage-bde -status` in der Eingabeaufforderung (als Administrator). Ist dort „Schutz ein“ zu sehen, gilt das oben Genannte.
+
 ## Wo kann ich Fragen stellen?
 
 Im **Forum für Eltern**: Kontrollzentrum → Hilfe → „Fragen und Ideen (Forum für Eltern)“. Dort antworten wir und andere Eltern. Bitte keine Namen oder Fotos von Kindern posten – das Forum ist öffentlich. Einen Fehler gefunden? Dann unter Hilfe → „Fehler melden“, am besten mit dem Bericht der Fehlerdiagnose.
