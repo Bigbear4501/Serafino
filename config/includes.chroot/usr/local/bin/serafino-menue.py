@@ -26,6 +26,7 @@ def main():
         return 2
     titel, text, rest = a[0], a[1], a[2:]
     app = QApplication(sys.argv[:1])
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-kontrollzentrum")
     d = QDialog()
     d.setWindowTitle(titel)

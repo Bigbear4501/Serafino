@@ -280,6 +280,7 @@ def wache(name, win):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setApplicationName("serafino-youtube-kids")
     app.setDesktopFileName("serafino-youtube-kids")
     EINMAL = "serafino-youtube-kids-%d" % os.getuid()

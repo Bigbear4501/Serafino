@@ -10,6 +10,14 @@
 # Dialog-Fenster (kdialog, sonst zenity) mit Serafino-Logo
 . /usr/local/lib/serafino/dialog.sh
 if command -v kdialog >/dev/null 2>&1 || command -v zenity >/dev/null 2>&1; then
+    # bz18: Ist auf dem Computer ein mit BitLocker verschlüsseltes Windows?
+    # (Zum Ausprobieren ohne BitLocker: SERAFINO_BITLOCKER_TEST=1 serafino-start-calamares.sh)
+    BL=$(lsblk -rno NAME,FSTYPE 2>/dev/null | awk '$2 == "BitLocker" {print "/dev/" $1}' | tr '\n' ' ')
+    [ -n "${SERAFINO_BITLOCKER_TEST:-}" ] && BL="${BL:-/dev/TEST}"
+    if [ -n "$BL" ]; then
+        pd_frage "BitLocker gefunden – bitte zuerst lesen" "<b>Auf diesem Computer ist Windows mit BitLocker verschlüsselt</b> ($BL).\n\n<b>Du willst die ganze Festplatte löschen?</b> Dann brauchst du nichts weiter zu tun – Windows und BitLocker sind danach weg.\n\n<b>Du willst Serafino neben Windows installieren?</b> Dann bitte vorher in Windows:\n\n1. <b>Wiederherstellungsschlüssel aufschreiben</b> (48 Ziffern):\n    im Browser <b>aka.ms/myrecoverykey</b> öffnen und mit dem Microsoft-Konto anmelden.\n    Ohne diesen Schlüssel startet Windows nach der Installation womöglich nicht mehr.\n\n2. <b>Am besten BitLocker ausschalten:</b>\n    Windows-Suche → „BitLocker verwalten“ → „BitLocker deaktivieren“\n    (Windows Home: Einstellungen → Datenschutz und Sicherheit → Geräteverschlüsselung → Aus).\n    Warten, bis Windows fertig entschlüsselt hat – das kann eine Weile dauern.\n\nDanach Windows herunterfahren und wieder vom Serafino-Stick starten.\n\nMöchtest du trotzdem jetzt weitermachen?" "Weiter" "Abbrechen" || exit 0
+    fi
+
     pd_frage "Achtung - Vor der Installation" "Bei der Installation von Serafino können Daten auf der Festplatte deines Computers gelöscht werden!\n\nBitte sichere wichtige Daten vorher an einem anderen Ort (z.B. USB-Stick).\n\nMöchtest du jetzt mit der Installation fortfahren?" "Ja, fortfahren" "Abbrechen"
 
     if [ $? -ne 0 ]; then

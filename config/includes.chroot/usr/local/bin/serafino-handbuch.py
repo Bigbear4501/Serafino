@@ -101,6 +101,7 @@ class Window(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setApplicationName("serafino-handbuch")
     win = Window(sys.argv[1] if len(sys.argv) > 1 else "")
     win.show()

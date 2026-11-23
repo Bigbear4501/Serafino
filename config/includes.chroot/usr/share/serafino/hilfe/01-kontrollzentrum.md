@@ -43,7 +43,7 @@ Für die Kleinen (2 bis 6 Jahre) könnt ihr **Anmelden ohne Passwort** einschalt
 
 **Konto löschen:** Ist das Kind noch angemeldet, wird es dabei abgemeldet. Gelöscht werden das Konto, sein Ordner mit allen Dateien und alles, was Serafino über das Kind gespeichert hat (Alter, Bildschirmzeit, Nutzung, Ausnahmen, Kacheln). Wichtige Bilder vorher auf einen Stick sichern.
 
-**Tipp:** Legt für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann kann einer das Passwort des anderen zurücksetzen, falls es vergessen wurde.
+> **Tipp:** Legt für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann kann einer das Passwort des anderen zurücksetzen, falls es vergessen wurde.
 
 ### Konten-Übersicht
 

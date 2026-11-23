@@ -525,6 +525,7 @@ class Fenster(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setApplicationName("serafino-treiber")
     app.setDesktopFileName("serafino-treiber")
     w = Fenster()

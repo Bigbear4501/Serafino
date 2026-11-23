@@ -349,6 +349,7 @@ def fenster():
             self.liste.addStretch(1)
 
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-statistik")
     w = Fenster(); w.show()
     return app.exec()

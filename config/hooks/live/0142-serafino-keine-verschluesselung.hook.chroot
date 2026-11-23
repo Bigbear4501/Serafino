@@ -1,0 +1,13 @@
+#!/bin/sh
+# Serafino (bz19, Entscheidung Mike 22. Nov): Festplattenverschlüsselung im
+# Installer nicht anbieten, solange sie nicht getestet ist (kein Haken
+# „System verschlüsseln“). Idee nach 1.0: mit Wiederherstellungs-Passwort für Eltern.
+for f in /etc/calamares/modules/partition.conf /usr/share/calamares/modules/partition.conf; do
+    [ -f "$f" ] || continue
+    if grep -q '^[[:space:]]*enableLuksAutomatedPartitioning:' "$f"; then
+        sed -i 's/^\([[:space:]]*enableLuksAutomatedPartitioning:\).*/\1 false/' "$f"
+    else
+        printf '\n# Serafino: keine Verschlüsselung anbieten (bz19)\nenableLuksAutomatedPartitioning: false\n' >> "$f"
+    fi
+    echo "KEINE-VERSCHLUESSELUNG: $f"
+done

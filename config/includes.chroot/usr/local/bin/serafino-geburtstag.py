@@ -186,6 +186,7 @@ def main():
         except OSError:
             pass
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-geburtstag")
     name = vorname(user)
     w = Feier(name, alter)

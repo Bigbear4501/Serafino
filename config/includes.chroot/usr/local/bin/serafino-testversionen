@@ -1,0 +1,80 @@
+#!/bin/bash
+#
+# serafino-testversionen – Test-Bereich des Serafino-Paketarchivs ein- und ausschalten (v1z)
+#
+# Neue Serafino-Versionen kommen zuerst in den Test-Bereich. Erst wenn sie dort
+# ein paar Tage gut gelaufen sind, gehen sie unverändert an alle Familien („stabil“).
+# Wer mittesten möchte, schaltet den Test-Bereich ein – bewusst nur hier im
+# Terminal, ohne Knopf im Kontrollzentrum, damit niemand ihn aus Versehen erwischt.
+#
+#   sudo serafino-testversionen an       Testversionen bekommen
+#   sudo serafino-testversionen aus      wieder nur stabile Versionen
+#        serafino-testversionen status   zeigen, was eingestellt ist
+
+QUELLE=/etc/apt/sources.list.d/serafino-test.sources
+REGEL=/etc/apt/apt.conf.d/53serafino-test
+URL="https://bigbear4501.github.io/Serafino/repo-test/"
+
+status() {
+    if [ -f "$QUELLE" ]; then
+        echo "Test-Bereich: AN – dieser Rechner bekommt Testversionen."
+    else
+        echo "Test-Bereich: aus – dieser Rechner bekommt nur stabile Versionen."
+    fi
+    echo
+    apt-cache policy serafino-tools 2>/dev/null | sed -n '1,3p'
+    apt-cache policy serafino-tools 2>/dev/null | grep -E 'Serafino/repo(-test)?/? ' | sed 's/^ */  Quelle: /' | sort -u
+}
+
+braucht_root() {
+    [ "$(id -u)" -eq 0 ] || { echo "Bitte mit sudo aufrufen:  sudo serafino-testversionen $1"; exit 1; }
+}
+
+case "${1:-status}" in
+    an|ein|on)
+        braucht_root an
+        cat > "$QUELLE" <<EOF
+# Serafino – Test-Bereich (eingeschaltet mit „sudo serafino-testversionen an“)
+# Neue Versionen kommen hier zuerst an, bevor sie an alle Familien gehen.
+# Ausschalten: sudo serafino-testversionen aus
+Types: deb
+URIs: $URL
+Suites: ./
+Signed-By: /usr/share/keyrings/serafino-archiv.gpg
+EOF
+        cat > "$REGEL" <<'EOF'
+// Serafino – Test-Bereich: auch Testversionen von selbst installieren
+// (angelegt von „sudo serafino-testversionen an“, entfernt von „… aus“)
+Unattended-Upgrade::Origins-Pattern { "origin=Serafino,label=Serafino-Test"; };
+EOF
+        chmod 644 "$QUELLE" "$REGEL"
+        echo "Test-Bereich eingeschaltet. Paketliste wird geholt …"
+        apt-get update -q >/dev/null 2>&1 || echo "Hinweis: Paketliste konnte gerade nicht geholt werden (Internet?) – kommt beim nächsten Update."
+
+        echo
+        echo "Fertig. Die nächste Testversion kommt mit den automatischen Updates –"
+        echo "oder sofort mit:  sudo apt update && sudo apt upgrade"
+        echo
+        status
+        ;;
+    aus|off)
+        braucht_root aus
+        rm -f "$QUELLE" "$REGEL"
+        apt-get update -q >/dev/null 2>&1
+        echo "Test-Bereich ausgeschaltet."
+        echo "Eine schon installierte Testversion bleibt, bis die nächste stabile Version"
+        echo "erscheint – die ersetzt sie dann ganz normal. Du musst nichts weiter tun."
+        echo
+        status
+        ;;
+    status|"")
+        status
+        ;;
+    *)
+        echo "Aufruf:"
+        echo "  sudo serafino-testversionen an       Testversionen bekommen"
+        echo "  sudo serafino-testversionen aus      wieder nur stabile Versionen"
+        echo "       serafino-testversionen status   zeigen, was eingestellt ist"
+        exit 2
+        ;;
+esac

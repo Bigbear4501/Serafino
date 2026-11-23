@@ -1,16 +1,16 @@
-Date: Mon, 23 Nov 2026 18:10:38 +0000
-Description: Serafino (Serafino) Paketarchiv
+Date: Mon, 23 Nov 2026 18:24:12 +0000
+Description: Serafino-Paketarchiv
 Label: Serafino
 Origin: Serafino
 MD5Sum:
- 6c82764a171c0cfde21cc74ae00a9246             1809 Packages
- b99dd2c4026e3636a445820f8d8fbeb4             1058 Packages.gz
+ 3356768f22ca83c2e24f437376c353cf             1832 Packages
+ 0bcd75cecf5f66ef2f363054bc81143e             1074 Packages.gz
 SHA1:
- 0276ae53bb41fdc936d3b545aeb20672024a626b             1809 Packages
- fbaff071dddb8f7a696c7cab1f3fd4bc229dc9a7             1058 Packages.gz
+ 4b4f1032e1e04a0fc13a42ad28dc69dd1f724897             1832 Packages
+ ee422c670105f8fbb5293ce094abc9b6088cc24b             1074 Packages.gz
 SHA256:
- 666867b99a56aeebec5130c47ed5105fdca4f29d673cf38e7a5b394ab4f1f273             1809 Packages
- bda9fc84a4d67b0608c4ee70b6c8e4b93bc40e828f363d1d04c8e04687583ddd             1058 Packages.gz
+ eb3337712d04f28516640b6d9345ac032d0731ad36592e456f709fe2f1079347             1832 Packages
+ 07343cef3fdc10ec739ce96df088771e62d8f4da9f4b468c8d9c37146ca83633             1074 Packages.gz
 SHA512:
- b90488d42fb34fc98ab7daa50359aa52d4fae235aa7268f03025a02a49dbd27e35ca0f9d03bf2d80636ed15bddc4fabd11d6be494008be5b8a3adcd7ee946d47             1809 Packages
- f82b318bcc28e1db9771876198ba8cb4771fa7d3c91faeaac76907d38943c8f7489406162e6649afae745d76541de70798091d9556c91a13604301e3e47e2475             1058 Packages.gz
+ a671d4bf58355461337006c7d9ab8d428890c68d079f247138d102afc9735784c0c3756c93b5946fc423adce52ec16cf632cf049bf7a221fb49f9a0260a4649a             1832 Packages
+ c99cca193d3e6919a82b6f8e1faa93ed9f96f386522b4c4708dc6c716476f853c75685903c96748fba89d44a6aa4bd7cc4bc5fd8450357e7083b51458f7c8dde             1074 Packages.gz

@@ -16,7 +16,7 @@ Am einfachsten geht es, wenn es auf dem Computer **zwei Eltern-Konten** gibt, zu
 2. Das **Eltern-Kontrollzentrum** öffnen (Symbol auf dem Schreibtisch).
 3. **Benutzerkonten** wählen, das Konto mit dem vergessenen Passwort auswählen und ein neues Passwort vergeben.
 
-**Tipp:** Legt gleich nach der Installation für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann braucht ihr Weg 2 nie.
+> **Tipp:** Legt gleich nach der Installation für beide Eltern ein eigenes Konto mit Eltern-Rechten an. Dann braucht ihr Weg 2 nie.
 
 ### Weg 2: Mit dem Serafino-Stick zurücksetzen
 
@@ -115,3 +115,16 @@ Nein, Serafino räumt einmal pro Woche selbst auf: alte Kernel, nicht mehr gebra
 ## Wo kann ich Fragen stellen?
 
 Im **Forum für Eltern**: Kontrollzentrum → Hilfe → „Fragen und Ideen (Forum für Eltern)“. Dort antworten wir und andere Eltern. Bitte keine Namen oder Fotos von Kindern posten – das Forum ist öffentlich. Einen Fehler gefunden? Dann unter Hilfe → „Fehler melden“, am besten mit dem Bericht der Fehlerdiagnose.
+
+## Der Installer warnt vor „BitLocker“ – was heißt das?
+
+BitLocker ist die Festplatten-Verschlüsselung von Windows. Viele neuere Laptops haben sie eingeschaltet, ohne dass man es merkt.
+
+- **Ihr löscht bei der Installation die ganze Festplatte:** Dann ist die Warnung egal, einfach „Weiter“.
+- **Ihr wollt Windows behalten:** Dann zuerst abbrechen, Windows starten und den **Wiederherstellungsschlüssel** sichern: im Browser **aka.ms/myrecoverykey** öffnen und mit dem Microsoft-Konto anmelden. Den 48-stelligen Schlüssel aufschreiben oder ausdrucken. Am sichersten ist es, BitLocker vorher auszuschalten: Windows-Suche → „BitLocker verwalten“ → „BitLocker deaktivieren“ (Windows Home: Einstellungen → Datenschutz und Sicherheit → Geräteverschlüsselung → Aus). Danach wieder vom Serafino-Stick starten.
+
+Fragt Windows nach der Installation trotzdem nach dem Schlüssel, gebt ihr ihn einmal ein – danach startet Windows wieder normal.
+
+## Kann ich die Festplatte verschlüsseln?
+
+Serafino bietet das bei der Installation bewusst **nicht** an, und wir empfehlen es für einen Familien-Computer auch nicht. Bei einer verschlüsselten Festplatte muss bei jedem Einschalten ein zusätzliches Passwort eingegeben werden – das kann kein Kind allein, und wer das Passwort vergisst, kommt nie wieder an Fotos, Dokumente und Spielstände heran. Wichtiger als Verschlüsselung sind gute Passwörter für die Eltern-Konten und regelmäßige Sicherungen (Kontrollzentrum → Sicherung).

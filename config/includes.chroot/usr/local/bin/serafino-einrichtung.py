@@ -118,6 +118,7 @@ def main():
                                  QSpinBox, QFrame, QMessageBox, QProgressBar, QWidget, QScrollArea)
 
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-einrichtung")
 
     def ueberschrift(text):

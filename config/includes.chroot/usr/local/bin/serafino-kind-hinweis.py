@@ -134,6 +134,7 @@ class Hinweis(QDialog):
 def main():
     args = sys.argv[1:]
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-kind-hinweis")
     gross, klein = texte(args)
     d = Hinweis(gross, klein, mehrzeit="--mehrzeit" in args)

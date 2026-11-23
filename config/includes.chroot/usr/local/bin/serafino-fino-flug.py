@@ -143,6 +143,7 @@ def main():
     if not os.path.exists(FINO):
         return 1
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-fino")
     w = Flug()
     w.showFullScreen()

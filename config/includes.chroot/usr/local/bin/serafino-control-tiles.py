@@ -152,6 +152,7 @@ class Window(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setApplicationName("serafino-kontrollzentrum")
     app.setDesktopFileName("serafino-parental-control")
     win = Window()

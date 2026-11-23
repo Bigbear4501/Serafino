@@ -102,6 +102,7 @@ class Picker(QDialog):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     dlg = Picker()
     dlg.exec()
     print(dlg.result_path)

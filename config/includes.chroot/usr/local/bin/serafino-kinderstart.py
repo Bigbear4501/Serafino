@@ -1119,6 +1119,7 @@ def main():
             kiosk(False)                   # Ränder und Leiste wieder normal (be4n)
         return 0
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setApplicationName("serafino-kinderstart")
     app.setDesktopFileName("serafino-kinderstart")
 

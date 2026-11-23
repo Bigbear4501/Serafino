@@ -329,6 +329,7 @@ class Fenster(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-programme")
     f = Fenster(); f.show()
     return app.exec()

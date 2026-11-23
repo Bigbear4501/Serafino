@@ -103,6 +103,7 @@ def merker_loeschen():
 def main():
     user = pwd.getpwuid(os.getuid()).pw_name
     app = QApplication(sys.argv)
+    import serafino_deutsch; serafino_deutsch.an(app)
     app.setDesktopFileName("serafino-mehr-zeit")
     frage = Fenster(FINO, "Noch %d Minuten?" % MINUTEN,
                     "Das dürfen Mama oder Papa entscheiden. Hol sie her – sie geben es mit "

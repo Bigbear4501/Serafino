@@ -16,6 +16,11 @@ Diese Anleitung führt dich vom Herunterladen bis zum ersten Anmelden. Du brauch
 - **Einen zweiten Computer** mit Internet, um den Stick vorzubereiten (Windows, Mac oder Linux). Das kann auch derselbe sein, solange dort noch das alte System läuft.
 - **Internet** (WLAN oder Kabel) – für Updates und den App Store.
 
+**Läuft auf dem Computer Windows mit BitLocker?** Viele neuere Laptops verschlüsseln die Festplatte von Haus aus. Der Serafino-Installer merkt das und warnt dich.
+
+- **Du löschst die ganze Festplatte** (empfohlen): Dann musst du nichts tun – Windows ist danach ohnehin weg.
+- **Du willst Windows behalten:** Dann vorher in Windows den **Wiederherstellungsschlüssel aufschreiben** – im Browser **aka.ms/myrecoverykey** öffnen und mit dem Microsoft-Konto anmelden. Am besten schaltest du BitLocker außerdem aus: Windows-Suche → „BitLocker verwalten“ → „BitLocker deaktivieren“ (bei Windows Home: Einstellungen → Datenschutz und Sicherheit → Geräteverschlüsselung → Aus) und wartest, bis Windows fertig ist. Ohne Schlüssel kann es passieren, dass Windows nach der Installation nicht mehr startet.
+
 **Vorher sichern:** Liegen auf dem Computer noch Fotos oder Dokumente, die du behalten willst? Dann kopiere sie jetzt auf eine externe Festplatte oder einen anderen Stick.
 
 ---
@@ -38,6 +43,10 @@ Im README steht bei jeder Version eine **Prüfsumme** – eine lange Zeichenkett
 - **Linux:** `sha256sum ~/Downloads/serafino-beta2-amd64.iso`
 
 Vergleiche die angezeigte Zeichenkette mit der im README. Stimmt sie überein, ist alles gut. Weicht sie ab: Datei löschen und noch einmal herunterladen.
+
+**Für Fortgeschrittene – Unterschrift prüfen (Linux):** Neben der ISO liegen `SHA256SUMS`, die Unterschrift `SHA256SUMS.asc` und der öffentliche Schlüssel `serafino-archiv.asc`. Alle in einen Ordner laden, dann:
+`gpg --import serafino-archiv.asc && gpg --verify SHA256SUMS.asc SHA256SUMS && sha256sum -c SHA256SUMS`
+Erwartet: „Korrekte Signatur von Serafino Paketarchiv“ und „OK“. Der Fingerabdruck des Schlüssels ist `C207 1895 9362 B2F8 A3F1 E3D5 13C8 8339 3569 CB29`.
 
 ---
 
@@ -124,7 +133,7 @@ Doppelklicke auf dem Schreibtisch auf **„Serafino installieren“**. Der Insta
 4. **Partitionen** (wohin Serafino installiert wird):
     - Die richtige Festplatte auswählen (meist gibt es nur eine).
     - **„Festplatte löschen“** wählen. Das ist der einfachste und sicherste Weg.
-    - „Neben Windows installieren“ (Dual Boot) und „System verschlüsseln“ sind in der Beta **noch nicht ausreichend getestet** – bitte vorerst nicht verwenden.
+    - „Neben Windows installieren“ (Dual Boot) ist möglich – der Installer kommt von Debian und kann das. **Wir testen es aber nicht selbst.** Wer Windows behalten will: vorher alles sichern und bei BitLocker den Wiederherstellungsschlüssel bereithalten (siehe Schritt 1). Die Kinderschutz-Sperren gelten nur in Serafino, nicht in Windows.
    → „Weiter“.
 5. **Benutzer:** Hier legst du das **Eltern-Konto** an – das ist dein Konto, nicht das der Kinder.
     - Dein Name, ein Anmeldename (z. B. `mama` oder `papa`) und der Name des Computers.

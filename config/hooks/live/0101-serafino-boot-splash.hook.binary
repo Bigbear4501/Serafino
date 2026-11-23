@@ -1,0 +1,32 @@
+#!/bin/sh
+# 0101-serafino-boot-splash.hook.binary
+#
+# Läuft nach 0100 (die setzt noch das alte Bild mit Pingu und „Pingulinux OS“ ein)
+# und ersetzt das Hintergrundbild des Startmenüs auf dem USB-Stick (GRUB bei UEFI,
+# isolinux bei BIOS) durch Fino unter dem Nachthimmel mit „Serafino“.
+# Das Bild liegt im System unter /usr/share/serafino/boot-splash.png (640×480).
+
+BILD=""
+for p in ../chroot/usr/share/serafino/boot-splash.png chroot/usr/share/serafino/boot-splash.png \
+         ../config/includes.chroot/usr/share/serafino/boot-splash.png config/includes.chroot/usr/share/serafino/boot-splash.png; do
+    [ -f "$p" ] && { BILD="$p"; break; }
+done
+if [ -z "$BILD" ]; then
+    echo "SERAFINO-SPLASH: boot-splash.png nicht gefunden – altes Bild bleibt" >&2
+    exit 0
+fi
+
+find . \( -iname "splash.png" -o -iname "splash.svg" \) 2>/dev/null | while read -r ziel; do
+    case "$ziel" in
+        *.png)
+            dims=$(identify -format "%wx%h" "$ziel" 2>/dev/null || echo "")
+            if [ -n "$dims" ] && command -v convert >/dev/null 2>&1; then
+                convert "$BILD" -resize "${dims}!" "$ziel"
+            else
+                cp "$BILD" "$ziel"
+            fi ;;
+        *.svg)
+            rm -f "$ziel"; cp "$BILD" "${ziel%.svg}.png" ;;
+    esac
+    echo "SERAFINO-SPLASH: $ziel ersetzt"
+done
