@@ -3,7 +3,7 @@
 # Aufruf im Projektordner: ./release-check.sh
 # Optional mit fertiger ISO: ./release-check.sh serafino-amd64.hybrid.iso
 
-VERSION="Beta 1"
+VERSION="Beta 3"
 FEHLER=0
 ok()   { echo "  OK      $1"; }
 fail() { echo "  FEHLT   $1"; FEHLER=1; }
@@ -23,7 +23,7 @@ LINKS=$(find config -path "*etc/serafino/links.conf" 2>/dev/null | head -1)
 if [ -z "$LINKS" ]; then
   fail "links.conf nicht gefunden"
 else
-  for KEY in PRIVACY IMPRINT BUG; do
+  for KEY in WEBSEITE DATENSCHUTZ IMPRESSUM FEHLER_MELDEN; do
     if grep -iE "^[^#]*${KEY}[^=]*=\s*\"?https?://" "$LINKS" | grep -vq "example.org"; then
       ok "links.conf: $KEY gesetzt"
     else
@@ -50,6 +50,8 @@ if [ -n "$1" ]; then
   if [ -f "$1" ]; then
     (cd "$(dirname "$1")" && sha256sum "$(basename "$1")") > SHA256SUMS
     ok "SHA256SUMS erzeugt:"; sed 's/^/            /' SHA256SUMS
+    echo "            Signieren (Schlüssel auf der Build-VM): gpg --armor --detach-sign SHA256SUMS"
+    echo "            → SHA256SUMS.asc mit auf SourceForge hochladen"
     GROESSE=$(du -h "$1" | cut -f1)
     ok "ISO-Größe: $GROESSE"
   else
