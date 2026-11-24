@@ -1,96 +1,99 @@
 {
- "policies": {
-  "Homepage": {
-   "URL": "https://www.fragfinn.de/",
-   "Locked": false,
-   "StartPage": "homepage"
-  },
-  "SearchEngines": {
-   "Add": [
-    {
-     "Name": "Kiddle",
-     "URLTemplate": "https://www.kiddle.co/s.php?q={searchTerms}",
-     "Method": "GET"
+  "policies": {
+    "Homepage": {
+      "URL": "https://www.fragfinn.de/",
+      "Locked": false,
+      "StartPage": "homepage"
     },
-    {
-     "Name": "DuckDuckGo",
-     "URLTemplate": "https://duckduckgo.com/?q={searchTerms}",
-     "Method": "GET"
-    }
-   ],
-   "Remove": [
-    "Google",
-    "Bing",
-    "Amazon.com"
-   ],
-   "Default": "Kiddle",
-   "PreventInstalls": false
-  },
-  "OverrideFirstRunPage": "",
-  "DontCheckDefaultBrowser": true,
-  "DisableFirefoxStudies": true,
-  "DNSOverHTTPS": {
-   "Enabled": false,
-   "Locked": true
-  },
-  "BlockAboutConfig": true,
-  "DisableTelemetry": true,
-  "ExtensionSettings": {
-   "uBlock0@raymondhill.net": {
-    "installation_mode": "force_installed",
-    "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi",
-    "private_browsing": true
-   },
-   "fino-waechter@serafino": {
-    "installation_mode": "force_installed",
-    "install_url": "file:///usr/share/serafino/firefox/fino-waechter.xpi",
-    "private_browsing": true
-   },
-   "pingu-waechter@pingulinux": {
-    "installation_mode": "blocked"
-   },
-   "fino-waechter@pingulinux": {
-    "installation_mode": "blocked"
-   },
-   "*": {
-    "installation_mode": "blocked",
-    "blocked_install_message": "Erweiterungen und Designs richtet Serafino ein. Bitte Mama oder Papa fragen."
-   }
-  },
-  "3rdparty": {
-   "Extensions": {
-    "uBlock0@raymondhill.net": {
-     "disableDashboard": true
-    }
-   }
-  },
-  "ManagedBookmarks": [
-   {
-    "toplevel_name": "Schule"
-   },
-   {
-    "name": "ANTON – Lernen für die Schule",
-    "url": "https://anton.app/de/"
-   },
-   {
-    "name": "Antolin – Lesen",
-    "url": "https://antolin.westermann.de/"
-   },
-   {
-    "name": "Microsoft Teams",
-    "url": "https://teams.microsoft.com/"
-   },
-   {
-    "name": "Schulcloud (dBildungscloud)",
-    "url": "https://dbildungscloud.de/"
-   },
-   {
-    "name": "fragFINN – Suchmaschine für Kinder",
-    "url": "https://www.fragfinn.de/"
-   }
-  ],
-  "DisplayBookmarksToolbar": "always",
-  "DisableDeveloperTools": true,
-  "OverridePostUpdatePage": ""
- }
+    "SearchEngines": {
+      "Add": [
+        {
+          "Name": "Kiddle",
+          "URLTemplate": "https://www.kiddle.co/s.php?q={searchTerms}",
+          "Method": "GET"
+        },
+        {
+          "Name": "DuckDuckGo",
+          "URLTemplate": "https://duckduckgo.com/?q={searchTerms}",
+          "Method": "GET"
+        }
+      ],
+      "Remove": [
+        "Google",
+        "Bing",
+        "Amazon.com"
+      ],
+      "Default": "Kiddle",
+      "PreventInstalls": false
+    },
+    "OverrideFirstRunPage": "",
+    "DontCheckDefaultBrowser": true,
+    "DisableFirefoxStudies": true,
+    "DNSOverHTTPS": {
+      "Enabled": false,
+      "Locked": true
+    },
+    "BlockAboutConfig": true,
+    "DisableTelemetry": true,
+    "ExtensionSettings": {
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi",
+        "private_browsing": true
+      },
+      "fino-waechter@serafino": {
+        "installation_mode": "force_installed",
+        "install_url": "file:///usr/share/serafino/firefox/fino-waechter.xpi",
+        "private_browsing": true
+      },
+      "pingu-waechter@pingulinux": {
+        "installation_mode": "blocked"
+      },
+      "fino-waechter@pingulinux": {
+        "installation_mode": "blocked"
+      },
+      "*": {
+        "installation_mode": "blocked",
+        "blocked_install_message": "Erweiterungen und Designs richtet Serafino ein. Bitte Mama oder Papa fragen."
+      }
+    },
+    "3rdparty": {
+      "Extensions": {
+        "uBlock0@raymondhill.net": {
+          "disableDashboard": true
+        }
+      }
+    },
+    "ManagedBookmarks": [
+      {
+        "toplevel_name": "Schule"
+      },
+      {
+        "name": "ANTON – Lernen für die Schule",
+        "url": "https://anton.app/de/"
+      },
+      {
+        "name": "Antolin – Lesen",
+        "url": "https://antolin.westermann.de/"
+      },
+      {
+        "name": "Microsoft Teams",
+        "url": "https://teams.microsoft.com/"
+      },
+      {
+        "name": "Schulcloud (dBildungscloud)",
+        "url": "https://dbildungscloud.de/"
+      },
+      {
+        "name": "fragFINN – Suchmaschine für Kinder",
+        "url": "https://www.fragfinn.de/"
+      }
+    ],
+    "DisplayBookmarksToolbar": "always",
+    "DisableDeveloperTools": true,
+    "OverridePostUpdatePage": "",
+    "RequestedLocales": [
+      "de"
+    ]
+  }
 }

@@ -721,7 +721,7 @@ class Startbildschirm(QWidget):
         f = self.zeittext.font(); f.setPixelSize(22); f.setBold(True); self.zeittext.setFont(f)
         sb.addWidget(self.zeittext)
         # „Mehr Zeit bitte“ (be15): Fino fragt, Mama oder Papa geben mit Passwort frei
-        self.mehrzeit = QPushButton("🙋 Mehr Zeit")
+        self.mehrzeit = QPushButton("  Mehr Zeit"); self.mehrzeit.setIcon(QIcon.fromTheme("help-hint", QIcon.fromTheme("dialog-question")))
         f = self.mehrzeit.font(); f.setPixelSize(20); f.setBold(True); self.mehrzeit.setFont(f)
         self.mehrzeit.setStyleSheet("QPushButton{background:#f2a51f;color:#1d2329;border:none;"
                                     "border-radius:18px;padding:6px 14px}")
@@ -750,9 +750,9 @@ class Startbildschirm(QWidget):
         v.addWidget(scroll, 1)
 
         unten = QHBoxLayout(); unten.addStretch(1)
-        for text, tip, fn in (("⏻  Herunterfahren", "Den Computer ausschalten", self.herunterfahren),
-                              ("🚪  Abmelden", "Abmelden – dann kann sich jemand anderes anmelden", self.abmelden)):
-            kn = QPushButton(text)
+        for text, tip, fn, ico in (("  Herunterfahren", "Den Computer ausschalten", self.herunterfahren, "system-shutdown"),
+                              ("  Abmelden", "Abmelden – dann kann sich jemand anderes anmelden", self.abmelden, "system-log-out")):
+            kn = QPushButton(text); kn.setIcon(QIcon.fromTheme(ico)); kn.setIconSize(QSize(32, 32))
             kn.setToolTip(tip); kn.setAccessibleName(text)
             kn.setCursor(Qt.CursorShape.PointingHandCursor)
             kn.setMinimumHeight(64)
@@ -1119,6 +1119,10 @@ def main():
             kiosk(False)                   # Ränder und Leiste wieder normal (be4n)
         return 0
     app = QApplication(sys.argv)
+    # bz40: Emoji-Schrift als Ersatzschrift eintragen, sonst zeigt Qt Kästchen
+    from PyQt6.QtGui import QFont
+    for fam in {app.font().family(), "Noto Sans", "DejaVu Sans", "Sans Serif"}:
+        QFont.insertSubstitutions(fam, ["Noto Color Emoji"])
     import serafino_deutsch; serafino_deutsch.an(app)
     app.setApplicationName("serafino-kinderstart")
     app.setDesktopFileName("serafino-kinderstart")
