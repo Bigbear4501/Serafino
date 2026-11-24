@@ -120,6 +120,12 @@ section.block{padding-block:72px}
 .privacy .small{color:var(--soft);font-size:.92rem}
 @media (max-width:640px){.privacy{grid-template-columns:1fr;padding:26px}}
 
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.shots figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.shots figure.wide{grid-column:1/-1}
+.shots img{display:block;width:100%;height:auto}
+.shots figcaption{padding:12px 16px;font-size:.95rem;color:var(--soft)}
+@media (max-width:700px){.shots{grid-template-columns:1fr}}
 /* download */
 .dl{display:grid;grid-template-columns:1.1fr .9fr;gap:22px}
 @media (max-width:820px){.dl{grid-template-columns:1fr}}
@@ -188,6 +194,7 @@ footer .muted{opacity:.65}
     <nav class="nav" aria-label="Seiten-Navigation">
       <a href="#kinder">Für Kinder</a>
       <a href="#eltern">Für Eltern</a>
+      <a href="#einblicke">Einblicke</a>
       <a href="#datenschutz-kurz">Datenschutz</a>
       <a href="#download">Download</a>
       <a href="#fragen">Fragen</a>
@@ -353,6 +360,22 @@ footer .muted{opacity:.65}
     </div>
   </section>
 
+  <section class="block" id="einblicke">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Einblicke</p>
+        <h2>So sieht Serafino aus.</h2>
+      </div>
+      <div class="shots">
+      <figure class="wide"><img src="bilder/desktop.jpg" width="1280" height="800" loading="lazy" alt="Der Desktop: übersichtlich, mit großen Symbolen."><figcaption>Der Desktop: übersichtlich, mit großen Symbolen.</figcaption></figure>
+      <figure><img src="bilder/kontrollzentrum.jpg" width="1280" height="738" loading="lazy" alt="Das Kontrollzentrum für Eltern."><figcaption>Das Kontrollzentrum für Eltern.</figcaption></figure>
+      <figure><img src="bilder/app-store.jpg" width="1280" height="800" loading="lazy" alt="Der App Store mit geprüften Programmen."><figcaption>Der App Store mit geprüften Programmen.</figcaption></figure>
+      <figure><img src="bilder/youtube-kids.jpg" width="1280" height="335" loading="lazy" alt="YouTube Kids in einem eigenen, geschützten Fenster."><figcaption>YouTube Kids in einem eigenen, geschützten Fenster.</figcaption></figure>
+      <figure><img src="bilder/bildschirmzeit.jpg" width="1280" height="800" loading="lazy" alt="Bildschirmzeit: Regeln für jedes Kind einzeln."><figcaption>Bildschirmzeit: Regeln für jedes Kind einzeln.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="datenschutz-kurz">
     <div class="wrap">
       <div class="privacy">
@@ -383,7 +406,6 @@ footer .muted{opacity:.65}
             <li>Mit einem Programm wie balenaEtcher oder Ventoy auf einen USB-Stick schreiben</li>
             <li>Computer vom USB-Stick starten und ausprobieren</li>
           </ol>
-          <p class="hint"><b>Hinweis:</b> Bis zur Beta 3 heißt das System im Download noch „Pingulinux“, so lautete der Arbeitstitel. Es ist dasselbe System.</p>
           <!-- Link nach dem Umbenennen auf das neue SourceForge-Projekt ändern -->
           <a class="btn gold" href="https://sourceforge.net/projects/pingulinux/files/">Zum Download (SourceForge)</a>
         </div>
