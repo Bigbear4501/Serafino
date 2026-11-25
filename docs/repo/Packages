@@ -1,23 +1,23 @@
 Package: pingulinux-system
 Architecture: all
-Version: 0.3.202611251625
+Version: 0.3.202611252005
 Priority: optional
 Section: oldlibs
 Maintainer: Serafino <noreply@serafino.invalid>
-Depends: serafino-tools (>= 0.3.202611251625)
-Filename: ./pingulinux-system_0.3.202611251625_all.deb
+Depends: serafino-tools (>= 0.3.202611252005)
+Filename: ./pingulinux-system_0.3.202611252005_all.deb
 Size: 836
-MD5sum: 0faaf0eee1bce5e3370ba0282943ebee
-SHA1: 8ed0bc3181b8b25f5d0c7ad6556d8287dd0719cb
-SHA256: 008a2812e015fd017793fb9bcaf63886092c29feda0acb65168cad5e96697fe5
-SHA512: aa6d92c7cbd38241160b209f7d9de79d567503423d8a5e23c6319864e7bd0fc273b7680d7f9449cb3f621be9ef14c5e34403f3507943db95a9cd8351dda3d831
+MD5sum: abc9454bb8404d5cf1ad923f368a34a8
+SHA1: 59fa3c8cff264bca913b38f46eb8954a936aeec7
+SHA256: 06275778c0da04381ed94b18dd6891e6734918e3b83b850aac21ab070d7c7728
+SHA512: c4690d9812e6da40cd3d7bf1d1c3041e95917d81a048929a058f30a6cbca07916a35f2ca4c6cdd44bc7a200b89d81c3b38d4ea1ef38d07d626120d141897a781
 Description: Übergangspaket – heißt jetzt serafino-tools
  Dieses leere Paket sorgt nur dafür, dass ältere Rechner beim Update
  serafino-tools bekommen. Es kann danach entfernt werden.
 
 Package: serafino-tools
 Architecture: all
-Version: 0.3.202611251625
+Version: 0.3.202611252005
 Priority: optional
 Protected: yes
 Section: admin
@@ -26,12 +26,12 @@ Depends: python3, python3-pyqt6, systemd-timesyncd | time-daemon, fonts-noto-col
  sddm, network-manager, firefox-esr, timekpr-next, timeshift, ufw, flatpak, unattended-upgrades, qt6-translations-l10n
 Breaks: pingulinux-system (<< 0.3~)
 Replaces: pingulinux-system (<< 0.3~)
-Filename: ./serafino-tools_0.3.202611251625_all.deb
-Size: 1825908
-MD5sum: 97860684bf5badd4d2b4c936b81f038b
-SHA1: cb90ce9fd29152a2945679da5ea059e3dcc469d2
-SHA256: 17dd2eaf0fd735f4bf8f2287800872af88c9d6d6e2308b1e6bb31ebe7131b45b
-SHA512: d1da6bd87f1a806af04ce6d44646c59e7be857dbf9d5ee3aed0360c5bd09546bf5e749b8e2f2af33eef3913901cdf6337237fd99149b7277c98c88ed798af761
+Filename: ./serafino-tools_0.3.202611252005_all.deb
+Size: 1799452
+MD5sum: e5d3c9267be18f2a6400d0de32bc2e5f
+SHA1: 5d0c4ede616d1f9056abf68d720b0f29070d5ca8
+SHA256: 36c171e5b919a7bde55d07cf2ccf360b80c7e860f9c218dcf967b222963c0a4c
+SHA512: efb4bcc0130125fc5471c9a9f88e67f5ece53c7619122a2fb6f783b2b6b792e589aa0ca32d4d6d21c3c91f8cbe69a4108edf98e49d00164269d508a4cb354855
 Description: Serafino – Kinderschutz, Kontrollzentrum, Fino und Co.
  Alle eigenen Dateien von Serafino: Eltern-Kontrollzentrum,
  Startbildschirm der Kleinen, Fino, Handbuch, Sperren und Einstellungen.
