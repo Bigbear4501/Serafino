@@ -1,0 +1,23 @@
+#!/bin/sh
+# Serafino: Boot-Menü auf Deutsch.
+# Debians GRUB hat für „Advanced options“, „with Linux“ und „recovery mode“
+# keine deutsche Übersetzung. Dieser Aufruf startet das echte grub-mkconfig
+# und übersetzt danach diese Zeilen in der erzeugten Datei. Er greift bei
+# update-grub, bei Kernel-Updates und beim Installer (Calamares).
+/usr/sbin/grub-mkconfig "$@"
+rc=$?
+out=""
+prev=""
+for a in "$@"; do
+    [ "$prev" = "-o" ] && out="$a"
+    case "$a" in --output=*) out="${a#--output=}" ;; esac
+    prev="$a"
+done
+if [ "$rc" -eq 0 ] && [ -n "$out" ] && [ -f "$out" ]; then
+    sed -i \
+        -e 's/Advanced options for /Erweiterte Optionen für /' \
+        -e 's/, with Linux /, mit Linux /' \
+        -e 's/(recovery mode)/(Wiederherstellungsmodus)/' \
+        "$out"
+fi
+exit "$rc"
