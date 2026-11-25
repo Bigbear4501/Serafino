@@ -40,9 +40,15 @@ echo 'GRUB_TIMEOUT_STYLE=menu' >> "$GRUB_DEFAULT"
 
 # Eigenes Hintergrundbild fürs installierte GRUB-Menü (Datei muss
 # dauerhaft im System liegen, damit update-grub sie später findet)
-if [ -f /usr/share/plymouth/themes/serafino/logo.png ]; then
-    mkdir -p /usr/share/serafino
+# Das fertige Bild (Nachthimmel, Fino klein unten rechts) kommt aus
+# includes.chroot und darf hier NICHT überschrieben werden. Nur wenn es fehlt,
+# nehmen wir als Notlösung das Logo des Startbilds.
+mkdir -p /usr/share/serafino
+if [ ! -f /usr/share/serafino/grub-background.png ] && \
+   [ -f /usr/share/plymouth/themes/serafino/logo.png ]; then
     cp /usr/share/plymouth/themes/serafino/logo.png /usr/share/serafino/grub-background.png
+fi
+if [ -f /usr/share/serafino/grub-background.png ]; then
     echo 'GRUB_BACKGROUND="/usr/share/serafino/grub-background.png"' >> "$GRUB_DEFAULT"
 fi
 
