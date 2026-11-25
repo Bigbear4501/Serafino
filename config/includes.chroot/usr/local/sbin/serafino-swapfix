@@ -1,0 +1,52 @@
+#!/bin/sh
+# serafino-swapfix: Laeuft im Calamares-Installer (im Zielsystem).
+# Entfernt Swap-Eintraege in /etc/fstab und resume=UUID=... (GRUB, initramfs),
+# deren Partition nicht existiert. Sonst wartet systemd beim Start 90 Sekunden.
+# Existiert die Swap-Partition wirklich, aendert das Skript nichts.
+
+exists() {
+    blkid -c /dev/null -U "$1" >/dev/null 2>&1 || [ -e "/dev/disk/by-uuid/$1" ]
+}
+
+changed=0
+
+# 1) fstab: Swap-Zeilen mit unbekannter UUID entfernen
+if [ -f /etc/fstab ]; then
+    for u in $(sed -n 's/^UUID=\([^[:space:]]*\)[[:space:]].*[[:space:]]swap[[:space:]].*/\1/p' /etc/fstab); do
+        if ! exists "$u"; then
+            sed -i "/^UUID=$u[[:space:]].*[[:space:]]swap[[:space:]]/d" /etc/fstab
+            echo "serafino-swapfix: Swap-Eintrag $u aus fstab entfernt"
+            changed=1
+        fi
+    done
+fi
+
+# 2) GRUB: resume=UUID=... entfernen, wenn die UUID nicht existiert
+for f in /etc/default/grub /etc/default/grub.d/*; do
+    [ -f "$f" ] || continue
+    for u in $(grep -o 'resume=UUID=[0-9a-fA-F-]*' "$f" | sed 's/^resume=UUID=//'); do
+        if ! exists "$u"; then
+            sed -i "s/[[:space:]]*resume=UUID=$u//" "$f"
+            echo "serafino-swapfix: resume=$u aus $f entfernt"
+            changed=1
+        fi
+    done
+done
+
+# 3) initramfs: RESUME=UUID=... in conf.d
+for f in /etc/initramfs-tools/conf.d/resume; do
+    [ -f "$f" ] || continue
+    u=$(sed -n 's/^RESUME=UUID=\([0-9a-fA-F-]*\).*/\1/p' "$f")
+    if [ -n "$u" ] && ! exists "$u"; then
+        rm -f "$f"
+        echo "serafino-swapfix: $f entfernt ($u unbekannt)"
+        changed=1
+    fi
+done
+
+# 4) GRUB neu schreiben (der Wrapper uebersetzt das Menue ins Deutsche)
+if [ "$changed" = 1 ] && command -v update-grub >/dev/null 2>&1; then
+    update-grub || true
+fi
+
+exit 0

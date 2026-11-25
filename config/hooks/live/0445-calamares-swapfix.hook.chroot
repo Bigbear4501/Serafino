@@ -1,0 +1,32 @@
+#!/bin/sh
+# Serafino: Calamares-Schritt "swapfix" in die Installationssequenz einbauen
+# (nach initramfscfg, vor initramfs). Idempotent.
+SETTINGS=/etc/calamares/settings.conf
+[ -f "$SETTINGS" ] || { echo "Calamares settings.conf nicht gefunden, ueberspringe." >&2; exit 0; }
+
+python3 - "$SETTINGS" <<'PY'
+import re, sys
+p = sys.argv[1]
+t = open(p, encoding="utf-8").read()
+if "shellprocess@swapfix" in t:
+    print("swapfix bereits eingebaut.")
+    sys.exit(0)
+
+# 1) Schritt in die Sequenz nach initramfscfg
+t, n = re.subn(r'^(\s*)- initramfscfg[ \t]*$',
+               r'\1- initramfscfg\n\1- shellprocess@swapfix', t, count=1, flags=re.M)
+if n != 1:
+    print("WARNUNG: initramfscfg nicht in settings.conf gefunden, swapfix nicht eingebaut.", file=sys.stderr)
+    sys.exit(0)
+
+# 2) Instanz definieren
+inst = "- id: swapfix\n  module: shellprocess\n  config: shellprocess_swapfix.conf\n"
+m = re.search(r'^instances:[ \t]*\n', t, flags=re.M)
+if m:
+    t = t[:m.end()] + inst + t[m.end():]
+else:
+    t = re.sub(r'^sequence:', "instances:\n" + inst + "\nsequence:", t, count=1, flags=re.M)
+open(p, "w", encoding="utf-8").write(t)
+print("swapfix in settings.conf eingebaut.")
+PY
+exit 0
