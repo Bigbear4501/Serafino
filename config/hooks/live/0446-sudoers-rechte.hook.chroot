@@ -1,0 +1,9 @@
+#!/bin/sh
+# Serafino: sudoers.d-Dateien muessen root gehoeren und Modus 0440 haben,
+# sonst ignoriert sudo sie. Git speichert weder Besitzer noch Modus.
+for f in /etc/sudoers.d/*; do
+    [ -f "$f" ] || continue
+    chown root:root "$f"
+    chmod 440 "$f"
+done
+exit 0
