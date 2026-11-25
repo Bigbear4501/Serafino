@@ -419,7 +419,7 @@ def main():
             for k in neue_kinder:
                 modus = "ohne" if k["ohne_pw"] else "pw"
                 self.schritte.append(("Konto für %s anlegen" % k["vorname"],
-                                      HELPER + ["konto-neu", k["name"], k["geburt"].isoformat(), "", modus],
+                                      HELPER + ["konto-neu", k["name"], k["geburt"].isoformat(), "", modus, k["vorname"]],
                                       k["pw"] if modus == "pw" else None))
                 wd0, we0, von0, bis0 = zeit_standard(k["alter"])
                 if (k["wd"], k["we"]) != (wd0, we0):

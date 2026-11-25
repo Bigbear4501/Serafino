@@ -15,9 +15,12 @@ set -e
 USERNAME="$1"
 AGE="$2"   # Geburtsmonat JJJJ-MM (oder Alter in Jahren)
 AVATAR="$3"
+ANZEIGE="$4"   # Anzeigename (Gross-/Kleinschreibung), leer = wie Anmeldename
 PASSWORD=$(cat)
 
-useradd -m -s /bin/bash "$USERNAME"
+OPTS=()
+[ -n "$ANZEIGE" ] && OPTS=(-c "$ANZEIGE")
+useradd -m -s /bin/bash "${OPTS[@]}" "$USERNAME"
 echo "${USERNAME}:${PASSWORD}" | chpasswd
 
 # Kinder-Konten sollen das Eltern-Kontrollzentrum nicht automatisch

@@ -36,19 +36,30 @@ while true; do
 
     case "$ACTION" in
         "Neuen Benutzer anlegen")
-            NEWUSER=$(pd_eingabe "Neuer Benutzer" "Name des neuen Benutzerkontos:")
-            if [ -z "$NEWUSER" ]; then
+            ANZEIGE=$(pd_eingabe "Neuer Benutzer" "Name des neuen Benutzerkontos (Groß- und Kleinschreibung egal):")
+            if [ -z "$ANZEIGE" ]; then
                 continue
             fi
+            # Anmeldename ableiten: klein, ohne Umlaute/Sonderzeichen, eindeutig (Anna -> anna)
+            anmeldename_aus() {
+                local n="${1,,}" k i=2
+                n="${n//ä/ae}"; n="${n//ö/oe}"; n="${n//ü/ue}"; n="${n//ß/ss}"; n="${n// /-}"
+                n=$(printf '%s' "$n" | tr -cd 'a-z0-9_-' | sed 's/^[^a-z_]*//')
+                n="${n:0:24}"; [ -n "$n" ] || n=kind
+                k="$n"
+                while id "$k" >/dev/null 2>&1; do k="$n$i"; i=$((i + 1)); done
+                printf '%s' "$k"
+            }
+            NEWUSER=$(anmeldename_aus "$ANZEIGE")
 
             YNOW=$(date +%Y)
             YEARS=$(seq "$YNOW" -1 $((YNOW - 17)) | paste -sd'|')
             # Geburtstag: Tag → Monat → Jahr (drei kleine Auswahlfenster)
             # shellcheck disable=SC2046
-            BDAY=$(pd_combo "Geburtstag von $NEWUSER" "An welchem Tag hat $NEWUSER Geburtstag?\nDas Alter bestimmt automatisch Bildschirmzeit und Schutzeinstellungen und wächst mit dem Kind mit – und Fino gratuliert am Geburtstag." "1" $(seq 1 31)) || continue
+            BDAY=$(pd_combo "Geburtstag von $ANZEIGE" "An welchem Tag hat $ANZEIGE Geburtstag?\nDas Alter bestimmt automatisch Bildschirmzeit und Schutzeinstellungen und wächst mit dem Kind mit – und Fino gratuliert am Geburtstag." "1" $(seq 1 31)) || continue
             case "$BDAY" in [1-9]|[12][0-9]|3[01]) ;; *) pd_fehler "Fehler" "Bitte den Tag auswählen."; continue;; esac
             BDAY=$(printf '%02d' "$BDAY")
-            BMON_NAME=$(pd_combo "Geburtstag von $NEWUSER" "In welchem Monat hat $NEWUSER Geburtstag?" \
+            BMON_NAME=$(pd_combo "Geburtstag von $ANZEIGE" "In welchem Monat hat $ANZEIGE Geburtstag?" \
                 "Januar" Januar Februar März April Mai Juni Juli August September Oktober November Dezember) || continue
             case "$BMON_NAME" in
                 Januar) BMON=01;; Februar) BMON=02;; "März") BMON=03;; April) BMON=04;; Mai) BMON=05;; Juni) BMON=06;;
@@ -56,7 +67,7 @@ while true; do
                 *) pd_fehler "Fehler" "Bitte den Monat auswählen."; continue;;
             esac
             # shellcheck disable=SC2086
-            BYEAR=$(pd_combo "Geburtstag von $NEWUSER" "In welchem Jahr wurde $NEWUSER geboren?" "$((YNOW - 6))" ${YEARS//|/ }) || continue
+            BYEAR=$(pd_combo "Geburtstag von $ANZEIGE" "In welchem Jahr wurde $ANZEIGE geboren?" "$((YNOW - 6))" ${YEARS//|/ }) || continue
             case "$BYEAR" in [0-9][0-9][0-9][0-9]) ;; *) pd_fehler "Fehler" "Bitte das Jahr auswählen."; continue;; esac
             if ! date -d "$BYEAR-$BMON-$BDAY" >/dev/null 2>&1; then
                 pd_fehler "Fehler" "Den $((10#$BDAY)). $BMON_NAME $BYEAR gibt es nicht. Bitte noch einmal."
@@ -72,13 +83,13 @@ while true; do
             # Für die Kleinen (bis 6): Anmelden ohne Passwort anbieten (bz21)
             MODUS=pw
             if [ "${AGE:-99}" -le 6 ] 2>/dev/null; then
-                if pd_frage "Anmelden ohne Passwort?" "$NEWUSER ist $AGE Jahre alt.\n\nSoll $NEWUSER sich ohne Passwort anmelden können? Dann reicht ein Klick auf das Profilbild.\n\nAlle Sperren und die Bildschirmzeit gelten trotzdem. Später im Kontrollzentrum unter „Benutzerkonten“ umstellbar." "Ohne Passwort" "Mit Passwort"; then
+                if pd_frage "Anmelden ohne Passwort?" "$ANZEIGE ist $AGE Jahre alt.\n\nSoll $ANZEIGE sich ohne Passwort anmelden können? Dann reicht ein Klick auf das Profilbild.\n\nAlle Sperren und die Bildschirmzeit gelten trotzdem. Später im Kontrollzentrum unter „Benutzerkonten“ umstellbar." "Ohne Passwort" "Mit Passwort"; then
                     MODUS=ohne
                 fi
             fi
             PASS1=""
             if [ "$MODUS" = pw ]; then
-                PASS1=$(pd_passwort "Neuer Benutzer" "Passwort für $NEWUSER festlegen:")
+                PASS1=$(pd_passwort "Neuer Benutzer" "Passwort für $ANZEIGE festlegen:")
                 [ -z "$PASS1" ] && continue
                 PASS2=$(pd_passwort "Neuer Benutzer" "Passwort wiederholen:")
                 if [ "$PASS1" != "$PASS2" ]; then
@@ -89,14 +100,14 @@ while true; do
 
             AVATAR=$(choose_avatar "$NEWUSER")
 
-            if ERR=$(printf '%s' "$PASS1" | pkexec /usr/local/bin/serafino-root-helper konto-neu "$NEWUSER" "$BIRTH" "$AVATAR" "$MODUS" 2>&1); then
+            if ERR=$(printf '%s' "$PASS1" | pkexec /usr/local/bin/serafino-root-helper konto-neu "$NEWUSER" "$BIRTH" "$AVATAR" "$MODUS" "$ANZEIGE" 2>&1); then
                 if [ "$AGE" -lt 13 ]; then
                     SOCIAL="\n• Social-Media-Seiten und normales YouTube sind gesperrt (gilt nur für dieses Konto, im Firefox).\n• YouTube Kids liegt auf dem Desktop."
                 else
                     SOCIAL=""
                 fi
                 [ "$MODUS" = ohne ] && OHNE="\n• Anmelden ohne Passwort: Klick auf das Profilbild genügt" || OHNE=""
-                pd_info "Fertig" "Benutzerkonto '$NEWUSER' wurde angelegt.\n\n• Eingeschränktes Konto (kein Admin, kein Terminal)$OHNE\n• Bildschirmzeit automatisch passend für $AGE Jahre (wächst mit dem Kind mit)$SOCIAL\n\nDie Zeiten kannst du im Kontrollzentrum unter „Bildschirmzeit“ anpassen."
+                pd_info "Fertig" "Benutzerkonto '$ANZEIGE' wurde angelegt (Anmeldename: $NEWUSER).\n\n• Eingeschränktes Konto (kein Admin, kein Terminal)$OHNE\n• Bildschirmzeit automatisch passend für $AGE Jahre (wächst mit dem Kind mit)$SOCIAL\n\nDie Zeiten kannst du im Kontrollzentrum unter „Bildschirmzeit“ anpassen."
             else
                 pd_fehler_roh "Fehler" "Das Benutzerkonto konnte nicht angelegt werden.
 

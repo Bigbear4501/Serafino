@@ -112,7 +112,13 @@ os.replace(tmp, "/var/lib/serafino/kinderstart/%s.json" % user)
       ts "${2:-}" timeshift --restore --snapshot "$1" --scripted --yes --skip-grub "${D[@]}" ;;
   # ---- Benutzerkonten: Kinderkonto anlegen, Anmelden ohne Passwort ----
   konto-neu)          # BENUTZER JJJJ-MM BILD|"" pw|ohne   (Passwort bei „pw“ auf stdin)
-      U="${1:-}"; B="${2:-}"; A="${3:-}"; M="${4:-}"
+      U="${1:-}"; B="${2:-}"; A="${3:-}"; M="${4:-}"; N="${5:-}"
+      # Anzeigename (darf Grossbuchstaben/Umlaute haben): keine Steuerzeichen, kein : , = \
+      if [ -n "$N" ]; then
+        [ ${#N} -le 40 ] || die "Der Name ist zu lang (höchstens 40 Zeichen)."
+        case "$N" in *[:,=]*|*\\*) die "Im Namen sind Doppelpunkt, Komma, Gleichheitszeichen und Rückstrich nicht erlaubt." ;; esac
+        [[ "$N" =~ [[:cntrl:]] ]] && die "Ungültiger Name."
+      fi
       [[ "$U" =~ ^[a-z_][a-z0-9_-]{0,31}$ ]] || die "Ungültiger Name (nur Kleinbuchstaben, Ziffern, - und _)"
       id "$U" >/dev/null 2>&1 && die "Das Konto '$U' gibt es schon."
       [[ "$B" =~ ^[0-9]{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01]))?$ ]] || die "Geburtstag?"
@@ -124,7 +130,7 @@ os.replace(tmp, "/var/lib/serafino/kinderstart/%s.json" % user)
         *)    die "Modus?" ;;
       esac
       rm -f "/var/lib/serafino/app-ausnahmen/$U.json"   # alte Ausnahmen eines gelöschten Kontos gleichen Namens
-      printf '%s' "$PW" | /usr/local/bin/serafino-create-restricted-user.sh "$U" "$B" "$A" || exit 1
+      printf '%s' "$PW" | /usr/local/bin/serafino-create-restricted-user.sh "$U" "$B" "$A" "$N" || exit 1
       if [ "$M" = ohne ]; then
           getent group "$PWLOS" >/dev/null || groupadd -r "$PWLOS"
           gpasswd -a "$U" "$PWLOS" >/dev/null
