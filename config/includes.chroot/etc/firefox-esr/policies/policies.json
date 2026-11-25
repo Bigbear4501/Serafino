@@ -52,6 +52,9 @@
       "fino-waechter@pingulinux": {
         "installation_mode": "blocked"
       },
+      "langpack-de@firefox-esr.mozilla.org": {
+        "installation_mode": "allowed"
+      },
       "*": {
         "installation_mode": "blocked",
         "blocked_install_message": "Erweiterungen und Designs richtet Serafino ein. Bitte Mama oder Papa fragen."
