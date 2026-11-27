@@ -102,8 +102,8 @@ class Feier(QWidget):
         bild.setAlignment(Qt.AlignmentFlag.AlignCenter)
         bild.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         lay.addWidget(bild)
-        gross = QLabel("Hallo %s!\nJetzt bist du %d! 🎉" % (name, alter) if alter
-                       else "Hallo %s!\nAlles Gute zum Geburtstag! 🎉" % name)
+        gross = QLabel("Hallo %s!\nJetzt bist du %d!" % (name, alter) if alter
+                       else "Hallo %s!\nAlles Gute zum Geburtstag!" % name)
         f = QFont(self.font()); f.setPointSizeF(f.pointSizeF() * 3.2); f.setBold(True)
         gross.setFont(f)
         gross.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -116,7 +116,7 @@ class Feier(QWidget):
         klein.setStyleSheet("color:#56636f; background:transparent")
         lay.addWidget(klein)
         lay.addSpacing(24)
-        knopf = QPushButton("Danke, Fino! 🎈")
+        knopf = QPushButton("Danke, Fino!")
         knopf.setFont(f2)
         knopf.setMinimumHeight(70)
         knopf.setMaximumWidth(420)

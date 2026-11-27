@@ -108,7 +108,7 @@ def main():
     frage = Fenster(FINO, "Noch %d Minuten?" % MINUTEN,
                     "Das dürfen Mama oder Papa entscheiden. Hol sie her – sie geben es mit "
                     "ihrem Passwort frei.",
-                    [("ja", "🙋 Mama oder Papa fragen", "#2e8a57"), ("nein", "Nein, danke", "#8a97a3")])
+                    [("ja", "Mama oder Papa fragen", "#2e8a57"), ("nein", "Nein, danke", "#8a97a3")])
     frage.exec()
     if frage.wahl != "ja":
         return 0
@@ -117,7 +117,7 @@ def main():
     if r.returncode == 0:
         merker_loeschen()
         Fenster(FINO_PARTY if os.path.exists(FINO_PARTY) else FINO, "Juhu! %d Minuten mehr!" % MINUTEN,
-                "Viel Spaß – und sag Danke! 😊", [("ok", "OK 👍", "#2e8a57")]).exec()
+                "Viel Spaß – und sag Danke!", [("ok", "OK", "#2e8a57")]).exec()
     elif r.returncode in (126, 127):
         Fenster(FINO, "Diesmal nicht.", "Ohne das Passwort von Mama oder Papa gibt es keine "
                 "Extra-Zeit. Vielleicht morgen!", [("ok", "OK", "#2e8a57")]).exec()

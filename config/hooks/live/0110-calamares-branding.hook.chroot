@@ -40,10 +40,10 @@ strings:
     shortVersionedName:   "Serafino"
     bootloaderEntryName:  "Serafino"
     productUrl:           "https://github.com/Bigbear4501/Serafino"
-    supportUrl:           "https://github.com/Bigbear4501/Serafino/issues"
-    knownIssuesUrl:       "https://github.com/Bigbear4501/Serafino/issues"
-    releaseNotesUrl:      "https://github.com/Bigbear4501/Serafino/releases"
-    donateUrl:            "https://github.com/Bigbear4501/Serafino"
+    supportUrl:           ""
+    knownIssuesUrl:       ""
+    releaseNotesUrl:      ""
+    donateUrl:            ""
 
 images:
     productLogo:          "logo.png"

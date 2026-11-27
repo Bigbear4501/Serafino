@@ -213,7 +213,13 @@ def main():
             form.addWidget(self.pw2, 4, 1)
             self.dazu = QPushButton(QIcon.fromTheme("list-add"), "Kind hinzufügen")
             self.dazu.clicked.connect(self.hinzufuegen)
-            form.addWidget(self.dazu, 5, 1)
+            self.bild = ""
+            self.bild_btn = QPushButton(QIcon.fromTheme("user-properties", QIcon.fromTheme("im-user")), "Profilbild wählen …")
+            self.bild_btn.clicked.connect(self.bild_waehlen)
+            form.addWidget(self.bild_btn, 5, 1)
+            self.bild_lbl = QLabel("Standard: Fino")
+            form.addWidget(self.bild_lbl, 5, 2)
+            form.addWidget(self.dazu, 6, 1)
             v.addLayout(form)
             v.addWidget(text("<b>Neu angelegt werden:</b>"))
             self.liste = QListWidget()
@@ -225,6 +231,20 @@ def main():
             v.addLayout(ikon_zeile("help-hint", "Ohne Kinder weiterklicken geht auch – Konten lassen "
                                    "sich jederzeit im Kontrollzentrum unter „Benutzerkonten“ anlegen."))
             self.alter_geaendert()
+
+        def bild_waehlen(self):
+            import os, subprocess
+            vn = self.vorname.text().strip()
+            try:
+                r = subprocess.run([sys.executable, "/usr/local/bin/serafino-pick-avatar.py", vn],
+                                   capture_output=True, text=True, timeout=900)
+                zeilen = (r.stdout or "").strip().splitlines()
+                pfad = zeilen[-1].strip() if zeilen else ""
+            except Exception:
+                pfad = ""
+            if pfad and os.path.isfile(pfad):
+                self.bild = pfad
+                self.bild_lbl.setText("Gewählt: " + os.path.basename(pfad))
 
         def alter_jetzt(self):
             return alter(self.geburt.date().toPyDate())
@@ -258,7 +278,7 @@ def main():
                     return
             belegt = alle_konten() | {k["name"] for k in neue_kinder}
             k = {"vorname": vn, "name": anmeldename(vn, belegt), "geburt": self.geburt.date().toPyDate(),
-                 "ohne_pw": ohne, "pw": "" if ohne else self.pw1.text()}
+                 "ohne_pw": ohne, "pw": "" if ohne else self.pw1.text(), "bild": self.bild}
             k["alter"] = alter(k["geburt"])
             wd, we, von, bis = zeit_standard(k["alter"])
             k.update(wd=wd, we=we, von=von, bis=bis)
@@ -268,6 +288,7 @@ def main():
                                      vn, k["alter"], k["name"], "ohne Passwort" if ohne else "mit Passwort"))
             self.liste.addItem(it)
             self.vorname.clear(); self.pw1.clear(); self.pw2.clear()
+            self.bild = ""; self.bild_lbl.setText("Standard: Fino")
             self.vorname.setFocus()
 
         def entfernen(self):
@@ -419,7 +440,7 @@ def main():
             for k in neue_kinder:
                 modus = "ohne" if k["ohne_pw"] else "pw"
                 self.schritte.append(("Konto für %s anlegen" % k["vorname"],
-                                      HELPER + ["konto-neu", k["name"], k["geburt"].isoformat(), "", modus, k["vorname"]],
+                                      HELPER + ["konto-neu", k["name"], k["geburt"].isoformat(), k.get("bild", ""), modus, k["vorname"]],
                                       k["pw"] if modus == "pw" else None))
                 wd0, we0, von0, bis0 = zeit_standard(k["alter"])
                 if (k["wd"], k["we"]) != (wd0, we0):

@@ -720,9 +720,13 @@ class Startbildschirm(QWidget):
         self.zeittext = QLabel(); self.zeittext.setStyleSheet("background:transparent;color:#1f3557")
         f = self.zeittext.font(); f.setPixelSize(22); f.setBold(True); self.zeittext.setFont(f)
         sb.addWidget(self.zeittext)
+        _fm = self.zeittext.fontMetrics()      # Breite fuer den laengsten Text reservieren
+        self.zeittext.setMinimumWidth(max(_fm.horizontalAdvance(x) for x in (
+            "🎨 Die Zeit steht gerade", "Noch viel Zeit", "Noch ein bisschen", "Bald ist Schluss")) + 16)
         # „Mehr Zeit bitte“ (be15): Fino fragt, Mama oder Papa geben mit Passwort frei
         self.mehrzeit = QPushButton("  Mehr Zeit"); self.mehrzeit.setIcon(QIcon.fromTheme("help-hint", QIcon.fromTheme("dialog-question")))
         f = self.mehrzeit.font(); f.setPixelSize(20); f.setBold(True); self.mehrzeit.setFont(f)
+        self.mehrzeit.setMinimumWidth(self.mehrzeit.fontMetrics().horizontalAdvance("  Mehr Zeit") + 80)
         self.mehrzeit.setStyleSheet("QPushButton{background:#f2a51f;color:#1d2329;border:none;"
                                     "border-radius:18px;padding:6px 14px}")
         self.mehrzeit.setToolTip("Mama oder Papa um 15 Minuten mehr bitten")
