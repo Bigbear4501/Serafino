@@ -1,26 +1,26 @@
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
 
-Date: Wed, 25 Nov 2026 19:06:20 +0000
+Date: Fri, 27 Nov 2026 03:02:06 +0000
 Description: Serafino-Paketarchiv
 Label: Serafino
 Origin: Serafino
 MD5Sum:
- 65d72c907f50aded76d30c7a02fea574             1832 Packages
- 058700f46baa8203fb7e8d2d4b12e763             1073 Packages.gz
+ 68a07bc60e2f76b117da167ff540f4ce             1832 Packages
+ 2076474e36a7901ffc20dfdddc5f956b             1074 Packages.gz
 SHA1:
- 6601fd7132ba639e7bbd7376e353303cdefafc8e             1832 Packages
- 05200bf536f39c805f4004781653398cca89d013             1073 Packages.gz
+ 6467f4457b07eb28f9231dae1d2eb5995b56a29b             1832 Packages
+ 59229c1c7c7be0110d881b3233371054a9eee38f             1074 Packages.gz
 SHA256:
- 6fad0383d769564cb7a407cf74f4ac7f0cf64704d6dc3477f0ea68cff59125ce             1832 Packages
- bbd96c4ee272076f85c3ebaa39d142e27b8bacf377e09e4133668d79b0009874             1073 Packages.gz
+ 320f49c3036f4734963bc20d7a9748858cbd729e8239ef431dad1c8ff4950853             1832 Packages
+ 9c5f9f5536391aa29c11dfda59dcff6ea0dc6ad4acb2593d3f38d766bfd89acd             1074 Packages.gz
 SHA512:
- d17f1c63f0645c82eb475c99e0ad460a11fd67d97be47eaaa014cfb2451bffbedac1b3a44eb7d42d81cd56bc4d152a8219590c7cacf8ed5e63bfc867d18d6264             1832 Packages
- 26aecd75df58a3554c6179f28780d711a45e78624c24f91a9bf9f8aeb9f860b3dd245982a415c2b6c003287e503a15335be4e046f065197be398267324887a48             1073 Packages.gz
+ 414cf59e45ddba719dc8c02d8c0e6ad320431f8284e03dfdd60db1d28b5facaefc1583b80755e7ae925db74aa801a36551f8d1ce36eaee0efff91a2b4f8b696b             1832 Packages
+ 4eac35d09ea74c69b010e8147e869847fac34971112361e26c4c8b601c12b7a43623f6452fce60d40ef060ab13330df7461489bcc428d31ce347b15305f9ce60             1074 Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iHUEARYKAB0WIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCawcxrAAKCRATyIM5NWnL
-KQEsAQDULAzjOQQQE4aavyLBfv7rJ9L5GWbhGflw9/xH9TbRkwD/ZNscqmsoaySl
-SYa6F3KSGChapjDxi0Lkff/88EHiywc=
-=BPIN
+iHUEARYKAB0WIQTCBxiVk2Ky+KPx49UTyIM5NWnLKQUCawjyrgAKCRATyIM5NWnL
+KRDXAP9vhwD5CLsI8IWOvDchvwdsmHc+c85DhjGfwx3YlwKTwQEA78KoukVuO/BI
+wvHASk/G8WvSofGYde/mTma5EsKsggk=
+=S4Z3
 -----END PGP SIGNATURE-----
