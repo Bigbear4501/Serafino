@@ -1,0 +1,68 @@
+#!/bin/bash
+# 0480-startmenue-aufraeumen.hook.chroot
+# 1) Programme, die nicht ins Startmenue gehoeren, ausblenden (NoDisplay=true).
+#    Sie bleiben installiert und lassen sich weiter starten (z. B. aus dem Eltern-Kontrollzentrum).
+# 2) Deutsche Beschreibungen (Comment[de]) fuer Programme, bei denen Debian keine mitliefert.
+python3 - <<'PY'
+import os, re
+
+APP = "/usr/share/applications"
+
+def lies(p):
+    with open(p, encoding="utf-8") as f:
+        return f.read()
+
+def schreibe(p, t):
+    with open(p, "w", encoding="utf-8") as f:
+        f.write(t)
+
+# --- 1) ausblenden
+VERSTECKEN = [
+    "org.kde.plasma.emojier.desktop",          # Emoji-Auswahl (Tastenkuerzel bleibt)
+    "kdesystemsettings.desktop",               # doppelt: bleibt "System Settings"
+    "org.kde.khelpcenter.desktop",             # Help Center (englisch, doppelt zu "Hilfe")
+    "org.kde.kmenuedit.desktop",               # Menu Editor
+    "org.kde.kwalletmanager.desktop",          # KWalletManager
+    "org.kde.drkonqi.coredump.gui.desktop",    # Crashed Processes Viewer
+    "vim.desktop",
+    "tuxpaint-config.desktop",
+]
+for n in VERSTECKEN:
+    p = os.path.join(APP, n)
+    if not os.path.isfile(p):
+        print("0480: nicht vorhanden, uebersprungen:", n)
+        continue
+    t = lies(p)
+    if re.search(r"^NoDisplay=true\s*$", t, re.M):
+        continue
+    t = re.sub(r"^NoDisplay=.*\n", "", t, flags=re.M)
+    t, k = re.subn(r"^\[Desktop Entry\]\s*\n", "[Desktop Entry]\nNoDisplay=true\n", t, count=1, flags=re.M)
+    if k:
+        schreibe(p, t)
+        print("0480: ausgeblendet:", n)
+
+# --- 2) deutsche Beschreibungen
+DE = {
+    "libreoffice-writer.desktop":  "Briefe, Berichte, Dokumente und Webseiten mit Text und Grafiken erstellen und bearbeiten.",
+    "libreoffice-calc.desktop":    "Berechnungen durchführen, Informationen analysieren und Listen in Tabellen verwalten.",
+    "libreoffice-impress.desktop": "Präsentationen für Diashows, Besprechungen und Webseiten erstellen und bearbeiten.",
+    "libreoffice-draw.desktop":    "Zeichnungen, Flussdiagramme und Logos erstellen und bearbeiten.",
+    "libreoffice-math.desktop":    "Wissenschaftliche Formeln und Gleichungen erstellen und bearbeiten.",
+    "libreoffice-base.desktop":    "Datenbanken pflegen sowie Abfragen und Berichte erstellen.",
+    "io.crow_translate.CrowTranslate.desktop": "Ein einfacher, schlanker Übersetzer, der Texte übersetzt und vorliest.",
+    "org.kde.plasma-systemmonitor.desktop":    "Systemsensoren, Prozesse und andere Systemressourcen überwachen.",
+}
+for n, text in DE.items():
+    p = os.path.join(APP, n)
+    if not os.path.isfile(p):
+        print("0480: nicht vorhanden, uebersprungen:", n)
+        continue
+    t = lies(p)
+    if re.search(r"^Comment\[de\]=", t, re.M):
+        continue
+    t, k = re.subn(r"^(Comment=.*\n)", lambda m: m.group(1) + "Comment[de]=" + text + "\n", t, count=1, flags=re.M)
+    if k:
+        schreibe(p, t)
+        print("0480: Beschreibung deutsch:", n)
+PY
+exit 0

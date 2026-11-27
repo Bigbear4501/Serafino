@@ -1,0 +1,190 @@
+#!/bin/bash
+# Serafino: fehlende deutsche Texte in KDE-Modulen ergaenzen (Firewall, Drucker, Energieverwaltung)
+set -e
+mkdir -p /usr/share/serafino
+cat > /usr/share/serafino/de-ergaenzen.py <<'SERAFINO_PY_EOF'
+# -*- coding: utf-8 -*-
+# Serafino: fehlende deutsche Texte fuer KDE-Module. Schluessel = msgid (mit Kontext: "Kontext\x04Text")
+T = {}
+T["kcm_firewall"] = {
+ "@info\x04Click switch above to enable it": "Zum Aktivieren den Schalter oben anklicken",
+ "@info\x04Click the <interface>Add Rule…</interface> button to add one": "Mit <interface>Regel hinzufügen …</interface> kann eine Regel hinzugefügt werden",
+ "@info\x04Firewall version: %1": "Firewall-Version: %1",
+ "@title:column\x04Action": "Aktion",
+ "@title:column\x04Date": "Datum",
+ "@title:column\x04Destination port": "Zielport",
+ "@title:column\x04Foreign address": "Fremde Adresse",
+ "@title:column\x04From": "Von",
+ "@title:column\x04Interface": "Schnittstelle",
+ "@title:column\x04IP": "IP",
+ "@title:column\x04Local address": "Lokale Adresse",
+ "@title:column\x04Logging": "Protokollierung",
+ "@title:column\x04PID": "PID",
+ "@title:column\x04Program": "Programm",
+ "@title:column\x04Protocol": "Protokoll",
+ "@title:column\x04Source port": "Quellport",
+ "@title:column\x04Status": "Status",
+ "@title:column\x04Time": "Zeit",
+ "@title:column\x04To": "An",
+ "Add Rule…": "Regel hinzufügen …",
+ "Allow connections for:": "Verbindungen erlauben für:",
+ "Application:": "Anwendung:",
+ "Blacklist Connection": "Verbindung sperren",
+ "could not find iproute2 or net-tools packages installed.": "Die Pakete iproute2 oder net-tools sind nicht installiert.",
+ "Could not remove the profile from disk.": "Das Profil konnte nicht vom Datenträger entfernt werden.",
+ "Created a blacklist rule from this connection.": "Aus dieser Verbindung wurde eine Sperrregel erstellt.",
+ "Created a blacklist rule from this log entry.": "Aus diesem Protokolleintrag wurde eine Sperrregel erstellt.",
+ "Default Incoming Policy:": "Standardrichtlinie für eingehende Verbindungen:",
+ "Default Outgoing Policy:": "Standardrichtlinie für ausgehende Verbindungen:",
+ "Disabled": "Deaktiviert",
+ "Disabling…": "Wird deaktiviert …",
+ "Enabling…": "Wird aktiviert …",
+ "Failed to get connections: %1": "Verbindungen konnten nicht abgerufen werden: %1",
+ "Firewall type:": "Firewall-Typ:",
+ "firewalld listing rules and services": "firewalld: Regeln und Dienste auflisten",
+ "firewalld saving": "firewalld: Speichern",
+ "firewalld saving (runtime to permanent)": "firewalld: Speichern (von laufend nach dauerhaft)",
+ "Invalid argument passed to add Rules": "Ungültiges Argument zum Hinzufügen von Regeln",
+ "Invalid arguments passed to delete profile": "Ungültige Argumente zum Löschen des Profils",
+ "Invalid arguments passed to the profile": "Ungültige Argumente für das Profil",
+ "Keeps the program waiting until the connection attempt times out, some short time later.": "Das Programm wartet, bis der Verbindungsversuch nach kurzer Zeit abläuft.",
+ "Please restart plasma firewall, the backend disconnected.": "Bitte die Plasma-Firewall neu starten, das Backend hat die Verbindung verloren.",
+ "Produces an immediate and very informative 'Connection refused' message": "Erzeugt sofort die aussagekräftige Meldung „Verbindung abgelehnt“",
+ "The default incoming policy is already '%1'.": "Die Standardrichtlinie für eingehende Verbindungen ist bereits „%1“.",
+ "The default outgoing policy is already '%1'.": "Die Standardrichtlinie für ausgehende Verbindungen ist bereits „%1“.",
+ "The firewall application, please install %1": "Die Firewall-Anwendung fehlt, bitte %1 installieren",
+ "There was an error in the backend! Please report it.\n%1 %2": "Im Backend ist ein Fehler aufgetreten! Bitte melden.\n%1 %2",
+ "You recently updated your kernel. Iptables is failing to initialize, please reboot.": "Der Kernel wurde kürzlich aktualisiert. Iptables lässt sich nicht initialisieren, bitte den Computer neu starten.",
+}
+T["kcm_powerdevilprofilesconfig"] = {
+ "@info:status\x04Disabling automatic suspend will result in higher energy consumption.": "Das Abschalten des automatischen Bereitschaftsmodus führt zu höherem Energieverbrauch.",
+ "@info:status A long duration until suspend/shutdown\x04A long duration will result in higher energy consumption.": "Eine lange Dauer führt zu höherem Energieverbrauch.",
+ "@option:combobox Power profile\x04Balanced": "Ausgewogen",
+ "@option:combobox Power profile\x04Performance": "Leistung",
+ "@option:combobox Power profile\x04Power Save": "Energiesparen",
+ "Do nothing": "Nichts tun",
+ "Hibernate": "Ruhezustand",
+ "Hybrid sleep": "Hybrider Ruhezustand",
+ "Leave unchanged": "Unverändert lassen",
+ "Lock screen": "Bildschirm sperren",
+ "Power down the computer\x04Shut down": "Herunterfahren",
+ "Show logout screen": "Abmeldebildschirm anzeigen",
+ "Standby, then hibernate": "Bereitschaft, danach Ruhezustand",
+ "Subtitle description for 'Hybrid sleep' sleep option\x04Save session to both memory and disk": "Sitzung im Arbeitsspeicher und auf der Festplatte speichern",
+ "Subtitle description for 'Standby' sleep option\x04Save session to memory": "Sitzung im Arbeitsspeicher speichern",
+ "Subtitle description for 'Standby, then hibernate' sleep option\x04Switch to hibernation after a period of inactivity": "Nach einiger Zeit ohne Aktivität in den Ruhezustand wechseln",
+ "Suspend to RAM\x04Sleep": "Energiesparmodus",
+ "Suspend to RAM\x04Standby": "Bereitschaft",
+ "Toggle screen on/off": "Bildschirm ein-/ausschalten",
+ "Turn off screen": "Bildschirm ausschalten",
+}
+_pm = {
+ "@info\x04Fatal Save Server Settings: (%1): %2": "Schwerer Fehler beim Speichern der Servereinstellungen: (%1): %2",
+ "@info\x04Install Error (package: %1)\nCheck authentication credentials and make sure PackageKit is installed properly.": "Installationsfehler (Paket: %1)\nZugangsdaten prüfen und sicherstellen, dass PackageKit richtig installiert ist.",
+ "@info\x04Server Settings Not Saved: (%1): %2": "Servereinstellungen nicht gespeichert: (%1): %2",
+}
+T["kcm_printer_manager"] = dict(_pm, **{
+ "@action:button\x04Choose Driverless…": "Treiberlos wählen …",
+ "@action:button\x04Continue with Address…": "Mit Adresse fortfahren …",
+ "@action:button\x04CUPS Print Server Admin": "CUPS-Druckserver-Verwaltung",
+ "@action:button\x04CUPS Printers Overview Help": "Hilfe zur CUPS-Druckerübersicht",
+ "@action:button\x04Printer/Device Admin Page": "Verwaltungsseite des Druckers/Geräts",
+ "@action:button\x04Remove Group": "Gruppe entfernen",
+ "@action:button\x04Remove Printer": "Drucker entfernen",
+ "@action:button\x04Select Printer…": "Drucker auswählen …",
+ "@action:button Install printer setup helper package\x04Install It": "Installieren",
+ "@action:button Open print queue\x04Print Queue": "Druckwarteschlange",
+ "@action:button The thing being added is a printer\x04Add…": "Hinzufügen …",
+ "@info\x04To change the default printer, set another printer as the default.": "Um den Standarddrucker zu ändern, einen anderen Drucker als Standard festlegen.",
+ "@info %1 is the name of a printer or printer group\x04'%1' will be removed.": "„%1“ wird entfernt.",
+ "@info The printer/device address\x04Enter device address": "Geräteadresse eingeben",
+ "@info:placeholder The LPD device queue name\x04LPD queue name": "LPD-Warteschlangenname",
+ "@info:status\x04Configuring %1, please wait…": "%1 wird eingerichtet, bitte warten …",
+ "@info:status\x04CUPS request error (%1): %2": "CUPS-Anfragefehler (%1): %2",
+ "@info:status\x04Install has completed successfully": "Die Installation wurde erfolgreich abgeschlossen",
+ "@info:status\x04Installation failed": "Die Installation ist fehlgeschlagen",
+ "@info:status\x04Installing…": "Wird installiert …",
+ "@info:status\x04Invalid LPD URL: %1": "Ungültige LPD-URL: %1",
+ "@info:status\x04Make/Model is required. Choose \"Select\" to pick Make/Model": "Hersteller/Modell ist erforderlich. „Auswählen“ wählen, um Hersteller/Modell zu bestimmen",
+ "@info:status\x04No Printers found at host: %1": "Auf dem Rechner %1 wurden keine Drucker gefunden",
+ "@info:status\x04Queue name is required. Enter a unique queue name.": "Ein Warteschlangenname ist erforderlich. Einen eindeutigen Namen eingeben.",
+ "@info:status\x04Queue name must be unique. Enter a unique queue name.": "Der Warteschlangenname muss eindeutig sein. Einen eindeutigen Namen eingeben.",
+ "@info:status\x04Unable to locate recommended drivers.  Click <interface>Refresh</interface> to try again or choose a driver manually.": "Empfohlene Treiber wurden nicht gefunden. Mit <interface>Aktualisieren</interface> erneut versuchen oder einen Treiber von Hand wählen.",
+ "@info:usagetip\x04A printer support package that provides convenience features does not appear to be installed.": "Ein Paket mit Komfortfunktionen für Drucker scheint nicht installiert zu sein.",
+ "@info:usagetip\x04A printer support package that provides convenience features does not appear to be installed.<nl/><nl/>Because this distro does not include PackageKit, we cannot provide an install option. Please use your package manager to install the <command>system-config-printer</command> package manually.": "Ein Paket mit Komfortfunktionen für Drucker scheint nicht installiert zu sein.<nl/><nl/>Da diese Distribution PackageKit nicht enthält, kann keine Installation angeboten werden. Bitte das Paket <command>system-config-printer</command> mit der Paketverwaltung von Hand installieren.",
+ "@info:usagetip\x04Click <interface>Add…</interface> to set up a new printer on this computer": "Mit <interface>Hinzufügen …</interface> wird ein neuer Drucker an diesem Computer eingerichtet",
+ "@info:usagetip\x04Enter the address of the AppSocket device": "Die Adresse des AppSocket-Geräts eingeben",
+ "@info:usagetip\x04Enter the address of the LPD device": "Die Adresse des LPD-Geräts eingeben",
+ "@info:usagetip\x04Report this issue to %1": "Dieses Problem an %1 melden",
+ "@info:whatsthis\x04A <interface>printer group</interface> is used to pool printing resources.": "Eine <interface>Druckergruppe</interface> fasst mehrere Drucker zusammen.",
+ "@info:whatsthis\x04If the printer address is known, enter it and choose <interface>Continue</interface>.": "Ist die Druckeradresse bekannt, sie eingeben und <interface>Weiter</interface> wählen.",
+ "@label:listbox\x04Member Printers:": "Drucker in der Gruppe:",
+ "@label:listitem\x04Driverless (%1)": "Treiberlos (%1)",
+ "@label:listitem\x04PPD File (%1)": "PPD-Datei (%1)",
+ "@label:textbox\x04Address:": "Adresse:",
+ "@label:textbox\x04Queue:": "Warteschlange:",
+ "@title:group\x04AppSocket Protocol (aka JetDirect)": "AppSocket-Protokoll (auch JetDirect)",
+ "@title:group\x04Line Printer Daemon (LPD) Protocol": "Line-Printer-Daemon-Protokoll (LPD)",
+ "@title:window\x04CUPS Server Settings": "CUPS-Servereinstellungen",
+ "@title:window\x04Printer Setup Helpers": "Hilfspakete für die Druckereinrichtung",
+ "@title:window\x04Remove Group?": "Gruppe entfernen?",
+ "@title:window\x04Remove Printer?": "Drucker entfernen?",
+ "Invalid Socket URL: %1": "Ungültige Socket-URL: %1",
+ "Please wait while the CUPS server restarts": "Bitte warten, der CUPS-Server wird neu gestartet",
+})
+T["print-manager"] = dict(_pm, **{
+ "@item\x04Manual Config": "Manuelle Einrichtung",
+ "NOTE: This application is deprecated and will be removed from Plasma in a future release.": "HINWEIS: Diese Anwendung ist veraltet und wird in einer künftigen Version aus Plasma entfernt.",
+ "The expected input should be printer/deviceid": "Erwartet wird die Eingabe Drucker/Geräte-ID",
+})
+
+import os, struct, sys
+ROOT = os.environ.get("SERAFINO_ROOT", "")
+LOC = ROOT + "/usr/share/locale/de/LC_MESSAGES"
+
+def lesen(pfad):
+    d = open(pfad, "rb").read()
+    mg = struct.unpack("<I", d[:4])[0]
+    e = "<" if mg == 0x950412de else ">"
+    _, _, n, oo, to = struct.unpack(e + "IIIII", d[4:24])[0:5] if False else (None,) + struct.unpack(e + "IIII", d[4:20])
+    eintr = {}
+    for i in range(n):
+        l, o = struct.unpack(e + "II", d[oo + 8*i: oo + 8*i + 8])
+        k = d[o:o+l]
+        l2, o2 = struct.unpack(e + "II", d[to + 8*i: to + 8*i + 8])
+        eintr[k] = d[o2:o2+l2]
+    return eintr
+
+def schreiben(pfad, eintr):
+    ks = sorted(eintr)
+    ids = b""; strs = b""; off = []
+    for k in ks:
+        v = eintr[k]
+        off.append((len(ids), len(k), len(strs), len(v)))
+        ids += k + b"\0"; strs += v + b"\0"
+    n = len(ks); ko = 28 + 16*n; vo = ko + len(ids)
+    out = struct.pack("<7I", 0x950412de, 0, n, 28, 28 + 8*n, 0, 0)
+    for o, l, _, _ in off: out += struct.pack("<II", l, ko + o)
+    for _, _, o, l in off: out += struct.pack("<II", l, vo + o)
+    tmp = pfad + ".neu"
+    open(tmp, "wb").write(out + ids + strs)
+    os.replace(tmp, pfad)
+
+for dom, tr in T.items():
+    p = LOC + "/" + dom + ".mo"
+    if not os.path.exists(p):
+        print("serafino-de: %s fehlt, uebersprungen" % p); continue
+    e = lesen(p)
+    neu = 0
+    for k, v in tr.items():
+        kb = k.encode("utf-8")
+        if not e.get(kb):
+            e[kb] = v.encode("utf-8"); neu += 1
+    if neu:
+        if not os.path.exists(p + ".orig"):
+            open(p + ".orig", "wb").write(open(p, "rb").read())
+        schreiben(p, e)
+    print("serafino-de: %s: %d Texte ergaenzt" % (dom, neu))
+SERAFINO_PY_EOF
+python3 /usr/share/serafino/de-ergaenzen.py
+exit 0

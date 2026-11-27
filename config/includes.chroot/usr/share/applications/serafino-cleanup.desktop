@@ -1,4 +1,5 @@
 [Desktop Entry]
+NoDisplay=true
 Type=Application
 Name=Systembereinigung
 Comment=Räumt ungenutzte Pakete und Zwischenspeicher auf
