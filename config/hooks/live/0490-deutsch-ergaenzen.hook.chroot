@@ -187,4 +187,25 @@ for dom, tr in T.items():
     print("serafino-de: %s: %d Texte ergaenzt" % (dom, neu))
 SERAFINO_PY_EOF
 python3 /usr/share/serafino/de-ergaenzen.py
+
+# Polkit-Text der Firewall (ufw): fehlende deutsche Zeilen ergaenzen
+python3 - <<'POLKIT_EOF'
+import os
+p = os.environ.get("SERAFINO_ROOT", "") + "/usr/share/polkit-1/actions/org.kde.ufw.policy"
+if os.path.exists(p):
+    s = open(p, encoding="utf-8").read()
+    paare = [
+        ("      <description>Query Applications</description>\n",
+         '      <description xml:lang="de">Anwendungen abfragen</description>\n'),
+        ("      <message>Query the automatic application block list</message>\n",
+         '      <message xml:lang="de">Die automatische Sperrliste für Anwendungen abfragen</message>\n'),
+    ]
+    for alt, neu in paare:
+        if s.count(alt) == 1 and neu not in s:
+            s = s.replace(alt, alt + neu)
+            print("serafino-de: polkit ergaenzt:", neu.strip())
+    open(p, "w", encoding="utf-8").write(s)
+else:
+    print("serafino-de: ufw.policy fehlt, uebersprungen")
+POLKIT_EOF
 exit 0
